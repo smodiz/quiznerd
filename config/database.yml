@@ -1,0 +1,31 @@
+# SQLite version 3.x
+#   gem install sqlite3
+#
+#   Ensure the SQLite 3 gem is defined in your Gemfile
+#   gem 'sqlite3'
+#
+default: &default
+  adapter: mysql2
+  pool: 5
+  timeout: 5000
+
+
+development:
+  <<: *default
+  database: quiznerd_development
+  username: qnerd_user
+  password: loopy1
+
+test:
+  <<: *default
+  database: quiznerd_test
+  username: qnerd_user
+  password: loopy1
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: quiznerd_production
+  pool: 5
+  username: quiznerd_user
+  password: loopy1
