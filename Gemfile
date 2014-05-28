@@ -17,9 +17,11 @@ gem 'will_paginate', '3.0.5'
 gem 'bootstrap-will_paginate', '0.0.10'
 gem 'redcarpet', '3.1.2'
 
+# temporarily add to all environments. Later, will remove from production
+gem 'rack-mini-profiler'
+
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0',          group: :doc
-gem 'pg', '0.15.1',							 group: :production
 
 group :development, :test do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
@@ -51,5 +53,8 @@ group :test do
   # gem 'wdm', '0.1.0'
 end
 
-# temporarily add to all environments. Later, will remove from production
-gem 'rack-mini-profiler'
+group :production do
+ 	gem 'rails_12factor', '0.0.2'
+ 	gem 'pg', '0.15.1'
+end
+
