@@ -7,7 +7,7 @@ describe "Static Pages" do
   
   describe "Home page" do
     before(:each) { visit root_path }
-    it { should have_content('Sample App') }
+    it { should have_content('QuizNerd') }
     it { should have_title(full_title('')) }
     it { should_not have_title('| Home') }      
   end
@@ -27,7 +27,7 @@ describe "Static Pages" do
  	it  "should have the right links on the layout" do
     visit root_path
     click_link "About"
-    expect(page).to have_title(full_title('About Us'))
+    expect(page).to have_title(full_title('About'))
     click_link "Contact"
     expect(page).to have_title(full_title('Contact'))
     click_link "Home"
@@ -35,9 +35,9 @@ describe "Static Pages" do
   end
   
   describe "Click Logo" do
-    before { visit help_path }
+    before { visit contact_path }
     it "should go to the home page" do
-      click_link "Quiz Nerd"
+      click_link "QuizNerd"
       expect(page).to have_title(full_title(''))
     end
   end

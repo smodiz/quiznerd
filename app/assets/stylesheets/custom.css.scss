@@ -1,8 +1,10 @@
 
-@import "bootstrap";
-/* mixins, variables, etc */
 
-$navbar-default-brand-color: #000066;
+/* mixins, variables, etc */
+$jumbotron-bg: Gainsboro;
+$navbar-default-bg: LightSteelBlue;
+$navbar-default-color: Black;
+$navbar-default-link-color: Black;
 
 @mixin box_sizing {
   -moz-box-sizing: border-box;
@@ -10,12 +12,22 @@ $navbar-default-brand-color: #000066;
   box-sizing: border-box;
 }
 
+/* navigation header */
+.navbar_group {
+  margin-left: 40px;
+  margin-right: 70px;
+}
+
 /* universal */
 html {
   overflow-y: scroll;
 }
 body {
-  padding-top: 0px;
+  padding-top: 60px;
+}
+.jumbotron {
+  text-align: center;
+  background-color: blue;
 }
 section {
   overflow: auto;
@@ -23,12 +35,29 @@ section {
 textarea {
   resize: vertical;
 }
+ul.li {
+  text-align: left;
+}
+
 .center {
   text-align: center;
 }
 .center h1 {
   margin-bottom: 10px;
 }
+
+.static_text {
+  font-size: 10pt;
+  font-family: arial;
+  color: black;
+  text-align: left;
+  padding-right: 4px;
+  padding-left: 2px
+}
+.app_name {
+  font-style: italic;
+}
+
 /* typography */
 h1, h2, h3, h4, h5, h6 {
   line-height: 1;
@@ -48,19 +77,14 @@ h2 {
   color: #999;
 }
 
-p{
-font-size: 1.1em; line-height: 1.7em;
-}
 /* header */
 #logo {
   float: left;
-  margin-left: 30px;
-  margin-right: 30px;
+  margin-left: 40px;
+  margin-right: 60px;
   font-size: 1.7em;
-  text-transform: bold;
   letter-spacing: 0px;
   padding-top: 9px;
-  font-weight: bold;
   line-height: 1.5;
 }
 
@@ -78,11 +102,8 @@ footer a {
 footer a:hover {
   color: #222;
 }
-footer small {
-  float: left;
-}
 footer ul {
-  float: left;
+  float: right;
   list-style: none;
   }
 footer ul li {
@@ -92,6 +113,7 @@ footer ul li {
 
 /* miscellaneous */
 .debug_dump {
+  background-color: Gainsboro;
   clear: both;
   float: left;
   width: 100%;
@@ -108,3 +130,4 @@ footer ul li {
 }
 
 
+@import "bootstrap";
