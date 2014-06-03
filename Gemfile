@@ -11,11 +11,12 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
-gem 'simple_form', '3.0.2'
+gem 'simple_form', '~> 3.1.0.rc1', github: 'plataformatec/simple_form'
 gem 'faker', '1.3.0'
 gem 'will_paginate', '3.0.5'
 gem 'bootstrap-will_paginate', '0.0.10'
 gem 'redcarpet', '3.1.2'
+gem 'devise'
 
 # temporarily add to all environments. Later, will remove from production
 gem 'rack-mini-profiler'

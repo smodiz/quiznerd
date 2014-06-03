@@ -2,6 +2,8 @@
 
 /* mixins, variables, etc */
 $jumbotron-bg: Gainsboro;
+$well-bg:      Gainsboro;
+$panel-default-heading-bg:  LightSteelBlue;
 $navbar-default-bg: LightSteelBlue;
 $navbar-default-color: Black;
 $navbar-default-link-color: Black;
@@ -21,6 +23,7 @@ $navbar-default-link-color: Black;
 /* universal */
 html {
   overflow-y: scroll;
+  
 }
 body {
   padding-top: 60px;
@@ -56,6 +59,17 @@ ul.li {
 }
 .app_name {
   font-style: italic;
+}
+.alert {
+  background-color: #F8FACF;
+}
+.alert-error {
+  color: red;
+}
+.authentication-form {
+  // width: 300px ;
+  // margin-left: auto ;
+  // margin-right: auto ;
 }
 
 /* typography */
