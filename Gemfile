@@ -25,7 +25,8 @@ gem 'rack-mini-profiler'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
 group :development, :test do
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  # Spring speeds up development by keeping your application running in the 
+  # background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'mysql2'
   gem 'rspec-rails', '2.13.1'
@@ -36,6 +37,12 @@ group :development, :test do
   gem 'hirb'
   gem 'awesome_print'
   gem 'debugger'
+
+  # In Rails 4.1, we have secrets.yml which kind of does the same thing as 
+  # figaro, except figaro helps automatically set up the variables in your 
+  # environment (incl Heroku), so it's still beneficial.
+  gem "figaro"
+
 end
 
 group :test do

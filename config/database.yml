@@ -13,19 +13,19 @@ default: &default
 development:
   <<: *default
   database: quiznerd_development
-  username: qnerd_user
-  password: loopy1
+  username: <%= ENV["DATABASE_USER"] %>
+  password: <%= ENV["DATABASE_PASSWORD"] %>
 
 test:
   <<: *default
   database: quiznerd_test
-  username: qnerd_user
-  password: loopy1
+  username: <%= ENV["DATABASE_USER"] %>
+  password: <%= ENV["DATABASE_PASSWORD"] %>
 
 production:
   adapter: postgresql
   encoding: unicode
   database: quiznerd_production
   pool: 5
-  username: quiznerd_user
-  password: loopy1
+  username: <%= ENV["DATABASE_USER"] %>
+  password: <%= ENV["DATABASE_PASSWORD"] %>

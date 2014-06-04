@@ -83,4 +83,14 @@ Rails.application.configure do
 
   #put here per devise install instructions
   config.action_mailer.default_url_options = { host: 'heroku.com' }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: "smtp.sendgrid.net",
+    port: "587",
+    authentication: "plain",
+    domain: "heroku.com",
+    enable_starttls_auto: true,
+    user_name: ENV["SENDGRID_USERNAME"],
+    password: ENV["SENDGRID_PASSWORD"]
+  }
 end
