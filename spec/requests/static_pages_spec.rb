@@ -7,9 +7,19 @@ describe "Static Pages" do
   
   describe "Home page" do
     before(:each) { visit root_path }
-    it { should have_content('QuizNerd') }
-    it { should have_title(full_title('')) }
-    it { should_not have_title('| Home') }      
+
+    context "when not signed in" do
+      it { should have_content('Welcome to QuizNerd') }
+      it { should have_title(full_title('')) }
+      it { should_not have_title('| Home') }   
+      it { should have_link('Sign up now!') }   
+    end
+
+    context "when signed in" do
+      it "should show user specific page" 
+      it "should show changes in the navigation links"
+    end
+
   end
 
   describe "About page" do
