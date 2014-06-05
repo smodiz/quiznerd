@@ -37,6 +37,8 @@ group :development, :test do
   gem 'hirb'
   gem 'awesome_print'
   gem 'debugger'
+  gem 'pry'
+
 
   # In Rails 4.1, we have secrets.yml which kind of does the same thing as 
   # figaro, except figaro helps automatically set up the variables in your 

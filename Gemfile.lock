@@ -282,6 +282,7 @@ DEPENDENCIES
   jquery-ui-rails
   mysql2
   pg (= 0.15.1)
+  pry
   rack-mini-profiler
   rails (= 4.1.1)
   rails_12factor (= 0.0.2)
