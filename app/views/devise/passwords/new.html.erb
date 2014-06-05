@@ -11,25 +11,25 @@
             radio_buttons: :horizontal_radio_and_checkboxes,
             file: :horizontal_file_input,
             boolean: :horizontal_boolean} do |f| %>
-  			<%= f.error_notification %>
+        <%= f.error_notification %>
 
-			  <div class="form-inputs">
-			    <%= f.input :email, required: true, autofocus: true %>
-			  </div>
+        <div class="form-inputs">
+          <%= f.input :email, required: true, autofocus: true %>
+        </div>
 
-			  <div class="form-actions col-sm-offset-3 col-sm-10">
-			    <%= f.button :submit, "Send me reset password instructions",  class: 'btn btn-primary' %>
-			  </div>
-			  <br/>
-			  <br/>
-			  <br/>
-			<% end %>
-			<div class="col-sm-offset-3 col-sm-10">
-				<%= render "devise/shared/links" %>
-			</div>
-		</div>
-	</div>
-</div>	
+        <div class="form-actions col-sm-offset-3 col-sm-10">
+          <%= f.button :submit, "Send me reset password instructions",  class: 'btn btn-primary' %>
+        </div>
+        <br/>
+        <br/>
+        <br/>
+      <% end %>
+      <div class="col-sm-offset-3 col-sm-10">
+        <%= render "devise/shared/links" %>
+      </div>
+    </div>
+  </div>
+</div>  
 
 
 
