@@ -22,8 +22,8 @@ me know if things have gone horribly wrong.
 
 describe User do
 
-	let(:user) { FactoryGirl.create(:user) }
-	
+  let(:user) { FactoryGirl.create(:user) }
+  
   subject { user }
 
   it { should respond_to(:email) }
@@ -33,80 +33,80 @@ describe User do
   it { should be_valid }
 
   context "when email is missing" do
-  	before { user.email = '' }
-  	it { should_not be_valid }
+    before { user.email = '' }
+    it { should_not be_valid }
   end
 
   context "when password is missing" do
-  	before { user.password = '' }
-  	it { should_not be_valid }
+    before { user.password = '' }
+    it { should_not be_valid }
   end
 
   context "when password_confirmation is missing" do
-  	before { user.password_confirmation = '' }
-  	it { should_not be_valid }
+    before { user.password_confirmation = '' }
+    it { should_not be_valid }
   end
 
   context "when password and password_confirmation don't match" do
-  	before { user.password_confirmation = "something_else" }
-  	it { should_not be_valid }
+    before { user.password_confirmation = "something_else" }
+    it { should_not be_valid }
   end
 
   context "when password is too short" do
-  	before do 
-  		user.password = "foobar"
-  		user.password_confirmation = "foobar"
-  	end
-  	it { should_not be_valid }
+    before do 
+      user.password = "foobar"
+      user.password_confirmation = "foobar"
+    end
+    it { should_not be_valid }
   end
 
   context "when email format is invalid" do
-  	it "should not be valid" do
-  		addresses = %w[user@foo @foo.com user_at_foo.com 
-  			user@foo,com]
-  		addresses.each do |address|
-  			user.email = address
-  			expect(user).to_not be_valid
-  			expect(user.errors.messages).to include(:email)
-  		end
-  	end
+    it "should not be valid" do
+      addresses = %w[user@foo @foo.com user_at_foo.com 
+        user@foo,com]
+      addresses.each do |address|
+        user.email = address
+        expect(user).to_not be_valid
+        expect(user.errors.messages).to include(:email)
+      end
+    end
   end
 
   context "when email format is valid" do
-  	it "should be valid" do
-			addresses = %w[user@foo.com 1@fee.foo.fun 1.2-+a@v.p USER@S.WHOOOP] 
-			addresses.each do |address|
-				user.email = address
-				expect(user).to be_valid
-			end  		
-  	end
+    it "should be valid" do
+      addresses = %w[user@foo.com 1@fee.foo.fun 1.2-+a@v.p USER@S.WHOOOP] 
+      addresses.each do |address|
+        user.email = address
+        expect(user).to be_valid
+      end     
+    end
   end
 
   context "when email is already taken" do
-	
-		let(:user2) { user.dup }  	
+  
+    let(:user2) { user.dup }    
 
-  	it "should have email already taken error" do
-  		expect(user2).to_not be_valid
-	  	expect(user2.errors.messages).to include(:email)
-  		expect(user2.errors.messages[:email].shift).to match(/already been taken/)
-  	end
+    it "should have email already taken error" do
+      expect(user2).to_not be_valid
+      expect(user2.errors.messages).to include(:email)
+      expect(user2.errors.messages[:email].shift).to match(/already been taken/)
+    end
   end
 
-	context "authenticating a user" do
-	  before(:each) do
-	  	user.password = "foobarbaz"
-	  	user.password_confirmation = "foobarbaz"
-	  end
+  context "authenticating a user" do
+    before(:each) do
+      user.password = "foobarbaz"
+      user.password_confirmation = "foobarbaz"
+    end
 
-	  it "will validate a correct password" do
-	    user.valid_password?("foobarbaz").should be_true
-	  end
-	  
-	  it "will not validate an incorrect password" do
-	    user.valid_password?("invalid_foo").should be_false
-	  end
-	end
+    it "will validate a correct password" do
+      user.valid_password?("foobarbaz").should be_true
+    end
+    
+    it "will not validate an incorrect password" do
+      user.valid_password?("invalid_foo").should be_false
+    end
+  end
 end
 
 

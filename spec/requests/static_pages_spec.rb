@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "Static Pages" do
 
-	subject { page }
+  subject { page }
 
   
   describe "Home page" do
@@ -23,18 +23,18 @@ describe "Static Pages" do
   end
 
   describe "About page" do
-  	before(:each) { visit about_path }
-  	it { should have_content('About') }
-  	it { should have_title(full_title('About')) }
+    before(:each) { visit about_path }
+    it { should have_content('About') }
+    it { should have_title(full_title('About')) }
   end
 
   describe "Contact page" do
-  	before(:each) { visit contact_path }
-  	it { should have_content('Contact') }
-  	it { should have_title(full_title('Contact')) }
+    before(:each) { visit contact_path }
+    it { should have_content('Contact') }
+    it { should have_title(full_title('Contact')) }
   end
 
- 	it  "should have the right links on the layout" do
+  it  "should have the right links on the layout" do
     visit root_path
     click_link "About"
     expect(page).to have_title(full_title('About'))
