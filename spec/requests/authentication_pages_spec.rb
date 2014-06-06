@@ -112,7 +112,7 @@ describe "Authentication Pages" do
   end
 
   describe "Forgot password" do
-    let(:user) { FactoryGirl.create(:user, email: "sharonmodiz@yahoo.com") }
+    let(:user) { FactoryGirl.create(:user) }
     before(:each) do
       visit new_user_session_path
       click_link('Forgot your password?')
@@ -125,11 +125,21 @@ describe "Authentication Pages" do
     context "with valid email" do
       before do
         fill_in "Email", with: user.email
-        click_button('Send me reset password instructions')
-      end
 
-      it { should have_content('You will receive an email') }
-      it { should have_selector('h2',"Sign in") }
+      end
+      describe "send reset" do
+        before(:each) do
+          ActionMailer::Base.deliveries.clear
+          click_button('Send me reset password instructions') 
+        end
+
+        it { should have_content('You will receive an email') }
+        it { should have_selector('h2',"Sign in") }
+        it "should send the email" do
+          expect(ActionMailer::Base.deliveries.last.to).to eq [user.email] 
+        end
+      end
+      
     end
 
     context "with invalid email" do
