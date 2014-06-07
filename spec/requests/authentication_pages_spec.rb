@@ -125,21 +125,15 @@ describe "Authentication Pages" do
     context "with valid email" do
       before do
         fill_in "Email", with: user.email
-
+        ActionMailer::Base.deliveries.clear
+        click_button('Send me reset password instructions') 
       end
-      describe "send reset" do
-        before(:each) do
-          ActionMailer::Base.deliveries.clear
-          click_button('Send me reset password instructions') 
-        end
 
-        it { should have_content('You will receive an email') }
-        it { should have_selector('h2',"Sign in") }
-        it "should send the email" do
-          expect(ActionMailer::Base.deliveries.last.to).to eq [user.email] 
-        end
+      it { should have_content('You will receive an email') }
+      it { should have_selector('h2',"Sign in") }
+      it "should send the email" do
+        expect(ActionMailer::Base.deliveries.last.to).to eq [user.email] 
       end
-      
     end
 
     context "with invalid email" do

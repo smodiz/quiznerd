@@ -8,6 +8,8 @@ $navbar-default-bg: LightSteelBlue;
 $navbar-default-color: Black;
 $navbar-default-link-color: Black;
 
+@import "bootstrap";
+
 @mixin box_sizing {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -65,7 +67,23 @@ ul.li {
 .alert-error {
   color: red;
 }
-
+.btn-primary {
+  color: #fff;
+  &:visited {
+    color: #fff;
+  }
+}
+.pull-right { 
+  float: right; 
+  margin-bottom: 5px;
+}
+.pull-left {
+  float: left;
+  margin: 5px;
+}
+.section-header {
+   font-size: 1.6em;
+}
 /* typography */
 h1, h2, h3, h4, h5, h6 {
   line-height: 1;
@@ -85,7 +103,7 @@ h2 {
   color: #999;
 }
 h3 {
-  text-align: center;
+    text-align: center;
 }
 /* header */
 #logo {
@@ -140,4 +158,4 @@ footer ul li {
 }
 
 
-@import "bootstrap";
+
