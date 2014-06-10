@@ -24,15 +24,14 @@ describe "Authentication Pages" do
 
   subject { page }
 
-  shared_examples_for "logged in user" do
-    it { should have_link('Log out') }
+  shared_examples_for "signed in user" do
+    it { should have_link('Sign out') }
     it { should have_link('Edit profile') }
     it { should_not have_link('Sign in') }
-    it "should take user to their home page"
   end
 
-  shared_examples_for "non-logged in user" do
-    it { should_not have_link('Log out') }
+  shared_examples_for "non-signed in user" do
+    it { should_not have_link('Sign out') }
     it { should_not have_link('Edit profile') }
     it { should have_link('Sign in') }
   end
@@ -42,7 +41,7 @@ describe "Authentication Pages" do
 
     describe "Sign up page" do
       it { should have_link('Already a member? Sign in') }
-      it_behaves_like "non-logged in user"
+      it_behaves_like "non-signed in user"
     end
 
     context "with valid crendentials" do
@@ -54,7 +53,7 @@ describe "Authentication Pages" do
       end
 
       it { should have_content('Welcome! You have signed up successfully') }
-      it_behaves_like "logged in user"
+      it_behaves_like "signed in user"
     end
 
     context "with invalid crendentials" do
@@ -67,7 +66,7 @@ describe "Authentication Pages" do
 
       it { should have_content("can't be blank") }
       it { should have_content('Sign up') }
-      it_behaves_like "non-logged in user"
+      it_behaves_like "non-signed in user"
       
     end
   end
@@ -79,7 +78,7 @@ describe "Authentication Pages" do
     describe "Sign in page" do
       it { should have_link('Sign up') }
       it { should have_link('Forgot your password?') }
-      it_behaves_like "non-logged in user"
+      it_behaves_like "non-signed in user"
     end
 
     context "with valid crendentials" do
@@ -88,14 +87,14 @@ describe "Authentication Pages" do
       end
 
       it { should have_content('Signed in successfully') }
-      it_behaves_like "logged in user"
+      it_behaves_like "signed in user"
 
-      describe "followed by log out" do
-        before { click_link('Log out') }
+      describe "followed by sign out" do
+        before { click_link('Sign out') }
 
         it { should have_content('Signed out successfully') }
         it { should have_content('Welcome to QuizNerd') }
-        it_behaves_like "non-logged in user"
+        it_behaves_like "non-signed in user"
       end
     end
 
@@ -107,7 +106,7 @@ describe "Authentication Pages" do
       end
       it { should have_content('Invalid email or password') }
       it { should have_content('Sign in') }
-      it_behaves_like "non-logged in user"
+      it_behaves_like "non-signed in user"
     end
   end
 
@@ -130,7 +129,7 @@ describe "Authentication Pages" do
       end
 
       it { should have_content('You will receive an email') }
-      it { should have_selector('h2',"Sign in") }
+      it { should have_selector('h3',"Sign in") }
       it "should send the email" do
         expect(ActionMailer::Base.deliveries.last.to).to eq [user.email] 
       end
@@ -154,7 +153,7 @@ describe "Authentication Pages" do
       click_link "Cancel my account"
     end
     it { should have_content("Your account was successfully cancelled") }
-    it_behaves_like "non-logged in user"
+    it_behaves_like "non-signed in user"
   end
 
   describe "edit user" do
@@ -165,7 +164,7 @@ describe "Authentication Pages" do
     end
 
     describe "edit user page" do
-      it { should have_selector('h2','Edit User') }
+      it { should have_selector('h3','Edit User') }
       it { should have_link('Back') }
       it { should have_selector('input', user.email) }
       it { should have_link('Cancel my account') }
@@ -210,7 +209,7 @@ describe "Authentication Pages" do
           click_button("Update")
         end
         it { should have_content('has already been taken') }
-        it { should have_selector('h2','Edit User') }
+        it { should have_selector('h3','Edit User') }
       end
 
       context "invalid email format" do
@@ -219,7 +218,7 @@ describe "Authentication Pages" do
           click_button("Update")
         end
         it { should have_content('is invalid') }
-        it { should have_selector('h2','Edit User') }
+        it { should have_selector('h3','Edit User') }
       end
     end
   end

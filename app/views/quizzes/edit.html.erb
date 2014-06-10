@@ -1,6 +1,12 @@
-<h1>Editing quiz</h1>
+<div class="well">
+  <div class="section-header">
+    Edit quiz
+    <hr/>
+  </div>  
+  <div class="row">
+    <div class="col-md-7 col-md-offset-2">
+      <%= render 'form' %>
+    </div>
+  </div>
+</div>
 
-<%= render 'form' %>
-
-<%= link_to 'Show', @quiz %> |
-<%= link_to 'Back', quizzes_path %>

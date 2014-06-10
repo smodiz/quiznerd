@@ -4,4 +4,13 @@ class Quiz < ActiveRecord::Base
   belongs_to :author, class_name: "User"
   validates :name, :description, :author, :category, :subject, presence: true
   validates :published, inclusion: { in: [true, false] }
+  
+  # This didn't work
+  # before_validation(on: :create) do
+  #   self.published = false
+  # end
+
+  # Also tried the above with a before_create callback. Didn't work either. Argh!
+ 
+
 end

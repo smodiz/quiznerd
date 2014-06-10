@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8"> 
   <title><%= full_title(yield(:title)) %></title>
+  <%= favicon_link_tag "sm_logo.ico" %>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
   <%= render '/layouts/shim' %>
 </head>
 <body>
+  <div class="container container-min">
   <%= render '/layouts/header' %>
-  <div class="container">
+  
     <% flash.each do |name, msg| %>
       <%= content_tag :div, :class => "alert alert-#{name}" do %>
         <a class="close" data-dismiss="alert" href="#">×</a>

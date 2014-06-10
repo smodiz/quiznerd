@@ -1,34 +1,40 @@
-<p id="notice"><%= notice %></p>
+<div class="well">
+  <div class="section-header">
+    <%= @quiz.name %>   
+    <%= link_to "Publish Quiz", "#", 
+        class: "btn btn-sm btn-success pull-right",
+        data: { confirm: 'Not implemented yet' } %>
+    <%= link_to "Edit Quiz Information", edit_quiz_path(@quiz), 
+          class: "btn btn-sm btn-primary pull-right" %>
+    <hr/>
+  </div>
+ 
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <tbody>
+        <tr>
+          <td><span class="field-title">Name: </span><%= @quiz.name  %></td>  
+          <td><span class="field-title">Category: </span><%= @quiz.category.name %></td>
+          <td><span class="field-title">Subject: </span><%= @quiz.subject.name %></td>
+        </tr>
+        <tr>
+          <td colspan ="2">
+            <span class="field-title">Description: </span><%= @quiz.description %>
+          </td>
+          <td>
+            <span class="field-title">Published? </span><%= @quiz.published.to_s.capitalize %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>    
 
-<p>
-  <strong>Name:</strong>
-  <%= @quiz.name %>
-</p>
+<div class="well">
+  <div class="section-header">
+    Questions
+    <hr/>
+  </div>
+</div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @quiz.description %>
-</p>
 
-<p>
-  <strong>Author:</strong>
-  <%= @quiz.author_id %>
-</p>
-
-<p>
-  <strong>Published:</strong>
-  <%= @quiz.published %>
-</p>
-
-<p>
-  <strong>Category:</strong>
-  <%= @quiz.category %>
-</p>
-
-<p>
-  <strong>Subject:</strong>
-  <%= @quiz.subject %>
-</p>
-
-<%= link_to 'Edit', edit_quiz_path(@quiz) %> |
-<%= link_to 'Back', quizzes_path %>

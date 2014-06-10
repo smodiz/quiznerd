@@ -1,10 +1,12 @@
 class QuizzesController < ApplicationController
   before_action :set_quiz, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  before_action :correct_user, only: [:edit, :update, :destroy]
 
   # GET /quizzes
   # GET /quizzes.json
   def index
-    @quizzes = Quiz.all
+    @quizzes = current_user.quizzes
   end
 
   # GET /quizzes/1
@@ -24,7 +26,10 @@ class QuizzesController < ApplicationController
   # POST /quizzes
   # POST /quizzes.json
   def create
-    @quiz = Quiz.new(quiz_params)
+    # temporary workaround
+    # set published to false on create. Tried to use various callbacks on the 
+    # # model to do this and it did not work. Come back and figure out why later.  
+    @quiz = current_user.quizzes.build(quiz_params.merge(published: false))
 
     respond_to do |format|
       if @quiz.save
@@ -69,6 +74,11 @@ class QuizzesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def quiz_params
-      params.require(:quiz).permit(:name, :description, :author_id, :published, :category_id, :subject_id)
+      params.require(:quiz).permit(:name, :description, :published, :category_id, :subject_id)
+    end
+
+    def correct_user
+      @quiz = current_user.quizzes.find_by(id: params[:id])
+      redirect_to root_url, notice: 'You cannot modify that quiz.' if @quiz.nil?
     end
 end

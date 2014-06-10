@@ -6,7 +6,7 @@ GIT
 
 GIT
   remote: git://github.com/plataformatec/simple_form.git
-  revision: f02216793a045a614e5c0ef7e7c2fb25fea7584b
+  revision: 122ac3b252f6d953c5e4e4856b95a63e6fd83f5a
   specs:
     simple_form (3.1.0.rc1)
       actionpack (~> 4.0)
@@ -44,7 +44,7 @@ GEM
     arel (5.0.1.20140414130214)
     awesome_print (1.2.0)
     bcrypt (3.1.7)
-    bootstrap-sass (3.1.1.1)
+    bootstrap-sass (3.1.1.0)
       sass (~> 3.2)
     bootstrap-will_paginate (0.0.10)
       will_paginate
@@ -93,7 +93,7 @@ GEM
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
     erubis (2.7.0)
-    execjs (2.1.0)
+    execjs (2.2.0)
     factory_girl (4.2.0)
       activesupport (>= 3.0.0)
     factory_girl_rails (4.2.0)
@@ -125,7 +125,7 @@ GEM
     hike (1.2.3)
     hirb (0.7.2)
     i18n (0.6.9)
-    jbuilder (2.0.7)
+    jbuilder (2.1.0)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
     jquery-rails (3.1.0)
@@ -134,7 +134,7 @@ GEM
     jquery-ui-rails (4.2.1)
       railties (>= 3.2.16)
     json (1.8.1)
-    listen (2.7.5)
+    listen (2.7.7)
       celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
@@ -154,9 +154,9 @@ GEM
     orm_adapter (0.5.0)
     pg (0.15.1)
     polyglot (0.3.5)
-    pry (0.9.12.6)
-      coderay (~> 1.0)
-      method_source (~> 0.8)
+    pry (0.10.0)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
       slop (~> 3.4)
     rack (1.5.2)
     rack-mini-profiler (0.9.1)
@@ -185,7 +185,7 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rake (10.3.2)
     rb-fsevent (0.9.4)
-    rb-inotify (0.9.4)
+    rb-inotify (0.9.5)
       ffi (>= 0.5.0)
     rdoc (4.1.1)
       json (~> 1.4)
@@ -244,7 +244,7 @@ GEM
       polyglot (>= 0.3.1)
     turbolinks (2.2.2)
       coffee-rails
-    tzinfo (1.2.0)
+    tzinfo (1.2.1)
       thread_safe (~> 0.1)
     uglifier (2.5.0)
       execjs (>= 0.3.0)
@@ -261,7 +261,7 @@ PLATFORMS
 
 DEPENDENCIES
   awesome_print
-  bootstrap-sass (= 3.1.1.1)
+  bootstrap-sass (~> 3.1.1.0)
   bootstrap-will_paginate (= 0.0.10)
   capybara (= 2.1.0)
   childprocess (= 0.3.6)

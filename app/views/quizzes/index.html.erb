@@ -1,15 +1,15 @@
 <div class="well">
   <div class="section-header">
-    Quizzes Authored
-     <% if @quizzes.size >= 1 %>
+    Quizzes Written
+     <% if @quizzes.size >= 7 %>
       <%= link_to new_quiz_path, class: 'btn btn-primary pull-right btn-sm' do %>
-        <i class="icon-plus icon-white"></i>New Quiz
+        <i class="glyphicon glyphicon-plus glyphicon-white"></i>New Quiz
       <% end %>
     <% end %>
     <hr/>
   </div>  
   <div class="table-responsive">
-  <table class="table table-bordered table-striped">
+  <table class="table table-bordered table-striped index-table">
     <thead>
       <tr>
         <th>Name</th>
@@ -17,31 +17,30 @@
         <th>Published</th>
         <th>Category</th>
         <th>Subject</th>
-        <th colspan="3"></th>
+        <th colspan="1"></th>
       </tr>
     </thead>
 
     <tbody>
       <% @quizzes.each do |quiz| %>
         <tr>
-          <td><%= quiz.name %></td>
+          <td><%= link_to quiz.name, quiz_path(quiz), class: "index-link" %></td>
           <td><%= quiz.description %></td>
           <td><%= quiz.published ? "Yes" : "No" %></td>
           <td><%= quiz.category.name %></td>
           <td><%= quiz.subject.name %></td>
-          <td><%= link_to 'Show', quiz %></td>
-          <td><%= link_to 'Edit', edit_quiz_path(quiz) %></td>
-          <td><%= link_to 'Destroy', quiz, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'destroy', quiz, method: :delete, data: { confirm: 'Are you sure?' }, class: "index-link" %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
   </div>
 
-
-  <%= link_to new_quiz_path, class: 'btn btn-primary pull-right btn-sm' do %>
-    <i class='icon-plus icon-white'></i>New Quiz
-  <% end %>
+  <div class="page-actions">
+    <%= link_to new_quiz_path, class: 'btn btn-primary pull-right btn-sm' do %>
+      <i class="glyphicon glyphicon-plus glyphicon-white"></i>New Quiz
+    <% end %>
+  </div>
   <br/>
   <br/>
 </div>

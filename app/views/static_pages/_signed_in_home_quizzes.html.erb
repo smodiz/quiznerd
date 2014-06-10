@@ -1,0 +1,25 @@
+<div class="home-header">
+  <h3><%= link_to "Quizzes Written", quizzes_path %></h3>
+</div>
+
+<% if @quizzes.empty? %>
+  <p>You haven't written any quizzes yet. Be a nerd! Get started today! </p>  
+<% else %>
+<p>Here are the quizzes you've written so far:</p>
+  <table class="table input-table">
+  <% @quizzes.each do |quiz| %>
+    <tr>
+      <td>
+        <%= link_to quiz.name, quiz_path(quiz), class: "index-link" %>
+      </td>
+    </tr>
+    <% end %>  
+    <tr>
+      <td>
+        <% if @remaining_quizzes > 0 %>
+          <%= link_to "... and #{@remaining_quizzes} more", quizzes_path, class: "small pull-right" %>
+        <% end %>
+      </td>
+    </tr>
+  </table>
+<% end %>

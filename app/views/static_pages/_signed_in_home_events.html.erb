@@ -1,0 +1,27 @@
+<div class="home-header">
+  <h3><%= link_to "Quizzes Taken", root_path, data: { confirm: 'Not implemented yet' } %></h3>
+</div>
+
+
+<% if @quiz_events.empty? %>
+  <p>You haven't taken any quizzes yet. Go ahead. Don't be shy. No one else can see your results.
+  </p>  
+<% else %>
+<p>Here are the quizzes you've written so far:</p>
+  <table class="table input-table">
+  <% @quiz_events.each do |event| %>
+    <tr>
+      <td>
+        <%= link_to event.quiz.name, quiz_path(quiz), class: "index-link" %>
+      </td>
+    </tr>
+    <% end %>  
+    <tr>
+      <td>
+        <% if @remaining_events > 0 %>
+          <%= link_to "... and #{@remaining_events} more", quizzes_path, class: "small pull-right" %>
+        <% end %>
+      </td>
+    </tr>
+  </table>
+  <% end %>

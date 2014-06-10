@@ -16,10 +16,36 @@ describe "Static Pages" do
     end
 
     context "when signed in" do
-      it "should show user specific page" 
-      it "should show changes in the navigation links"
-    end
+      let(:user) { FactoryGirl.create(:user) }
+      let(:quiz) { FactoryGirl.create(:quiz, author: user) }
 
+      before(:each) do
+        quiz.save
+        valid_sign_in(user) 
+      end
+
+      describe "should show user specific home page" do
+        it { should have_content("Quizzes Written") }
+        it { should have_content("Quizzes Taken") }
+        it { should have_link('New Quiz') }
+        it { should have_link('Search for a Quiz') }
+      end
+
+      describe "when I click the New Quiz link" do
+        before(:each) do
+          within(".home-page") do
+          click_link "New Quiz"
+          end
+        end
+        specify { expect(current_path).to eq(new_quiz_path) } 
+      end
+
+      describe "when I click the Search for a Quiz link" do
+        before { click_link "Search for a Quiz" }
+        it "should go to the search page"
+        #specify { expect(current_path).to eq(?) }
+      end        
+    end
   end
 
   describe "About page" do
