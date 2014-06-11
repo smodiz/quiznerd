@@ -40,7 +40,7 @@ describe "Static Pages" do
         specify { expect(current_path).to eq(new_quiz_path) } 
       end
 
-      describe "when I click the Search for a Quiz link" do
+      describe "when I click the 'Search for a Quiz' link" do
         before { click_link "Search for a Quiz" }
         it "should go to the search page"
         #specify { expect(current_path).to eq(?) }

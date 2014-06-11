@@ -1,0 +1,23 @@
+<%= simple_form_for @question, html: { class: 'form-horizontal' },
+          wrapper: :horizontal_form,
+          wrapper_mappings: {
+            check_boxes: :horizontal_radio_and_checkboxes,
+            radio_buttons: :horizontal_radio_and_checkboxes,
+            file: :horizontal_file_input,
+            boolean: :horizontal_boolean} do |f| %>
+
+  <div class="form-inputs">
+    <!--<%= f.input :question_type do %> -->
+      <%= f.input :question_type, collection: Question::QUESTION_TYPES.map { |key, value| [value, key] }, include_blank: true  %>
+    <!-- <% end %> -->
+    <%= f.input :content, label: "Question" %>
+    <%= f.input :remarks %>
+    <%= f.input :quiz_id, as: "hidden" %>
+  </div>
+
+  
+   <div class="form-actions col-sm-offset-4 col-sm-10">
+    <%= f.button :submit, class: 'btn btn-primary btn-sm'  %> 
+    <%= link_to 'Cancel', :back, class: 'btn btn-danger btn-sm' %>
+  </div>
+<% end %>

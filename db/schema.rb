@@ -11,13 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140606044725) do
+ActiveRecord::Schema.define(version: 20140611040506) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "questions", force: true do |t|
+    t.string   "question_type"
+    t.text     "content"
+    t.text     "remarks"
+    t.integer  "quiz_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "questions", ["quiz_id"], name: "index_questions_on_quiz_id", using: :btree
 
   create_table "quizzes", force: true do |t|
     t.string   "name"

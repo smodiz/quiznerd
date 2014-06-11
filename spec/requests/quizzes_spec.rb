@@ -120,7 +120,7 @@ describe "Quiz Pages" do
     it { should have_link("Edit Quiz Information") }
     it { should have_link("Publish Quiz") }
     it { should have_content("Questions") }
-    it "should have a link to add questions"
+    it { should have_link("Add Question") }
   end
 
  describe "edit quiz" do

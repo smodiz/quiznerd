@@ -1,6 +1,7 @@
 
 FactoryGirl.define do
-  
+
+
   factory :user do
     sequence(:email) { |n| "user#{n}@example.com" }
     password "something"
@@ -15,5 +16,10 @@ FactoryGirl.define do
     published false
   end
 
+  factory :question do
+    sequence(:content) { |n| "Question number #{n}"}
+    remarks "These are some remarks to show the user after they answer"
+    sequence(:question_type) { |n| Question::QUESTION_TYPES.keys[n%4] }
+  end
 end
 

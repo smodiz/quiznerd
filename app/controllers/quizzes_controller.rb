@@ -70,6 +70,8 @@ class QuizzesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_quiz
       @quiz = Quiz.find(params[:id])
+      # @project = Project.includes(:user).where(hashed_id: params[:id]).first
+      # @projects = Project.find(:all, :includes => :user)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
