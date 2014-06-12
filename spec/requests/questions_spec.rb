@@ -28,6 +28,10 @@ describe "Questions" do
       fill_in "Question", with: question.content
       fill_in "Remarks", with: question.remarks 
       select question.question_type_description, :from => 'Question type'
+      fill_in "question_answers_attributes_0_content", with: "Some answer 1"
+      fill_in "question_answers_attributes_1_content", with: "Some answer 2"
+      fill_in "question_answers_attributes_2_content", with: "Some answer 3"
+      fill_in "question_answers_attributes_3_content", with: "Some answer 4"
       click_button "Create Question"
     end
 

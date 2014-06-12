@@ -9,6 +9,9 @@ class Question < ActiveRecord::Base
                         "FIB"   =>  "Fill In the Blank"
                     }
   belongs_to :quiz
+  has_many :answers
+  accepts_nested_attributes_for :answers, allow_destroy: true
+  
   validates :question_type, :content, :quiz_id, presence: true
 
   def question_type_description

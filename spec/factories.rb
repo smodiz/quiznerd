@@ -21,5 +21,11 @@ FactoryGirl.define do
     remarks "These are some remarks to show the user after they answer"
     sequence(:question_type) { |n| Question::QUESTION_TYPES.keys[n%4] }
   end
+
+  factory :answer do
+    sequence(:content) { |n| "Answer number #{n}" }
+    sequence(:correct) { |n| n.even? ? true : false }
+  end
+
 end
 

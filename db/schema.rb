@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140611040506) do
+ActiveRecord::Schema.define(version: 20140611203409) do
+
+  create_table "answers", force: true do |t|
+    t.text     "content"
+    t.integer  "question_id"
+    t.boolean  "correct"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "answers", ["question_id"], name: "index_answers_on_question_id", using: :btree
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -21,8 +31,8 @@ ActiveRecord::Schema.define(version: 20140611040506) do
 
   create_table "questions", force: true do |t|
     t.string   "question_type"
-    t.text     "content"
-    t.text     "remarks"
+    t.string   "content"
+    t.string   "remarks"
     t.integer  "quiz_id"
     t.datetime "created_at"
     t.datetime "updated_at"
