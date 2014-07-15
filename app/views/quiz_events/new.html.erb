@@ -1,0 +1,48 @@
+<div class="well row">
+  <div class="col-md-offset-3 col-md-8">  
+    <% @quiz = @quiz_event.quiz %>
+
+    <table class="table">
+      <tr><td colspan="2"><h3><%= @quiz.name  %></h3></td></tr>
+      <tr>
+        <td>
+          <span class="field-title">Category: </span><%= @quiz.category.name %>
+        </td>
+        <td>
+          <span class="field-title">Subject: </span><%= @quiz.subject.name %>
+        </td>
+      </tr>
+      <tr>
+        <td colspan ="2">
+          <span class="field-title">Description: </span><%= @quiz.description %>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <span class="field-title">Number of Questions: </span>
+            <%= @quiz.questions.size  %>
+        </td>
+      </tr>
+    </table>
+
+    <%= simple_form_for @quiz_event do |f| %>
+     <%= f.error_notification %>
+      <%= f.input :quiz_id, as: "hidden" %>
+      <div class="form-actions col-md-offset-4">
+          <%= f.button :submit, value: "Take This Quiz", 
+              class: 'btn btn-primary btn-sm'  %> 
+          <%= link_to 'Back to Results', :back, 
+              class: 'btn btn-primary btn-sm' %>
+      </div>
+    <% end %>
+    <ul>
+      <%  @quiz_event.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+</ul>
+
+  </div>
+</div> 
+
+
+

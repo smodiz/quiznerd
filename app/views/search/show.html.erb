@@ -1,0 +1,31 @@
+<div class="well">
+  <div class="section-header">
+    Search Results
+    <hr/>
+  </div>  
+  <div class="table-responsive">
+  <table class="table table-bordered table-striped index-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Category</th>
+        <th>Subject</th>
+        <th colspan="1"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @quizzes.each do |quiz| %>
+        <tr>
+          <td><%= link_to quiz.name, new_quiz_event_path(quiz_id: quiz.id), class: "index-link" %></td>
+          <td><%= quiz.description %></td>
+          <td><%= quiz.category.name %></td>
+          <td><%= quiz.subject.name %></td>
+          <td><%= link_to "details", new_quiz_event_path(quiz_id: quiz.id) , class: "index-link" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  </div>
+</div>

@@ -32,11 +32,11 @@ describe Question do
 
   describe "#question_type_label" do
       let(:question2) { 
-        FactoryGirl.create(:question, quiz: quiz, question_type: "FIB") }
+        FactoryGirl.create(:question, quiz: quiz, question_type: "T/F") }
       let(:question3) { 
         FactoryGirl.create(:question, quiz: quiz, question_type: "BLAH") }
     it "has a valid question type" do
-      expect(question2.question_type_description).to eq "Fill In the Blank"
+      expect(question2.question_type_description).to eq "True/False"
     end
 
     it "has no question type or invalid type" do
@@ -44,5 +44,9 @@ describe Question do
     end
   end
 
+  describe "#correct_answer" do
+    it "should return true when user selects correct answer"
+    it "should return false when incorrect answers passed in"
+  end
 end
 

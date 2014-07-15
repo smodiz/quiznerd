@@ -1,0 +1,30 @@
+<h1>Listing quiz_events</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Quiz</th>
+      <th>Number correct</th>
+      <th>Number questions</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @quiz_events.each do |quiz_event| %>
+      <tr>
+        <td><%= quiz_event.user %></td>
+        <td><%= quiz_event.quiz %></td>
+        <td><%= quiz_event.number_correct %></td>
+        <td><%= quiz_event.number_questions %></td>
+        <td><%= link_to 'Show', quiz_event %></td>
+        <td><%= link_to 'Destroy', quiz_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+

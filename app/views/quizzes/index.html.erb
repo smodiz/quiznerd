@@ -25,7 +25,7 @@
       <% @quizzes.each do |quiz| %>
         <tr>
           <td><%= link_to quiz.name, quiz_path(quiz), class: "index-link" %></td>
-          <td><%= quiz.description %></td>
+          <td><%= truncate(quiz.description, length:40) %></td>
           <td><%= quiz.published ? "Yes" : "No" %></td>
           <td><%= quiz.category.name %></td>
           <td><%= quiz.subject.name %></td>
@@ -44,3 +44,4 @@
   <br/>
   <br/>
 </div>
+ <%= ENV["DATABASE_USER"] %>

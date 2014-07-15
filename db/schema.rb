@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140611203409) do
+ActiveRecord::Schema.define(version: 20140615183723) do
 
   create_table "answers", force: true do |t|
     t.text     "content"
@@ -31,14 +31,28 @@ ActiveRecord::Schema.define(version: 20140611203409) do
 
   create_table "questions", force: true do |t|
     t.string   "question_type"
-    t.string   "content"
-    t.string   "remarks"
+    t.text     "content"
+    t.text     "remarks"
     t.integer  "quiz_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "questions", ["quiz_id"], name: "index_questions_on_quiz_id", using: :btree
+
+  create_table "quiz_events", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "quiz_id"
+    t.string   "status",           default: "In Progress"
+    t.integer  "total_correct",    default: 0
+    t.integer  "total_answered",   default: 0
+    t.integer  "last_question_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "quiz_events", ["quiz_id"], name: "index_quiz_events_on_quiz_id", using: :btree
+  add_index "quiz_events", ["user_id"], name: "index_quiz_events_on_user_id", using: :btree
 
   create_table "quizzes", force: true do |t|
     t.string   "name"

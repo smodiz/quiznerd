@@ -1,0 +1,45 @@
+
+<table class="table table-bordered">
+  <tr><td class="quiz_event_section_header">
+      <% if @quiz_event.last_answer_correct %>
+        <span class="correct">Correct!</span>
+      <% else %>
+        <span class="incorrect">Incorrect!</span>  
+      <% end %> 
+  </td></tr>
+</table>
+  
+<table class="table table-bordered">
+  <tr>
+    <td colspan="2"><%= markdown(@quiz_event.last_question.content) %></td>
+  </tr> 
+ 
+  <% @quiz_event.last_question.answers.each do |answer| %>
+ <tr>
+    <td width="10%">
+       <% if answer.correct %>
+        <span class="grade_icon correct">&#x2713</span>
+      <% elsif @quiz_event.last_answer_ids.include?(answer.id) %>
+         <span class="grade_icon incorrect">&#x2717</span>
+      <% end %>
+    </td>
+    <td>
+      <%= markdown(answer.content) %>
+    </td>
+   </tr> 
+  <% end %>
+</table>
+
+
+<% unless @quiz_event.last_question.remarks.blank? %>
+<table class="table">
+  <tr>
+    <td><i class="glyphicon glyphicon-info-sign"></i></td>
+    <td>
+      <%= markdown(@quiz_event.last_question.remarks) %>
+    </td>
+  </tr>
+</table>
+<% end %>
+
+

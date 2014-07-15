@@ -3,8 +3,6 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user!
   before_action :correct_user, only: [:edit, :update, :destroy]
 
-  
-
   # GET /questions/1
   # GET /questions/1.json
   def show
@@ -73,6 +71,7 @@ class QuestionsController < ApplicationController
       params.require(:question).permit(:question_type, :content, :remarks, :quiz_id,
         answers_attributes: [:id, :content, :correct, :_destroy])
     end
+    
     def correct_user
       authorized = @question.quiz.author == current_user
       redirect_to root_url, notice: 'Unauthorized.' unless authorized

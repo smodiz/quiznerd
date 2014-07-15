@@ -1,0 +1,20 @@
+<% unless @quiz_event.before_first_question? || answer_shown_already? %>
+  <div class="row">
+    <div class="col-md-offset-2 col-md-8">  
+      <%= render 'graded_question' %>
+    </div>
+  </div>
+<% end %>
+
+
+<div class="row">
+  <div class="col-md-offset-2 col-md-8">  
+    <%= render 'question_form' %>
+  </div>
+</div> 
+
+
+
+
+
+

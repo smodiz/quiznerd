@@ -14,16 +14,27 @@
     <table class="table table-bordered">
       <tbody>
         <tr>
-          <td><span class="field-title">Name: </span><%= @quiz.name  %></td>  
-          <td><span class="field-title">Category: </span><%= @quiz.category.name %></td>
-          <td><span class="field-title">Subject: </span><%= @quiz.subject.name %></td>
+          <td>
+            <span class="field-title">Name: </span>
+            <%= @quiz.name  %>
+          </td>  
+          <td>
+            <span class="field-title">Category: </span>
+            <%= @quiz.category.name %>
+          </td>
+          <td>
+            <span class="field-title">Subject: </span>
+            <%= @quiz.subject.name %>
+          </td>
         </tr>
         <tr>
           <td colspan ="2">
-            <span class="field-title">Description: </span><%= @quiz.description %>
+            <span class="field-title">Description: </span>
+            <%= @quiz.description %>
           </td>
           <td>
-            <span class="field-title">Published? </span><%= @quiz.published.to_s.capitalize %>
+            <span class="field-title">Published? </span>
+            <%= @quiz.published ? "Yes" : "No" %>
           </td>
         </tr>
       </tbody>
@@ -35,8 +46,9 @@
 
   <div class="section-header">
     Questions
-    <%= link_to new_question_path(quiz_id: @quiz.id), class: 'btn btn-primary pull-right btn-sm' do %>
-      <i class="glyphicon glyphicon-plus glyphicon-white"></i>Add Question
+    <%= link_to new_question_path(quiz_id: @quiz.id), 
+        class: 'btn btn-primary pull-right btn-sm' do %>
+        <i class="glyphicon glyphicon-plus glyphicon-white"></i>Add Question
     <% end %>
     <hr/>
   </div>
@@ -48,9 +60,9 @@
     <div class="table-responsive">
       <table class="table table-bordered">
         <thead>
-          <td><span class="field-title">Question</span></td>
-          <td><span class="field-title">Answer</span></td>
-          <td colspan="3"></td>
+          <td width="60%"><span class="field-title">Question</span></td>
+          <td width="25%"><span class="field-title">Answer</span></td>
+          <td colspan="3" width="15%"></td>
         </thead>
         <tbody>
           <% @quiz.questions.each do |question| %>
@@ -59,22 +71,26 @@
             <td>
                <% question.answers.each do |answer| %>
                 <span class="answer-display">
-                  <%= answer.content %>
+                  <%= truncate(answer.content, length: 30) %>
                   <% if answer.correct %>
                     &#x2713
                   <% end %>
                 </span>
             <% end %>
             </td>
-            <td><%= link_to "edit", edit_question_path(question) %></td>
-            <td><%= link_to "copy", "#", data: { confirm: "Not implemented yet" } %></td>
-            <td><%= link_to "delete", question, method: :delete, data: { confirm: "Are you sure?" } %></td>
+            <td>
+              <%= link_to "edit", edit_question_path(question) %>
+            </td>
+            <td>
+              <%= link_to "copy", "#", data: { confirm: "Not implemented yet" } %>
+            </td>
+            <td>
+              <%= link_to "delete", question, method: :delete, 
+                    data: { confirm: "Are you sure?" } %>
+            </td>
           <% end %>
         </tbody>
       </table>
     </div>
   <% end %>
-
 </div>
-
-
