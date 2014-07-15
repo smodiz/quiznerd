@@ -6,26 +6,14 @@ describe "QuizEvents" do
   let(:quiz_taker)  { FactoryGirl.create(:user) }
   let(:quiz)        { FactoryGirl.create(:quiz_with_questions, author: quiz_author) }
   let(:quiz_event)  { FactoryGirl.create(:quiz_event, quiz: quiz, user: quiz_taker) }
-  let(:new_quiz_url) { "/quiz_events/new?quiz_id=#{quiz.id}" }
-  let(:question_type) { quiz_event.current_question.question_type }
-  let(:number_of_questions) { quiz_event.number_of_questions }
-  let(:correct_answer_ids) { quiz_event.current_question.correct_answer_ids }
-  let(:correct_answer_text) do
-    correct_text = []
-    correct_answer_ids.each do |answer_id|
-      correct_text << Answer.find(answer_id).content
-    end
-    correct_text
-  end
-  let(:incorrect_answer_text) do
-    incorrect_id = quiz_event.current_question.incorrect_answer_ids[0]
-    Answer.find(incorrect_id).content
-  end
-      
+  let(:new_quiz_url)          { new_quiz_url_for(quiz.id) }
+  let(:question_type)         { quiz_event.current_question.question_type }
+  let(:number_of_questions)   { quiz_event.number_of_questions }
+  let(:correct_answer_text)   { correct_answer_texts(quiz_event) }
+  let(:incorrect_answer_text) { incorrect_answer_texts(quiz_event) }
 
   before(:each) do
     valid_sign_in(quiz_taker)
-    
   end
 
   subject { page }
@@ -55,13 +43,11 @@ describe "QuizEvents" do
       end
 
       it "should display message for correctly answered question" do
-        # MC-2 is multiple choice w/ multi selection, thus checkboxes,
-        # otherwise it will be radio buttons
-        if question_type == "MC-2"
+        if question_type == "MC-2"  #multiple answers, thus checkboxes
           correct_answer_text.each do |answer_text| 
             check(answer_text)
           end
-        else
+        else # single answer, thus radio button
           choose(correct_answer_text.to_s)
         end
         click_button "Continue"
@@ -69,7 +55,6 @@ describe "QuizEvents" do
       end
       
       it "should display message for incorrectly answered question" do
-
         if question_type == "MC-2"
           check(incorrect_answer_text)
         else
@@ -86,18 +71,11 @@ describe "QuizEvents" do
   end
 
   describe "when I finish the quiz" do
-    let(:small_quiz)  { FactoryGirl.create(:quiz_with_question, author: quiz_author) }
-    let(:small_quiz_event)  { FactoryGirl.create(:quiz_event, quiz: small_quiz, user: quiz_taker) }
-    let(:new_quiz_url) { "/quiz_events/new?quiz_id=#{small_quiz.id}" }
-    let(:correct_answer_ids) { small_quiz_event.current_question.correct_answer_ids }
-    let(:correct_answer_text) do
-      correct_text = []
-      correct_answer_ids.each do |answer_id|
-        correct_text << Answer.find(answer_id).content
-      end
-      correct_text
-    end
-    let(:question_type) { small_quiz_event.current_question.question_type }
+    let(:small_quiz)            { FactoryGirl.create(:quiz_with_question, author: quiz_author) }
+    let(:small_quiz_event)      { FactoryGirl.create(:quiz_event, quiz: small_quiz, user: quiz_taker) }
+    let(:new_quiz_url)          { new_quiz_url_for(small_quiz.id) }
+    let(:correct_answer_text)   { correct_answer_texts(small_quiz_event) }
+    let(:question_type)         { small_quiz_event.current_question.question_type }
 
     before do
         visit new_quiz_url
@@ -121,12 +99,18 @@ describe "QuizEvents" do
     end
   end
 
-    describe "when user quits" do
-      it "should remove the quiz_event from the database" do
-        pending
-      end
-      it "should redirect the user to the home page" do
-        pending
-      end
+  describe "when user quits" do
+    before do
+      visit new_quiz_url
+      click_button "Take This Quiz" 
+      click_link "Quit" 
     end
+
+    it "should redirect the user to the home page" do
+      expect(current_path).to eq(root_path)
+    end
+    it "should remove the quiz_event from the database" do
+      expect(page).to_not have_link quiz.name
+    end
+  end
 end

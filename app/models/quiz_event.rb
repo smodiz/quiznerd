@@ -2,13 +2,14 @@ class QuizEvent < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :quiz
 	before_save :process_question, on: :update 
-
+	default_scope -> { order('created_at') }
+	validates :answer_ids, presence: true, on: :update 
 
 	# these virtual attributes used for temporarily storing the 
 	# current question_id and the user's answer, as well as their
-	# answer to the last question so we can show the graded question
+	# answer to the last question so we can access the graded question
 	attr_accessor :answer_ids, :question_id, :last_answer_ids, :last_answer_correct
-	validates :answer_ids, presence: true, on: :update 
+	
 
 	COMPLETED_STATUS = "Completed"
 	IN_PROGRESS_STATUS = "In Progress"
@@ -69,20 +70,6 @@ class QuizEvent < ActiveRecord::Base
 		end
 	end
 
-	def current_letter_grade
-		case current_percent_grade
-		when 90..100 	then "A"
-		when 80..89		then "B"
-		when 70..79		then "C"
-		when 60..69		then "D"
-		when 0..59		then "F"
-		end
-	end
-
-	def number_of_questions
-		quiz.questions.count
-	end
-	
 	private
 
 		def grade_question
@@ -115,8 +102,6 @@ class QuizEvent < ActiveRecord::Base
 					quiz.questions.first.id 
 				end
 		end
-
-	
 
 		def answer_correct?
 			current_question.correct_answer?(answer_ids)

@@ -16,8 +16,8 @@
     <% end %>  
     <tr>
       <td>
-        <% if @remaining_quizzes > 0 %>
-          <%= link_to "... and #{@remaining_quizzes} more", quizzes_path, class: "small pull-right" %>
+        <% if @num_remaining_quizzes > 0 %>
+          <%= link_to "... and #{@num_remaining_quizzes} more", quizzes_path, class: "small pull-right" %>
         <% end %>
       </td>
     </tr>

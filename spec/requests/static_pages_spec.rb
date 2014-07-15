@@ -7,6 +7,7 @@ describe "Static Pages" do
   
   describe "Home page" do
     before(:each) { visit root_path }
+    let(:user)    { FactoryGirl.create(:user) }
 
     context "when not signed in" do
       it { should have_content('Welcome to QuizNerd') }
@@ -16,11 +17,8 @@ describe "Static Pages" do
     end
 
     context "when signed in" do
-      let(:user) { FactoryGirl.create(:user) }
-      let(:quiz) { FactoryGirl.create(:quiz, author: user) }
-
+ 
       before(:each) do
-        quiz.save
         valid_sign_in(user) 
       end
 
@@ -29,22 +27,44 @@ describe "Static Pages" do
         it { should have_content("Quizzes Taken") }
         it { should have_link('New Quiz') }
         it { should have_link('Search for a Quiz') }
+        it { should have_content("You haven't taken any quizzes yet") }
+        it { should have_content("You haven't written any quizzes yet") }
       end
 
       describe "when I click the New Quiz link" do
-        before(:each) do
-          within(".home-page") do
-          click_link "New Quiz"
-          end
-        end
+        before { within(".home-page") { click_link "New Quiz" }}
         specify { expect(current_path).to eq(new_quiz_path) } 
       end
 
       describe "when I click the 'Search for a Quiz' link" do
         before { click_link "Search for a Quiz" }
-        it "should go to the search page"
-        #specify { expect(current_path).to eq(?) }
-      end        
+        specify { expect(current_path).to eq(search_path) }
+      end     
+
+      describe "when quiz has been written" do
+        let(:quiz_written)  { FactoryGirl.create(:quiz, author: user) }
+        before do 
+          quiz_written.save
+          visit root_path  
+        end
+        it "should have link to written quiz" do
+          expect(page).to have_link(quiz_written.name)
+        end
+      end
+
+      describe "when quiz has been taken" do
+        let(:author)        { FactoryGirl.create(:user) }
+        let(:quiz_taken)    { FactoryGirl.create(:quiz_with_questions, author: author) }
+        let(:quiz_event)    { FactoryGirl.create(:quiz_event, quiz: quiz_taken, user: user) }
+        before do
+          quiz_taken.save
+          quiz_event.save
+          visit root_path  
+        end
+        it "should have link to quiz that was taken" do
+          expect(page).to have_link(quiz_taken.name)
+        end
+      end
     end
   end
 

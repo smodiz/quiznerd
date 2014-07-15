@@ -7,8 +7,6 @@ class Question < ActiveRecord::Base
   accepts_nested_attributes_for :answers, allow_destroy: true
   validates :question_type, :content, :quiz_id, presence: true
 
-
-
   # Question types are not in the database because application logic (such as
   # fill-in-the-blank has one answer, T/F has 2 answers, etc) depends on these 
   # values, so they can't be changed independently of the code.

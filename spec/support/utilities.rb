@@ -6,3 +6,29 @@ def valid_sign_in(user)
 	fill_in "Password", with: user.password
 	click_button 'Sign in'
 end
+
+# Note: These methds cannot be named the same as the variable specified in the 
+# let methods that use them. See quiz_events_spec.rb
+
+def correct_answer_texts(quiz_event)
+  # need all the correct answers
+  answer_texts(quiz_event.current_question.correct_answer_ids)
+end
+
+def incorrect_answer_texts(quiz_event)
+   # just need one incorrect answer
+   incorrect_id = quiz_event.current_question.incorrect_answer_ids[0]
+   Answer.find(incorrect_id).content
+end
+
+def answer_texts(answer_ids)
+  answer_texts = []
+  answer_ids.each do |answer_id|
+    answer_texts << Answer.find(answer_id).content
+  end
+  answer_texts
+end
+
+def new_quiz_url_for(quiz_id)
+  "/quiz_events/new?quiz_id=#{quiz_id}"
+end

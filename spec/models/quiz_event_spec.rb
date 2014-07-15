@@ -148,23 +148,7 @@ describe QuizEvent do
       expect(quiz_event.current_percent_grade).to eq 50
     end
 
-    it "should give the correct grade when percentage is on lower boundary" do
-      quiz_event.total_answered = 100
-      quiz_event.total_correct = 90
-      expect(quiz_event.current_letter_grade).to eq "A"
-    end
-
-    it "should give the correct grade when percentage is on upper boundary" do
-      quiz_event.total_answered = 100
-      quiz_event.total_correct = 89
-      expect(quiz_event.current_letter_grade).to eq "B"
-    end
-
-    it "should give the correct grade when percentage is zero" do
-      quiz_event.total_answered = 10
-      quiz_event.total_correct = 0
-      expect(quiz_event.current_letter_grade).to eq "F"
-    end
+ 
   end
 
 end

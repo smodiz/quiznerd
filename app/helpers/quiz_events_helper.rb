@@ -1,7 +1,5 @@
 module QuizEventsHelper
 
- 
-
   def answer_shown_already?
     # when you present a question, you show the previous answer at the 
     # same time. If the new question fails validaton, the page reloads 
