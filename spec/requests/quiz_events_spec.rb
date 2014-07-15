@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "QuizEvents" do
+describe "Quiz Event Pages" do
  
   let(:quiz_author) { FactoryGirl.create(:user) }
   let(:quiz_taker)  { FactoryGirl.create(:user) }
@@ -17,6 +17,28 @@ describe "QuizEvents" do
   end
 
   subject { page }
+
+ describe "shows a quiz event on the index page" do
+    before(:each) do
+      quiz_event.save
+      visit quiz_events_path
+    end
+    
+    it { should have_content("Quizzes Taken") }
+    it { should have_content(quiz_event.quiz.name) }
+    it { should have_content(quiz_event.total_correct) }
+    it { should have_content(quiz_event.total_answered) }
+  end
+
+  describe "does not show other users quiz" do
+    let(:user2) { FactoryGirl.create(:user) }
+    let(:quiz_event_2) { FactoryGirl.create(:quiz_event, quiz: quiz, user: user2) }
+    before(:each) do
+      quiz_event_2.save
+      visit quiz_events_path
+    end
+    it { should_not have_content(quiz_event_2.quiz.name) }
+  end
 
   describe "shows quiz detail on the create page" do
     before { visit new_quiz_url }
@@ -65,7 +87,7 @@ describe "QuizEvents" do
       end
 
       it "should not allow user to use back button to re-answer" do
-        pending # I don't know how to simulate back button
+        pending "I don't know how to simulate back button yet"
       end
     end
   end
@@ -95,7 +117,7 @@ describe "QuizEvents" do
     end
 
     it "should not allow user to go back once done" do
-      pending # I don't know how to simulate back button
+      pending "I don't know how to simulate back button yet"
     end
   end
 

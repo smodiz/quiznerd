@@ -1,25 +1,30 @@
-<h1>Listing quiz_events</h1>
-
-<table>
+<div class="well">
+  <div class="section-header">
+    Quizzes Taken
+    <hr/>
+  </div>  
+  <div class="table-responsive">
+  <table class="table table-bordered table-striped index-table">
   <thead>
     <tr>
-      <th>User</th>
       <th>Quiz</th>
-      <th>Number correct</th>
-      <th>Number questions</th>
-      <th colspan="2"></th>
+      <th>Correct</th>
+      <th>Total</th>
+      <th>Score</th>
+      <th colspan="1"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @quiz_events.each do |quiz_event| %>
       <tr>
-        <td><%= quiz_event.user %></td>
-        <td><%= quiz_event.quiz %></td>
-        <td><%= quiz_event.number_correct %></td>
-        <td><%= quiz_event.number_questions %></td>
-        <td><%= link_to 'Show', quiz_event %></td>
-        <td><%= link_to 'Destroy', quiz_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to quiz_event.quiz.name, quiz_event %></td>
+        <td><%= quiz_event.total_correct %></td>
+        <td><%= quiz_event.total_answered %></td>
+        <td><%= "%.0f" % quiz_event.current_percent_grade %>%</td>
+        <td>
+          <%= link_to 'destroy', quiz_event, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
       </tr>
     <% end %>
   </tbody>

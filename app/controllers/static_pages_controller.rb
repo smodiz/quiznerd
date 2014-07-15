@@ -15,7 +15,6 @@ class StaticPagesController < ApplicationController
   end
 
   def get_quiz_events
-    # not implemented yet
     @quiz_events = current_user.quiz_events.limit(LIMIT) 
     @num_remaining_events = @quiz_events.size == LIMIT ? current_user.quiz_events.size - LIMIT : 0
   end

@@ -2,9 +2,10 @@ require 'spec_helper'
 
 describe Question do
   
-  let(:user) { FactoryGirl.create(:user) }
-  let(:quiz) { FactoryGirl.create(:quiz, author: user) }
-  let(:question) { FactoryGirl.create( :question, quiz: quiz) }
+  let(:user)      { FactoryGirl.create(:user) }
+  let(:quiz)      { FactoryGirl.create(:quiz, author: user) }
+  let(:question)  { FactoryGirl.create( :question, quiz: quiz) }
+  let(:question_with_answers) { FactoryGirl.create(:question_mc2_with_answers, quiz: quiz) }
 
   subject { question }
 
@@ -45,8 +46,13 @@ describe Question do
   end
 
   describe "#correct_answer" do
-    it "should return true when user selects correct answer"
-    it "should return false when incorrect answers passed in"
+    it "should return true when correct answer is provided" do
+      expect(question_with_answers.correct_answer?(
+        question_with_answers.correct_answer_ids)).to be_true
+    end
+    it "should return false when incorrect answer is provided" do
+      expect(question_with_answers.correct_answer?([9999999])).to be_false
+    end
   end
 end
 

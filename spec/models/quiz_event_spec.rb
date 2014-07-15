@@ -148,7 +148,6 @@ describe QuizEvent do
       expect(quiz_event.current_percent_grade).to eq 50
     end
 
- 
   end
 
 end
