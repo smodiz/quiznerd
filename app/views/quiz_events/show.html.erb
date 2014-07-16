@@ -1,7 +1,14 @@
 
 <div class="row">
   <div class="col-md-offset-3 col-md-6">  
-
+    <br/>
+   
+    <div class="alert alert-error">
+      <a class="close" data-dismiss="alert" href="#">×</a>
+      <%  @quiz_event.errors.full_messages.each do |msg| %>
+        <%= msg %>
+      <% end %>
+    </div>
     <p id="notice"><%= notice %></p>
     <% unless @quiz_event.before_first_question? || answer_shown_already? %>
       <%= render 'graded_question' %>

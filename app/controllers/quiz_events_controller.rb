@@ -39,12 +39,6 @@ class QuizEventsController < ApplicationController
   # PATCH/PUT /quiz_events/1
   def update
     
-    # handle back-button shenanigans
-    if question_repeated? 
-      handle_repeat
-      return
-    end
-
     @quiz_event.update(quiz_event_params)
     if suspend? || @quiz_event.status == QuizEvent::COMPLETED_STATUS
       render :show 
@@ -65,32 +59,13 @@ class QuizEventsController < ApplicationController
 
   private
 
-    # make sure user doesn't use back button to re-answer a question
-    def question_repeated?
-      @quiz_event.last_question_id && 
-        quiz_event_params[:question_id].to_i <= @quiz_event.last_question_id 
-    end
-
     def set_quiz_event
       @quiz_event = current_user.quiz_events.find(params[:id])
-     
     end
    
     def suspend?
       params[:suspend_button]
     end
-
-    def handle_repeat
-      if @quiz_event.status == QuizEvent::IN_PROGRESS_STATUS
-        @quiz_event.reset
-        flash.now[:error] = "Can't answer the same question twice. Please answer the next question, shown below."
-        render :edit
-      elsif @quiz_event.status == QuizEvent::COMPLETED_STATUS
-        flash.now[:error] = "Can't answer that question again. You've already completed this quiz."
-        render :show
-      end
-    end
-
 
     # answer_ids is a virtual attribute that rails assigns to the variable as a string (when only 
     # one is submitted via radio button) or string array (when multiple submitted, via checkboxes).

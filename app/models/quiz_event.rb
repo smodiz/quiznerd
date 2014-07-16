@@ -9,20 +9,22 @@ class QuizEvent < ActiveRecord::Base
 	# current question_id and the user's answer, as well as their
 	# answer to the last question so we can access the graded question
 	attr_accessor :answer_ids, :question_id, :last_answer_ids, :last_answer_correct
-	
 
 	COMPLETED_STATUS = "Completed"
 	IN_PROGRESS_STATUS = "In Progress"
 
 	def process_question
 		if status == COMPLETED_STATUS
-			self.errors.add(:status, "This quiz has already been completed.")
+			self.errors.add(:base, 
+				"Can't re-answer questions. Quiz already completed.")
 			return false
 		end
 
 		if question_id && last_question_id && 
 							question_id.to_i <= last_question_id.to_i
-			self.errors.add(:question_id, "Can't answer same question more than once")
+			self.errors.add(:question_id, 
+				"cannot be answered more than once. Please answer the next question:")
+			reset
 			return false
 		end
 

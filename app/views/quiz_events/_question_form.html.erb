@@ -3,7 +3,7 @@
   <%= f.error_notification %>
   <ul>
     <%  @quiz_event.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
+      <li class="alert-error"><%= msg %></li>
     <% end %>
   </ul>
   <table class="table table-bordered">
