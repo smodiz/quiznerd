@@ -6,7 +6,7 @@ class QuizzesController < ApplicationController
   # GET /quizzes
   # GET /quizzes.json
   def index
-    @quizzes = current_user.quizzes
+    @quizzes = current_user.quizzes.paginate(page: params[:page]) 
   end
 
   # GET /quizzes/1

@@ -59,7 +59,7 @@ describe QuizEvent do
       quiz_event.question_id = quiz_event.last_question_id
       quiz_event.answer_ids = quiz_event.last_answer_ids
       expect(quiz_event.save).to be_false
-      expect(quiz_event.errors[:question_id].join(" ")).to match(/same question/i)
+      expect(quiz_event.errors[:question_id].join(" ")).to match(/cannot be answered more than once/i)
     end
 
     it "should have a status of In Progress" do
@@ -126,7 +126,7 @@ describe QuizEvent do
       quiz_event.question_id = quiz_event.last_question_id
       quiz_event.answer_ids = quiz_event.last_answer_ids
       expect(quiz_event.save).to be_false
-      expect(quiz_event.errors[:status].to_s).to match(/Completed/i)
+      expect(quiz_event.errors[:base].to_s).to match(/Completed/i)
     end
   end
 

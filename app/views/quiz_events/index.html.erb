@@ -4,33 +4,35 @@
     <hr/>
   </div>  
   <div class="table-responsive">
-  <table class="table table-bordered table-striped index-table">
-  <thead>
-    <tr>
-      <th>Quiz</th>
-      <th>Correct</th>
-      <th>Total</th>
-      <th>Score</th>
-      <th colspan="1"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @quiz_events.each do |quiz_event| %>
-      <tr>
-        <td><%= link_to quiz_event.quiz.name, quiz_event %></td>
-        <td><%= quiz_event.total_correct %></td>
-        <td><%= quiz_event.total_answered %></td>
-        <td><%= formatted_quiz_score(quiz_event) %>%</td>
-        <td>
-          <%= link_to 'destroy', quiz_event, method: :delete, 
-              data: { confirm: 'Are you sure?' } %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-
+    <table class="table table-bordered table-striped index-table">
+      <thead>
+        <tr>
+          <th>Quiz</th>
+          <th>Correct</th>
+          <th>Total</th>
+          <th>Score</th>
+          <th colspan="1"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @quiz_events.each do |quiz_event| %>
+          <tr>
+            <td><%= link_to quiz_event.quiz.name, quiz_event %></td>
+            <td><%= quiz_event.total_correct %></td>
+            <td><%= quiz_event.total_answered %></td>
+            <td><%= formatted_quiz_score(quiz_event) %>%</td>
+            <td>
+              <%= link_to 'destroy', quiz_event, method: :delete, 
+                  data: { confirm: 'Are you sure?' } %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-md-offset-4 col-md-6"><%= will_paginate @quiz_events %></div>
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+</div>
