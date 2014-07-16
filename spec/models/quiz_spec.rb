@@ -29,22 +29,25 @@ describe Quiz do
   end
 
   describe "search" do
-    let(:quiz_1) { FactoryGirl.create(:quiz, name: "Rails 101", author: user)  }
-    let(:quiz_2) { FactoryGirl.create(:quiz, name: "Ruby 101", author: user) }
-    let(:quiz_3) { FactoryGirl.create(:quiz, name: "jQuery", author: user) }
+    let(:quiz_1) { FactoryGirl.create(:quiz_with_questions, name: "Rails 101", author: user)  }
+    let(:quiz_2) { FactoryGirl.create(:quiz_with_questions, name: "Ruby 101", author: user) }
+    let(:quiz_3) { FactoryGirl.create(:quiz_with_questions, name: "jQuery", author: user) }
+    let(:quiz_4) { FactoryGirl.create(:quiz, name: "CSS 101", author: user)  }
 
     before(:each) do
       quiz_1.save!
       quiz_2.save!
       quiz_3.save!
+      quiz_4.save!
     end
 
     context "when given a search key word" do
-      it "should return only the matching records" do
+      it "should return only the matching records for publishd quizzes" do
         @quizzes = Quiz.search("101")
-        expect(@quizzes.count).to eq 2 
+        expect(@quizzes.count).to eq 2
         @quizzes.each do |quiz|
           expect(quiz.name).to match(/101/)
+          expect(quiz.name).not_to match(/CSS/)
         end
       end
     end

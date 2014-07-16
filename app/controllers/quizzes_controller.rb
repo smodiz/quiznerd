@@ -1,5 +1,5 @@
 class QuizzesController < ApplicationController
-  before_action :set_quiz, only: [:show, :edit, :update, :destroy]
+  before_action :set_quiz, only: [:show, :edit, :update, :destroy, :toggle_publish]
   before_action :authenticate_user!
   before_action :correct_user, only: [:edit, :update, :destroy]
 
@@ -62,6 +62,18 @@ class QuizzesController < ApplicationController
     @quiz.destroy
     respond_to do |format|
       format.html { redirect_to quizzes_url, notice: 'Quiz was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
+  def toggle_publish
+    @quiz.toggle_publish
+    @quiz.save
+    respond_to do |format|
+      format.html do
+        state = @quiz.published ? "Published" : "Unpublished" 
+        redirect_to @quiz, notice: "Quiz was #{state}"
+      end
       format.json { head :no_content }
     end
   end

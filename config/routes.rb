@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :questions
 
   resources :quizzes
+  match '/toggle_publish/:id', to: 'quizzes#toggle_publish', via: 'put'
 
   devise_for :users
 

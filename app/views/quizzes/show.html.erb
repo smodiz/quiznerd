@@ -2,9 +2,12 @@
   
   <div class="section-header">
     <%= @quiz.name %>   
-    <%= link_to "Publish Quiz", "#", 
-        class: "btn btn-sm btn-success pull-right",
-        data: { confirm: 'Not implemented yet' } %>
+    <% if @quiz.published || (!@quiz.published && @quiz.can_publish?) %>
+      <% label = @quiz.published ? "Unpublish" : "Publish" %>
+      <%= link_to "#{label} Quiz", "/toggle_publish/#{@quiz.id}", 
+          class: "btn btn-sm btn-success pull-right",
+          method: :put %>
+    <% end %>
     <%= link_to "Edit Quiz Information", edit_quiz_path(@quiz), 
           class: "btn btn-sm btn-primary pull-right" %>
     <hr/>

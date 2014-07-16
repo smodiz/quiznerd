@@ -118,12 +118,15 @@ describe "Quiz Pages" do
     specify { expect(current_path).to eq(quiz_path(quiz))}
     it { should have_content(quiz.name) }
     it { should have_link("Edit Quiz Information") }
-    it { should have_link("Publish Quiz") }
+    
     it { should have_content("Questions") }
     it { should have_link("Add Question") }
+    it "should not have Publish link without minimum number of questions" do
+      expect(page).to_not have_link("Publish Quiz") 
+    end
   end
 
- describe "edit quiz" do
+  describe "edit quiz" do
     before(:each) do 
       quiz.save!
       visit quizzes_path
@@ -136,6 +139,25 @@ describe "Quiz Pages" do
     it { should have_button("Update Quiz") }
     it { should have_link("Cancel") }
 
+  end
+
+
+  describe "publish a quiz" do
+    let(:quiz_with_questions) { FactoryGirl.create(:quiz_with_questions, author: user) }
+    before(:each) do
+      quiz_with_questions.published = false
+      quiz_with_questions.save!
+      visit quiz_path(quiz_with_questions)
+      click_link "Publish Quiz"
+    end
+
+    specify { expect(current_path).to eq(quiz_path(quiz_with_questions)) }
+    it { should have_link("Unpublish Quiz") }
+    it { should have_content("Published? Yes") }
+  end
+
+  describe "unpublish a quiz" do
+    pending
   end
 
 end

@@ -16,6 +16,7 @@ FactoryGirl.define do
     published false
     
     factory :quiz_with_questions do
+      published true
       after(:create) do |quiz|
         create(:question_mc2_with_answers, quiz: quiz)
         create(:question_mc1_with_answers, quiz: quiz)
@@ -24,6 +25,7 @@ FactoryGirl.define do
     end
 
      factory :quiz_with_question do
+
       after(:create) do |quiz|
         create(:question_mc2_with_answers, quiz: quiz)
       end

@@ -16,9 +16,9 @@ class Quiz < ActiveRecord::Base
  
   def self.search(search)
     if search
-      Quiz.where("name like ?", "%#{search}%")
+      Quiz.where("name like ?", "%#{search}%").where(published: true)
     else
-      Quiz.all 
+      Quiz.all.where(published:true) 
     end
   end
 
@@ -29,5 +29,18 @@ class Quiz < ActiveRecord::Base
   def number_of_questions
     questions.size
   end
+
+  def can_publish?
+    number_of_questions >= 3
+  end
+
+  def toggle_publish
+    if published
+      self.toggle(:published)   # can unpublish at will
+    elsif can_publish?  # but publishing requires validation
+      self.toggle(:published)
+    end
+  end
+
 
 end
