@@ -1,0 +1,49 @@
+<div class="section-header">
+  Questions
+  <%= link_to new_question_path(quiz_id: @quiz.id), 
+      class: 'btn btn-primary pull-right btn-sm' do %>
+      <i class="glyphicon glyphicon-plus glyphicon-white"></i>Add Question
+  <% end %>
+  <hr/>
+</div>
+
+
+<%  if @quiz.questions.empty? then %>
+  No questions added yet.
+<% else %>
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+        <td width="60%"><span class="field-title">Question</span></td>
+        <td width="25%"><span class="field-title">Answer</span></td>
+        <td colspan="3" width="15%"></td>
+      </thead>
+      <tbody>
+        <% @quiz.questions.each do |question| %>
+        <tr>
+          <td><%= question.content %></td>
+          <td>
+             <% question.answers.each do |answer| %>
+              <span class="answer-display">
+                <%= truncate(answer.content, length: 30) %>
+                <% if answer.correct %>
+                  &#x2713
+                <% end %>
+              </span>
+          <% end %>
+          </td>
+          <td>
+            <%= link_to "edit", edit_question_path(question) %>
+          </td>
+          <td>
+            <%= link_to "copy", "#", data: { confirm: "Not implemented yet" } %>
+          </td>
+          <td>
+            <%= link_to "delete", question, method: :delete, 
+                  data: { confirm: "Are you sure?" } %>
+          </td>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>
