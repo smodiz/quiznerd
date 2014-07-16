@@ -17,7 +17,7 @@
     </p>
 
     <p class="quiz_event_result_body">
-       <%= "You scored %.0f" % @quiz_event.current_percent_grade %>%&nbsp;
+       <%= "You scored #{formatted_quiz_score(@quiz_event)}" %>%&nbsp;
        (<%= @quiz_event.total_correct %> out of 
         <%= @quiz_event.total_answered %>)
         <br/>

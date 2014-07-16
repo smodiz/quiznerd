@@ -21,4 +21,8 @@ module ApplicationHelper
                                         tables: true)
     markdown.render(text).html_safe
   end
+
+  def formatted_quiz_score(quiz_event)
+    "%.0f" % quiz_event.current_percent_grade
+  end
 end

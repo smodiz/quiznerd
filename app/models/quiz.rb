@@ -8,12 +8,6 @@ class Quiz < ActiveRecord::Base
   validates :name, :description, :author, :category, :subject, presence: true
   validates :published, inclusion: { in: [true, false] }
   
-  # This didn't work
-  # before_validation(on: :create) do
-  #   self.published = false
-  # end
-  # Also tried the above with a before_create callback. Didn't work either. Argh!
- 
   def self.search(search)
     if search
       Quiz.where("name like ?", "%#{search}%").where(published: true)

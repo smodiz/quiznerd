@@ -69,21 +69,17 @@ class QuizzesController < ApplicationController
   def toggle_publish
     @quiz.toggle_publish
     @quiz.save
+    action = @quiz.published ? "Published" : "Unpublished" 
     respond_to do |format|
-      format.html do
-        state = @quiz.published ? "Published" : "Unpublished" 
-        redirect_to @quiz, notice: "Quiz was #{state}"
-      end
+      format.html { redirect_to @quiz, notice: "Quiz was #{action}" }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_quiz
       @quiz = Quiz.find(params[:id])
-      # @project = Project.includes(:user).where(hashed_id: params[:id]).first
-      # @projects = Project.find(:all, :includes => :user)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

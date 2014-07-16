@@ -21,7 +21,7 @@
         <td><%= link_to quiz_event.quiz.name, quiz_event %></td>
         <td><%= quiz_event.total_correct %></td>
         <td><%= quiz_event.total_answered %></td>
-        <td><%= "%.0f" % quiz_event.current_percent_grade %>%</td>
+        <td><%= formatted_quiz_score(quiz_event) %>%</td>
         <td>
           <%= link_to 'destroy', quiz_event, method: :delete, 
               data: { confirm: 'Are you sure?' } %>
