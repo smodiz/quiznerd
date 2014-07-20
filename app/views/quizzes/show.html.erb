@@ -4,7 +4,7 @@
     <%= @quiz.name %>   
     <% if @quiz.published || (!@quiz.published && @quiz.can_publish?) %>
       <% label = @quiz.published ? "Unpublish" : "Publish" %>
-      <%= link_to "#{label} Quiz", "/toggle_publish/#{@quiz.id}", 
+      <%= link_to "#{label} Quiz", quiz_toggle_publish_path(@quiz), 
           class: "btn btn-sm btn-success pull-right",
           method: :put %>
     <% end %>

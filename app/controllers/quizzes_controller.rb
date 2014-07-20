@@ -1,30 +1,22 @@
 class QuizzesController < ApplicationController
-  before_action :set_quiz, only: [:show, :edit, :update, :destroy, :toggle_publish]
+  before_action :set_quiz, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
   before_action :correct_user, only: [:edit, :update, :destroy]
 
-  # GET /quizzes
-  # GET /quizzes.json
   def index
     @quizzes = current_user.quizzes.paginate(page: params[:page]) 
   end
 
-  # GET /quizzes/1
-  # GET /quizzes/1.json
   def show
   end
 
-  # GET /quizzes/new
   def new
     @quiz = Quiz.new
   end
 
-  # GET /quizzes/1/edit
   def edit
   end
 
-  # POST /quizzes
-  # POST /quizzes.json
   def create
     # temporary workaround
     # set published to false on create. Tried to use various callbacks on the 
@@ -42,8 +34,6 @@ class QuizzesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /quizzes/1
-  # PATCH/PUT /quizzes/1.json
   def update
     respond_to do |format|
       if @quiz.update(quiz_params)
@@ -56,8 +46,6 @@ class QuizzesController < ApplicationController
     end
   end
 
-  # DELETE /quizzes/1
-  # DELETE /quizzes/1.json
   def destroy
     @quiz.destroy
     respond_to do |format|
@@ -67,9 +55,10 @@ class QuizzesController < ApplicationController
   end
 
   def toggle_publish
+    @quiz = Quiz.find(params[:quiz_id])
     @quiz.toggle_publish
     @quiz.save
-    action = @quiz.published ? "Published" : "Unpublished" 
+    action = @quiz.published ? "published" : "unpublished" 
     respond_to do |format|
       format.html { redirect_to @quiz, notice: "Quiz was #{action}" }
       format.json { head :no_content }
@@ -82,7 +71,6 @@ class QuizzesController < ApplicationController
       @quiz = Quiz.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def quiz_params
       params.require(:quiz).permit(:name, :description, :published, :category_id, :subject_id)
     end

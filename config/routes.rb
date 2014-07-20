@@ -3,19 +3,17 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'static_pages#home'
-   
-  resources :quiz_events
-
-  resources :questions
-
-  resources :quizzes
-  match '/toggle_publish/:id', to: 'quizzes#toggle_publish', via: 'put'
-
+  
   devise_for :users
+ 
+  resources :quiz_events
+  resources :questions
+  resources :quizzes do 
+    put 'toggle_publish' => 'quizzes#toggle_publish'
+  end
 
   match '/search',          to: 'search#new',     via: 'get'
   match '/search/create',   to: 'search#create',  via: 'post'
-
   match '/about',   to: 'static_pages#about',   via: 'get'
   match '/contact', to: 'static_pages#contact', via: 'get'
 
