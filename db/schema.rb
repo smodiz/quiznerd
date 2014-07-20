@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20140615183723) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "answers", force: true do |t|
     t.text     "content"
     t.integer  "question_id"

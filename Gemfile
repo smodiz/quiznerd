@@ -18,6 +18,7 @@ gem 'will_paginate', '3.0.5'
 gem 'bootstrap-will_paginate', '0.0.10'
 gem 'redcarpet', '3.1.2'
 gem 'devise'
+gem 'pg', '0.15.1'
 
 # temporarily add to all environments. Later, will remove from production
 gem 'rack-mini-profiler'
@@ -29,7 +30,6 @@ group :development, :test do
   # Spring speeds up development by keeping your application running in the 
   # background. Read more: https://github.com/rails/spring
   gem 'spring'
-  gem 'mysql2'
   gem 'rspec-rails', '2.13.1'
   gem 'guard-rspec', '2.5.0'
   gem 'spork-rails', '4.0.0'
@@ -66,6 +66,5 @@ end
 
 group :production do
  	gem 'rails_12factor', '0.0.2'
- 	gem 'pg', '0.15.1'
 end
 

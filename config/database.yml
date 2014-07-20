@@ -5,9 +5,9 @@
 #   gem 'sqlite3'
 #
 default: &default
-  adapter: mysql2
+  adapter: postgresql
+  encoding: unicode
   pool: 5
-  timeout: 5000
 
 
 development:
@@ -23,9 +23,7 @@ test:
   password: <%= ENV["DATABASE_PASSWORD"] %>
 
 production:
-  adapter: postgresql
-  encoding: unicode
+  <<: *default
   database: quiznerd_production
-  pool: 5
   username: <%= ENV["DATABASE_USER"] %>
   password: <%= ENV["DATABASE_PASSWORD"] %>
