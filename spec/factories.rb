@@ -11,8 +11,8 @@ FactoryGirl.define do
   factory :quiz do
     sequence(:name) { |n| "Quiz Number #{n}"}
     description "This is a quiz created by Factory Girl."
-    category Category.first
-    subject Subject.first
+    category_id 1 # Category.fist  <-- this caused an error in rake db:schema:load RAILS_ENV=test
+    subject_id 1 # Subject.first <-- see above, don't know why but someone on stackoverflow had same issue
     published false
     
     factory :quiz_with_questions do
@@ -77,10 +77,4 @@ FactoryGirl.define do
 
 end
 
-    #  :id => :integer,
-    #          :user_id => :integer,
-    #          :quiz_id => :integer,
-    #           :status => :string,
-    #    :total_correct => :integer,
-    #   :total_answered => :integer,
-    # :last_question_id => :integer,
+  
