@@ -43,8 +43,8 @@ describe Quiz do
 
     context "when given a search key word" do
       it "should return only the matching records for publishd quizzes" do
-        @quizzes = Quiz.search("101")
-        expect(@quizzes.count).to eq 2
+        @quizzes = Quiz.search_quiz_to_take("101")
+        expect(@quizzes.size).to eq 2
         @quizzes.each do |quiz|
           expect(quiz.name).to match(/101/)
           expect(quiz.name).not_to match(/CSS/)
@@ -54,8 +54,8 @@ describe Quiz do
 
     context "when no search terms given" do
       it "should return all records" do
-        @quizzes = Quiz.search("")
-        expect(@quizzes.count).to eq 3
+        @quizzes = Quiz.search_quiz_to_take("")
+        expect(@quizzes.size).to eq 3
       end
     end
   end

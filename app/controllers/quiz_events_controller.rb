@@ -5,7 +5,7 @@ class QuizEventsController < ApplicationController
   # GET /quiz_events
   # GET /quiz_events.json
   def index
-    @quiz_events = current_user.quiz_events.paginate(page: params[:page]) 
+    @quiz_events = current_user.quiz_events.paginate(:per_page => 5, page: params[:page]) 
   end
 
   # GET /quiz_events/1

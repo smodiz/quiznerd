@@ -1,47 +1,58 @@
 <div class="well">
   <div class="section-header">
     Quizzes Written
-     <% if @quizzes.size >= 7 %>
+     <% if @quizzes.size >= 1 %>
       <%= link_to new_quiz_path, class: 'btn btn-primary pull-right btn-sm' do %>
         <i class="glyphicon glyphicon-plus glyphicon-white"></i>New Quiz
       <% end %>
     <% end %>
     <hr/>
   </div>  
+  <div>
+    <%= form_tag quizzes_path, method: :get do %>
+    <%= hidden_field_tag :direction, params[:direction] %>
+    <%= hidden_field_tag :sort, params[:sort] %>
+    <p>
+      <%= text_field_tag :search, params[:search], placeholder: "searches all" %>
+      <%= submit_tag "Search", name: nil %>
+    <% end %>
+  </div>
   <div class="table-responsive">
-  <table class="table table-bordered table-striped index-table">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Published</th>
-        <th>Category</th>
-        <th>Subject</th>
-        <th colspan="1"></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @quizzes.each do |quiz| %>
+    <table class="table table-bordered table-striped index-table">
+      <thead>
         <tr>
-          <td><%= link_to quiz.name, quiz_path(quiz), class: "index-link" %></td>
-          <td><%= truncate(quiz.description, length:40) %></td>
-          <td><%= quiz.published ? "Yes" : "No" %></td>
-          <td><%= quiz.category.name %></td>
-          <td><%= quiz.subject.name %></td>
-          <td><%= link_to 'destroy', quiz, method: :delete, data: { confirm: 'Are you sure?' }, class: "index-link" %></td>
+          <th class='<%= sortable_css_class("name") %>'><%= sortable "name" %></th>
+          <th class='<%= sortable_css_class("description") %>'><%= sortable "description" %></th>
+          <th class='<%= sortable_css_class("published") %>'><%= sortable "published" %></th>
+          <th>Category</th>
+          <th>Subject</th>
+          <th colspan="1"></th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <% @quizzes.each do |quiz| %>
+          <tr>
+            <td><%= link_to quiz.name, quiz_path(quiz), class: "index-link" %></td>
+            <td><%= truncate(quiz.description, length:40) %></td>
+            <td><%= quiz.published ? "Yes" : "No" %></td>
+            <td><%= quiz.category.name %></td>
+            <td><%= quiz.subject.name %></td>
+            <td><%= link_to 'destroy', quiz, method: :delete, 
+                      data: { confirm: 'Are you sure?' }, class: "index-link" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
 
   <div class="page-actions">
     <%= link_to new_quiz_path, class: 'btn btn-primary pull-right btn-sm' do %>
       <i class="glyphicon glyphicon-plus glyphicon-white"></i>New Quiz
     <% end %>
+    
   </div>
-  <div><%= will_paginate @quizzes %></div>
+
+  <div class="center"><%= will_paginate @quizzes, renderer: BootstrapPagination::Rails  %></div>
   <br/>
   <br/>
 </div>

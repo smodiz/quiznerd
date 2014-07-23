@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.1.1'
 
-gem 'rails', '4.1.1'
+gem 'rails', '4.1.2.rc1'
 gem 'sass-rails', '~> 4.0.3'
 gem 'bootstrap-sass', '~> 3.1.1.0'
 
@@ -14,11 +14,12 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'simple_form', '~> 3.1.0.rc1', github: 'plataformatec/simple_form'
 gem 'faker', '1.3.0'
-gem 'will_paginate', '3.0.5'
-gem 'bootstrap-will_paginate', '0.0.10'
+gem 'will_paginate', github: 'mislav/will_paginate'
+gem 'will_paginate-bootstrap'
 gem 'redcarpet', '3.1.2'
 gem 'devise'
 gem 'pg', '0.15.1'
+gem 'pg_search', '0.7.4'
 
 # temporarily add to all environments. Later, will remove from production
 gem 'rack-mini-profiler'
@@ -39,6 +40,7 @@ group :development, :test do
   gem 'awesome_print'
   gem 'debugger'
   gem 'pry'
+  gem 'orderly'
 
   # In Rails 4.1, we have secrets.yml which kind of does the same thing as 
   # figaro, except figaro helps automatically set up the variables in your 

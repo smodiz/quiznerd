@@ -160,4 +160,75 @@ describe "Quiz Pages" do
     pending
   end
 
+  describe "quizzes_written page has sortable columns" do
+    let(:cat_2) { Category.find_or_create_by(name: "Aaa") }
+    let(:sub_2) { Subject.find_or_create_by(name: "Zzz", category: cat_2) }
+    let(:cat_3) { Category.find_or_create_by(name: "Zzz") }
+    let(:sub_3) { Subject.find_or_create_by(name: "Aaa", category: cat_3) }
+    let(:quiz_2) do
+      FactoryGirl.create( :quiz, name: "Aaa", category: cat_2, subject: sub_2, 
+        published: false, author: user )
+    end
+    let(:quiz_3) do
+      FactoryGirl.create( :quiz, name: "Zzz", category: cat_3, subject: sub_3, 
+        published: true, author: user )
+    end
+
+    before(:each) do
+      quiz.save
+      quiz_2.save
+      quiz_3.save
+      visit quizzes_path
+    end
+
+    it { should have_link("Name")}
+    it { should have_link("Published") }
+ 
+    describe "sorting by name" do
+      before(:each) { click_link "Name" }
+  
+      it "should sort by name" do
+        expect(quiz_2.name).to appear_before(quiz.name)
+      end
+    end
+
+    describe "sorting by published" do
+      before(:each) { click_link "Published" }
+  
+      it "should sort by published" do
+        expect(quiz_2.name).to appear_before(quiz_3.name)
+      end
+    end
+ 
+
+    describe "sorting by published in reverse order" do
+      before(:each) do
+       click_link "Published" 
+       click_link "Published" 
+     end
+  
+      it "should reverse the order" do
+        expect(quiz_3.name).to appear_before(quiz_2.name)
+      end
+    end
+
+  end  
+
+  #   describe "sorting by category" do
+  #     before(:each) { click_link "Category" }
+  
+  #     it "should sort by category" do
+  #       expect(quiz_2.name).to appear_before(quiz.name)
+  #     end
+  #   end
+
+  #   describe "sorting by subject" do
+  #     before(:each) { click_link "Subject" }
+  
+  #     it "should sort by subect" do
+  #       expect(quiz_3.name).to appear_before(quiz_2.name)
+  #     end
+  #   end   
+  # end
+
 end

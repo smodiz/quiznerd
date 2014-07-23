@@ -8,12 +8,20 @@ FactoryGirl.define do
     password_confirmation "something"
   end
 
+  factory :category do
+    sequence(:name) { |n| "Category #{n}" }
+  end
+
+  factory :subject do
+    sequence(:name) { |n| "Subject #{n}" }
+  end
+
   factory :quiz do
     sequence(:name) { |n| "Quiz Number #{n}"}
     description "This is a quiz created by Factory Girl."
-    category_id 1 # Category.fist  <-- this caused an error in rake db:schema:load RAILS_ENV=test
-    subject_id 1 # Subject.first <-- see above, don't know why but someone on stackoverflow had same issue
     published false
+    category_id 1
+    subject_id 1
     
     factory :quiz_with_questions do
       published true
