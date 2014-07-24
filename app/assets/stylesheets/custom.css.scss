@@ -70,6 +70,14 @@ $table-border-color: darken(Gainsboro, 5%);
   padding-top: 4px;
   text-decoration: none !important;
 }
+.sortable-link {
+    text-decoration: underline;
+    &:hover {
+      background-color: transparent;
+      color: $brand-primary;
+    }
+}
+
 /* ======== images, icons ======== */
 #logo {
   float: left;
@@ -180,14 +188,6 @@ label {
 .div.center {
   margin-left: 15%;
   margin-right: 15%;
-}
-.sortable {
-    text-decoration: underline;
-    color: $brand-primary;
-    &:hover {
-      background-color: transparent;
-      color: $brand-primary;
-    }
 }
 
 

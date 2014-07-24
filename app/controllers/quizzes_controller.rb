@@ -1,13 +1,13 @@
 class QuizzesController < ApplicationController
+  include SortableColumns
+
   before_action :set_quiz, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
   before_action :correct_user, only: [:edit, :update, :destroy]
 
-  helper_method :sort_column, :sort_direction
-
   def index
     @quizzes = Quiz.search_owned_by(current_user, params[:search]).
-        order(sort_clause).paginate(page: params[:page]) 
+        reorder(sort_clause).paginate(page: params[:page]) 
   end
 
   def show
@@ -83,15 +83,5 @@ class QuizzesController < ApplicationController
       redirect_to root_url, notice: 'You cannot modify that quiz.' if @quiz.nil?
     end
 
-    def sort_column
-      Quiz.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
-    end
-
-    def sort_direction
-      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
-    end
-
-    def sort_clause
-      "#{sort_column} #{sort_direction}"
-    end
+  
 end

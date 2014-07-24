@@ -1,6 +1,11 @@
 class QuizEvent < ActiveRecord::Base
+  include QuizEventFinder
+
   belongs_to :user
   belongs_to :quiz
+  has_one :subject, through: :quiz 
+  has_one :category, through: :quiz
+  
   before_save :process_question, on: :update 
   default_scope -> { order('created_at') }
   validates :answer_ids, presence: true, on: :update 

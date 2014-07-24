@@ -5,13 +5,7 @@ module QuizFinder
     include PgSearch
     pg_search_scope :search, against: [:name, :description],
       using: {tsearch: {dictionary: "english" }},
-      associated_against: {category: :name, subject: :name },
-      :order_within_rank => "pg_search_rank"  #see comment below
-
-      #order_within_rank by pg_search_rank means it orders by it twice,
-      #which is harmless. If you don't specify a secondary sort, it
-      #defaults to id, which was then making the sort I add on to the 
-      #end at runtime via sortable headers useless
+      associated_against: {category: :name, subject: :name }
 
     scope :published,   -> { where(published: true) }
     scope :authored_by, -> (user) { where(author: user) }
@@ -31,7 +25,7 @@ module QuizFinder
 
     def do_search(query)
       if query.present?
-        search(query)  # see pg_search_scope
+        search(query) 
       else
         all
       end

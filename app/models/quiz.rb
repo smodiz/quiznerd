@@ -5,7 +5,8 @@ class Quiz < ActiveRecord::Base
   belongs_to :subject
   belongs_to :author, class_name: "User"
   has_many :questions, dependent: :destroy
-  
+  has_many :quiz_events, dependent: :nullify
+
   validates :name, :description, :author, :category, :subject, presence: true
   validates :published, inclusion: { in: [true, false] }
 

@@ -1,9 +1,10 @@
 class QuizEventsController < ApplicationController
+
   before_action :set_quiz_event, only: [:show, :edit, :update, :destroy]
   
-
   def index
-    @quiz_events = current_user.quiz_events.paginate(:per_page => 5, page: params[:page]) 
+    @quiz_events = QuizEvent.search_quizzes_taken(params[:search], current_user).
+        paginate(page: params[:page])   
   end
 
   def show
@@ -37,10 +38,7 @@ class QuizEventsController < ApplicationController
 
   def destroy
     @quiz_event.destroy
-    respond_to do |format|
-      format.html { redirect_to root_path, notice: 'Quiz event was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to root_path, notice: 'Quiz event was successfully destroyed.' 
   end
 
   private
@@ -49,10 +47,10 @@ class QuizEventsController < ApplicationController
       @quiz_event = current_user.quiz_events.find(params[:id])
     end
    
-    # answer_ids is a virtual attribute that rails assigns to the variable 
+    # answer_ids is a virtual attribute on QuizEvent. Rails assigns it  
     # as a string (when only one is submitted via radio button) or string 
     # array (when multiple submitted, via checkboxes). However, what we 
-    # want is an integer array. 
+    # want is an integer array.
     def convert_answer_ids
       answer_ids = params[:quiz_event][:answer_ids]
       return unless answer_ids
@@ -71,8 +69,8 @@ class QuizEventsController < ApplicationController
     # (check boxes), thus it appears in this list both ways
     def quiz_event_params
       convert_answer_ids
-      params.require(:quiz_event).permit(:id, :quiz_id, :question_id, { :answer_ids => [] }, :answer_ids, :suspend_button)
+      params.require(:quiz_event).permit(:id, :quiz_id, :question_id, { :answer_ids => [] }, 
+        :answer_ids, :suspend_button)
     end
-
 
 end
