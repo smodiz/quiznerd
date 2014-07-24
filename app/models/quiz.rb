@@ -1,6 +1,6 @@
 class Quiz < ActiveRecord::Base
   include QuizFinder
-  
+
   belongs_to :category
   belongs_to :subject
   belongs_to :author, class_name: "User"
@@ -14,7 +14,7 @@ class Quiz < ActiveRecord::Base
   end
 
   def can_publish?
-    number_of_questions >= 3
+    number_of_questions >= 1
   end
 
   def toggle_publish

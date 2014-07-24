@@ -10,24 +10,24 @@
           <th>Quiz</th>
           <th>Category</th>
           <th>Subject</th>
-          <th>Correct</th>
-          <th>Total</th>
           <th>Score</th>
+          <th>Date</th>
           <th colspan="1"></th>
         </tr>
       </thead>
       <tbody>
         <% @quiz_events.each do |quiz_event| %>
           <tr>
-            <td><%= link_to quiz_event.quiz.name, quiz_event %></td>
+            <td><%= link_to quiz_event.quiz.name, quiz_event, 
+                      class: "index-link"  %></td>
             <td><%= quiz_event.quiz.category.name  %></td>
             <td><%= quiz_event.quiz.subject.name  %></td>
-            <td><%= quiz_event.total_correct %></td>
-            <td><%= quiz_event.total_answered %></td>
-            <td><%= formatted_quiz_score(quiz_event) %>%</td>
-            <td>
-              <%= link_to 'destroy', quiz_event, method: :delete, 
-                  data: { confirm: 'Are you sure?' } %>
+            <td><%= quiz_event.total_correct %> out of
+               <%= quiz_event.total_answered %> 
+               (<%= formatted_quiz_score(quiz_event) %>%)</td>
+            <td><%= time_ago_in_words(quiz_event.updated_at)%> ago</td>
+            <td><%= link_to 'destroy', quiz_event, method: :delete, 
+                  data: { confirm: 'Are you sure?' }, class: "index-link"  %>
             </td>
           </tr>
         <% end %>

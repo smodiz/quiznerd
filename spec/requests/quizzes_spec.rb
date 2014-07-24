@@ -214,21 +214,4 @@ describe "Quiz Pages" do
 
   end  
 
-  #   describe "sorting by category" do
-  #     before(:each) { click_link "Category" }
-  
-  #     it "should sort by category" do
-  #       expect(quiz_2.name).to appear_before(quiz.name)
-  #     end
-  #   end
-
-  #   describe "sorting by subject" do
-  #     before(:each) { click_link "Subject" }
-  
-  #     it "should sort by subect" do
-  #       expect(quiz_3.name).to appear_before(quiz_2.name)
-  #     end
-  #   end   
-  # end
-
 end

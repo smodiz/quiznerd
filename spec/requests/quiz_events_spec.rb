@@ -113,7 +113,7 @@ describe "Quiz Event Pages" do
     end
 
     it "should display completion message" do
-      expect(page).to have_content("You've completed the quiz")
+      expect(page).to have_content("You completed the quiz")
     end
 
     it "should not allow user to go back once done" do

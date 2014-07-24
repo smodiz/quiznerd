@@ -13,7 +13,8 @@
     <%= hidden_field_tag :direction, params[:direction] %>
     <%= hidden_field_tag :sort, params[:sort] %>
     <p>
-      <%= text_field_tag :search, params[:search], placeholder: "searches all" %>
+      <%= text_field_tag :search, params[:search], 
+        options = { size: 30, placeholder: "search all fields showb below" } %>
       <%= submit_tag "Search", name: nil %>
     <% end %>
   </div>
@@ -26,6 +27,7 @@
           <th class='<%= sortable_css_class("published") %>'><%= sortable "published" %></th>
           <th>Category</th>
           <th>Subject</th>
+          <th>Questions</th>
           <th colspan="1"></th>
         </tr>
       </thead>
@@ -37,6 +39,7 @@
             <td><%= quiz.published ? "Yes" : "No" %></td>
             <td><%= quiz.category.name %></td>
             <td><%= quiz.subject.name %></td>
+            <td><%= quiz.number_of_questions %></td>
             <td><%= link_to 'destroy', quiz, method: :delete, 
                       data: { confirm: 'Are you sure?' }, class: "index-link" %></td>
           </tr>
