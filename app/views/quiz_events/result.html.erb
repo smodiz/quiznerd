@@ -1,0 +1,37 @@
+
+<div class="row">
+  <div class="col-md-offset-3 col-md-6">  
+    <br/>
+   
+   <% unless @quiz_event.errors.empty? %>
+    <div class="alert alert-error">
+      <a class="close" data-dismiss="alert" href="#">×</a>
+      <%  @quiz_event.errors.full_messages.each do |msg| %>
+        <%= msg %>
+      <% end %>
+    </div>
+    <% end %>
+    <p id="notice"><%= notice %></p>
+    
+    <% unless @quiz_event.before_first_question? || answer_shown_already? %>
+      <%= render 'graded_question' %>
+    <% end %>
+
+ </div>
+</div> 
+
+<div class="row">
+  <div class="col-md-offset-3 col-md-6">  
+    <p class="quiz_event_result_header">
+      You completed the quiz!
+    </p>
+
+    <p class="quiz_event_result_body">
+       <%= "You scored #{formatted_quiz_score(@quiz_event)}" %>%&nbsp;
+       (<%= @quiz_event.total_correct %> out of 
+        <%= @quiz_event.total_answered %>)
+        <br/>
+    </p>
+
+ </div>
+</div>

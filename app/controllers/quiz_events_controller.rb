@@ -30,7 +30,7 @@ class QuizEventsController < ApplicationController
   def update
     @quiz_event.update(quiz_event_params)
     if @quiz_event.status == QuizEvent::COMPLETED_STATUS
-      render :show 
+      render 'result'
     else
       render :edit
     end

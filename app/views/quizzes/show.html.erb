@@ -1,3 +1,8 @@
+<ul class="breadcrumb">
+  <li><%= link_to 'My Quizzes', quizzes_path %> <span class="divider"></span></li>
+  <li class="active">Show Quiz</li>
+</ul>
+
 <div class="well">
   
   <div class="section-header">
@@ -12,7 +17,7 @@
           class: "btn btn-sm btn-primary pull-right" %>
     <hr/>
   </div>
-<%= render 'quiz_fields' %> 
+<%= render partial: 'quiz_fields', locals: { quiz: @quiz } %> 
 </div>    
 
 <div class="well">

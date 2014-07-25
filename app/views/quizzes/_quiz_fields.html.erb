@@ -4,25 +4,25 @@
       <tr>
         <td>
           <span class="field-title">Name: </span>
-          <%= @quiz.name  %>
+          <%= quiz.name  %>
         </td>  
         <td>
           <span class="field-title">Category: </span>
-          <%= @quiz.category.name %>
+          <%= quiz.category.name %>
         </td>
         <td>
           <span class="field-title">Subject: </span>
-          <%= @quiz.subject.name %>
+          <%= quiz.subject.name %>
         </td>
       </tr>
       <tr>
         <td colspan ="2">
           <span class="field-title">Description: </span>
-          <%= @quiz.description %>
+          <%= quiz.description %>
         </td>
         <td>
           <span class="field-title">Published? </span>
-          <%= @quiz.published ? "Yes" : "No" %>
+          <%= quiz.published ? "Yes" : "No" %>
         </td>
       </tr>
     </tbody>
