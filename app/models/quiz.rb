@@ -25,6 +25,5 @@ class Quiz < ActiveRecord::Base
       self.toggle(:published)
     end
   end
-
   
 end

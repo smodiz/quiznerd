@@ -10,14 +10,14 @@ end
 # Note: These methds cannot be named the same as the variable specified in the 
 # let methods that use them. See quiz_events_spec.rb
 
-def correct_answer_texts(quiz_event)
+def correct_answer_texts(question)
   # need all the correct answers
-  answer_texts(quiz_event.current_question.correct_answer_ids)
+  answer_texts(question.correct_answer_ids)
 end
 
-def incorrect_answer_texts(quiz_event)
+def incorrect_answer_texts(question)
    # just need one incorrect answer
-   incorrect_id = quiz_event.current_question.incorrect_answer_ids[0]
+   incorrect_id = question.incorrect_answer_ids[0]
    Answer.find(incorrect_id).content
 end
 

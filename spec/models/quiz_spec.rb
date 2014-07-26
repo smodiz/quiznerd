@@ -29,10 +29,13 @@ describe Quiz do
   end
 
   describe "search" do
-    let(:quiz_1) { FactoryGirl.create(:quiz_with_questions, name: "Rails 101", author: user)  }
-    let(:quiz_2) { FactoryGirl.create(:quiz_with_questions, name: "Ruby 101", author: user) }
-    let(:quiz_3) { FactoryGirl.create(:quiz_with_questions, name: "jQuery", author: user) }
-    let(:quiz_4) { FactoryGirl.create(:quiz, name: "CSS 101", author: user)  }
+    let(:quiz_1) { FactoryGirl.create(:quiz_with_questions, name: "Rails 101", 
+      author: user)  }
+    let(:quiz_2) { FactoryGirl.create(:quiz_with_questions, name: "Ruby 101", 
+      author: user) }
+    let(:quiz_3) { FactoryGirl.create(:quiz_with_questions, name: "jQuery", 
+      author: user) }
+    let(:quiz_4) { FactoryGirl.create(:quiz, name: "CSS 101", author: user, published: false)  }
 
     before(:each) do
       quiz_1.save!

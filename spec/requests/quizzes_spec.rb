@@ -4,6 +4,8 @@ describe "Quiz Pages" do
 
   let(:user) { FactoryGirl.create(:user) }
   let(:quiz) { FactoryGirl.create(:quiz, author: user) }
+  let(:quiz_with_questions) { FactoryGirl.create(:quiz_with_questions, 
+      author: user, published: false) }
 
   subject { page }
 
@@ -143,9 +145,7 @@ describe "Quiz Pages" do
 
 
   describe "publish a quiz" do
-    let(:quiz_with_questions) { FactoryGirl.create(:quiz_with_questions, author: user) }
     before(:each) do
-      quiz_with_questions.published = false
       quiz_with_questions.save!
       visit quiz_path(quiz_with_questions)
       click_link "Publish Quiz"
@@ -157,7 +157,16 @@ describe "Quiz Pages" do
   end
 
   describe "unpublish a quiz" do
-    pending
+     before(:each) do
+      quiz_with_questions.published = true
+      quiz_with_questions.save!
+      visit quiz_path(quiz_with_questions)
+      click_link "Unpublish Quiz"
+    end
+    
+    specify { expect(current_path).to eq(quiz_path(quiz_with_questions)) }
+    it { should have_link("Publish Quiz") }
+    it { should have_content("Published? No") }
   end
 
   describe "quizzes_written page has sortable columns" do

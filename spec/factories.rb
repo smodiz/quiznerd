@@ -19,12 +19,11 @@ FactoryGirl.define do
   factory :quiz do
     sequence(:name) { |n| "Quiz Number #{n}"}
     description "This is a quiz created by Factory Girl."
-    published false
+    published true
     category_id 1
     subject_id 1
     
     factory :quiz_with_questions do
-      published true
       after(:create) do |quiz|
         create(:question_mc2_with_answers, quiz: quiz)
         create(:question_mc1_with_answers, quiz: quiz)
@@ -76,11 +75,10 @@ FactoryGirl.define do
     end
   end
 
-
   factory :quiz_event do
-    status "In Progress"
-    total_correct 0
-    total_answered 0
+      status "In Progress"
+      total_correct 0
+      total_answered 0
   end
 
 end

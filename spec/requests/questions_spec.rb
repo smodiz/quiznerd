@@ -82,10 +82,5 @@ describe "Questions" do
     end  
   end
 
-  describe "when I copy a question" do
-    it "should open the edit question page"
-    it "should show a duplicate of the question"
-    it "should save it as a new question"
-  end
 
 end
