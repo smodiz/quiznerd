@@ -66,6 +66,24 @@ describe "Quiz Pages" do
     it { should have_content(quiz.name) }
   end
 
+  describe "create new quiz with a new category and subject" do
+    before(:each) do
+      visit quizzes_path
+      within(".page-actions") do
+        click_link "New Quiz"
+      end
+      fill_in "Name", with: quiz.name
+      fill_in "Description", with: quiz.description
+      fill_in "or create a new category:", with: "Geography"
+      fill_in "or create a new subject:", with: "North American Rivers"
+      click_button "Create Quiz"
+    end
+
+    it { should have_content("Quiz was successfully created") }
+    it { should have_content("Geography") }
+    it { should have_content("North American Rivers") }
+  end
+
   describe "cancel create new quiz" do
     before(:each) do
       visit quizzes_path

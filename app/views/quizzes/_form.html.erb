@@ -7,19 +7,28 @@
             boolean: :horizontal_boolean} do |f| %>
   <%= f.error_notification %>
 <div class="form-inputs">
+  
     <table class="table input-table">
-      <tr>
-        <td><%= f.input :name %></td>
-      </tr>
-      <tr>
-        <td><%= f.association :category %></td>
-      </tr>
-       <tr>
-        <td><%= f.association :subject %></td>
-      </tr>
-      <tr>
-        <td><%= f.input :description, as: :text %></td>
-      </tr>
+      <tbody>
+        <tr>
+          <td><%= f.input :name %></td>
+        </tr>
+        <tr>
+          <td><%= f.input :description, as: :text %></td>
+        </tr>
+        <tr><td><hr/>*</td></tr>
+        <tr>
+          <td><%= f.association :category %>
+            <%= f.input :new_category, label: "or create a new category:" %>
+          </td>
+        </tr>
+        <tr><td><hr/>*</td></tr>
+         <tr>
+          <td><%= f.association :subject %>
+            <%= f.input :new_subject, label: "or create a new subject:" %>    
+          </td>    
+        </tr>
+      </tbody>
     </table>
 </div>
 
