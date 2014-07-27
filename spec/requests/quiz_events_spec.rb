@@ -102,6 +102,10 @@ describe "Quiz Event Pages" do
       
       it "should not allow user to use back button to re-answer" do
         pending "I don't know how to simulate back button yet"
+        # ('window.history.back()')
+        # OR? 
+        # visit request.env['HTTP_REFERER']
+        # expect(page).to have_content "Question cannot be answered more than once"
       end
     end
   end
@@ -128,6 +132,7 @@ describe "Quiz Event Pages" do
     it "should not allow user to go back once done" do
       pending "I don't know how to simulate back button yet"
       # page.evaluate_script('window.history.back()')
+      # it , js: true do
     end
 
   end
