@@ -36,16 +36,17 @@
         <%= link_to 'Cancel', quiz_path(@question.quiz_id), class: 'btn btn-danger btn-sm' %>
       </div>
     <% end %>
-
   </div>
-     <div class="col-md-offset-2 col-md-8">
-      <br/>
-      <div class="alert alert-error">
-        <%  if @question.errors.include?(:answers) %>
-          <% @question.errors.full_messages.each do |msg|  %>
-              <div><%= msg if msg =~ /Answer/ %></div>
-          <% end %>
-        <% end %>
-      </div>
+
+  <%  if @question.errors.include?(:answers) %>
+  <div class="col-md-offset-2 col-md-8">
+    <br/>
+    <div class="alert alert-error">
+      <% @question.errors.full_messages.each do |msg|  %>
+        <div><%= msg if msg =~ /Answer/ %></div>
+      <% end %>
     </div>
+  </div>
+  <% end %>
+
 </div>
