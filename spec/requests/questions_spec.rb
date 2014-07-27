@@ -32,6 +32,7 @@ describe "Questions" do
       fill_in "question_answers_attributes_1_content", with: "Some answer 2"
       fill_in "question_answers_attributes_2_content", with: "Some answer 3"
       fill_in "question_answers_attributes_3_content", with: "Some answer 4"
+      check("Correct", :match => :prefer_exact)
       click_button "Create Question"
     end
 

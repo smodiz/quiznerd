@@ -6,6 +6,7 @@ class Question < ActiveRecord::Base
   default_scope -> { order('id') }
   accepts_nested_attributes_for :answers, allow_destroy: true
   validates :question_type, :content, :quiz_id, presence: true
+  validate :must_have_multiple_answers, :must_have_correct_answer
 
   # Question types are not in the database because application logic (such as
   # fill-in-the-blank has one answer, T/F has 2 answers, etc) depends on these 
@@ -34,4 +35,17 @@ class Question < ActiveRecord::Base
   def all_answer_ids
     answers.map(&:id)
   end
+
+  def must_have_multiple_answers
+    if answers.size < 2
+      errors.add(:answers, "cannot be fewer than two")
+    end
+  end
+
+  def must_have_correct_answer
+    if correct_answer_ids.size < 1 
+      errors.add(:answers, "must have at least one which is correct")
+    end
+  end
+
 end

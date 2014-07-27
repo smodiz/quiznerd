@@ -8,6 +8,7 @@ FactoryGirl.define do
     password_confirmation "something"
   end
 
+
   factory :category do
     sequence(:name) { |n| "Category #{n}" }
   end
@@ -25,42 +26,34 @@ FactoryGirl.define do
     
     factory :quiz_with_questions do
       after(:create) do |quiz|
-        create(:question_mc2_with_answers, quiz: quiz)
-        create(:question_mc1_with_answers, quiz: quiz)
-        create(:question_mc1_with_answers, quiz: quiz)
+        create(:question, quiz: quiz)
+        create(:question, quiz: quiz)
+        create(:question, quiz: quiz)
       end
     end
 
-     factory :quiz_with_question do
-
+    factory :quiz_with_question do
       after(:create) do |quiz|
-        create(:question_mc2_with_answers, quiz: quiz)
+        create(:question, quiz: quiz)
       end
     end
+
+
   end
 
-  factory :question do
-    sequence(:content) { |n| "Question number #{n}"}
-    remarks "These are some remarks to show the user after they answer"
-    question_type "MC-2"
 
-    factory :question_mc2_with_answers do
-      after(:create) do |question|
-        create(:answer_correct, question: question)
-        create(:answer_incorrect, question: question)
-        create(:answer_correct, question: question)
-        create(:answer_incorrect, question: question)
-      end
-    end
-    factory :question_mc1_with_answers do
-      question_type "MC-1"
-      after(:create) do |question|
-        create(:answer_incorrect, question: question)
-        create(:answer_incorrect, question: question)
-        create(:answer_correct, question: question)
-        create(:answer_incorrect, question: question)
-      end
-    end
+  # factory :quiz do
+  #   sequence(:name) { |n| "Quiz Number #{n}"}
+  #   description "This is a quiz created by Factory Girl."
+  #   published true
+  #   category_id 1
+  #   subject_id 1
+  # end
+
+  factory :question do |q|
+    q.content "WhyWhyWhy!"
+    q.question_type "MC-2"
+    q.answers { |answers| [answers.association(:answer_correct), answers.association(:answer_incorrect)] }
   end
 
 
