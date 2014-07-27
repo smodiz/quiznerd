@@ -137,22 +137,17 @@ describe "Quiz Event Pages" do
 
   end
 
-  describe "View completed quizz" do
+  describe "View completed quizz detail" do
 
     before do
       visit quiz_events_path
+      click_link quiz_event.quiz.name
     end
 
-    it { should have_link(quiz_event.quiz.name) }
-    
-
-      #   click_link quiz_event.quiz.name
-      # end
-      # it { should have_content quiz_event.status }
-      # it { should have_content quiz_event.quiz.name }
-      # it { should_not have_link "Edit" }
-
-      # it "should have an edit button if the quiz taker is also the author"
+    it { should have_content(quiz_event.quiz.name) }
+    it { should have_content quiz_event.status }
+    it { should have_link "Edit" }
+    it { should have_button "Take This Quiz Again" }
   end
 
   describe "when user quits" do

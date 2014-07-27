@@ -16,13 +16,19 @@
   
   <%= render partial: 'quizzes/quiz_fields', locals: { quiz: @quiz_event.quiz }  %>
   
-  <% if @quiz_event.quiz.author == current_user %>
-  <div class="center">
-     <%= link_to "Edit Quiz", quiz_path(@quiz_event.quiz), 
-          class: "btn btn-sm btn-primary" %>
-  </div>
-  <% end %>
 
+    <%= simple_form_for QuizEvent.new, method: :post do |f| %>
+     <%= f.error_notification %>
+      <%= hidden_field_tag "quiz_event[quiz_id]", @quiz_event.quiz_id %>
+      <div class="form-actions center">
+          <%= f.button :submit, value: "Take This Quiz Again", 
+              class: 'btn btn-primary btn-sm'  %> 
+          <% if @quiz_event.quiz.author == current_user %>
+            <%= link_to "Edit Quiz", quiz_path(@quiz_event.quiz), 
+              class: "btn btn-sm btn-primary" %>   
+          <% end %>
+      </div>
+    <% end %>
  </div>
 </div> 
 

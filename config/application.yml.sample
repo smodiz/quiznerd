@@ -1,0 +1,25 @@
+# This file is from the figaro gem.
+# This file does not get checked into source code control. It has sensitive user id and login info, plus secret_key_base. 
+
+# In Rails 4.1, we have secrets.yml which kind of does the same thing, except figaro helps automatically set up the 
+# variables in your environment (incl Heroku), so it's still beneficial.
+
+DATABASE_USER: "your_database_user_name"
+DATABASE_PASSWORD: "your_database_password"
+SENDGRID_USERNAME: "your-sendgrid-email-username"
+SENDGRID_PASSWORD: "your-sendgrid-password"
+DEVISE_SECRET_KEY: 'your-secret-key'
+
+development:
+  DATABASE_USER: "your_database_user_name"
+  DATABASE_PASSWORD: "your_database_password"
+  SECRET_KEY_BASE: your-secret-key
+  EMAIL_USER: "your-email-user-name"
+  EMAIL_PASSWORD: "your-email-password"
+
+test:
+  DATABASE_USER: "your_database_user_name"
+  DATABASE_PASSWORD: "your_database_password"
+  SECRET_KEY_BASE: your-secret-key
+  EMAIL_USER: "your-email-user-name"
+  EMAIL_PASSWORD: "your-email-password"

@@ -7,7 +7,7 @@ class QuizEvent < ActiveRecord::Base
   has_one :category, through: :quiz
   
   before_save :process_question, on: :update 
-  default_scope -> { order('created_at') }
+  default_scope -> { order('created_at DESC') }
   validates :answer_ids, presence: true, on: :update 
 
   # these virtual attributes used for temporarily storing the 

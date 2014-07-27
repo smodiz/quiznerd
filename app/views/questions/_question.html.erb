@@ -1,0 +1,23 @@
+<tr>
+    <td><%= question.content %></td>
+    <td>
+       <% question.answers.each do |answer| %>
+        <span class="answer-display">
+          <%= truncate(answer.content, length: 30) %>
+          <% if answer.correct %>
+            &#x2713
+          <% end %>
+        </span>
+    <% end %>
+    </td>
+    <td>
+      <%= link_to "edit", edit_question_path(question) %>
+    </td>
+    <td>
+      <%= link_to "copy", "#", data: { confirm: "Not implemented yet" } %>
+    </td>
+    <td>
+      <%= link_to "delete", question, method: :delete, 
+            data: { confirm: "Are you sure?" } %>
+    </td>
+</tr>
