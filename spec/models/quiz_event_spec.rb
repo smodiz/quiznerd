@@ -4,7 +4,7 @@ describe QuizEvent do
   
   let(:quiz_author) { FactoryGirl.create(:user) }
   let(:quiz_taker)  { FactoryGirl.create(:user) }
-  let(:quiz)        { FactoryGirl.create(:quiz_with_questions, author: quiz_author) }
+  let(:quiz)        { FactoryGirl.create(:quiz, author: quiz_author) }
   let(:quiz_event)  { FactoryGirl.create(:quiz_event, quiz: quiz, user: quiz_taker) }
   
   subject { quiz_event }

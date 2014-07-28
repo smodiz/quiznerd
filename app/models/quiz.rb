@@ -13,6 +13,7 @@ class Quiz < ActiveRecord::Base
   validate  :new_category_requires_subject, :new_or_existing_category_required 
   validate  :new_or_existing_subject_required
   before_save :create_category, :create_subject
+  after_touch :check_published_flag
 
   def number_of_questions
     questions.size
@@ -66,5 +67,12 @@ class Quiz < ActiveRecord::Base
     end    
   end
 
+  protected
+    def check_published_flag
+      if questions.size == 0
+        self.published = false
+        self.save!
+      end
+    end
 
 end

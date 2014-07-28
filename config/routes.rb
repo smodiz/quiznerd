@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     put 'toggle_publish' => 'quizzes#toggle_publish'
   end
   
-  match '/search',          to: 'search#index',     via: 'get'
+  match '/search',  to: 'search#index',         via: 'get'
   match '/about',   to: 'static_pages#about',   via: 'get'
   match '/contact', to: 'static_pages#contact', via: 'get'
 

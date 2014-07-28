@@ -16,7 +16,7 @@ describe Question do
     end
   end
 
-  [:question_type, :content, :quiz_id].each do |field|
+  [:question_type, :content].each do |field|
     describe "when required field #{field} is absent" do
       before(:each) do
         question.send(field.to_s+"=",nil) 

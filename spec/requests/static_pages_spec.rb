@@ -54,7 +54,7 @@ describe "Static Pages" do
 
       describe "when quiz has been taken" do
         let(:author)        { FactoryGirl.create(:user) }
-        let(:quiz_taken)    { FactoryGirl.create(:quiz_with_questions, author: author) }
+        let(:quiz_taken)    { FactoryGirl.create(:quiz, author: author) }
         let(:quiz_event)    { FactoryGirl.create(:quiz_event, quiz: quiz_taken, user: user) }
         before do
           quiz_taken.save

@@ -55,8 +55,8 @@ class QuestionsController < ApplicationController
     end
 
     def question_params
-      params.require(:question).permit(:question_type, :content, :remarks, :quiz_id,
-        answers_attributes: [:id, :content, :correct, :_destroy])
+      params.require(:question).permit(:question_type, :content, :remarks, 
+        :quiz_id, answers_attributes: [:id, :content, :correct, :_destroy])
     end
     
     def correct_user

@@ -10,12 +10,12 @@ end
 # Note: These methds cannot be named the same as the variable specified in the 
 # let methods that use them. See quiz_events_spec.rb
 
-def correct_answer_texts(question)
+def correct_answer(question)
   # need all the correct answers
   answer_texts(question.correct_answer_ids)
 end
 
-def incorrect_answer_texts(question)
+def incorrect_answer(question)
    # just need one incorrect answer
    incorrect_id = question.incorrect_answer_ids[0]
    Answer.find(incorrect_id).content

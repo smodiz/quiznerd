@@ -4,16 +4,21 @@ describe "Quiz Pages" do
 
   let(:user) { FactoryGirl.create(:user) }
   let(:quiz) { FactoryGirl.create(:quiz, author: user) }
-  let(:quiz_with_questions) { FactoryGirl.create(:quiz_with_questions, 
-      author: user, published: false) }
 
   subject { page }
 
-  before(:each) { valid_sign_in(user) }
+# GENERAL COMMENT: variables declared via let() are not created
+# until accessed the first time. This means that if I visit a page
+# and then check to see that the quiz appears, it won't. Therefore,
+# the before block touches the quiz in the first line.
+
+  before(:each) do
+    quiz  
+    valid_sign_in(user) 
+  end
 
   describe "shows a quiz on the index page" do
     before(:each) do
-      quiz.save
       visit quizzes_path
     end
     
@@ -30,7 +35,7 @@ describe "Quiz Pages" do
     let(:user2) { FactoryGirl.create(:user) }
     let(:quiz2) { FactoryGirl.create(:quiz, author: user2) }
     before(:each) do
-      quiz2.save
+      quiz2   #need to access variable before page load
       visit quizzes_path
     end
     it { should_not have_content(quiz2.name) }
@@ -99,7 +104,6 @@ describe "Quiz Pages" do
 
   describe "delete a quiz" do
     before(:each) do
-      quiz.save
       visit quizzes_path
       click_link("destroy")
     end
@@ -130,7 +134,6 @@ describe "Quiz Pages" do
 
   describe "show quiz" do
     before(:each) do 
-      quiz.save!
       visit quizzes_path
       click_link quiz.name
     end
@@ -148,7 +151,6 @@ describe "Quiz Pages" do
 
   describe "edit quiz" do
     before(:each) do 
-      quiz.save!
       visit quizzes_path
       click_link quiz.name
       click_link "Edit Quiz Information"
@@ -164,25 +166,24 @@ describe "Quiz Pages" do
 
   describe "publish a quiz" do
     before(:each) do
-      quiz_with_questions.save!
-      visit quiz_path(quiz_with_questions)
+      quiz.published = false
+      quiz.save!
+      visit quiz_path(quiz)
       click_link "Publish Quiz"
     end
 
-    specify { expect(current_path).to eq(quiz_path(quiz_with_questions)) }
+    specify { expect(current_path).to eq(quiz_path(quiz)) }
     it { should have_link("Unpublish Quiz") }
     it { should have_content("Published? Yes") }
   end
 
   describe "unpublish a quiz" do
      before(:each) do
-      quiz_with_questions.published = true
-      quiz_with_questions.save!
-      visit quiz_path(quiz_with_questions)
+      visit quiz_path(quiz)
       click_link "Unpublish Quiz"
     end
     
-    specify { expect(current_path).to eq(quiz_path(quiz_with_questions)) }
+    specify { expect(current_path).to eq(quiz_path(quiz)) }
     it { should have_link("Publish Quiz") }
     it { should have_content("Published? No") }
   end

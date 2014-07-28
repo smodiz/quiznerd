@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "Questions" do
   
   let(:user) { FactoryGirl.create(:user) }
-  let(:quiz) { FactoryGirl.create(:quiz, author: user) }
+  let(:quiz) { FactoryGirl.create(:quiz_without_questions, author: user) }
   let(:question) { FactoryGirl.create( :question, quiz: quiz) }
 
   subject { page }

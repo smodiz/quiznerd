@@ -10,45 +10,31 @@ FactoryGirl.define do
 
 
   factory :category do
-    sequence(:name) { |n| "Category #{n}" }
+    name "Category FactoryGirl Testing"
   end
 
   factory :subject do
-    sequence(:name) { |n| "Subject #{n}" }
+     name "Category FactoryGirl Testing"
   end
 
-  factory :quiz do
+  factory :quiz_without_questions, class: Quiz do 
     sequence(:name) { |n| "Quiz Number #{n}"}
+    # qz.name "Quiz from the factory"
     description "This is a quiz created by Factory Girl."
     published true
     category_id 1
     subject_id 1
-    
-    factory :quiz_with_questions do
-      after(:create) do |quiz|
-        create(:question, quiz: quiz)
-        create(:question, quiz: quiz)
-        create(:question, quiz: quiz)
-      end
-    end
-
-    factory :quiz_with_question do
-      after(:create) do |quiz|
-        create(:question, quiz: quiz)
-      end
-    end
-
-
   end
 
-
-  # factory :quiz do
-  #   sequence(:name) { |n| "Quiz Number #{n}"}
-  #   description "This is a quiz created by Factory Girl."
-  #   published true
-  #   category_id 1
-  #   subject_id 1
-  # end
+  factory :quiz do |qz|
+    sequence(:name) { |n| "Quiz Number #{n}"}
+    # qz.name "Quiz from the factory"
+    qz.description "This is a quiz created by Factory Girl."
+    qz.published true
+    category_id 1
+    subject_id 1
+    qz.questions { |questions| [questions.association(:question),questions.association(:question)] }
+  end
 
   factory :question do |q|
     q.content "WhyWhyWhy!"
