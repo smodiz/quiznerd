@@ -14,26 +14,22 @@ FactoryGirl.define do
   end
 
   factory :subject do
-     name "Category FactoryGirl Testing"
+     name "Subject FactoryGirl Testing"
   end
 
-  factory :quiz_without_questions, class: Quiz do 
+  factory :quiz do 
     sequence(:name) { |n| "Quiz Number #{n}"}
-    # qz.name "Quiz from the factory"
     description "This is a quiz created by Factory Girl."
     published true
+    association :author, factory: :user
     category_id 1
     subject_id 1
-  end
-
-  factory :quiz do |qz|
-    sequence(:name) { |n| "Quiz Number #{n}"}
-    # qz.name "Quiz from the factory"
-    qz.description "This is a quiz created by Factory Girl."
-    qz.published true
-    category_id 1
-    subject_id 1
-    qz.questions { |questions| [questions.association(:question),questions.association(:question)] }
+    factory :quiz_with_questions do |qz|
+      qz.questions { |questions| [questions.association(:question),questions.association(:question)] }
+    end
+    factory :small_quiz do |qz|
+      qz.questions { |questions| [questions.association(:question),questions.association(:question)] }
+    end    
   end
 
   factory :question do |q|
@@ -41,7 +37,6 @@ FactoryGirl.define do
     q.question_type "MC-2"
     q.answers { |answers| [answers.association(:answer_correct), answers.association(:answer_incorrect)] }
   end
-
 
   factory :answer do
     sequence(:content) { |n| "Answer number #{n}" }
@@ -58,6 +53,11 @@ FactoryGirl.define do
       status "In Progress"
       total_correct 0
       total_answered 0
+      association :user, factory: :user
+      association :quiz, factory: :quiz_with_questions
+      factory :small_quiz_event do
+        association :quiz, factory: :small_quiz
+      end
   end
 
 end

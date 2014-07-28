@@ -42,7 +42,7 @@ describe "Static Pages" do
       end     
 
       describe "when quiz has been written" do
-        let(:quiz_written)  { FactoryGirl.create(:quiz, author: user) }
+        let(:quiz_written)  { FactoryGirl.create(:quiz_with_questions, author: user) }
         before do 
           quiz_written.save
           visit root_path  
@@ -54,7 +54,7 @@ describe "Static Pages" do
 
       describe "when quiz has been taken" do
         let(:author)        { FactoryGirl.create(:user) }
-        let(:quiz_taken)    { FactoryGirl.create(:quiz, author: author) }
+        let(:quiz_taken)    { FactoryGirl.create(:quiz_with_questions, author: author) }
         let(:quiz_event)    { FactoryGirl.create(:quiz_event, quiz: quiz_taken, user: user) }
         before do
           quiz_taken.save

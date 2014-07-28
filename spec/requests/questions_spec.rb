@@ -2,13 +2,12 @@ require 'spec_helper'
 
 describe "Questions" do
   
-  let(:user) { FactoryGirl.create(:user) }
-  let(:quiz) { FactoryGirl.create(:quiz_without_questions, author: user) }
+  let(:quiz) { FactoryGirl.create(:quiz) }
   let(:question) { FactoryGirl.create( :question, quiz: quiz) }
 
   subject { page }
 
-  before(:each) { valid_sign_in(user) }
+  before(:each) { valid_sign_in(quiz.author) }
 
   describe "when I visit the add new question page" do
     before(:each) do

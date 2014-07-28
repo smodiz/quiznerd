@@ -2,8 +2,7 @@ require 'spec_helper'
 
 describe "Quiz Pages" do
 
-  let(:user) { FactoryGirl.create(:user) }
-  let(:quiz) { FactoryGirl.create(:quiz, author: user) }
+  let(:quiz) { FactoryGirl.create(:quiz_with_questions) }
 
   subject { page }
 
@@ -14,7 +13,7 @@ describe "Quiz Pages" do
 
   before(:each) do
     quiz  
-    valid_sign_in(user) 
+    valid_sign_in(quiz.author) 
   end
 
   describe "shows a quiz on the index page" do
@@ -33,7 +32,7 @@ describe "Quiz Pages" do
 
   describe "does not show other users quiz" do
     let(:user2) { FactoryGirl.create(:user) }
-    let(:quiz2) { FactoryGirl.create(:quiz, author: user2) }
+    let(:quiz2) { FactoryGirl.create(:quiz_with_questions, author: user2) }
     before(:each) do
       quiz2   #need to access variable before page load
       visit quizzes_path
@@ -114,7 +113,7 @@ describe "Quiz Pages" do
 
   describe "as wrong user" do
     let(:wrong_user) { FactoryGirl.create(:user) }
-    let(:quiz) { FactoryGirl.create(:quiz, author: wrong_user) }
+    let(:quiz) { FactoryGirl.create(:quiz_with_questions, author: wrong_user) }
 
     describe "submitting a GET request to the Quizzes#edit action" do
       before { get edit_quiz_path(quiz) }
@@ -189,23 +188,17 @@ describe "Quiz Pages" do
   end
 
   describe "quizzes_written page has sortable columns" do
-    let(:cat_2) { Category.find_or_create_by(name: "Aaa") }
-    let(:sub_2) { Subject.find_or_create_by(name: "Zzz", category: cat_2) }
-    let(:cat_3) { Category.find_or_create_by(name: "Zzz") }
-    let(:sub_3) { Subject.find_or_create_by(name: "Aaa", category: cat_3) }
-    let(:quiz_2) do
-      FactoryGirl.create( :quiz, name: "Aaa", category: cat_2, subject: sub_2, 
-        published: false, author: user )
-    end
-    let(:quiz_3) do
-      FactoryGirl.create( :quiz, name: "Zzz", category: cat_3, subject: sub_3, 
-        published: true, author: user )
-    end
+    let(:cat_2)   { Category.find_or_create_by(name: "Aaa") }
+    let(:sub_2)   { Subject.find_or_create_by(name: "Zzz", category: cat_2) }
+    let(:cat_3)   { Category.find_or_create_by(name: "Zzz") }
+    let(:sub_3)   { Subject.find_or_create_by(name: "Aaa", category: cat_3) }
+    let(:quiz_2)  { FactoryGirl.create(:quiz, name: "Aaa", author: quiz.author,
+                      category: cat_2, subject: sub_2, published: false) }
+    let(:quiz_3)  { FactoryGirl.create( :quiz, name: "Zzz", author: quiz.author,
+                      category: cat_3, subject: sub_3, published: true) }
 
     before(:each) do
-      quiz.save
-      quiz_2.save
-      quiz_3.save
+      quiz; quiz_2; quiz_3; # touch so they exist
       visit quizzes_path
     end
 

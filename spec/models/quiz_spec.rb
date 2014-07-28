@@ -2,8 +2,7 @@ require 'spec_helper'
 
 describe Quiz do
   
-  let(:user) { FactoryGirl.create(:user) }
-  let(:quiz) { FactoryGirl.create(:quiz, author: user) }
+  let(:quiz) { FactoryGirl.create(:quiz_with_questions) }
 
   subject { quiz }
 
@@ -30,11 +29,10 @@ describe Quiz do
   end
 
   describe "search" do
-    let(:quiz_1) { FactoryGirl.create(:quiz, name: "Rails 101", author: user)  }
-    let(:quiz_2) { FactoryGirl.create(:quiz, name: "Ruby 101", author: user) }
-    let(:quiz_3) { FactoryGirl.create(:quiz, name: "jQuery", author: user) }
-    let(:quiz_4) { FactoryGirl.create(:quiz, name: "CSS 101", author: user, 
-      published: false) }
+    let(:quiz_1) { FactoryGirl.create(:quiz_with_questions, name: "Rails 101")  }
+    let(:quiz_2) { FactoryGirl.create(:quiz_with_questions, name: "Ruby 101") }
+    let(:quiz_3) { FactoryGirl.create(:quiz_with_questions, name: "jQuery") }
+    let(:quiz_4) { FactoryGirl.create(:quiz, name: "CSS 101", published: false) }
 
     before(:each) do
       #Touch, otherwise they don't exist yet

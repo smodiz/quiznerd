@@ -2,8 +2,7 @@ require 'spec_helper'
 
 describe Question do
   
-  let(:user)      { FactoryGirl.create(:user) }
-  let(:quiz)      { FactoryGirl.create(:quiz, author: user) }
+  let(:quiz)      { FactoryGirl.create(:quiz_with_questions) }
   let(:question)  { FactoryGirl.create( :question, quiz: quiz) }
   let(:correct_answer) { FactoryGirl.build(:answer_correct) }
   let(:incorrect_answer) { FactoryGirl.build(:answer_incorrect) }

@@ -2,9 +2,7 @@ require 'spec_helper'
 
 describe Answer do
 
-  let(:user) { FactoryGirl.create(:user) }
-  let(:quiz) { FactoryGirl.create(:quiz, author: user) }
-  let(:question) { FactoryGirl.create(:question, quiz: quiz) }
+  let(:question) { FactoryGirl.create(:question) }
   let(:answer) { FactoryGirl.create(:answer, question: question) }
 
   subject { answer }

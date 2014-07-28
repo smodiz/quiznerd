@@ -2,17 +2,14 @@ require 'spec_helper'
 
 describe "Quiz Event Pages" do
  
-  let(:quiz_author) { FactoryGirl.create(:user) }
-  let(:quiz_taker)  { FactoryGirl.create(:user) }
-  let(:quiz)        { FactoryGirl.create(:quiz, author: quiz_author) }
-  let(:quiz_event)  { FactoryGirl.create(:quiz_event, quiz: quiz, user: quiz_taker) }
-  let(:new_quiz_url)  { new_quiz_url_for(quiz.id) }
+  let(:quiz_event)  { FactoryGirl.create(:small_quiz_event) }
+  let(:new_quiz_url)  { new_quiz_url_for(quiz_event.quiz.id) }
 
   before(:each) do
-    quiz_event.question_id = quiz.questions.first.id
-    quiz_event.answer_ids = quiz.questions.first.correct_answer_ids
+    quiz_event.question_id = quiz_event.quiz.questions.first.id
+    quiz_event.answer_ids = quiz_event.quiz.questions.first.correct_answer_ids
     quiz_event.save!
-    valid_sign_in(quiz_taker)
+    valid_sign_in(quiz_event.user)
   end
 
   subject { page }
@@ -29,14 +26,11 @@ describe "Quiz Event Pages" do
     it { should have_content(quiz_event.total_answered) }
   end
 
-  describe "does not show other users quiz" do
-    let(:user2) { FactoryGirl.create(:user) }
-    let(:quiz_2) { FactoryGirl.create(:quiz, author: quiz_author) }
-    let(:quiz_event_2)  { FactoryGirl.build(:quiz_event, 
-      quiz: quiz_2, user: user2) }
+  describe "does not show other users quiz event" do
+    let(:quiz_event_2)  { FactoryGirl.create(:small_quiz_event) }
     before(:each) do
-      quiz_event_2.answer_ids = quiz_2.questions.first.correct_answer_ids
-      quiz_event_2.question_id = quiz_2.questions.first.id
+      quiz_event_2.answer_ids = quiz_event_2.quiz.questions.first.correct_answer_ids
+      quiz_event_2.question_id = quiz_event_2.quiz.questions.first.id
       quiz_event_2.save!
       visit quiz_events_path
     end
@@ -45,7 +39,7 @@ describe "Quiz Event Pages" do
 
   describe "shows quiz detail on the create page" do
     before { visit new_quiz_url }
-    it { should have_content(quiz.name) }
+    it { should have_content(quiz_event.quiz.name) }
     it { should have_button("Take This Quiz") }
   end
 
@@ -62,9 +56,9 @@ describe "Quiz Event Pages" do
     end
 
     describe "when I answer the question" do
-      let(:question_type) { quiz.questions.first.question_type }
-      let(:incorrect_answer_text) { incorrect_answer(quiz.questions.first) }
-      let(:correct_answer_text)   { correct_answer(quiz.questions.first) }  
+      let(:question_type) { quiz_event.quiz.questions.first.question_type }
+      let(:incorrect_answer_text) { incorrect_answer(quiz_event.quiz.questions.first) }
+      let(:correct_answer_text)   { correct_answer(quiz_event.quiz.questions.first) }  
 
       it "should require an answer to be selected" do
         click_button "Continue"
@@ -113,7 +107,7 @@ describe "Quiz Event Pages" do
     before do
         visit new_quiz_url
         click_button "Take This Quiz"
-        quiz.questions.each do |question|
+        quiz_event.quiz.questions.each do |question|
           answer_text = question.answers.first.content
           check(answer_text)
           click_button "Continue"
@@ -155,7 +149,7 @@ describe "Quiz Event Pages" do
     end
     it "should remove the quiz_event from the database" do
       within ('#quizzes') do
-        expect(page).to_not have_link quiz.name
+        expect(page).to_not have_link quiz_event.quiz.name
       end
     end
   end
