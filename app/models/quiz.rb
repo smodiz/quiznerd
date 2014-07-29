@@ -9,6 +9,7 @@ class Quiz < ActiveRecord::Base
 
   validates :name, :description, :author, presence: true
   validates :name, length: { maximum: 45 }
+  validates :description, length: { maximum: 255 }
   validates :published, inclusion: { in: [true, false] }
   validate  :new_category_requires_subject, :new_or_existing_category_required 
   validate  :new_or_existing_subject_required
