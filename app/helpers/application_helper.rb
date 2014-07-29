@@ -24,13 +24,24 @@ module ApplicationHelper
   end
 
  
-  def text_area_rows(content, field_width)
+  def text_area_rows(content, field_width = 50)
     rows = [2]
     if content.present?
-        rows << ((content.length.to_f)/field_width).ceil + 1
+        rows << calculate_by_length(content.length, field_width) + 
+          number_of_newlines(content)
     end
     rows.max
   end
+
+  private
+
+    def number_of_newlines(text)
+      newlines = text.split(/\r\n/).length
+    end
+
+    def calculate_by_length(length, width)
+      (length.to_f/width).ceil + 1
+    end
   
   
 end
