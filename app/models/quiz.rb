@@ -8,6 +8,7 @@ class Quiz < ActiveRecord::Base
   has_many :quiz_events, dependent: :nullify
 
   validates :name, :description, :author, presence: true
+  validates :name, length: { maximum: 45 }
   validates :published, inclusion: { in: [true, false] }
   validate  :new_category_requires_subject, :new_or_existing_category_required 
   validate  :new_or_existing_subject_required
@@ -15,7 +16,7 @@ class Quiz < ActiveRecord::Base
   after_touch :check_published_flag
 
   attr_accessor :new_category, :new_subject
-  
+
 
   def number_of_questions
     questions.size

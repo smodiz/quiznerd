@@ -147,4 +147,16 @@ describe Quiz do
 
   end
 
+  describe "name should not exceed 45 characters" do
+    before { 
+      quiz.name = "a" * 46 
+      quiz.valid? 
+    }
+
+    it "should have an error" do
+      expect(quiz.errors).to include(:name)
+      expect(quiz.errors.messages[:name].to_s).to match(/is too long/)
+    end
+  end
+
 end
