@@ -8,7 +8,8 @@ module QuizEventFinder
       associated_against: { quiz: :name, subject: :name, category: :name }
 
     self.per_page = 10
-    scope :taken_by, -> (user) { where(user: user) }
+    scope :taken_by,    -> (user) { where(user: user) }
+    scope :ordered,     -> { order('updated_at DESC') } 
   end
 
   module ClassMethods 

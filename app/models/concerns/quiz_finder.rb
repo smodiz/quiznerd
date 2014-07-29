@@ -9,6 +9,7 @@ module QuizFinder
 
     scope :published,   -> { where(published: true) }
     scope :authored_by, -> (user) { where(author: user) }
+    scope :ordered,     -> { order('updated_at DESC') } 
 
     self.per_page = 10
   end
