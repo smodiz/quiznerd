@@ -24,8 +24,13 @@ module ApplicationHelper
   end
 
  
-
- 
-
+  def text_area_rows(content, field_width)
+    rows = [2]
+    if content.present?
+        rows << ((content.length.to_f)/field_width).ceil + 1
+    end
+    rows.max
+  end
+  
   
 end

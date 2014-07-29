@@ -14,7 +14,8 @@
           <td><%= f.input :name %></td>
         </tr>
         <tr>
-          <td><%= f.input :description, as: :text %></td>
+          <td><%= f.input :description, as: :text, 
+            input_html: { rows: text_area_rows(@quiz.description,70) } %></td>
         </tr>
         <tr><td><hr/>*</td></tr>
         <tr>

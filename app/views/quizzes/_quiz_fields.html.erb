@@ -2,10 +2,12 @@
   <table class="table table-bordered">
     <tbody>
       <tr>
-        <td>
+        <td colspan="2">
           <span class="field-title">Name: </span>
           <%= quiz.name  %>
-        </td>  
+        </td> 
+      </tr>  
+      <tr> 
         <td>
           <span class="field-title">Category: </span>
           <%= quiz.category.name %>
@@ -16,7 +18,7 @@
         </td>
       </tr>
       <tr>
-        <td colspan ="2">
+        <td>
           <span class="field-title">Description: </span>
           <%= quiz.description %>
         </td>

@@ -16,15 +16,17 @@
             <td><%= f.input :quiz_id, as: "hidden" %></td>
           </tr>
           <tr>
-            <td><%= f.input :content, label: "Question"  %></td>
+            <td><%= f.input :content, label: "Question", as: :text,
+              input_html: { rows: text_area_rows(@question.content,50) } %></td>
             <td></td>
           </tr>
           <tr>
-            <td><%= f.input :remarks %></td>
+            <td><%= f.input :remarks, as: :text, 
+              input_html: { rows: text_area_rows(@question.remarks,50),
+              placeholder: "Remarks will be shown as additional information 
+              after the user answers the question" }%></td>
             <td></td>
           </tr>
-          <!-- </table>
-          <table  class="table table-condensed">-->
           <%= f.simple_fields_for :answers do |answers| %>
             <%= render 'answer_fields',  f: answers  %>
           <% end %>

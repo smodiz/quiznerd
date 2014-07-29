@@ -1,5 +1,5 @@
 <tr>
-    <td><%= question.content %></td>
+    <td><%= markdown(question.content) %></td>
     <td>
        <% question.answers.each do |answer| %>
         <span class="answer-display">
