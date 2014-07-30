@@ -21,10 +21,7 @@ class QuizzesController < ApplicationController
   end
 
   def create
-    # temporary workaround
-    # set published to false on create. Tried to use various callbacks on the 
-    # # model to do this and it did not work. Come back and figure out why later
-    @quiz = current_user.quizzes.build(quiz_params.merge(published: false))
+    @quiz = current_user.quizzes.build(quiz_params)
     if @quiz.save
       redirect_to @quiz, notice: 'Quiz was successfully created.' 
     else

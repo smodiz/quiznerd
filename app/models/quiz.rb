@@ -15,7 +15,7 @@ class Quiz < ActiveRecord::Base
   validate  :new_or_existing_subject_required
   before_save :create_category, :create_subject
   after_touch :check_published_flag
-
+  after_initialize :defaults
   attr_accessor :new_category, :new_subject
 
 
@@ -37,20 +37,20 @@ class Quiz < ActiveRecord::Base
   
   def create_category
     if new_category.present?
-      self.category = Category.find_or_create_by!(name: new_category.titleize)
+      self.category = Category.find_or_create_by!(name: new_category.strip.titleize)
     end
   end
 
   def create_subject
     if new_subject.present?
-      self.subject = Subject.find_or_create_by!(name: new_subject.titleize, 
+      self.subject = Subject.find_or_create_by!(name: new_subject.strip.titleize, 
         category: category) 
     end
   end
 
   def new_category_requires_subject
     if new_category.present? && !new_subject.present?
-      errors.add(:new_subject, "new category requires new subject")
+      errors.add(:new_subject, "new category requires a new subject")
     end
   end
 
@@ -81,6 +81,7 @@ class Quiz < ActiveRecord::Base
   end
 
   protected
+    
     def check_published_flag
       if questions.size == 0
         self.published = false
@@ -88,4 +89,7 @@ class Quiz < ActiveRecord::Base
       end
     end
 
+    def defaults
+      self.published = false if self.published.nil?
+    end
 end
