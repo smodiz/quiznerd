@@ -15,6 +15,9 @@
     <% end %>
     <%= link_to "Edit Quiz Information", edit_quiz_path(@quiz), 
           class: "btn btn-sm btn-primary pull-right" %>
+    <%= link_to "Delete Quiz", quiz_path(@quiz), method: :delete, 
+          data: { confirm: 'Are you sure?' }, 
+          class: "btn btn-sm btn-danger pull-right" %>
     <hr/>
   </div>
 <%= render partial: 'quiz_fields', locals: { quiz: @quiz } %> 

@@ -148,6 +148,16 @@ describe "Quiz Pages" do
     end
   end
 
+  describe "delete a quiz from the show page" do 
+    before(:each) do 
+      visit quiz_path quiz
+      click_link("Delete Quiz") 
+    end
+    specify { expect(current_path).to eq(quizzes_path)}
+    it { should_not have_content(quiz.name) }
+  end
+
+
   describe "edit quiz" do
     before(:each) do 
       visit quizzes_path
