@@ -126,7 +126,6 @@ describe Quiz do
 
   describe "adding a new subject that already exists" do
     before(:each) do
-      quiz.save
       quiz.new_subject = quiz.subject.name
       quiz.subject = nil
     end
