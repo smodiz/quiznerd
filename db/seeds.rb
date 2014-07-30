@@ -11,7 +11,7 @@ end
 
 prog_id = Category.find_by(name: "Programming").id
 
-['Software Development - General',
+['Software Development (General)',
  'Unix',
  'Ruby',
  'Rails',
