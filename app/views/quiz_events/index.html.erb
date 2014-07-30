@@ -21,27 +21,29 @@
       </thead>
       <tbody>
         <% @quiz_events.each do |quiz_event| %>
-          <tr>
-            <td><%= link_to quiz_event.quiz.name, quiz_event, 
-                      class: "index-link"  %></td>
-            <td><%= quiz_event.quiz.category.name  %></td>
-            <td><%= quiz_event.quiz.subject.name  %></td>
-            <td><%= quiz_event.total_correct %> out of
-               <%= quiz_event.total_answered %> 
-               (<%= formatted_quiz_score(quiz_event) %>%)</td>
-               <td><%= quiz_event.status %></td>
-            <td><%= time_ago_in_words(quiz_event.updated_at)%> ago</td>
-            <td><%= link_to 'destroy', quiz_event, method: :delete, 
-                  data: { confirm: 'Are you sure?' }, class: "index-link"  %>
-            </td>
-          </tr>
+        <tr>
+          <td><%= link_to quiz_event.quiz.name, quiz_event, 
+                    class: "index-link"  %></td>
+          <td><%= quiz_event.quiz.category.name  %></td>
+          <td><%= quiz_event.quiz.subject.name  %></td>
+          <td><%= quiz_event.total_correct %> out of
+             <%= quiz_event.total_answered %> 
+             (<%= formatted_quiz_score(quiz_event) %>%)</td>
+             <td><%= quiz_event.status %></td>
+          <td><%= time_ago_in_words(quiz_event.updated_at)%> ago</td>
+          <td><%= link_to 'destroy', 
+                  quiz_event_path(quiz_event,return_to: "index"), 
+                  method: :delete, data: { confirm: 'Are you sure?' }, 
+                  class: "index-link"  %></td>
+        </tr>
         <% end %>
       </tbody>
     </table>
   </div>
-  <div class="center"><%= will_paginate @quiz_events, renderer: BootstrapPagination::Rails  %></div>
-  <br/>
-  <br/>
-  <br/>
-  <br/>
+
+  <div class="center">
+    <%= will_paginate @quiz_events, renderer: BootstrapPagination::Rails  %>
+  </div>
+  <br/><br/><br/><br/>
+
 </div>

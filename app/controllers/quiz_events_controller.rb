@@ -38,7 +38,8 @@ class QuizEventsController < ApplicationController
 
   def destroy
     @quiz_event.destroy
-    redirect_to root_path, notice: 'Quiz event was successfully destroyed.' 
+    redirect_to (return_to_index? ? quiz_events_path : root_path), 
+      notice: "Quiz event was successfully destroyed."
   end
 
   private
@@ -47,6 +48,10 @@ class QuizEventsController < ApplicationController
       @quiz_event = current_user.quiz_events.find(params[:id])
     end
    
+    def return_to_index?
+      params[:return_to].present? && params[:return_to] == "index"
+    end
+
     # answer_ids is a virtual attribute on QuizEvent. Rails assigns it  
     # as a string (when only one is submitted via radio button) or string 
     # array (when multiple submitted, via checkboxes). However, what we 
