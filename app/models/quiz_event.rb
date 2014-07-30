@@ -19,20 +19,7 @@ class QuizEvent < ActiveRecord::Base
   IN_PROGRESS_STATUS = "In Progress"
 
   def process_question
-    if status == COMPLETED_STATUS
-      self.errors.add(:base, 
-        "Can't re-answer questions. Quiz already completed.")
-      return false
-    end
-
-    if question_id && last_question_id && 
-              question_id.to_i <= last_question_id.to_i
-      self.errors.add(:question_id, 
-        "cannot be answered more than once. Please answer the next question:")
-      reset
-      return false
-    end
-
+    return false if user_cheating
     if before_first_question?
       set_question_id
     else
@@ -80,12 +67,8 @@ class QuizEvent < ActiveRecord::Base
   private
 
     def grade_question
-      if answer_correct?
-        self.total_correct += 1 
-        self.last_answer_correct = true
-      else
-        self.last_answer_correct = false
-      end
+      self.total_correct += 1 if  answer_correct?
+      self.last_answer_correct = answer_correct?
       self.total_answered += 1
     end
 
@@ -102,16 +85,38 @@ class QuizEvent < ActiveRecord::Base
     end
 
     def set_question_id 
-      self.question_id = 
-        if last_question_id
-          quiz.questions.where("id > ?", last_question_id).first.try(:id)
-        else
-          quiz.questions.first.id 
-        end
+      self.question_id = quiz.next_question_id(last_question_id)
     end
 
     def answer_correct?
       current_question.correct_answer?(answer_ids)
     end
 
+    def user_cheating   
+      if user_modifying_completed_test || user_re_answering_question
+        true
+      else
+        false
+      end
+    end
+
+    def user_modifying_completed_test
+      if status == COMPLETED_STATUS
+        self.errors.add(:base, 
+          "Can't re-answer questions. Quiz already completed.")
+        return true
+      end
+      false
+    end
+
+    def user_re_answering_question
+      if question_id && last_question_id && 
+                question_id.to_i <= last_question_id.to_i
+        self.errors.add(:question_id, 
+          "cannot be answered more than once. Please answer the next question:")
+        reset
+        return true
+      end
+      false
+    end
 end

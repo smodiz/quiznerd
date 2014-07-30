@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   
-  has_many :quizzes, :foreign_key =>"author_id"
+  has_many :quizzes, :foreign_key =>"author_id", dependent: :nullify
   has_many :quiz_events, dependent: :destroy
 
 end

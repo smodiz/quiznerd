@@ -18,7 +18,7 @@ module QuizEventFinder
       do_search(query).taken_by(user).includes(:quiz)
     end
 
-   def do_search(query)
+    def do_search(query)
       if query.present?
         search_events(query)
       else

@@ -23,38 +23,26 @@ class QuizzesController < ApplicationController
   def create
     # temporary workaround
     # set published to false on create. Tried to use various callbacks on the 
-    # # model to do this and it did not work. Come back and figure out why later.  
+    # # model to do this and it did not work. Come back and figure out why later
     @quiz = current_user.quizzes.build(quiz_params.merge(published: false))
-
-    respond_to do |format|
-      if @quiz.save
-        format.html { redirect_to @quiz, notice: 'Quiz was successfully created.' }
-        format.json { render :show, status: :created, location: @quiz }
-      else
-        format.html { render :new }
-        format.json { render json: @quiz.errors, status: :unprocessable_entity }
-      end
+    if @quiz.save
+      redirect_to @quiz, notice: 'Quiz was successfully created.' 
+    else
+      render :new 
     end
   end
 
   def update
-    respond_to do |format|
-      if @quiz.update(quiz_params)
-        format.html { redirect_to @quiz, notice: 'Quiz was successfully updated.' }
-        format.json { render :show, status: :ok, location: @quiz }
-      else
-        format.html { render :edit }
-        format.json { render json: @quiz.errors, status: :unprocessable_entity }
-      end
+    if @quiz.update(quiz_params)
+      redirect_to @quiz, notice: 'Quiz was successfully updated.' 
+    else
+      render :edit 
     end
   end
 
   def destroy
     @quiz.destroy
-    respond_to do |format|
-      format.html { redirect_to quizzes_url, notice: 'Quiz was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to quizzes_url, notice: 'Quiz was successfully destroyed.' 
   end
 
   def toggle_publish
@@ -62,10 +50,7 @@ class QuizzesController < ApplicationController
     @quiz.toggle_publish
     @quiz.save
     action = @quiz.published ? "published" : "unpublished" 
-    respond_to do |format|
-      format.html { redirect_to @quiz, notice: "Quiz was #{action}" }
-      format.json { head :no_content }
-    end
+    redirect_to @quiz, notice: "Quiz was #{action}" 
   end
 
   private
@@ -75,7 +60,8 @@ class QuizzesController < ApplicationController
     end
 
     def quiz_params
-      params.require(:quiz).permit(:name, :description, :published, :category_id, :subject_id, :new_category, :new_subject)
+      params.require(:quiz).permit(:name, :description, :published, 
+        :category_id, :subject_id, :new_category, :new_subject)
     end
 
     def correct_user

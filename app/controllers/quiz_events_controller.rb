@@ -1,10 +1,11 @@
 class QuizEventsController < ApplicationController
 
   before_action :set_quiz_event, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
   
   def index
-    @quiz_events = QuizEvent.search_quizzes_taken(params[:search], current_user).
-        paginate(page: params[:page])   
+    @quiz_events = QuizEvent.search_quizzes_taken(
+      params[:search], current_user).paginate(page: params[:page])   
   end
 
   def show
@@ -59,6 +60,11 @@ class QuizEventsController < ApplicationController
     def convert_answer_ids
       answer_ids = params[:quiz_event][:answer_ids]
       return unless answer_ids
+      converted_ids = convert_to_integers(answer_ids)
+      params[:quiz_event][:answer_ids] = converted_ids.sort
+    end
+   
+    def convert_to_integers(answer_ids)
       converted_ids = []
       if answer_ids.class == String 
        converted_ids << answer_ids.to_i
@@ -67,15 +73,15 @@ class QuizEventsController < ApplicationController
           converted_ids << s.to_i unless s.blank?
         end
       end
-      params[:quiz_event][:answer_ids] = converted_ids.sort
+      converted_ids
     end
-   
-    # Note that answer_ids can be a single value (radio button) or multiple values 
-    # (check boxes), thus it appears in this list both ways
+
+    # Note that answer_ids can be a single value (radio button) or multiple 
+    # values (check boxes), thus it appears in this list both ways
     def quiz_event_params
       convert_answer_ids
-      params.require(:quiz_event).permit(:id, :quiz_id, :question_id, { :answer_ids => [] }, 
-        :answer_ids, :suspend_button)
+      params.require(:quiz_event).permit(:id, :quiz_id, :question_id, 
+        { :answer_ids => [] }, :answer_ids, :suspend_button)
     end
 
 end

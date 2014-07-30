@@ -16,6 +16,18 @@ class Question < ActiveRecord::Base
                         "MC-2"  =>  "Multiple Choice - Multi"
                     }
 
+  def must_have_multiple_answers
+    if answers.size < 2
+      errors.add(:answers, "cannot be fewer than two")
+    end
+  end
+
+  def must_have_correct_answer
+    if correct_answer_ids.size < 1 
+      errors.add(:answers, "must have at least one which is correct")
+    end
+  end
+
   def question_type_description
     QUESTION_TYPES.include?(question_type) ? QUESTION_TYPES[question_type] : ""
   end
@@ -32,20 +44,5 @@ class Question < ActiveRecord::Base
     answers.select { |a| a.correct == false }.map(&:id)
   end
 
-  def all_answer_ids
-    answers.map(&:id)
-  end
-
-  def must_have_multiple_answers
-    if answers.size < 2
-      errors.add(:answers, "cannot be fewer than two")
-    end
-  end
-
-  def must_have_correct_answer
-    if correct_answer_ids.size < 1 
-      errors.add(:answers, "must have at least one which is correct")
-    end
-  end
 
 end

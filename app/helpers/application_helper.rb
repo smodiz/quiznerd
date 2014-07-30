@@ -23,7 +23,9 @@ module ApplicationHelper
     markdown.render(text).html_safe
   end
 
- 
+  
+  # Calculate the number of rows a text area should have in order
+  # to display all the existing text
   def text_area_rows(content, field_width = 50)
     rows = [2]
     if content.present?

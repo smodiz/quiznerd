@@ -16,37 +16,26 @@ class QuestionsController < ApplicationController
 
   def create
     @question = Question.new(question_params)
-
-    respond_to do |format|
-      if @question.save
-        format.html { redirect_to quiz_path(@question.quiz_id), notice: 'Question was successfully created.' }
-        format.json { render :show, status: :created, location: @question }
-      else
-        format.html { render :new }
-        format.json { render json: quiz_path(@question.quiz_id) , status: :unprocessable_entity }
-      end
+    if @question.save
+       redirect_to quiz_path(@question.quiz_id), 
+          notice: 'Question was successfully created.' 
+    else
+       render :new 
     end
   end
 
   def update
-    respond_to do |format|
-      if @question.update(question_params)
-        format.html { redirect_to  @question.quiz, notice: 'Question was successfully updated.' }
-        format.json { render :show, status: :ok, location: @question }
-      else
-        format.html { render :edit }
-        format.json { render json: @question.errors, status: :unprocessable_entity }
-      end
+    if @question.update(question_params)
+      redirect_to  @question.quiz, notice: 'Question was successfully updated.' 
+    else
+      render :edit 
     end
   end
 
   def destroy
     @quiz_id = @question.quiz_id
     @question.destroy
-    respond_to do |format|
-      format.html { redirect_to quiz_path(@quiz_id), notice: 'Question was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to quiz_path(@quiz_id), notice: 'Question was successfully destroyed.' 
   end
 
   private

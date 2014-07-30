@@ -71,6 +71,14 @@ class Quiz < ActiveRecord::Base
     end    
   end
 
+  def next_question_id(last_question_id)
+    if last_question_id
+      questions.where("id > ?", last_question_id).first.try(:id)
+    else
+      questions.first.id 
+    end
+  end
+
   protected
     def check_published_flag
       if questions.size == 0
