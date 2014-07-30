@@ -37,13 +37,14 @@ class Quiz < ActiveRecord::Base
   
   def create_category
     if new_category.present?
-      self.category = Category.find_or_create_by!(name: new_category)
+      self.category = Category.find_or_create_by!(name: new_category.titleize)
     end
   end
 
   def create_subject
     if new_subject.present?
-      self.subject = Subject.find_or_create_by!(name: new_subject, category: category) 
+      self.subject = Subject.find_or_create_by!(name: new_subject.titleize, 
+        category: category) 
     end
   end
 
