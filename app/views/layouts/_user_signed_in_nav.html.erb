@@ -1,0 +1,37 @@
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+    Quizzes <i class="glyphicon glyphicon-edit"></i><b class="caret"></b>
+  </a>
+  <ul class="dropdown-menu">
+    <li role="presentation" class="dropdown-header">
+      My Quizzes
+    </li>
+    <li><%= link_to "New Quiz", new_quiz_path %></li>
+    <li><%= link_to "Quizzes Written", quizzes_path %></li>
+    <li><%= link_to "Quizzes Taken", quiz_events_path %></li>
+    <li class="divider"></li>
+    <li role="presentation" class="dropdown-header">All Quizzes</li>
+      <li>
+        <%= link_to search_path do %>
+          Search<i class="glyphicon glyphicon-search"></i>
+        <% end %>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+    Account<i class="glyphicon glyphicon-user"></i> <b class="caret"></b>
+  </a>
+  <ul class="dropdown-menu">
+    <li>
+      <%= link_to edit_user_registration_path do %>
+        Edit profile<i class="glyphicon glyphicon-pencil"></i>
+      <% end %>
+    </li> 
+    <li>
+      <%= link_to destroy_user_session_path, method: :delete do %>
+        Sign out<i class="glyphicon glyphicon-log-out"></i>
+      <% end %>
+    </li>
+  </ul>
+</li>

@@ -26,7 +26,7 @@
     </table>
 
     <%= simple_form_for @quiz_event do |f| %>
-     <%= f.error_notification %>
+      <%= f.error_notification %>
       <%= f.input :quiz_id, as: "hidden" %>
       <div class="form-actions col-md-offset-4">
           <%= f.button :submit, value: "Take This Quiz", 
@@ -35,14 +35,11 @@
               class: 'btn btn-primary btn-sm' %>
       </div>
     <% end %>
+    
     <ul>
       <%  @quiz_event.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-</ul>
-
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
   </div>
 </div> 
-
-
-
