@@ -86,6 +86,13 @@ describe "Quiz Pages" do
     it { should have_content("Quiz was successfully created") }
     it { should have_content("Geography") }
     it { should have_content("North American Rivers") }
+    it "should not have Publish related links without minimum number of questions" do
+      expect(page).to_not have_link("Publish") 
+      expect(page).to_not have_link("Unpublish") 
+    end
+    it "should not have Take Quiz link without minimum number of questions" do
+      expect(page).to_not have_link("Take Quiz") 
+    end
   end
 
   describe "cancel create new quiz" do
@@ -139,19 +146,19 @@ describe "Quiz Pages" do
     
     specify { expect(current_path).to eq(quiz_path(quiz))}
     it { should have_content(quiz.name) }
-    it { should have_link("Edit Quiz Information") }
+    it { should have_link("Edit") }
     
     it { should have_content("Questions") }
     it { should have_link("Add Question") }
-    it "should not have Publish link without minimum number of questions" do
-      expect(page).to_not have_link("Publish Quiz") 
-    end
+    it { should have_link("Unpublish") }
+    it { should have_link("Take Quiz") }
+ 
   end
 
   describe "delete a quiz from the show page" do 
     before(:each) do 
       visit quiz_path quiz
-      click_link("Delete Quiz") 
+      click_link("Delete") 
     end
     specify { expect(current_path).to eq(quizzes_path)}
     it { should_not have_content(quiz.name) }
@@ -162,12 +169,12 @@ describe "Quiz Pages" do
     before(:each) do 
       visit quizzes_path
       click_link quiz.name
-      click_link "Edit Quiz Information"
+      click_link "Edit"
     end
     
     specify { expect(current_path).to eq(edit_quiz_path(quiz))}
-    it { should have_content("Edit quiz") }
-    it { should have_button("Update Quiz") }
+    it { should have_content("Edit") }
+    it { should have_button("Update") }
     it { should have_link("Cancel") }
 
   end
@@ -178,22 +185,22 @@ describe "Quiz Pages" do
       quiz.published = false
       quiz.save!
       visit quiz_path(quiz)
-      click_link "Publish Quiz"
+      click_link "Publish"
     end
 
     specify { expect(current_path).to eq(quiz_path(quiz)) }
-    it { should have_link("Unpublish Quiz") }
+    it { should have_link("Unpublish") }
     it { should have_content("Published? Yes") }
   end
 
   describe "unpublish a quiz" do
      before(:each) do
       visit quiz_path(quiz)
-      click_link "Unpublish Quiz"
+      click_link "Unpublish"
     end
     
     specify { expect(current_path).to eq(quiz_path(quiz)) }
-    it { should have_link("Publish Quiz") }
+    it { should have_link("Publish") }
     it { should have_content("Published? No") }
   end
 
