@@ -9,6 +9,15 @@
                 file: :horizontal_file_input,
                 boolean: :horizontal_boolean} do |f| %>
       <%= f.error_notification %>
+      <%  if @question.errors.include?(:answers) %>
+        <div class="col-md-offset-2 col-md-8">
+          <div class="alert alert-error">
+            <% @question.errors.full_messages.each do |msg|  %>
+              <div><%= msg if msg =~ /Answer/ %></div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
       <div class="form-inputs">
         <table class="table input-table">
           <tr>
@@ -40,15 +49,6 @@
     <% end %>
   </div>
 
-  <%  if @question.errors.include?(:answers) %>
-  <div class="col-md-offset-2 col-md-8">
-    <br/>
-    <div class="alert alert-error">
-      <% @question.errors.full_messages.each do |msg|  %>
-        <div><%= msg if msg =~ /Answer/ %></div>
-      <% end %>
-    </div>
-  </div>
-  <% end %>
+ 
 
 </div>
