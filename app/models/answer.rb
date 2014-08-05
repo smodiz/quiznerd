@@ -3,4 +3,5 @@ class Answer < ActiveRecord::Base
   validates :content, presence: true
   validates :correct, inclusion: { in: [true, false] }
 
+  default_scope -> { order('id') }
 end
