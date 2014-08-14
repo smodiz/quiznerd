@@ -113,6 +113,7 @@ describe Quiz do
 
   describe "adding a new category that already exists" do
     before(:each) do
+      quiz.save!
       quiz.new_category = quiz.category.name
       quiz.category = nil
       quiz.new_subject = quiz.subject.name
