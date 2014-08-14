@@ -37,7 +37,7 @@
             <td></td>
           </tr>
           <%= f.simple_fields_for :answers do |answers| %>
-            <%= render 'answer_fields', f: answers  %>
+            <%= render 'questions/answer_fields', f: answers  %>
           <% end %>
           </table>
       </div>

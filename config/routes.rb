@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   devise_for :users
  
   resources :quiz_events
-  resources :questions
+  resources :questions do
+    post 'copy' => 'copy_questions#create'
+  end
   resources :quizzes do 
     put 'toggle_publish' => 'quizzes#toggle_publish'
   end

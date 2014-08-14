@@ -76,11 +76,33 @@ describe "Questions" do
       expect(current_path).to eq quiz_path(question.quiz)
     end
     it "should delete the question" do
-          expect do
-            click_link "delete"
-          end.to change(quiz.questions, :count).by(-1)
+      expect do
+        click_link "delete"
+      end.to change(quiz.questions, :count).by(-1)
     end  
   end
 
+  describe "when I copy a question" do
+    before(:each) do
+      #need to reference question so it exists before going to quiz page
+      question     
+      visit quiz_path(quiz)
+      click_link "#{quiz.questions.first.id}"
+    end
 
+    it { should have_content(quiz.questions.first.content) }
+
+    it "should have all the answers" do
+      quiz.questions.first.answers.each do |answer|
+        expect(page).to have_content(answer.content) 
+      end
+    end
+
+    it "should add the copied question" do
+      expect do
+        click_button "Create Question"
+      end.to change(quiz.questions, :count).by(1)
+    end  
+
+  end
 end

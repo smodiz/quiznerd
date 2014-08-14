@@ -29,5 +29,4 @@ describe Answer do
     end
   end
 
-  
 end
