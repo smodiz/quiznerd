@@ -19,6 +19,12 @@ class Quiz < ActiveRecord::Base
   attr_accessor :new_category, :new_subject
 
 
+  def self.new_for_user(user, params)
+    quiz = Quiz.new(params)
+    quiz.author = user
+    quiz
+  end
+
   def number_of_questions
     questions.size
   end

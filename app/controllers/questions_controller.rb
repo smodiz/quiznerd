@@ -7,8 +7,7 @@ class QuestionsController < ApplicationController
   end
 
   def new
-    @question = Question.new(quiz_id: params[:quiz_id])
-    4.times { @question.answers.build }
+    @question = Question.new_with_answers(params[:quiz_id])
   end
 
   def edit

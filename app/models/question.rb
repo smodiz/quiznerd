@@ -16,6 +16,12 @@ class Question < ActiveRecord::Base
                         "MC-2"  =>  "Multiple Choice - Multi"
                     }
 
+  def self.new_with_answers(quiz_id)
+    question = Question.new(quiz_id: quiz_id)
+    4.times { question.answers.build }
+    question
+  end
+
   def must_have_multiple_answers
     if answers.size < 2
       errors.add(:answers, "cannot be fewer than two")

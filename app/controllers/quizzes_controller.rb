@@ -21,7 +21,7 @@ class QuizzesController < ApplicationController
   end
 
   def create
-    @quiz = current_user.quizzes.build(quiz_params)
+    @quiz = Quiz.new_for_user(current_user, quiz_params)
     if @quiz.save
       redirect_to @quiz, notice: 'Quiz was successfully created.' 
     else
