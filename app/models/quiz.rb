@@ -15,7 +15,7 @@ class Quiz < ActiveRecord::Base
   validate  :new_or_existing_subject_required
   before_save :create_category, :create_subject
   after_touch :check_published_flag
-  after_initialize :defaults
+  after_initialize :set_defaults
   attr_accessor :new_category, :new_subject
 
 
@@ -95,7 +95,7 @@ class Quiz < ActiveRecord::Base
       end
     end
 
-    def defaults
+    def set_defaults
       self.published = false if self.published.nil?
     end
 end
