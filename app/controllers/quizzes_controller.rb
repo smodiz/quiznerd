@@ -52,19 +52,19 @@ class QuizzesController < ApplicationController
 
   private
 
-    def set_quiz
-      @quiz = Quiz.find(params[:id])
-    end
+  def set_quiz
+    @quiz = Quiz.find(params[:id])
+  end
 
-    def quiz_params
-      params.require(:quiz).permit(:name, :description, :published, 
-        :category_id, :subject_id, :new_category, :new_subject)
-    end
+  def quiz_params
+    params.require(:quiz).permit(:name, :description, :published, 
+      :category_id, :subject_id, :new_category, :new_subject)
+  end
 
-    def correct_user
-      @quiz = current_user.quizzes.find_by(id: params[:id])
-      redirect_to root_url, notice: 'You cannot modify that quiz.' if @quiz.nil?
-    end
+  def correct_user
+    @quiz = current_user.quizzes.find_by(id: params[:id])
+    redirect_to root_url, notice: 'You cannot modify that quiz.' if @quiz.nil?
+  end
 
   
 end

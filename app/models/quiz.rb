@@ -6,17 +6,18 @@ class Quiz < ActiveRecord::Base
   belongs_to :author, class_name: "User"
   has_many :questions, dependent: :destroy
   has_many :quiz_events, dependent: :nullify
-
+  attr_accessor :new_category, :new_subject
+  
+  validates_with CategorySubjectValidator
   validates :name, :description, :author, presence: true
   validates :name, length: { maximum: 45 }
   validates :description, length: { maximum: 255 }
   validates :published, inclusion: { in: [true, false] }
-  validate  :new_category_requires_subject, :new_or_existing_category_required 
-  validate  :new_or_existing_subject_required
-  before_save :create_category, :create_subject
+
+  before_save :create_category_subject, if: -> { :new_subject.present? }
   after_touch :check_published_flag
   after_initialize :set_defaults
-  attr_accessor :new_category, :new_subject
+  
 
 
   def self.new_for_user(user, params)
@@ -41,43 +42,6 @@ class Quiz < ActiveRecord::Base
     end
   end
   
-  def create_category
-    if new_category.present?
-      self.category = Category.find_or_create_by!(name: new_category.strip.titleize)
-    end
-  end
-
-  def create_subject
-    if new_subject.present?
-      self.subject = Subject.find_or_create_by!(name: new_subject.strip.titleize, 
-        category: category) 
-    end
-  end
-
-  def new_category_requires_subject
-    if new_category.present? && !new_subject.present?
-      errors.add(:new_subject, "new category requires a new subject")
-    end
-  end
-
-  def new_or_existing_category_required
-    if new_category.present? && category.present?
-      errors.add(:category, "should be blank if new category selected")
-    end
-    if !new_category.present? && !category.present?
-      errors.add(:category, "should be selected or a new category entered")
-    end
-  end
-
-  def new_or_existing_subject_required
-    if new_subject.present? && subject.present?
-      errors.add(:subject, "should be blank if new subject selected")
-    end
-    if !new_category.present? && !new_subject.present? && !subject.present?
-      errors.add(:subject, "should be selected or a new subject entered")
-    end    
-  end
-
   def next_question_id(last_question_id)
     if last_question_id
       questions.where("id > ?", last_question_id).first.try(:id)
@@ -87,31 +51,27 @@ class Quiz < ActiveRecord::Base
   end
 
   def category_name
-    if category.present?
-      category.name
-    else
-      ""
-    end
+    category.present? ? category.name : ""
   end
 
- def subject_name
-    if subject.present?
-      subject.name
-    else
-      ""
-    end
+  def subject_name
+    subject.present? ? subject.name : ""
+  end
+
+  def create_category_subject
+    CategorySubjectCreator.new(self).create
   end
 
   protected
-    
-    def check_published_flag
-      if questions.size == 0
-        self.published = false
-        self.save!
-      end
+  
+  def check_published_flag
+    if questions.size == 0
+      self.published = false
+      self.save!
     end
+  end
 
-    def set_defaults
-      self.published = false if self.published.nil?
-    end
+  def set_defaults
+    self.published = false if self.published.nil?
+  end
 end
