@@ -2,8 +2,8 @@
   <td><%= link_to quiz.name, quiz_path(quiz), class: "index-link" %></td>
   <td><%= quiz.description %></td>
   <td><%= quiz.published ? "Yes" : "No" %></td>
-  <td><%= quiz.category.name %></td>
-  <td><%= quiz.subject.name %></td>
+  <td><%= quiz.category_name %></td>
+  <td><%= quiz.subject_name %></td>
   <td><%= quiz.number_of_questions %></td>
   <td><%= link_to 'destroy', quiz, method: :delete, 
             data: { confirm: 'Are you sure?' }, class: "index-link" %></td>

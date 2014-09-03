@@ -86,6 +86,22 @@ class Quiz < ActiveRecord::Base
     end
   end
 
+  def category_name
+    if category.present?
+      category.name
+    else
+      ""
+    end
+  end
+
+ def subject_name
+    if subject.present?
+      subject.name
+    else
+      ""
+    end
+  end
+
   protected
     
     def check_published_flag
