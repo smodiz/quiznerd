@@ -1,27 +1,27 @@
 class CategorySubjectCreator 
 
-  def initialize(quiz)
-    @quiz = quiz
+  def initialize(record)
+    @record = record
   end
 
   def create
-    if @quiz.valid?
+    if @record.valid?
       create_category
       create_subject
     end
   end
 
   def create_category
-    if @quiz.new_category.present?
-      @quiz.category = Category.find_or_create_by!(
-        name: @quiz.new_category.strip.titleize)
+    if @record.new_category.present?
+      @record.category = Category.find_or_create_by!(
+        name: @record.new_category.strip.titleize)
     end
   end
 
   def create_subject
-   if @quiz.new_subject.present?
-      @quiz.subject = Subject.find_or_create_by!(
-        name: @quiz.new_subject.strip.titleize, category: @quiz.category) 
+   if @record.new_subject.present?
+      @record.subject = Subject.find_or_create_by!(
+        name: @record.new_subject.strip.titleize, category: @record.category) 
     end
   end
 
