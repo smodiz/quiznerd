@@ -5,7 +5,7 @@ class Quiz < ActiveRecord::Base
   belongs_to :subject
   belongs_to :author, class_name: "User"
   has_many :questions, dependent: :destroy
-  has_many :quiz_events, dependent: :nullify
+  has_many :quiz_events, dependent: :destroy
   attr_accessor :new_category, :new_subject
   
   validates_with CategorySubjectValidator
