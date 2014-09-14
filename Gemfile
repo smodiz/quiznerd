@@ -5,7 +5,6 @@ ruby '2.1.1'
 gem 'rails', '4.1.2.rc1'
 gem 'sass-rails', '~> 4.0.3'
 gem 'bootstrap-sass', '~> 3.1.1.0'
-
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
@@ -23,13 +22,9 @@ gem 'pg_search', '0.7.4'
 
 # temporarily add to all environments. Later, will remove from production
 gem 'rack-mini-profiler'
-
-# bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
 group :development, :test do
-  # Spring speeds up development by keeping your application running in the 
-  # background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'rspec-rails', '2.13.1'
   gem 'guard-rspec', '2.5.0'
@@ -40,6 +35,7 @@ group :development, :test do
   gem 'awesome_print'
   gem 'debugger'
   gem 'pry'
+  gem 'pry-byebug'
   gem 'orderly'
 
   # In Rails 4.1, we have secrets.yml which kind of does the same thing as 

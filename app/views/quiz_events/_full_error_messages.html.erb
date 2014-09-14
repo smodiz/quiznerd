@@ -1,0 +1,5 @@
+  <ul>
+    <% @form.errors.full_messages.each do |msg| %>
+      <li class="alert-error"><%= msg %></li>
+    <% end %>
+  </ul>

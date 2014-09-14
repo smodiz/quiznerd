@@ -1,4 +1,4 @@
-<% unless @quiz_event.before_first_question? || answer_shown_already? %>
+<% if @quiz_form.show_graded_question? %>
   <div class="row">
     <div class="col-md-offset-2 col-md-8">  
       <%= render 'graded_question' %>
@@ -6,10 +6,18 @@
   </div>
 <% end %>
 
-
+<% if @quiz_form.quiz_completed? %>
+<div class="row">
+  <div class="col-md-offset-2 col-md-8">  
+    <%= render  :partial => "result", 
+                :locals => { :@quiz_form => @quiz_form } %>
+  </div>
+</div>
+<% else %>
 <div class="row">
   <div class="col-md-offset-2 col-md-8">  
     <%= render 'question_form' %>
   </div>
 </div> 
+<% end %>
 

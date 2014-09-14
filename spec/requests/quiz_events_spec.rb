@@ -6,9 +6,6 @@ describe "Quiz Event Pages" do
   let(:new_quiz_url)  { new_quiz_url_for(quiz_event.quiz.id) }
 
   before(:each) do
-    quiz_event.question_id = quiz_event.quiz.questions.first.id
-    quiz_event.answer_ids = quiz_event.quiz.questions.first.correct_answer_ids
-    quiz_event.save!
     valid_sign_in(quiz_event.user)
   end
 
@@ -29,9 +26,6 @@ describe "Quiz Event Pages" do
   describe "does not show other users quiz event" do
     let(:quiz_event_2)  { FactoryGirl.create(:small_quiz_event) }
     before(:each) do
-      quiz_event_2.answer_ids = quiz_event_2.quiz.questions.first.correct_answer_ids
-      quiz_event_2.question_id = quiz_event_2.quiz.questions.first.id
-      quiz_event_2.save!
       visit quiz_events_path
     end
     it { should_not have_content(quiz_event_2.quiz.name) }
@@ -62,7 +56,7 @@ describe "Quiz Event Pages" do
 
       it "should require an answer to be selected" do
         click_button "Continue"
-        expect(page).to have_content("Answer cannot be blank") 
+        expect(page).to have_content("Answer ids can't be blank") 
       end
 
       context "correctly" do

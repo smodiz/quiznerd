@@ -46,8 +46,12 @@ class Quiz < ActiveRecord::Base
     if last_question_id
       questions.where("id > ?", last_question_id).first.try(:id)
     else
-      questions.first.id 
+      first_question_id
     end
+  end
+
+  def first_question_id
+    questions.first.id 
   end
 
   def category_name

@@ -22,6 +22,7 @@ class QuizEventsController < ApplicationController
   def create
     @quiz_event = current_user.quiz_events.build(quiz_event_params)
     if @quiz_event.save
+      @quiz_form = QuizTakingForm.new(quiz_event: @quiz_event, view_context: view_context)
       render 'edit'
     else
       render 'new'
@@ -29,12 +30,9 @@ class QuizEventsController < ApplicationController
   end
 
   def update
-    @quiz_event.update(quiz_event_params)
-    if @quiz_event.status == QuizEvent::COMPLETED_STATUS
-      render 'result'
-    else
-      render :edit
-    end
+    @quiz_form = QuizTakingForm.new(quiz_event: @quiz_event, view_context: view_context)
+    @quiz_form.submit(quiz_event_params)
+    render 'edit'
   end
 
   def destroy
@@ -56,7 +54,7 @@ class QuizEventsController < ApplicationController
     # answer_ids is a virtual attribute on QuizEvent. Rails assigns it  
     # as a string (when only one is submitted via radio button) or string 
     # array (when multiple submitted, via checkboxes). However, what we 
-    # want is an integer array.
+    # want is an integer array, always.
     def convert_answer_ids
       answer_ids = params[:quiz_event][:answer_ids]
       return unless answer_ids
@@ -81,7 +79,7 @@ class QuizEventsController < ApplicationController
     def quiz_event_params
       convert_answer_ids
       params.require(:quiz_event).permit(:id, :quiz_id, :question_id, 
-        { :answer_ids => [] }, :answer_ids, :suspend_button)
+        { :answer_ids => [] }, :answer_ids)
     end
 
 end

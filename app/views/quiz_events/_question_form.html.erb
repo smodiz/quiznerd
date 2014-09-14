@@ -1,45 +1,43 @@
-<%= simple_form_for(@quiz_event) do |f| %>
+<%= simple_form_for(@quiz_form) do |f| %>
   
   <%= f.error_notification %>
-  <ul>
-    <%  @quiz_event.errors.full_messages.each do |msg| %>
-      <li class="alert-error"><%= msg %></li>
-    <% end %>
-  </ul>
+  <%= render  :partial => "full_error_messages", 
+              :locals => { :@form => @quiz_form } %>
+
   <table class="table table-bordered">
     <tr>
-      <td class="quiz_event_section_header">
-        Question <%= @quiz_event.current_question_number %>
+      <td class="quiz_event_section">
+        Question <%= @quiz_form.question_number %>
       </td>
     </tr>
     <tr>
-      <td class="question">
-        <%= markdown(@quiz_event.current_question.content) %>
-      </td>
+      <td class="question"><%= markdown(@quiz_form.question.content) %></td>
     </tr> 
     <tr>
       <td>
-        <% if @quiz_event.current_question.question_type == "MC-2" %>
+        <% if @quiz_form.multi_select? %>
           <%= f.collection_check_boxes :answer_ids, 
-              @quiz_event.current_question.answers, :id, :content, 
+              @quiz_form.question.answers, :id, :content, 
               {:item_wrapper_class => 'answer_checkbox'} %>
         <% else %>
           <%= f.collection_radio_buttons :answer_ids, 
-              @quiz_event.current_question.answers, :id, :content,
+              @quiz_form.question.answers, :id, :content,
               {:item_wrapper_class => 'answer_checkbox'} %>
         <% end %>
       </td>
     </tr> 
   </table>
   
-  <%= f.input :quiz_id, as: "hidden" %>
+  <%= f.input :id, as: "hidden" %>
   <%= f.input :question_id, as: "hidden" %>
   
   <div class="form-actions col-md-offset-3" >
-    <%= f.button :submit, value: "Continue ---> ", 
-          class: 'btn btn-primary btn-sm'  %> 
-    <%= link_to 'Quit', @quiz_event, method: :delete, data: { confirm: 'Are you sure?' }, 
-          class: 'btn btn-primary btn-sm'  %>
+    <%= f.button :submit, value: "Continue --->", 
+          class: 'btn btn-primary btn-sm' %> 
+    <%= link_to 'Quit', @quiz_form.quiz_event, 
+          method: :delete, 
+          data:   { confirm: 'Are you sure?' }, 
+          class:  'btn btn-primary btn-sm'  %>
   </div>
 
 <% end %>
