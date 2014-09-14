@@ -12,11 +12,7 @@ class QuizEvent < ActiveRecord::Base
   IN_PROGRESS_STATUS = "In Progress"
   
   def number_of_questions
-    # if quiz.present?
-      quiz.number_of_questions
-    # else
-    #   0
-    # end
+    quiz.number_of_questions
   end
 
   def current_percent_grade
