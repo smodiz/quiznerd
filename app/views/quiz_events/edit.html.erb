@@ -7,17 +7,16 @@
 <% end %>
 
 <% if @quiz_form.quiz_completed? %>
-<div class="row">
-  <div class="col-md-offset-2 col-md-8">  
-    <%= render  :partial => "result", 
-                :locals => { :@quiz_form => @quiz_form } %>
+  <div class="row">
+    <div class="col-md-offset-2 col-md-8">  
+      <%= render 'result' %>
+    </div>
   </div>
-</div>
 <% else %>
-<div class="row">
-  <div class="col-md-offset-2 col-md-8">  
-    <%= render 'question_form' %>
-  </div>
-</div> 
+  <div class="row">
+    <div class="col-md-offset-2 col-md-8">  
+      <%= render 'question_form' %>
+    </div>
+  </div> 
 <% end %>
 
