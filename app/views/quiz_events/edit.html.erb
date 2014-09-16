@@ -1,22 +1,24 @@
-<% if @quiz_form.show_graded_question? %>
-  <div class="row">
-    <div class="col-md-offset-2 col-md-8">  
-      <%= render 'graded_question' %>
-    </div>
-  </div>
-<% end %>
+<% @presenter = present @quiz_taking_form, QuizTakingPresenter %>
 
-<% if @quiz_form.quiz_completed? %>
-  <div class="row">
-    <div class="col-md-offset-2 col-md-8">  
-      <%= render 'result' %>
+  <% if @presenter.show_graded_question? %>
+    <div class="row">
+      <div class="col-md-offset-2 col-md-8">  
+        <%= render 'graded_question' %>
+      </div>
     </div>
-  </div>
-<% else %>
-  <div class="row">
-    <div class="col-md-offset-2 col-md-8">  
-      <%= render 'question_form' %>
+  <% end %>
+
+  <% if @presenter.completed? %>
+    <div class="row">
+      <div class="col-md-offset-2 col-md-8">  
+        <%= render 'result' %>
+      </div>
     </div>
-  </div> 
-<% end %>
+  <% else %>
+    <div class="row">
+      <div class="col-md-offset-2 col-md-8">  
+        <%= render 'question_form' %>
+      </div>
+    </div> 
+  <% end %>
 

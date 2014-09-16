@@ -1,25 +1,25 @@
 <table class="table table-bordered">
   <tr>
     <td class="quiz_event_section">
-      <%= @quiz_form.grade_header %></td>
+      <%= @presenter.grade_header %></td>
   </tr>
 </table>
 
   
 <table class="table table-bordered graded-question">
   <tr>
-    <td colspan="2"><%= markdown(@quiz_form.graded_question.content) %></td>
+    <td colspan="2"><%= markdown(@presenter.graded_question.content) %></td>
   </tr> 
-  <% @quiz_form.graded_question.answers.each do |answer| %>
+  <% @presenter.graded_question.answers.each do |answer| %>
   <tr>
-    <td width="10%"><%= @quiz_form.grade_icon_for(answer) %></td>
+    <td width="10%"><%= @presenter.grade_icon_for(answer) %></td>
     <td><%= answer.content %></td>
   </tr> 
   <% end %>
 </table>
 
 
-<% if @quiz_form.has_remarks? %>
+<% if @presenter.has_remarks? %>
   <%= render 'remarks' %>
 <% end %>
 

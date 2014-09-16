@@ -22,7 +22,7 @@ class QuizEventsController < ApplicationController
   def create
     @quiz_event = current_user.quiz_events.build(quiz_event_params)
     if @quiz_event.save
-      @quiz_form = QuizTakingForm.new(quiz_event: @quiz_event, view_context: view_context)
+      @quiz_taking_form = QuizTakingForm.new(quiz_event: @quiz_event, view_context: view_context)
       render 'edit'
     else
       render 'new'
@@ -30,8 +30,8 @@ class QuizEventsController < ApplicationController
   end
 
   def update
-    @quiz_form = QuizTakingForm.new(quiz_event: @quiz_event, view_context: view_context)
-    @quiz_form.submit(quiz_event_params)
+    @quiz_taking_form = QuizTakingForm.new(quiz_event: @quiz_event, view_context: view_context)
+    @quiz_taking_form.submit(quiz_event_params)
     render 'edit'
   end
 

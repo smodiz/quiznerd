@@ -18,6 +18,7 @@ class QuizTakingForm
                 :question_id, :question, :answer_ids,
                 :graded_question, :graded_answer_ids
   attr_reader   :view_context
+  delegate :id, :completed?, to: :quiz_event
 
   def initialize(options={})
     @quiz_event     = options[:quiz_event]
@@ -51,39 +52,6 @@ class QuizTakingForm
     end
   end
 
-  def question_number
-    quiz_event.total_answered + 1
-  end
-
-  def show_graded_question?
-    graded_question.present?
-  end
-
-  def multi_select?
-    question.question_type == "MC-2"
-  end
-
-  def has_remarks?
-    graded_question.remarks.present? 
-  end
-
-  def grade_icon_for(answer)
-    if answer.correct?
-      view_context.content_tag(:span, "&#x2713".html_safe, class: "grade icon correct")
-    elsif graded_answer_ids.include?(answer.id)
-      view_context.content_tag(:span, "&#x2717".html_safe, class: "grade icon incorrect")
-    end
-  end
-
-  def grade_header
-    result = answer_correct? ? "Correct" : "Incorrect"
-    view_context.content_tag(:span, "#{result}!", class: result.downcase)
-  end
-
-  def quiz_completed?
-    quiz_event.completed?
-  end
-
   def question
     @question ||= 
       if question_id.blank?
@@ -91,10 +59,6 @@ class QuizTakingForm
       else
         quiz.questions.find(question_id)
       end
-  end
-
-  def id
-    quiz_event.id
   end
 
   def answer_correct?
@@ -116,8 +80,6 @@ private
     self.graded_question = question
     self.graded_answer_ids = answer_ids
   end
-
- 
 
   def advance_to_next
     quiz_event.last_question_id = question_id

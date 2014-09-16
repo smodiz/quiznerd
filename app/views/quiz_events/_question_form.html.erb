@@ -1,27 +1,29 @@
-<%= simple_form_for(@quiz_form) do |f| %>
+<%= simple_form_for(@presenter.quiz_taking_form) do |f| %>
   
   <%= f.error_notification %>
   <%= render  :partial => "full_error_messages", 
-              :locals => { :@form => @quiz_form } %>
+              :locals => { :@form => @presenter } %>
 
   <table class="table table-bordered">
     <tr>
       <td class="quiz_event_section">
-        Question <%= @quiz_form.question_number %>
+        Question <%= @presenter.question_number %>
       </td>
     </tr>
     <tr>
-      <td class="question"><%= markdown(@quiz_form.question.content) %></td>
+      <td class="question">
+        <%= markdown(@presenter.question.content) %>
+      </td>
     </tr> 
     <tr>
       <td>
-        <% if @quiz_form.multi_select? %>
+        <% if @presenter.multi_select? %>
           <%= f.collection_check_boxes :answer_ids, 
-              @quiz_form.question.answers, :id, :content, 
+              @presenter.question.answers, :id, :content, 
               {:item_wrapper_class => 'answer_checkbox'} %>
         <% else %>
           <%= f.collection_radio_buttons :answer_ids, 
-              @quiz_form.question.answers, :id, :content,
+              @presenter.question.answers, :id, :content,
               {:item_wrapper_class => 'answer_checkbox'} %>
         <% end %>
       </td>
@@ -34,7 +36,7 @@
   <div class="form-actions col-md-offset-3" >
     <%= f.button :submit, value: "Continue --->", 
           class: 'btn btn-primary btn-sm' %> 
-    <%= link_to 'Quit', @quiz_form.quiz_event, 
+    <%= link_to 'Quit', @presenter.quiz_event, 
           method: :delete, 
           data:   { confirm: 'Are you sure?' }, 
           class:  'btn btn-primary btn-sm'  %>

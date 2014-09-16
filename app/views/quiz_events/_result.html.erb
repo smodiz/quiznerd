@@ -1,15 +1,12 @@
 <div>
   <%= render  :partial => "full_error_messages", 
-              :locals => { :@form => @quiz_form } %>
+              :locals => { :@form => @presenter } %>
 
   <p class="quiz_event_result_header">
     You completed the quiz!
   </p>
 
   <p class="quiz_event_result_body">
-     <%= "You scored #{formatted_quiz_score(@quiz_form.quiz_event)}" %>%&nbsp;
-     (<%= @quiz_event.total_correct %> out of 
-      <%= @quiz_event.total_answered %>)
-      <br/>
+     <%= @presenter.quiz_result %><br/>
   </p>
 </div>

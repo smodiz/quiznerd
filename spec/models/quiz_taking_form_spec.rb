@@ -108,7 +108,7 @@ describe "Quiz Taking Form" do
     end
 
     it "is still completed" do
-      expect(quiz_taking_form.quiz_completed?).to be_true
+      expect(quiz_taking_form.completed?).to be_true
     end
 
     it "does not impact the grade" do
