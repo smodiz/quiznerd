@@ -2,14 +2,17 @@
   Questions
   <%= link_to new_question_path(quiz_id: @quiz.id), 
       class: 'btn btn-primary pull-right btn-sm' do %>
-      <i class="glyphicon glyphicon-plus glyphicon-white"></i>Add Question
+      <i class="glyphicon glyphicon-plus glyphicon-white"></i>
+      Add Question
   <% end %>
   <hr/>
 </div>
 
-
 <%  if @quiz.questions.empty? then %>
-  <p>Add at least one question and then you can publish your quiz so that others can take it.</p>
+  <p>
+    Add at least one question and then you can publish your quiz 
+    so that others can take it.
+  </p>
 <% else %>
   <div class="table-responsive">
     <table class="table table-bordered">

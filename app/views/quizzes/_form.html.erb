@@ -6,32 +6,35 @@
             file: :horizontal_file_input,
             boolean: :horizontal_boolean} do |f| %>
   <%= f.error_notification %>
-<div class="form-inputs">
-  
+  <div class="form-inputs">
     <table class="table input-table">
       <tbody>
         <tr>
           <td><%= f.input :name %></td>
         </tr>
         <tr>
-          <td><%= f.input :description, as: :text, 
-            input_html: { rows: text_area_rows(@quiz.description,70) } %></td>
+          <td>
+            <%= f.input :description, as: :text, 
+            input_html: { rows: text_area_rows(@quiz.description,70) } %>
+          </td>
         </tr>
         <tr><td><hr/>*</td></tr>
         <tr>
-          <td><%= f.association :category %>
+          <td>
+            <%= f.association :category %>
             <%= f.input :new_category, label: "or create a new category:" %>
           </td>
         </tr>
         <tr><td><hr/>*</td></tr>
          <tr>
-          <td><%= f.association :subject %>
+          <td>
+            <%= f.association :subject %>
             <%= f.input :new_subject, label: "or create a new subject:" %>    
           </td>    
         </tr>
       </tbody>
     </table>
-</div>
+  </div>
 
 <div class="form-actions center">
   <%= f.button :submit, class: 'btn btn-primary btn-sm'  %> 

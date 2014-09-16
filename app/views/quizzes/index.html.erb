@@ -3,7 +3,8 @@
     Quizzes Written
      <% if @quizzes.size >= 1 %>
       <%= link_to new_quiz_path, class: 'btn btn-primary pull-right btn-sm' do %>
-        <i class="glyphicon glyphicon-plus glyphicon-white"></i>New Quiz
+        <i class="glyphicon glyphicon-plus glyphicon-white"></i>
+        New Quiz
       <% end %>
     <% end %>
     <hr/>
@@ -31,16 +32,15 @@
         </tr>
       </thead>
       <tbody>
-
         <%= render @quizzes %>
-      
       </tbody>
     </table>
   </div>
 
   <div class="page-actions">
     <%= link_to new_quiz_path, class: 'btn btn-primary pull-right btn-sm' do %>
-      <i class="glyphicon glyphicon-plus glyphicon-white"></i>New Quiz
+      <i class="glyphicon glyphicon-plus glyphicon-white"></i>
+      New Quiz
     <% end %>
   </div>
 
