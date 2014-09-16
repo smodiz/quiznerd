@@ -1,3 +1,8 @@
+=begin 
+
+QuizTakingPresenter has view logic that was extracted from QuizTakingForm.
+
+=end
 class QuizTakingPresenter < BasePresenter
 
   presents :quiz_taking_form
