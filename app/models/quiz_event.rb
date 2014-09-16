@@ -5,7 +5,10 @@ class QuizEvent < ActiveRecord::Base
   belongs_to :quiz
   has_one :subject, through: :quiz 
   has_one :category, through: :quiz
-  
+  delegate :name, to: :category, prefix: true
+  delegate :name, to: :subject, prefix: true
+  delegate :name, to: :quiz, prefix: true
+
   default_scope -> { order('created_at DESC') }
    
   COMPLETED_STATUS = "Completed"
@@ -31,7 +34,6 @@ class QuizEvent < ActiveRecord::Base
     self[:total_answered] = value
     update_status if self[:total_answered] && self[:total_answered] > 0
   end
-
 
 private
 
