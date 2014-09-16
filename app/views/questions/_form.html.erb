@@ -21,7 +21,10 @@
       <div class="form-inputs">
         <table class="table input-table">
           <tr>
-            <td><%= f.input :question_type, collection: Question::QUESTION_TYPES.map { |key, value| [value, key] }, include_blank: true  %></td>
+            <td><%= f.input :question_type, 
+                    collection: Question::QUESTION_TYPES.map { |k, v| [v, k] }, 
+                    include_blank: true  %>
+            </td>
             <td><%= f.input :quiz_id, as: "hidden" %></td>
           </tr>
           <tr>

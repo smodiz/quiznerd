@@ -1,6 +1,10 @@
 <ul class="breadcrumb">
-  <li><%= link_to 'My Quizzes', quizzes_path %> <span class="divider"></span></li>
-  <li><%= link_to @question.quiz.name, quiz_path(@question.quiz) %> <span class="divider"></span></li>
+  <li><%= link_to 'My Quizzes', quizzes_path %> 
+    <span class="divider"></span>
+  </li>
+  <li><%= link_to @question.quiz.name, quiz_path(@question.quiz) %> 
+    <span class="divider"></span>
+  </li>
   <li class="active">New Question</li>
 </ul>
 
