@@ -32,14 +32,20 @@ class QuizEvent < ActiveRecord::Base
 
   def total_answered=(value)
     self[:total_answered] = value
-    update_status if self[:total_answered] && self[:total_answered] > 0
+    update_to_completed if last_question_answered?
   end
 
 private
 
-  def update_status
-    if total_answered == number_of_questions
-      self.status = QuizEvent::COMPLETED_STATUS
+  def update_to_completed
+    self.status = QuizEvent::COMPLETED_STATUS
+  end
+
+  def last_question_answered?
+    if data_present?
+      total_answered == number_of_questions
+    else
+      false
     end
   end
 
