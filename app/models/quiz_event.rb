@@ -7,7 +7,7 @@ class QuizEvent < ActiveRecord::Base
   has_one :category, through: :quiz
   delegate :name, to: :category, prefix: true
   delegate :name, to: :subject, prefix: true
-  delegate :name, to: :quiz, prefix: true
+  delegate :name, :description, to: :quiz, prefix: true
 
   default_scope -> { order('created_at DESC') }
    
