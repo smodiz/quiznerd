@@ -8,7 +8,9 @@
   
 <table class="table table-bordered graded-question">
   <tr>
-    <td colspan="2"><%= markdown(@presenter.graded_question.content) %></td>
+    <td colspan="2">
+      <%= markdown(@presenter.graded_question.content) %>
+    </td>
   </tr> 
   <% @presenter.graded_question.answers.each do |answer| %>
   <tr>
