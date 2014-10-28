@@ -3,7 +3,6 @@ class Question < ActiveRecord::Base
   belongs_to :quiz, touch: true
   has_many :answers, dependent: :destroy
 
-  default_scope -> { order('created_at') }
   accepts_nested_attributes_for :answers, allow_destroy: true
   validates :question_type, :content, presence: true
   validate :must_have_multiple_answers, :must_have_correct_answer
