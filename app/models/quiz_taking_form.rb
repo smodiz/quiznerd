@@ -93,11 +93,7 @@ private
   end
 
   def user_cheating?   
-    if user_modifying_completed_test? || user_re_answering_question?
-      true
-    else
-      false
-    end
+    user_modifying_completed_test? || user_re_answering_question?
   end
 
   def user_modifying_completed_test?
