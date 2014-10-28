@@ -1,11 +1,12 @@
 class Quiz < ActiveRecord::Base
   include QuizFinder
 
-  belongs_to :category
-  belongs_to :subject
-  belongs_to :author, class_name: "User"
-  has_many :questions, dependent: :destroy
-  has_many :quiz_events, dependent: :destroy
+  belongs_to  :category
+  belongs_to  :subject
+  belongs_to  :author, class_name: "User"
+  has_many    :questions, dependent: :destroy
+  has_many    :quiz_events, dependent: :destroy
+  
   attr_accessor :new_category, :new_subject
   
   validates_with CategorySubjectValidator
@@ -14,9 +15,9 @@ class Quiz < ActiveRecord::Base
   validates :description, length: { maximum: 255 }
   validates :published, inclusion: { in: [true, false] }
 
-  before_save :create_category_subject, if: -> { :new_subject.present? }
-  after_touch :check_published_flag
-  after_initialize :set_defaults
+  before_save       :create_category_subject, if: -> { :new_subject.present? }
+  after_touch       :unpublish_when_last_question_removed
+  after_initialize  :set_defaults
   
 
 
@@ -68,10 +69,9 @@ class Quiz < ActiveRecord::Base
 
   protected
   
-  def check_published_flag
-    if questions.size == 0
-      self.published = false
-      self.save!
+  def unpublish_when_last_question_removed
+    if questions.size == 0 && published
+      self.update_attributes(published: false)
     end
   end
 
