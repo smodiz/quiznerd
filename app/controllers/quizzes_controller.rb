@@ -1,7 +1,7 @@
 class QuizzesController < ApplicationController
   include SortableColumns
 
-  before_action :set_quiz, only: [:show, :edit, :update, :destroy]
+  before_action :set_quiz, only: [:edit, :update, :destroy]
   before_action :authenticate_user!
   before_action :correct_user, only: [:edit, :update, :destroy]
 
@@ -11,6 +11,7 @@ class QuizzesController < ApplicationController
   end
 
   def show
+    @quiz = Quiz.with_questions_and_answers(params[:id])
   end
 
   def new

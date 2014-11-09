@@ -27,6 +27,10 @@ class Quiz < ActiveRecord::Base
     quiz
   end
 
+  def self.with_questions_and_answers(id)
+    Quiz.includes(:category, :subject, questions: [:answers]).find(id)
+  end
+
   def number_of_questions
     questions.size
   end
