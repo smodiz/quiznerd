@@ -1,26 +1,14 @@
-class CategorySubjectValidator < ActiveModel::Validator
+class SubjectPresentValidator < ActiveModel::EachValidator
 
-  def validate(record)
+  def validate_each(record, attribute, value)
     @quiz = record
-    new_category_requires_subject
-    new_or_existing_category_required
     new_or_existing_subject_required
+    new_category_requires_subject
   end
-
-  private
 
   def new_category_requires_subject
     if  @quiz.new_category.present? &&  @quiz.new_subject.blank?
        @quiz.errors.add(:new_subject, "is required for a new category")
-    end
-  end
-
-  def new_or_existing_category_required
-    if @quiz.new_category.present? && @quiz.category.present?
-       @quiz.errors.add(:category, "should be blank if new category selected")
-    end
-    if @quiz.new_category.blank? && @quiz.category.blank?
-      @quiz.errors.add(:category, "should be selected or a new category entered")
     end
   end
 
@@ -33,5 +21,5 @@ class CategorySubjectValidator < ActiveModel::Validator
        @quiz.errors.add(:subject, "should be selected or a new subject entered")
     end
   end
-
 end
+

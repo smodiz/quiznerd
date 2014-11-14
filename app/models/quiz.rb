@@ -9,13 +9,19 @@ class Quiz < ActiveRecord::Base
   
   attr_accessor :new_category, :new_subject
   
-  validates_with CategorySubjectValidator
   validates :name, :description, :author, presence: true
   validates :name, length: { maximum: 45 }
   validates :description, length: { maximum: 255 }
   validates :published, inclusion: { in: [true, false] }
+  validates :category_id, :category_present => true
+  validates :subject_id, :subject_present => true
 
-  before_save       :create_category_subject, if: -> { :new_subject.present? }
+  delegate :name, :to => :category, :prefix => true, :allow_nil => true
+  delegate :name, :to => :subject, :prefix => true, :allow_nil => true
+
+  before_save   ->{ CategoryCreator.new(self).create }, if: -> { :new_category.present? }
+  before_save   ->{ SubjectCreator.new(self).create }, if: -> { :new_subject.present? }
+
   after_touch       :unpublish_when_last_question_removed
   after_initialize  :set_defaults
   
@@ -57,18 +63,6 @@ class Quiz < ActiveRecord::Base
 
   def first_question_id
     questions.first.id 
-  end
-
-  def category_name
-    category.present? ? category.name : ""
-  end
-
-  def subject_name
-    subject.present? ? subject.name : ""
-  end
-
-  def create_category_subject
-    CategorySubjectCreator.new(self).create
   end
 
   protected
