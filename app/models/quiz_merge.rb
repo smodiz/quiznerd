@@ -10,7 +10,7 @@ class QuizMerge
 
 
   def self.mergable_quizzes_for(user)
-    Quiz.where(author: user).sort
+    Quiz.where(author: user)
   end
 
   def save
@@ -23,7 +23,7 @@ class QuizMerge
   end
 
   def target_quiz
-    if target_quiz_id
+    if target_quiz_id.present?
       @target_quiz ||= Quiz.find(target_quiz_id)
     end
   end
@@ -40,7 +40,7 @@ class QuizMerge
   end
 
   def source_quiz
-    if source_quiz_id
+    if source_quiz_id.present?
       @source_quiz ||= Quiz.find(source_quiz_id)
     end
   end
@@ -51,7 +51,7 @@ class QuizMerge
 
   def ids_not_equal
     if source_quiz_id == target_quiz_id
-      errors.add(:source_quiz_id, "cannot be equal to the target")
+      errors.add(:target_quiz_id, "cannot be equal to the source")
     end
   end
 
@@ -60,8 +60,8 @@ class QuizMerge
                   source_quiz_id.present? && 
                   target_quiz_id.present?
 
-    if source_quiz.author.id != target_quiz.author.id || 
-      target_quiz.author.id != user.id
+    if source_quiz.author.id  !=  target_quiz.author.id || 
+      target_quiz.author.id   !=  user.id
       errors.add(:base, "You must own the quizzes to be merged")
     end
   end

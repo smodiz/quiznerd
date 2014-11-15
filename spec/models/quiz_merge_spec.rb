@@ -32,10 +32,10 @@ describe "QuizMerge" do
   end
 
   describe "validation" do
-    let(:user) { new_user }
-    let(:quiz) { quiz_for(user) }
-    let(:another_quiz) { quiz_for(user) }
-    let(:bad_quiz) { quiz_for(new_user) }
+    let(:user)          { new_user }
+    let(:quiz)          { quiz_for(user) }
+    let(:another_quiz)  { quiz_for(user) }
+    let(:bad_quiz)      { quiz_for(new_user) }
 
     it "fails validation if the source and the target id are same" do
       m = QuizMerge.new({ 
@@ -44,7 +44,7 @@ describe "QuizMerge" do
         user: user 
       })
       m.valid?
-      expect(m.errors).to include(:source_quiz_id) 
+      expect(m.errors).to include(:target_quiz_id) 
     end
 
     it "fails validation if the target id missing" do
@@ -83,13 +83,13 @@ describe "QuizMerge" do
   end
 
   describe "merge" do
-    let(:user) { new_user }
-    let(:target) { quiz_for(user) }
-    let(:source) { quiz_for(user) }
-    let(:quiz_event) { quiz_event_for(source) }
+    let(:user)        { new_user }
+    let(:target)      { quiz_for(user) }
+    let(:source)      { quiz_for(user) }
+    let(:quiz_event)  { quiz_event_for(source) }
     let(:quiz_event2) { quiz_event_for(source) }
 
-    let(:unrelated_quiz) { quiz_for(user) }
+    let(:unrelated_quiz)  { quiz_for(user) }
     let(:unrelated_event) { quiz_event_for(unrelated_quiz) }
 
     before(:each) do
