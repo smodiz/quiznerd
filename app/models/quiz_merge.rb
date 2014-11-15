@@ -15,13 +15,10 @@ class QuizMerge
 
   def save
     return false unless valid?
-    if update_quiz_events
-      return Quiz.transaction do
-        merge_questions
-        destroy_source_quiz
-      end
-    else
-      false
+    ActiveRecord::Base.transaction do
+      update_quiz_events
+      merge_questions
+      destroy_source_quiz
     end
   end
 
