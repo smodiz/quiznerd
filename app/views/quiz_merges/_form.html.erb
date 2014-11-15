@@ -1,0 +1,40 @@
+<%= simple_form_for @quiz_merge, html: { class: 'form-horizontal' },
+          wrapper: :horizontal_form,
+          wrapper_mappings: {
+            check_boxes: :horizontal_radio_and_checkboxes,
+            radio_buttons: :horizontal_radio_and_checkboxes,
+            file: :horizontal_file_input,
+            boolean: :horizontal_boolean} do |f| %>
+  <%= f.error_notification %>
+  <div class="form-inputs">
+    <table class="table input-table">
+      <tbody>
+        <tr>
+          <td>
+            <%= f.input :source_quiz_id, 
+            collection: mergable_quizzes_select,
+            label: "Source Quiz",
+            include_blank: true %>
+          </td>
+          <td>&nbsp;(move from here)</td>
+        </tr>
+        <tr>
+          <td>
+            <%= f.input :target_quiz_id, 
+            collection: mergable_quizzes_select, 
+            label: "Target Quiz",
+            include_blank: true %>
+          </td>
+          <td>&nbsp;(move to here)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+<div class="form-actions center">
+  <%= f.button :submit, label: "Merge", class: 'btn btn-primary btn-sm'  %> 
+  <%= link_to 'Cancel', root_path, class: 'btn btn-danger btn-sm' %>
+</div>
+<% end %>
+
+

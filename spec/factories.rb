@@ -32,10 +32,10 @@ FactoryGirl.define do
     end    
   end
 
-  factory :question do |q|
-    q.content "WhyWhyWhy!"
-    q.question_type "MC-2"
-    q.answers { |answers| [answers.association(:answer_correct), answers.association(:answer_incorrect)] }
+  factory :question do 
+    sequence(:content) { |n| "WhyWhyWhy! #{n}" }
+    question_type "MC-2"
+    answers { |answers| [answers.association(:answer_correct), answers.association(:answer_incorrect)] }
   end
 
   factory :answer do

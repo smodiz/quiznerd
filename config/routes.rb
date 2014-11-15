@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   resources :quizzes do 
     put 'toggle_publish' => 'quizzes#toggle_publish'
   end
+
+  resource :quiz_merges, only: [:new, :create]
   
   match '/search',  to: 'search#index',         via: 'get'
   match '/about',   to: 'static_pages#about',   via: 'get'
