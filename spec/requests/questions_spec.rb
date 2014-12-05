@@ -86,6 +86,7 @@ describe "Questions" do
     before(:each) do
       #need to reference question so it exists before going to quiz page
       question     
+      quiz.reload
       visit quiz_path(quiz)
       click_link "#{quiz.questions.first.id}"
     end

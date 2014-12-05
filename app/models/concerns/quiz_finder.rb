@@ -21,7 +21,7 @@ module QuizFinder
     end
 
     def search_owned_by(user,query)
-      do_search(query).authored_by(user).includes(:category, :subject, :author, :questions)
+      do_search(query).authored_by(user).includes(:category, :subject, :author)
     end
 
     def do_search(query)
