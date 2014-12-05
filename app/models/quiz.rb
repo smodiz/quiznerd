@@ -27,10 +27,8 @@ class Quiz < ActiveRecord::Base
   
 
 
-  def self.new_for_user(user, params)
-    quiz = Quiz.new(params)
-    quiz.author = user
-    quiz
+  def self.new_for_user(user)
+    user.quizzes.build
   end
 
   def self.with_questions_and_answers(id)

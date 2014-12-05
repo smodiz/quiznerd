@@ -1,46 +1,40 @@
 class QuizzesController < ApplicationController
   include SortableColumns
 
-  before_action :set_quiz, only: [:edit, :update, :destroy]
+
   before_action :authenticate_user!
   before_action :correct_user, only: [:edit, :update, :destroy]
 
   def index
-    @quizzes = Quiz.search_owned_by(current_user, params[:search]).
-        reorder(sort_clause).paginate(page: params[:page]) 
+    load_quizzes
   end
 
   def show
-    @quiz = Quiz.with_questions_and_answers(params[:id])
+    load_quiz(eager_load: true)
   end
 
   def new
-    @quiz = Quiz.new
+    build_quiz
   end
 
   def edit
+    load_quiz
   end
 
   def create
-    @quiz = Quiz.new_for_user(current_user, quiz_params)
-    if @quiz.save
-      redirect_to @quiz, notice: 'Quiz was successfully created.' 
-    else
-      render :new 
-    end
+    build_quiz
+    save_quiz or render :new 
   end
 
   def update
-    if @quiz.update(quiz_params)
-      redirect_to @quiz, notice: 'Quiz was successfully updated.' 
-    else
-      render :edit 
-    end
+    build_quiz
+    save_quiz or render :edit
   end
 
   def destroy
+    load_quiz
     @quiz.destroy
-    redirect_to quizzes_url, notice: 'Quiz was successfully destroyed.' 
+    redirect_to quizzes_path, notice: 'Quiz was successfully destroyed.' 
   end
 
   def toggle_publish
@@ -53,11 +47,32 @@ class QuizzesController < ApplicationController
 
   private
 
-  def set_quiz
-    @quiz = Quiz.find(params[:id])
+  def load_quizzes
+    @quizzes = Quiz.search_owned_by(current_user, params[:search]).
+        reorder(sort_clause).paginate(page: params[:page]) 
+  end
+
+  def load_quiz(eager_load:false)
+    if eager_load
+      @quiz = Quiz.with_questions_and_answers(params[:id])
+    else
+      @quiz = Quiz.find(params[:id])
+    end
+  end
+
+  def build_quiz
+    @quiz ||= Quiz.new_for_user(current_user)
+    @quiz.attributes = quiz_params unless quiz_params.blank?
+  end
+
+  def save_quiz
+    if @quiz.save
+      redirect_to @quiz, notice: 'Quiz was successfully saved.' 
+    end
   end
 
   def quiz_params
+    return {} unless params[:quiz]
     params.require(:quiz).permit(:name, :description, :published, 
       :category_id, :subject_id, :new_category, :new_subject)
   end
@@ -66,6 +81,5 @@ class QuizzesController < ApplicationController
     @quiz = current_user.quizzes.find_by(id: params[:id])
     redirect_to root_url, notice: 'You cannot modify that quiz.' if @quiz.nil?
   end
-
   
 end

@@ -66,7 +66,7 @@ describe "Quiz Pages" do
       click_button "Create Quiz"
     end
 
-    it { should have_content("Quiz was successfully created") }
+    it { should have_content("Quiz was successfully saved") }
     it { should have_content(quiz.name) }
   end
 
@@ -83,7 +83,7 @@ describe "Quiz Pages" do
       click_button "Create Quiz"
     end
 
-    it { should have_content("Quiz was successfully created") }
+    it { should have_content("Quiz was successfully saved") }
     it { should have_content("Geography") }
     it { should have_content("North American Rivers") }
     it "should not have Publish related links without minimum number of questions" do
