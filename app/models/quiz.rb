@@ -58,7 +58,7 @@ class Quiz < ActiveRecord::Base
   protected
   
   def unpublish_when_last_question_removed
-    if questions.size == 0 && published
+    if questions.reload.length == 0 && published
       self.update_attributes(published: false)
     end
   end

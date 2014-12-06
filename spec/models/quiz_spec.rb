@@ -60,10 +60,8 @@ describe Quiz do
   describe "removing the last question" do
 
     it "should change published to false" do
-      pending "This test fails but the functionality works. Need help figuring out" 
-      # expect {
-      #  quiz.questions.each { |question| question.destroy } 
-      # }.to change(quiz, :published).to(false)
+       quiz.questions.each { |question| question.destroy }
+       expect(quiz.published).to eq false
     end
 
   end
