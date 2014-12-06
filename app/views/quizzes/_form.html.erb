@@ -22,14 +22,18 @@
         <tr>
           <td>
             <%= f.association :category %>
-            <%= f.input :new_category, label: "or create a new category:" %>
+            <%= f.input :new_category, label: "or create a new category:"  do %>
+              <%= text_field_tag 'new_category' %>
+            <% end %>
           </td>
         </tr>
         <tr><td><hr/>*</td></tr>
          <tr>
           <td>
             <%= f.association :subject %>
-            <%= f.input :new_subject, label: "or create a new subject:" %>    
+            <%= f.input :new_subject, label: "or create a new subject:"  do %>
+              <%= text_field_tag 'new_subject' %>
+            <% end %>
           </td>    
         </tr>
       </tbody>

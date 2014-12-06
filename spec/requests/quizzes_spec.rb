@@ -78,8 +78,8 @@ describe "Quiz Pages" do
       end
       fill_in "Name", with: quiz.name
       fill_in "Description", with: quiz.description
-      fill_in "or create a new category:", with: "Geography"
-      fill_in "or create a new subject:", with: "North American Rivers"
+      fill_in "new_category", with: "Geography"
+      fill_in "new_subject", with: "North American Rivers"
       click_button "Create Quiz"
     end
 
@@ -92,6 +92,25 @@ describe "Quiz Pages" do
     end
     it "should not have Take Quiz link without minimum number of questions" do
       expect(page).to_not have_link("Take Quiz") 
+    end
+
+  end
+
+  describe "create a new quiz with a new category with duplicate name" do
+    before(:each) do
+      Category.create(name: "Geography")
+      visit quizzes_path
+      within(".page-actions") do
+        click_link "New Quiz"
+      end
+      fill_in "Name", with: quiz.name
+      fill_in "Description", with: quiz.description
+      fill_in "new_category", with: "Geography"
+      fill_in "new_subject", with: "North American Rivers"
+      click_button "Create Quiz"
+    end
+    it "should not create another category" do
+      expect(Category.where(name: "Geography").size).to eq 1 
     end
   end
 

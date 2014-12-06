@@ -66,7 +66,7 @@ class QuizzesController < ApplicationController
   end
 
   def save_quiz
-    if @quiz.save
+    if QuizSaver.new(@quiz, params[:new_category], params[:new_subject]).save
       redirect_to @quiz, notice: 'Quiz was successfully saved.' 
     end
   end

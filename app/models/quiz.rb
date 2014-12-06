@@ -7,26 +7,18 @@ class Quiz < ActiveRecord::Base
   has_many    :questions, dependent: :destroy
   has_many    :quiz_events, dependent: :destroy
   
-  attr_accessor :new_category, :new_subject
-  
   validates :name, :description, :author, presence: true
   validates :name, length: { maximum: 45 }
   validates :description, length: { maximum: 255 }
   validates :published, inclusion: { in: [true, false] }
-  validates :category_id, :category_present => true
-  validates :subject_id, :subject_present => true
+  validates :category_id, :subject_id, presence: true
 
   delegate :name, :to => :category, :prefix => true, :allow_nil => true
   delegate :name, :to => :subject, :prefix => true, :allow_nil => true
 
-  before_save   ->{ CategoryCreator.new(self).create }, if: -> { :new_category.present? }
-  before_save   ->{ SubjectCreator.new(self).create }, if: -> { :new_subject.present? }
-
   after_touch       :unpublish_when_last_question_removed
   after_initialize  :set_defaults
   
-
-
   def self.new_for_user(user)
     user.quizzes.build
   end
