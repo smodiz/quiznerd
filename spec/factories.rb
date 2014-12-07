@@ -35,6 +35,7 @@ FactoryGirl.define do
   factory :question do 
     sequence(:content) { |n| "WhyWhyWhy! #{n}" }
     question_type "MC-2"
+    remarks "remarks for question"
     answers { |answers| [answers.association(:answer_correct), answers.association(:answer_incorrect)] }
   end
 
