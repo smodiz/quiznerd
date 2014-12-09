@@ -1,4 +1,3 @@
-require 'factory_girl_rails' 
 
 %w[Programming].each do |cat|
   Category.find_or_create_by(name: cat)
