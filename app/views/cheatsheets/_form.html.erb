@@ -1,0 +1,35 @@
+<%= simple_form_for @cheatsheet, html: { class: 'form-horizontal' },
+          wrapper: :horizontal_form,
+          wrapper_mappings: {
+            check_boxes: :horizontal_radio_and_checkboxes,
+            radio_buttons: :horizontal_radio_and_checkboxes,
+            file: :horizontal_file_input,
+            boolean: :horizontal_boolean} do |f| %>
+  <%= f.error_notification %>
+  <div class="form-inputs">
+    <table class="table input-table">
+      <tbody>
+        <tr>
+          <td><%= f.association :status,  include_blank: false,
+                :input_html => {:style => 'width: 150px'}  %></td>
+        </tr>
+        <tr>
+          <td><%= f.input :title %></td>
+        </tr>
+        <tr>
+          <td><%= f.input :tag_list, label: "Tag list (comma sep)" %></td>
+        </tr>
+        <tr>
+          <td><%= f.input :content, as: :text, 
+            input_html: { rows: text_area_rows(@cheatsheet.content,70,20),
+            placeholder: "supports markdown"  } %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="form-actions center">
+    <%= f.button :submit, class: "btn btn-primary btn-sm" %>
+    <%= link_to 'Cancel', cheatsheets_path, class: "btn btn-danger btn-sm" %>
+  </div>
+<% end %>

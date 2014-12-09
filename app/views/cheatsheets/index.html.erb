@@ -1,0 +1,50 @@
+<div class="well">
+
+  <div class="section-header">
+    Cheatsheets
+    <%= link_to new_cheatsheet_path, 
+        class: 'btn btn-primary pull-right btn-sm' do %>
+        <i class="glyphicon glyphicon-plus glyphicon-white"></i>
+        New Cheatsheet
+    <% end %>
+   <hr/>
+  </div>  
+  <%= render partial: 'search/shared_search', locals: { path: cheatsheets_path } %>
+  <p>
+     Or filter by Tag:
+      <% @tag_names.sort.each do |name| %>
+        <%= link_to name, tag_path(name), class: "index-link" %>&nbsp;&nbsp;
+      <% end %>
+  </p>    
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped index-table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Tags</th>
+          <th>Status</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render @cheatsheets %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="page-actions">
+    <%= link_to new_cheatsheet_path, 
+        class: 'btn btn-primary pull-right btn-sm' do %>
+        <i class="glyphicon glyphicon-plus glyphicon-white"></i>
+        New Cheatsheet
+    <% end %>
+  </div>
+
+  <div class="center">
+    <%= will_paginate @cheatsheets, renderer: BootstrapPagination::Rails  %>
+  </div>
+
+  <br/><br/>
+
+</div>

@@ -1,0 +1,27 @@
+<ul class="breadcrumb">
+ <li>
+    <%= link_to 'My Cheatsheets', cheatsheets_path %> 
+    <span class="divider"></span></li>
+  <li class="active">Show Cheatsheet</li>
+</ul>
+
+<div class="well">
+  
+  <div class="section-header">
+    <%= @cheatsheet.title %>
+    <%= link_to "Delete", cheatsheet_path(@cheatsheet), 
+          method: :delete,
+          data: { confirm: 'Are you sure?' },
+          class: "btn btn-sm btn-danger pull-right" %>    
+     <%= link_to "Edit", edit_cheatsheet_path(@cheatsheet), 
+        class: "btn btn-primary btn-sm pull-right" %>
+      <hr/>
+  </div>
+  <div>
+    Tags: <%= @cheatsheet.tag_list %>
+    <hr/>
+    <%= markdown(@cheatsheet.content) %><br/><br/>
+  </div>
+
+</div>
+

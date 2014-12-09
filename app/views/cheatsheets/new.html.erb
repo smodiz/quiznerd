@@ -1,0 +1,18 @@
+<ul class="breadcrumb">
+  <li><%= link_to "My Cheatsheets", cheatsheets_path %>
+      <span class="divider"></span>
+  </li>
+  <li class="active">New</li>
+</ul>
+
+<div class="well">
+  <div class="section-header">
+    New Cheatsheet
+    <hr/>
+  </div>
+  <div class="row">
+    <div class="col-md-10">
+      <%= render 'form' %>
+    </div>
+  </div>
+</div>

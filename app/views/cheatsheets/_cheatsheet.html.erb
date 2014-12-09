@@ -1,0 +1,15 @@
+<tr>
+  <td width="50%"><%= link_to cheatsheet.title, cheatsheet_path(cheatsheet), 
+          class: "index-link" %>
+  </td>
+  <td width="20%"><%= cheatsheet.tag_list %></td>
+  <td width="10%"><%= cheatsheet.status.name %></td>
+  <td width="5%"><%= link_to 'edit', edit_cheatsheet_path(cheatsheet), 
+            class: "index-link" %>
+  </td>
+  <td width="5%"><%= link_to 'destroy', cheatsheet, 
+            method: :delete, 
+            data: { confirm: 'Are you sure?' }, 
+            class: "index-link" %>
+  </td>
+</tr>

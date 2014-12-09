@@ -61,6 +61,13 @@ FactoryGirl.define do
       end
   end
 
+  factory :cheatsheet do
+    sequence(:title) { |n| "Cheatsheet #{n} - Test" }
+    content "sample content"
+    status_id 1
+    association :user, factory: :user
+  end
+
 end
 
   

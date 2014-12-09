@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141205154211) do
+ActiveRecord::Schema.define(version: 20141208194557) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,21 @@ ActiveRecord::Schema.define(version: 20141205154211) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "cheatsheets", force: true do |t|
+    t.string   "title"
+    t.text     "content"
+    t.boolean  "published"
+    t.boolean  "archived"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+    t.integer  "status_id"
+  end
+
+  add_index "cheatsheets", ["status_id"], name: "index_cheatsheets_on_status_id", using: :btree
+  add_index "cheatsheets", ["title"], name: "index_cheatsheets_on_title", using: :btree
+  add_index "cheatsheets", ["user_id"], name: "index_cheatsheets_on_user_id", using: :btree
 
   create_table "questions", force: true do |t|
     t.string   "question_type"
@@ -72,6 +87,12 @@ ActiveRecord::Schema.define(version: 20141205154211) do
   add_index "quizzes", ["category_id"], name: "index_quizzes_on_category_id", using: :btree
   add_index "quizzes", ["subject_id"], name: "index_quizzes_on_subject_id", using: :btree
 
+  create_table "statuses", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "subjects", force: true do |t|
     t.string   "name"
     t.integer  "category_id"
@@ -80,6 +101,25 @@ ActiveRecord::Schema.define(version: 20141205154211) do
   end
 
   add_index "subjects", ["category_id"], name: "index_subjects_on_category_id", using: :btree
+
+  create_table "taggings", force: true do |t|
+    t.integer  "tag_id"
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
+  add_index "taggings", ["taggable_type"], name: "index_taggings_on_taggable_type", using: :btree
+
+  create_table "tags", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tags", ["name"], name: "index_tags_on_name", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

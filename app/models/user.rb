@@ -6,5 +6,6 @@ class User < ActiveRecord::Base
   
   has_many :quizzes, :foreign_key =>"author_id", dependent: :nullify
   has_many :quiz_events, dependent: :destroy
+  has_many :cheatsheets
 
 end

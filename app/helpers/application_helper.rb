@@ -33,8 +33,8 @@ module ApplicationHelper
   
   # Calculate the number of rows a text area should have in order
   # to display all the existing text
-  def text_area_rows(content, field_width = 50)
-    rows = [2]
+  def text_area_rows(content, field_width = 50, min=2)
+    rows = [min]
     if content.present?
         rows << calculate_by_length(content.length, field_width) + 
           number_of_newlines(content)
