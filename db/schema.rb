@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141208194557) do
+ActiveRecord::Schema.define(version: 20150103231237) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(version: 20141208194557) do
     t.integer  "questions_count", default: 0
   end
 
+  add_index "quizzes", ["author_id"], name: "index_quizzes_on_author_id", using: :btree
   add_index "quizzes", ["category_id"], name: "index_quizzes_on_category_id", using: :btree
   add_index "quizzes", ["subject_id"], name: "index_quizzes_on_subject_id", using: :btree
 
@@ -111,7 +112,7 @@ ActiveRecord::Schema.define(version: 20141208194557) do
   end
 
   add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
-  add_index "taggings", ["taggable_type"], name: "index_taggings_on_taggable_type", using: :btree
+  add_index "taggings", ["taggable_type", "taggable_id"], name: "index_taggings_on_taggable_type_and_taggable_id", using: :btree
 
   create_table "tags", force: true do |t|
     t.string   "name"
