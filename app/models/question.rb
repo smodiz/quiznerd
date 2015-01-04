@@ -2,16 +2,19 @@ class Question < ActiveRecord::Base
   
   belongs_to :quiz, touch: true, counter_cache: true
   has_many :answers, dependent: :destroy
-
   accepts_nested_attributes_for :answers, allow_destroy: true
-  validates :question_type, :content, presence: true
-  validate :must_have_multiple_answers, :must_have_correct_answer
-  default_scope -> { order('created_at') }
 
   QUESTION_TYPES = {    "T/F"   =>  "True/False", 
                         "MC-1"  =>  "Multiple Choice - Single", 
                         "MC-2"  =>  "Multiple Choice - Multi"
                     }
+
+  validates :content, presence: true
+  validates :question_type, inclusion: { in: QUESTION_TYPES.keys }
+  validate :must_have_multiple_answers, :must_have_correct_answer
+  default_scope -> { order('created_at') }
+
+  
 
   def self.new_with_answers(quiz_id)
     question = Question.new(quiz_id: quiz_id)
