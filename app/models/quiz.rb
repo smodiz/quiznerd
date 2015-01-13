@@ -45,7 +45,7 @@ class Quiz < ActiveRecord::Base
   
   def next_question_id(last_question_id)
     if last_question_id
-      questions.where("id > ?", last_question_id).first.try(:id)
+      questions.detect { |q| q.id > last_question_id }.try(:id)
     else
       first_question_id
     end
