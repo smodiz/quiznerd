@@ -57,7 +57,7 @@ class QuizTakingForm
       if question_id.blank?
         nil
       else
-        quiz.questions.find(question_id)
+        quiz.questions.detect { |q| q.id.to_s == question_id.to_s }
       end
   end
 
