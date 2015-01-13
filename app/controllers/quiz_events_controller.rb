@@ -31,7 +31,7 @@ class QuizEventsController < ApplicationController
   end
 
   def update
-    @quiz_taking_form = QuizTakingForm.new(quiz_event: @quiz_event, 
+    @quiz_taking_form ||= QuizTakingForm.new(quiz_event: @quiz_event, 
       view_context: view_context)
     @quiz_taking_form.submit(quiz_event_params)
     render 'edit'
@@ -46,38 +46,28 @@ class QuizEventsController < ApplicationController
   private
 
     def set_quiz_event
-      @quiz_event = current_user.quiz_events.find(params[:id])
+      @quiz_event ||= current_user.quiz_events.
+                        where(id: params[:id]).
+                        includes(quiz: [questions: [:answers]]).first
     end
    
     def return_to_index?
       params[:return_to].present? && params[:return_to] == "index"
     end
 
-    # answer_ids is a virtual attribute on QuizEvent. Rails assigns it  
-    # as a string (when only one is submitted via radio button) or string 
-    # array (when multiple submitted, via checkboxes). However, what we 
-    # want is an integer array, always.
+    # If radio button is the selector, we get a single string, if 
+    # check boxes are the selectors, we get an array of strings. 
+    # We want an array of integers all the time.
     def convert_answer_ids
-      answer_ids = params[:quiz_event][:answer_ids]
-      return unless answer_ids
-      converted_ids = convert_to_integers(answer_ids)
-      params[:quiz_event][:answer_ids] = converted_ids.sort
-    end
-   
-    def convert_to_integers(answer_ids)
-      converted_ids = []
-      if answer_ids.class == String 
-       converted_ids << answer_ids.to_i
-     elsif answer_ids.class == Array
-        answer_ids.each do |s|
-          converted_ids << s.to_i unless s.blank?
-        end
+      ids = params[:quiz_event][:answer_ids]
+      if ids
+        params[:quiz_event][:answer_ids] = ids.split.flatten.map(&:to_i)
       end
-      converted_ids
     end
 
     # Note that answer_ids can be a single value (radio button) or multiple 
-    # values (check boxes), thus it appears in this list both ways
+    # values (check boxes), thus it appears in this list both ways and we have
+    # to convert it. 
     def quiz_event_params
       convert_answer_ids
       params.require(:quiz_event).permit(:id, :quiz_id, :question_id, 
