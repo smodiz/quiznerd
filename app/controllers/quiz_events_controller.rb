@@ -46,9 +46,7 @@ class QuizEventsController < ApplicationController
   private
 
     def set_quiz_event
-      @quiz_event ||= current_user.quiz_events.
-                        where(id: params[:id]).
-                        includes(quiz: [questions: [:answers]]).first
+      @quiz_event ||= current_user.quiz_events.find(params[:id])
     end
    
     def return_to_index?
@@ -60,8 +58,9 @@ class QuizEventsController < ApplicationController
     # We want an array of integers all the time.
     def convert_answer_ids
       ids = params[:quiz_event][:answer_ids]
-      if ids
-        params[:quiz_event][:answer_ids] = ids.split.flatten.map(&:to_i)
+      if ids 
+        params[:quiz_event][:answer_ids] = 
+          ids.split.flatten.reject(&:blank?).map(&:to_i)
       end
     end
 

@@ -22,7 +22,7 @@ class QuizTakingForm
 
   def initialize(options={})
     @quiz_event     = options[:quiz_event]
-    @quiz           = @quiz_event.quiz
+    @quiz           = @quiz_event.cached_quiz
     @view_context   = options[:view_context] 
     @answer_correct = nil
 

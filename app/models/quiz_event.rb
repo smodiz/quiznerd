@@ -3,19 +3,36 @@ class QuizEvent < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :quiz
-  has_one :subject, through: :quiz 
-  has_one :category, through: :quiz
-  delegate :name, to: :category, prefix: true
-  delegate :name, to: :subject, prefix: true
-  delegate :name, :description, to: :quiz, prefix: true
-
+  after_find :cached_quiz
   default_scope -> { order('created_at DESC') }
    
   COMPLETED_STATUS = "Completed"
   IN_PROGRESS_STATUS = "In Progress"
+
+
+  def cached_quiz
+    quiz = Rails.cache.fetch(["quiz_event/quiz", quiz_id]) { Quiz.with_questions_and_answers(quiz_id) }
+    quiz
+  end
+
+  def category_name
+    cached_quiz.category.name
+  end
   
+  def subject_name
+    cached_quiz.subject.name
+  end
+
+  def quiz_name
+    cached_quiz.name
+  end
+
+  def quiz_description
+    cached_quiz.description
+  end
+
   def number_of_questions
-    quiz.number_of_questions
+    cached_quiz.number_of_questions
   end
 
   def current_percent_grade
