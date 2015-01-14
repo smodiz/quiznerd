@@ -44,7 +44,7 @@ class Cheatsheet < ActiveRecord::Base
   end
 
   def tag_list
-    self.tags.map(&:name).join(", ")
+    self.tags.order(name: :asc).map(&:name).join(", ")
   end
 
   def tag_list=(tags)
