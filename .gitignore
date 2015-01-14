@@ -17,6 +17,9 @@
 /log/*.log
 /tmp
 
+# Ignore database backups
+/db/backups/*
+
 # Ignore application configuration
 /config/application.yml
 
