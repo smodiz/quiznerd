@@ -3,7 +3,6 @@ class QuizEvent < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :quiz
-  after_find :cached_quiz
   default_scope -> { order('created_at DESC') }
    
   COMPLETED_STATUS = "Completed"
