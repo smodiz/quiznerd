@@ -9,10 +9,12 @@ class QuizEvent < ActiveRecord::Base
   COMPLETED_STATUS = "Completed"
   IN_PROGRESS_STATUS = "In Progress"
 
-
+  
   def cached_quiz
-    quiz = Rails.cache.fetch(["quiz_event/quiz", quiz_id]) { Quiz.with_questions_and_answers(quiz_id) }
-    quiz
+    # cached for use by this single quiz event
+    quiz = Rails.cache.fetch(["quiz_event/quiz", quiz_id, id]) do
+      Quiz.with_questions_and_answers(quiz_id) 
+    end 
   end
 
   def category_name
