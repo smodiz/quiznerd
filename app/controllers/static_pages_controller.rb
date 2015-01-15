@@ -18,12 +18,14 @@ class StaticPagesController < ApplicationController
   private 
 
     def get_quizzes
-      @quizzes = current_user.quizzes.ordered.limit(LIMIT)
-      @num_remaining_quizzes = @quizzes.size == LIMIT ? current_user.quizzes.size - LIMIT : 0
+      user_quizzes = Quiz.cached_for_user(current_user)
+      @quizzes = user_quizzes.slice(0, LIMIT)
+      @num_remaining_quizzes = user_quizzes.size - @quizzes.size
     end
 
     def get_quiz_events
-      @quiz_events = current_user.quiz_events.ordered.limit(LIMIT) 
-      @num_remaining_events = @quiz_events.size == LIMIT ? current_user.quiz_events.size - LIMIT : 0
+      user_events = QuizEvent.cached_for_user(current_user)
+      @quiz_events = user_events.slice(0, LIMIT)
+      @num_remaining_events = user_events.size - @quiz_events.size
     end
 end

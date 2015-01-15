@@ -3,10 +3,14 @@ class QuizEvent < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :quiz
+  belongs_to    :user
+  belongs_to    :quiz
+  after_commit  :invalidate_cache
+  
   default_scope -> { order('created_at DESC') }
    
-  COMPLETED_STATUS = "Completed"
-  IN_PROGRESS_STATUS = "In Progress"
+  COMPLETED_STATUS    = "Completed"
+  IN_PROGRESS_STATUS  = "In Progress"
 
   
   def cached_quiz
@@ -76,4 +80,9 @@ private
       false
     end
   end
+
+  def invalidate_cache
+    Rails.cache.delete(["quiz_events_for_user",user])
+  end
+
 end

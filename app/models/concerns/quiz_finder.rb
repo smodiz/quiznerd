@@ -32,5 +32,20 @@ module QuizFinder
       end
     end
 
+    def new_for_user(user)
+      user.quizzes.build
+    end
+
+    def with_questions_and_answers(id)
+      Quiz.includes(:category, :subject, questions: [:answers]).find(id)
+    end
+
+    def cached_for_user(user)
+      Rails.cache.fetch(["quizzes_for_user",user], :expires_in => 15.minutes) do
+        authored_by(user).ordered.to_a
+      end
+    end
+
+ 
   end
 end

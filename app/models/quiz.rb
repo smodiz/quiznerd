@@ -18,14 +18,8 @@ class Quiz < ActiveRecord::Base
 
   after_touch       :unpublish_when_last_question_removed
   after_initialize  :set_defaults
-  
-  def self.new_for_user(user)
-    user.quizzes.build
-  end
-
-  def self.with_questions_and_answers(id)
-    Quiz.includes(:category, :subject, questions: [:answers]).find(id)
-  end
+  after_commit      :invalidate_cache
+ 
 
   def number_of_questions
     questions.size
@@ -66,4 +60,9 @@ class Quiz < ActiveRecord::Base
   def set_defaults
     self.published = false if self.published.nil?
   end
+
+  def invalidate_cache
+    Rails.cache.delete(["quizzes_for_user",author])
+  end
+
 end
