@@ -62,7 +62,7 @@ class Quiz < ActiveRecord::Base
   end
 
   def invalidate_cache
-    Rails.cache.delete(["quizzes_for_user",author])
+    Rails.cache.delete(quizzes_cache_key(author))
   end
 
 end

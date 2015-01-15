@@ -26,8 +26,12 @@ module QuizEventFinder
       end
     end
 
+    def quiz_events_cache_key(user)
+      ["quiz_events_for_user",user]
+    end
+    
     def cached_for_user(user)
-      Rails.cache.fetch(["quiz_events_for_user",user], :expires_in => 15.minutes) do
+      Rails.cache.fetch(quiz_events_cache_key(user), :expires_in => 15.minutes) do
         taken_by(user).includes(:quiz).ordered.to_a
       end
     end

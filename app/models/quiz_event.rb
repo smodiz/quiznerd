@@ -12,6 +12,8 @@ class QuizEvent < ActiveRecord::Base
   COMPLETED_STATUS    = "Completed"
   IN_PROGRESS_STATUS  = "In Progress"
 
+  QUIZ_EVENTS_CACHE_KEY = 
+
   
   def cached_quiz
     # cached for use by this single quiz event
@@ -81,8 +83,10 @@ private
     end
   end
 
+
+
   def invalidate_cache
-    Rails.cache.delete(["quiz_events_for_user",user])
+    Rails.cache.delete(quiz_events_cache_key(user))
   end
 
 end
