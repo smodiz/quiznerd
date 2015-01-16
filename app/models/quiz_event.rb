@@ -6,14 +6,12 @@ class QuizEvent < ActiveRecord::Base
   belongs_to    :user
   belongs_to    :quiz
   after_commit  :invalidate_cache
+  after_destroy  :invalidate_cache
   
   default_scope -> { order('created_at DESC') }
    
   COMPLETED_STATUS    = "Completed"
   IN_PROGRESS_STATUS  = "In Progress"
-
-  QUIZ_EVENTS_CACHE_KEY = 
-
   
   def cached_quiz
     # cached for use by this single quiz event
@@ -83,10 +81,8 @@ private
     end
   end
 
-
-
   def invalidate_cache
-    Rails.cache.delete(quiz_events_cache_key(user))
+    Rails.cache.delete(QuizEvent.quiz_events_cache_key(user))
   end
 
 end

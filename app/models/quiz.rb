@@ -19,6 +19,7 @@ class Quiz < ActiveRecord::Base
   after_touch       :unpublish_when_last_question_removed
   after_initialize  :set_defaults
   after_commit      :invalidate_cache
+  after_destroy     :invalidate_cache
  
 
   def number_of_questions
@@ -62,7 +63,7 @@ class Quiz < ActiveRecord::Base
   end
 
   def invalidate_cache
-    Rails.cache.delete(quizzes_cache_key(author))
+    Rails.cache.delete(Quiz.quizzes_cache_key(author))
   end
 
 end
