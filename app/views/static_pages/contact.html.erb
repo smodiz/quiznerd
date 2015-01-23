@@ -3,8 +3,9 @@
 <div class="center jumbotron">
   <h3>Contact</h3>
   <hr/>
-  <br/>
-  <div >
-    Contact me at <a href="mailto:quiznerd@yahoo.com">quiznerd@yahoo.com</a>
+  <div>
+    <%= mail_to "quiznerd@yahoo.com" do %>
+      Contact me at: <span>quiznerd@yahoo.com</span>
+    <% end %>
   </div>
 </div>
