@@ -1,0 +1,10 @@
+<div class="home-header">
+  <h3><%= link_to "Create Quizzes!", quizzes_path %></h3>
+</div>
+
+<% if @quizzes.empty? %>
+  <p>You haven't written any quizzes yet. Be a nerd! Get started today! </p>  
+<% else %>
+  <p>Here are the quizzes you've written so far:</p>
+  <%= render 'static_pages/signed_in_home/home_quiz_list' %>  
+<% end %>
