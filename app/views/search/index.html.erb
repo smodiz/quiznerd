@@ -5,42 +5,51 @@
     <hr/>
     <%= form_tag search_path, :method => :get do %>
     <p>
-      <%= text_field_tag :search, params[:search], options = { size: 30, 
-          placeholder: "search all fields shown below" } %>
+      <%= text_field_tag \
+            :search, 
+            params[:search], 
+            options = { 
+              size: 30, 
+              placeholder: "search all fields shown below" 
+            }  
+      %>
       <%= submit_tag "Search", :name => nil  %>
     </p>
     <% end %>
   </div>  
  
   <div class="table-responsive">
-  <table class="table table-bordered table-striped index-table">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Category</th>
-        <th>Subject</th>
-        <th>Questions</th>
-        <th colspan="1"></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @quizzes.each do |quiz| %>
+    <table class="table table-bordered table-striped index-table">
+      <thead>
         <tr>
-          <td><%= link_to quiz.name, new_quiz_event_path(quiz_id: quiz.id), 
-              class: "index-link" %></td>
-          <td><%= quiz.description %></td>
-          <td><%= quiz.category.name %></td>
-          <td><%= quiz.subject.name %></td>
-          <td><%= quiz.number_of_questions %></td>
-          <td><%= link_to "details", new_quiz_event_path(quiz_id: quiz.id), 
-              class: "index-link" %></td>
+          <th class='quiz_name_cell'>Name</th>
+          <th>Description</th>
+          <th>Category</th>
+          <th>Subject</th>
+          <th>Questions</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <% @quizzes.each do |quiz| %>
+          <tr>
+            <td class='quiz_name_cell'>
+              <%= link_to \
+                quiz.name, 
+                new_quiz_event_path(quiz_id: quiz.id), 
+                class: "index-link" 
+              %>
+            </td>
+            <td><%= quiz.description %></td>
+            <td><%= quiz.category.name %></td>
+            <td><%= quiz.subject.name %></td>
+            <td><%= quiz.number_of_questions %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
-  <div class="center"><%= will_paginate @quizzes, 
-      renderer: BootstrapPagination::Rails  %></div>
+
+  <div class="center">
+    <%= will_paginate @quizzes, renderer: BootstrapPagination::Rails %>
+  </div>
 </div>
