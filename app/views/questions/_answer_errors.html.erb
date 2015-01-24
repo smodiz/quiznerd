@@ -1,0 +1,13 @@
+<!--  
+Some answer errors apply to the collection, and not a single answer, so they 
+are displayed at the top. (e.g. there has to be at least one correct answer)
+-->
+<%  if @question.errors.include?(:answers) %>
+  <div class="col-md-offset-2 col-md-8">
+    <div class="alert alert-error">
+      <% @question.errors.full_messages.each do |msg|  %>
+        <div><%= msg if msg =~ /Answer/ %></div>
+      <% end %>
+    </div>
+  </div>
+<% end %>

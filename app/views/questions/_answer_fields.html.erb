@@ -1,7 +1,9 @@
 <tr>
   <td>
-    <%= f.input :content, label: 'Answer', as: :text, 
-      input_html: { rows: text_area_rows(f.object.content,50) }  %>
+    <%= f.input :content, 
+        label: 'Answer', as: :text, 
+        input_html: { rows: text_area_rows(f.object.content,50) }  
+    %>
     <%= f.input :question_id, as: "hidden" %>
   </td>
   <td>&nbsp;</td>

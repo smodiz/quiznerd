@@ -1,24 +1,26 @@
 <tr>
     <td><%= markdown(question.content) %></td>
     <td>
-       <% question.answers.each do |answer| %>
+      <% question.answers.each do |answer| %>
         <span class="answer-display">
           <%= truncate(answer.content, length: 30) %>
-          <% if answer.correct %>
-            &#x2713
-          <% end %>
+          <%= correct_answer_checkmark if answer.correct %>
         </span>
-    <% end %>
+      <% end %>
     </td>
     <td>
       <%= link_to "edit", edit_question_path(question) %>
     </td>
     <td>
-      <%= link_to "copy",  question_copy_path(question), 
-            method: :post, id: question.id %>
+      <%= link_to "copy",  
+          question_copy_path(question), 
+          method: :post, 
+          id: question.id %>
     </td>
     <td>
-      <%= link_to "delete", question, method: :delete, 
-            data: { confirm: "Are you sure?" } %>
+      <%= link_to "delete", 
+          question, 
+          method: :delete, 
+          data: { confirm: "Are you sure?" } %>
     </td>
 </tr>

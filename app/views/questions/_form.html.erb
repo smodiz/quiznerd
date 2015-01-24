@@ -1,23 +1,18 @@
 
- <div class="row">
+<div class="row">
   <div class="col-md-offset-2 col-md-8">
-    <%= simple_form_for @question, html: { class: 'form-horizontal' },
-              wrapper: :horizontal_form,
-              wrapper_mappings: {
-                check_boxes: :horizontal_radio_and_checkboxes,
-                radio_buttons: :horizontal_radio_and_checkboxes,
-                file: :horizontal_file_input,
-                boolean: :horizontal_boolean} do |f| %>
+    <%= simple_form_for @question, 
+      html: { class: 'form-horizontal' },
+      wrapper: :horizontal_form,
+      wrapper_mappings: {
+        check_boxes: :horizontal_radio_and_checkboxes,
+        radio_buttons: :horizontal_radio_and_checkboxes,
+        file: :horizontal_file_input,
+        boolean: :horizontal_boolean
+      } do |f| %>
       <%= f.error_notification %>
-      <%  if @question.errors.include?(:answers) %>
-        <div class="col-md-offset-2 col-md-8">
-          <div class="alert alert-error">
-            <% @question.errors.full_messages.each do |msg|  %>
-              <div><%= msg if msg =~ /Answer/ %></div>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
+      <%= render 'questions/answer_errors' %>
+
       <div class="form-inputs">
         <table class="table input-table">
           <tr>
@@ -29,29 +24,36 @@
           </tr>
           <tr>
             <td><%= f.input :content, label: "Question", as: :text,
-              input_html: { rows: text_area_rows(@question.content,50),
-              placeholder: "supports markdown" } %></td>
+                    input_html: { rows: text_area_rows(@question.content,50),
+                    placeholder: "supports markdown" } %>
+            </td>
             <td></td>
           </tr>
           <tr>
             <td><%= f.input :remarks, as: :text, 
-              input_html: { rows: text_area_rows(@question.remarks,50),
-              placeholder: "shown after the user answers" }%></td>
+                      input_html: { rows: text_area_rows(@question.remarks,50),
+                      placeholder: "shown after the user answers" }%>
+            </td>
             <td></td>
           </tr>
+
           <%= f.simple_fields_for :answers do |answers| %>
             <%= render 'questions/answer_fields', f: answers  %>
           <% end %>
+
           </table>
       </div>
       
-       <div class="form-actions col-sm-offset-3 col-sm-6">
-        <%= f.button :submit, class: 'btn btn-primary btn-sm'  %> 
-        <%= link_to 'Cancel', quiz_path(@question.quiz_id), class: 'btn btn-danger btn-sm' %>
+      <div class="form-actions col-sm-offset-3 col-sm-6">
+        <%= f.button :submit, 
+            class: 'btn btn-primary btn-sm'  
+        %> 
+        <%= link_to 'Cancel', 
+            quiz_path(@question.quiz_id), 
+            class: 'btn btn-danger btn-sm' 
+        %>
       </div>
     <% end %>
+
   </div>
-
- 
-
 </div>
