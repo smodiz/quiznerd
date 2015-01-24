@@ -3,4 +3,8 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .answer-display {
   display: block;
+  white-space:nowrap;
+}
+.quiz_name_cell {
+  min-width: 70px;
 }

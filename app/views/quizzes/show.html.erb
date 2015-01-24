@@ -1,5 +1,5 @@
 <ul class="breadcrumb">
-  <li><%= link_to 'My Quizzes', quizzes_path %> <span class="divider"></span></li>
+  <li><%= link_to 'My Quizzes', quizzes_path %></li>
   <li class="active">Show Quiz</li>
 </ul>
 
@@ -7,24 +7,28 @@
   
   <div class="section-header">
     <%= @quiz.name %>   
-    <%= link_to "Delete", quiz_path(@quiz), method: :delete, 
+    <%= link_to "Delete", quiz_path(@quiz), 
+          method: :delete, 
           data: { confirm: 'Are you sure?' }, 
-          class: "btn btn-sm btn-danger pull-right" %>
-    <% if @quiz.questions.present? %>
-     <%= link_to "Take Quiz", new_quiz_event_path(quiz_id: @quiz.id),  
-         class: "btn btn-sm btn-success pull-right" %>
-    <% end %>
-    <% if @quiz.published || (!@quiz.published && @quiz.can_publish?) %>
-      <% label = @quiz.published ? "Unpublish" : "Publish" %>
-      <%= link_to "#{label}", quiz_toggle_publish_path(@quiz), 
+          class: "btn btn-sm btn-danger pull-right" 
+    %>
+    <%= link_to_if @quiz.questions.present?, 
+          "Take Quiz", 
+          new_quiz_event_path(quiz_id: @quiz.id),  
+          class: "btn btn-sm btn-success pull-right" 
+    %>
+    <%= link_to_if show_published_link?, 
+          publish_label, 
+          quiz_toggle_publish_path(@quiz), 
           class: "btn btn-sm btn-primary pull-right",
-          method: :put %>
-    <% end %>
-    <%= link_to "Edit", edit_quiz_path(@quiz), 
-          class: "btn btn-sm btn-primary pull-right" %>
-   
-    <hr/>
+          method: :put 
+    %>
+    <%= link_to "Edit", 
+          edit_quiz_path(@quiz), 
+          class: "btn btn-sm btn-primary pull-right" 
+    %>
   </div>
+
 <%= render partial: 'quiz_fields', locals: { quiz: @quiz } %> 
 </div>    
 

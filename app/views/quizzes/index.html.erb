@@ -1,12 +1,7 @@
 <div class="well">
   <div class="section-header">
     Quizzes Written
-     <% if @quizzes.size >= 1 %>
-      <%= link_to new_quiz_path, class: 'btn btn-primary pull-right btn-sm' do %>
-        <i class="glyphicon glyphicon-plus glyphicon-white"></i>
-        New Quiz
-      <% end %>
-    <% end %>
+      <%= new_quiz_button %>
     <hr/>
   </div>  
 
@@ -16,19 +11,13 @@
     <table class="table table-bordered table-striped index-table">
       <thead>
         <tr>
-          <th width="25%" class='<%= sortable_css_class("name") %>'>
-            <%= sortable_link "name" %>
-          </th>
-          <th width="25%" class='<%= sortable_css_class("description") %>'>
-            <%= sortable_link "description" %>
-          </th>
-          <th width="12%" class='<%= sortable_css_class("published") %>'>
-            <%= sortable_link "published" %>
-          </th>
-          <th width="14%">Category</th>
-          <th width="14%">Subject</th>
-          <th width="5%">Questions</th>
-          <th width="5%" colspan="1"></th>
+          <th class='quiz_name_cell <%= sortable_css_class("name") %>'><%= sortable_link "name" %></th>
+          <th class='<%= sortable_css_class("description") %>'><%= sortable_link "description" %></th>
+          <th class='<%= sortable_css_class("published") %>'><%= sortable_link "published" %></th>
+          <th>Category</th>
+          <th>Subject</th>
+          <th>Questions</th>
+          <th colspan="1"></th>
         </tr>
       </thead>
       <tbody>
@@ -38,10 +27,7 @@
   </div>
 
   <div class="page-actions">
-    <%= link_to new_quiz_path, class: 'btn btn-primary pull-right btn-sm' do %>
-      <i class="glyphicon glyphicon-plus glyphicon-white"></i>
-      New Quiz
-    <% end %>
+    <%= new_quiz_button %>
   </div>
 
   <div class="center">

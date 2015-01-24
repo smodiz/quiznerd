@@ -1,32 +1,27 @@
-<div class="table-responsive">
-  <table class="table table-bordered">
-    <tbody>
-      <tr>
-        <td colspan="2">
-          <span class="field-title">Name: </span>
-          <%= quiz.name  %>
-        </td> 
-      </tr>  
-      <tr> 
-        <td>
-          <span class="field-title">Category: </span>
-          <%= quiz.category_name %>
-        </td>
-        <td>
-          <span class="field-title">Subject: </span>
-          <%= quiz.subject_name %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <span class="field-title">Description: </span>
-          <%= quiz.description %>
-        </td>
-        <td>
-          <span class="field-title">Published? </span>
-          <%= quiz.published ? "Yes" : "No" %>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<!-- This partial is used for both the show quiz action and the show quiz event action -->
+
+<table class="table table-bordered">
+  <tbody>
+    <tr>
+      <td colspan="2">
+        <span class="field-title">Name: </span><%= quiz.name  %>
+      </td> 
+    </tr>  
+    <tr> 
+      <td>
+        <span class="field-title">Category: </span><%= quiz.category_name %>
+      </td>
+      <td>
+        <span class="field-title">Subject: </span><%= quiz.subject_name %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="field-title">Description: </span><%= quiz.description %>
+      </td>
+      <td>
+        <span class="field-title">Published? </span><%= quiz.published ? "Yes" : "No" %>
+      </td>
+    </tr>
+  </tbody>
+</table>
