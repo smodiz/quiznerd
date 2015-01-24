@@ -7,17 +7,21 @@
         Home<i class="glyphicon glyphicon-home"></i>
       <% end %>
     </li>
-    <% if user_signed_in? %>
+
+    <% if user_signed_in?  %>
       <%= render '/layouts/user_signed_in_nav' %>
     <% else %>
       <li>
-        <%= link_to new_user_session_path do %>
-          Sign in<i class="glyphicon glyphicon-log-in"></i>
-        <% end %>
+        <%= link_to 'Sign in<i class="glyphicon glyphicon-log-in"></i>'.html_safe, 
+            new_user_session_path 
+        %>
       </li>
-    <% end %>
+    <% end %>  
   </ul>
 
-  <p class="navbar-text pull-right small"><%= "Signed in as #{current_user.email}" if current_user %></p>
+  <div class="navbar-text visible-md visible-lg pull-right user-email">
+    <%= "Signed in as #{current_user.email}" if current_user %>
+  </div>
  
 </div>
+
