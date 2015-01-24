@@ -6,6 +6,8 @@ class Cheatsheet < ActiveRecord::Base
   has_many :tags, through: :taggings
 
   validates :title, :content, :status_id, presence: true
+  validates :title, length: { maximum: 40 }
+
   attr_accessor :tag_list
 
   pg_search_scope :search, against: [:title, :content],
