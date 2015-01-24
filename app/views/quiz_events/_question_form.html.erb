@@ -20,11 +20,13 @@
         <% if @presenter.multi_select? %>
           <%= f.collection_check_boxes :answer_ids, 
               @presenter.question.answers, :id, :content, 
-              {:item_wrapper_class => 'answer_checkbox'} %>
+              {:item_wrapper_class => 'answer_checkbox'} 
+          %>
         <% else %>
           <%= f.collection_radio_buttons :answer_ids, 
               @presenter.question.answers, :id, :content,
-              {:item_wrapper_class => 'answer_checkbox'} %>
+              {:item_wrapper_class => 'answer_checkbox'}
+          %>
         <% end %>
       </td>
     </tr> 
@@ -35,11 +37,13 @@
   
   <div class="form-actions col-md-offset-3" >
     <%= f.button :submit, value: "Continue --->", 
-          class: 'btn btn-primary btn-sm' %> 
+          class: 'btn btn-primary btn-sm' 
+    %> 
     <%= link_to 'Quit', @presenter.quiz_event, 
           method: :delete, 
           data:   { confirm: 'Are you sure?' }, 
-          class:  'btn btn-primary btn-sm'  %>
+          class:  'btn btn-primary btn-sm'  
+    %>
   </div>
 
 <% end %>

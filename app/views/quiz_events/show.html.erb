@@ -1,6 +1,5 @@
 <ul class="breadcrumb">
-  <li><%= link_to 'Quizzes Taken', quiz_events_path %> 
-      <span class="divider"></span></li>
+  <li><%= link_to 'Quizzes Taken', quiz_events_path %></li> 
   <li class="active">Show Quiz Taken</li>
 </ul>
 
@@ -18,19 +17,19 @@
     </h4>
   
     <%= render partial: 'quizzes/quiz_fields', locals: { quiz: @quiz_event.quiz }  %>
-
-    <%= simple_form_for QuizEvent.new, method: :post do |f| %>
-      <%= f.error_notification %>
-      <%= hidden_field_tag "quiz_event[quiz_id]", @quiz_event.quiz_id %>
-      <div class="form-actions center">
-          <%= f.button :submit, value: "Take This Quiz Again", 
-              class: 'btn btn-primary btn-sm'  %> 
-          <% if @quiz_event.quiz.author == current_user %>
-            <%= link_to "Edit Quiz", quiz_path(@quiz_event.quiz), 
-              class: "btn btn-sm btn-primary" %>   
-          <% end %>
-      </div>
-    <% end %>
+    
+    <div class="center">
+      <%= link_to "Take This Quiz Again", 
+            quiz_events_path + "?quiz_id=#{@quiz_event.quiz_id}",  
+            method: :post, 
+            class: "btn btn-primary btn-sm" 
+      %>
+      <%= link_to_if(user_owns_quiz?, 
+          "Edit Quiz", 
+          quiz_path(@quiz_event.quiz),
+          { class: "btn btn-sm btn-primary" }) {}
+      %>
+    </div>
   </div>
 </div> 
 

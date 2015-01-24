@@ -1,8 +1,12 @@
-<table class="table">
-  <tr>
-    <td><i class="glyphicon glyphicon-info-sign"></i></td>
-    <td>
-      <%= markdown(@quiz_taking_form.graded_question.remarks) %>
-    </td>
-  </tr>
-</table>
+<div class="table-responsive question-remarks">
+  <table class="table">
+    <tr>
+      <td class="header"><i class="glyphicon glyphicon-info-sign"></i>Additional Information</td>
+    </tr>
+    <tr>
+      <td>
+        <%= markdown(@quiz_taking_form.graded_question.remarks) %>
+      </td>
+    </tr>
+  </table>
+</div>

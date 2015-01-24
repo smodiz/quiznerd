@@ -20,7 +20,8 @@ class QuizEventsController < ApplicationController
   end
 
   def create
-    @quiz_event = current_user.quiz_events.build(quiz_event_params)
+    @quiz = Quiz.find(params[:quiz_id])
+    @quiz_event = current_user.quiz_events.build(quiz: @quiz)
     if @quiz_event.save
       @quiz_taking_form = QuizTakingForm.new(quiz_event: @quiz_event, 
         view_context: view_context)
@@ -57,7 +58,7 @@ class QuizEventsController < ApplicationController
     # check boxes are the selectors, we get an array of strings. 
     # We want an array of integers all the time.
     def convert_answer_ids
-      ids = params[:quiz_event][:answer_ids]
+      ids = params[:quiz_event][:answer_ids] if params[:quiz_event]
       if ids 
         params[:quiz_event][:answer_ids] = 
           ids.split.flatten.reject(&:blank?).map(&:to_i)

@@ -34,13 +34,13 @@ describe "Quiz Event Pages" do
   describe "shows quiz detail on the create page" do
     before { visit new_quiz_url }
     it { should have_content(quiz_event.quiz.name) }
-    it { should have_button("Take This Quiz") }
+    it { should have_link("Take This Quiz") }
   end
 
   describe "taking the quiz" do
     before(:each) do
       visit new_quiz_url
-      click_button "Take This Quiz"
+      click_link "Take This Quiz"
     end
 
     describe "when I start the quiz" do
@@ -100,7 +100,7 @@ describe "Quiz Event Pages" do
 
     before do
         visit new_quiz_url
-        click_button "Take This Quiz"
+        click_link "Take This Quiz"
         quiz_event.quiz.questions.each do |question|
           answer_text = question.answers.first.content
           check(answer_text)
@@ -128,13 +128,13 @@ describe "Quiz Event Pages" do
     it { should have_content(quiz_event.quiz.name) }
     it { should have_content quiz_event.status }
     it { should have_link "Edit" }
-    it { should have_button "Take This Quiz Again" }
+    it { should have_link "Take This Quiz Again" }
   end
 
   describe "when user quits" do
     before do
       visit new_quiz_url
-      click_button "Take This Quiz" 
+      click_link "Take This Quiz" 
       click_link "Quit" 
     end
 

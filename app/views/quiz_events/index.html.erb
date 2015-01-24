@@ -24,18 +24,21 @@
         <% @quiz_events.each do |quiz_event| %>
         <tr>
           <td><%= link_to quiz_event.quiz_name, quiz_event, 
-                    class: "index-link"  %></td>
+                    class: "index-link"  %>
+          </td>
           <td><%= quiz_event.category_name  %></td>
           <td><%= quiz_event.subject_name  %></td>
           <td><%= quiz_event.total_correct %> out of
-             <%= quiz_event.total_answered %> 
-             (<%= formatted_quiz_score(quiz_event) %>%)</td>
+              <%= quiz_event.total_answered %> 
+              (<%= formatted_quiz_score(quiz_event) %>%)
+          </td>
           <td><%= quiz_event.status %></td>
           <td><%= time_ago_in_words(quiz_event.updated_at)%> ago</td>
           <td><%= link_to 'destroy', 
                   quiz_event_path(quiz_event,return_to: "index"), 
                   method: :delete, data: { confirm: 'Are you sure?' }, 
-                  class: "index-link"  %></td>
+                  class: "index-link"  %>
+          </td>
         </tr>
         <% end %>
       </tbody>
