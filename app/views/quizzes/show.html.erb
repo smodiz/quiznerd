@@ -7,21 +7,20 @@
   
   <div class="section-header">
     <%= @quiz.name %>   
+    <div class='visible-xs visible-sm'></div>
     <%= link_to "Delete", quiz_path(@quiz), 
           method: :delete, 
           data: { confirm: 'Are you sure?' }, 
           class: "btn btn-sm btn-danger pull-right" 
     %>
-    <%= link_to_if @quiz.questions.present?, 
-          "Take Quiz", 
+    <%= link_to("Take Quiz", 
           new_quiz_event_path(quiz_id: @quiz.id),  
-          class: "btn btn-sm btn-success pull-right" 
+          class: "btn btn-sm btn-success pull-right") if @quiz.questions.present?
     %>
-    <%= link_to_if show_published_link?, 
-          publish_label, 
+    <%= link_to(publish_label, 
           quiz_toggle_publish_path(@quiz), 
-          class: "btn btn-sm btn-primary pull-right",
-          method: :put 
+          method: :put,
+          class: "btn btn-sm btn-primary pull-right") if show_published_link?
     %>
     <%= link_to "Edit", 
           edit_quiz_path(@quiz), 
