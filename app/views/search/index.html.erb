@@ -4,17 +4,16 @@
     Search for a quiz to take
     <hr/>
     <%= form_tag search_path, :method => :get do %>
-    <p>
-      <%= text_field_tag \
-            :search, 
-            params[:search], 
-            options = { 
-              size: 30, 
-              placeholder: "search all fields shown below" 
-            }  
-      %>
-      <%= submit_tag "Search", :name => nil  %>
-    </p>
+      <p>
+        <%= text_field_tag :search, 
+              params[:search], 
+              options = { 
+                size: 30, 
+                placeholder: "search all fields shown below" 
+              }  
+        %>
+        <%= submit_tag "Search", :name => nil  %>
+      </p>
     <% end %>
   </div>  
  
