@@ -46,9 +46,6 @@ $table-border-color: darken(Gainsboro, 5%);
 
 a {
   color: $brand-primary;
-  &:visited {
-    color: #666;
-  }
   &:hover {
     color: #fff;
     background-color: #000;
