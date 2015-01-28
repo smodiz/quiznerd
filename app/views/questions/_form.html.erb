@@ -36,14 +36,19 @@
             </td>
             <td></td>
           </tr>
-
           <%= f.simple_fields_for :answers do |answers| %>
             <%= render 'questions/answer_fields', f: answers  %>
           <% end %>
-
+          <tr>
+            <td class="center">
+              <%= link_to_add_fields "Add an Answer", f, :answers %>
+            </td>
+            <td>&nbsp;</td>
+          </tr>
           </table>
       </div>
-      
+
+      <hr/>
       <div class="form-actions col-sm-offset-3 col-sm-6">
         <%= f.button :submit, 
             class: 'btn btn-primary btn-sm'  
