@@ -9,7 +9,7 @@
     dir         = form.object.class.name.downcase.pluralize
     partial     = "#{association.to_s.singularize}_fields"
 
-    fields = form.fields_for(association, new_object, child_index: id) do |builder|
+    fields = form.simple_fields_for(association, new_object, child_index: id) do |builder|
       render "#{dir}/#{partial}", f: builder
     end
 

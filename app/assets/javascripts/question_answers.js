@@ -12,11 +12,6 @@ $(document).ready(function() {
     var regexp = new RegExp($(this).data('id'), 'g');
     var answer = $(this).data('fields').replace(regexp, unique_id);
     $(this).closest('table').find('tr').last().before(answer);
-    
-    //have to manually add the bootstrap classes
-    var inserted = $(this).closest('table').find('tr').last().prev();
-    $(inserted).find('label').first().addClass('col-sm-3');
-    $(inserted).find('.form-group').find('div').addClass('col-sm-9');
   });
   
 });
