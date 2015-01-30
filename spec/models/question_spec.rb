@@ -51,6 +51,34 @@ describe Question do
     end
   end
 
+  describe "#validate_question_type" do
+    before(:each) do
+      @question = FactoryGirl.build(:question, quiz: quiz, question_type: "MC-1") 
+      @question.answers.each { |a| a.correct = true }
+      @question.valid?
+    end
+
+    it "is not valid with multiple correct answers and question_type != MC-2" do
+      expect(@question).to_not be_valid
+      expect(@question.errors[:question_type].first).to match(/multiple correct answers/)
+    end
+
+    it "is is valid with multiple correct answers and question_type of MC-2" do
+      @question.question_type = "MC-2"
+      expect(@question).to be_valid
+    end
+
+    it "is is valid with a single correct answer and question_type of MC-2" do
+      @question.question_type = "MC-2"
+      @question.answers.each { |a| a.correct = false }
+      @question.answers.first.correct = true
+
+      expect(@question).to be_valid
+    end
+
+  end
+
+
   describe "#correct_answer?" do
     it "should return true when correct answer is provided" do
       expect(question.correct_answer?(

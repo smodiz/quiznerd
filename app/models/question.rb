@@ -11,7 +11,9 @@ class Question < ActiveRecord::Base
 
   validates :content, presence: true
   validates :question_type, inclusion: { in: QUESTION_TYPES.keys }
-  validate :must_have_multiple_answers, :must_have_correct_answer
+  validate  :must_have_multiple_answers, 
+            :must_have_correct_answer,
+            :validate_question_type
   default_scope -> { order('created_at') }
 
   
@@ -56,5 +58,11 @@ private
     end
   end
 
+  def validate_question_type
+    if correct_answer_ids.size > 1 && question_type != "MC-2"
+      errors.add(:question_type, 
+        "must be '#{QUESTION_TYPES["MC-2"]}' if multiple correct answers are selected.")
+    end
+  end
 
 end
