@@ -9,6 +9,6 @@
   <td>&nbsp;</td>
   <td>
     <%= f.input :correct, as: :boolean, label: false, inline_label: 'Correct?' %>
-    <%= f.input :_destroy, as: :boolean, label: false, inline_label: 'Delete?' %>
+    <%= f.input :_destroy, as: :boolean, label: false, inline_label: 'Delete?', input_html: { class: "destroy" } %>
   </td>
 </tr>
