@@ -29,7 +29,7 @@
         <tr><td><hr/>*</td></tr>
          <tr>
           <td>
-            <%= f.association :subject %>
+            <%= f.input :subject_id, collection: Category.all.to_a, as: :grouped_select, group_method: :subjects %>
             <%= f.input :new_subject, label: "or create a new subject:"  do %>
               <%= text_field_tag 'new_subject' %>
             <% end %>
