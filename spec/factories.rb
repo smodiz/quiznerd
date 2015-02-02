@@ -10,11 +10,12 @@ FactoryGirl.define do
 
 
   factory :category do
-    name "Category FactoryGirl Testing"
+    sequence(:name) { |n| "Category #{n}" }
   end
 
   factory :subject do
-     name "Subject FactoryGirl Testing"
+    sequence(:name) { |n| "Subject #{n}" } 
+    association :category, factory: :category
   end
 
   factory :quiz do 
@@ -22,8 +23,8 @@ FactoryGirl.define do
     description "This is a quiz created by Factory Girl."
     published true
     association :author, factory: :user
-    category_id 1
-    subject_id 1
+    association :category, factory: :category
+    association :subject, factory: :subject
     factory :quiz_with_questions do |qz|
       qz.questions { |questions| [questions.association(:question),questions.association(:question)] }
     end
