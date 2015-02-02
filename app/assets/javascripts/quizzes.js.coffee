@@ -8,3 +8,4 @@ jQuery ->
       $('#quiz_subject_id').html(options)
     else
       $('#quiz_subject_id').empty()
+  $("#quiz_category_id").trigger 'change'
