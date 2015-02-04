@@ -13,7 +13,7 @@ class Cheatsheet < ActiveRecord::Base
   pg_search_scope :search, against: [:title, :content],
     using: {tsearch: {dictionary: "english" }},
     associated_against: { status: :name, tags: :name }
-  self.per_page = 10
+  self.per_page = 20
   
   scope :authored_by, -> (user) { where(user: user) }
   default_scope -> { order(:created_at) }
