@@ -37,7 +37,7 @@ describe "Cheatsheets Pages" do
 
   describe  "show pagination links on index page" do
     before(:each) do
-      11.times { FactoryGirl.create(:cheatsheet, user: user) }
+      (Cheatsheet.per_page + 1).times { FactoryGirl.create(:cheatsheet, user: user) }
       visit cheatsheets_path
     end
 
