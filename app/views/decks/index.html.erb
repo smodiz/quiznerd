@@ -1,0 +1,43 @@
+<div class="well">
+  <div class="section-header">
+    Flash Decks
+    <%= new_deck_button %>
+  </div>
+  <hr/>
+
+  <%= render partial: 'search/shared_search', locals: { path: decks_path } %>
+
+  <p>
+     Or filter by Tag:
+      <% @tag_names.sort.each do |name| %>
+        <%= link_to name, tag_path(name), class: "index-link" %>&nbsp;&nbsp;
+      <% end %>
+  </p> 
+
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped index-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Tags</th>
+          <th>Status</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render @decks %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="page-actions">
+    <%= new_deck_button %>
+  </div>
+
+  <div class="center">
+    <%= will_paginate @cheatsheets, renderer: BootstrapPagination::Rails %>
+  </div>
+
+  <br/><br/>
+</div>

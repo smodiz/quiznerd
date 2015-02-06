@@ -1,0 +1,17 @@
+<tr>
+  <td><%= link_to deck.name,
+          deck_path(deck),
+          class: "index-link"  %>
+  </td>  
+  <td><%= deck.tag_list %></td>
+  <td><%= deck.status %></td>
+  <td><%= link_to 'edit',
+            edit_deck_path(deck),
+            class: "index-link" %>
+  </td>
+  <td><%= link_to 'destroy', deck,
+            method: :delete,
+            data: { confirm: 'Are you sure?' },
+            class: "index-link" %>
+  </td>
+</tr>

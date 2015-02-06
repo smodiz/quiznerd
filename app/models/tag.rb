@@ -4,6 +4,10 @@ class Tag < ActiveRecord::Base
             through: :taggings, 
             source: :taggable, 
             source_type: 'Cheatsheet'
+  has_many  :decks, 
+            through: :taggings, 
+            source: :taggable, 
+            source_type: 'Deck'
 
   validates :name, presence: true
 end

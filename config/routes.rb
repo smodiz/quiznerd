@@ -22,5 +22,5 @@ Rails.application.routes.draw do
   resources :cheatsheets
   get 'tags/:tag', to: 'cheatsheets#index', as: :tag
 
- 
+  resources :decks
 end

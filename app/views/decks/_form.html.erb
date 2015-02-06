@@ -1,0 +1,38 @@
+<%= simple_form_for @deck, 
+  html: { class: 'form-horizontal' },
+  wrapper: :horizontal_form,
+  wrapper_mappings: {
+    check_boxes: :horizontal_radio_and_checkboxes,
+    radio_buttons: :horizontal_radio_and_checkboxes,
+    file: :horizontal_file_input,
+    boolean: :horizontal_boolean
+  } do |f| %>
+  <%= f.error_notification %>
+  <div class="form-inputs">
+    <table class="table input-table">
+      <tbody>
+        <tr><td><%= f.input :name %></td></tr>
+        <tr>
+          <td>
+            <%= f.input :status, collection: Deck::STATUSES.map { |s| [s, s] }, 
+                    include_blank: true  %>
+          </td>
+        </tr>
+        <tr>
+          <td><%= f.input :tag_list, label: "Tag list (comma sep)" %></td>
+        </tr>
+        <tr>
+          <td><%= f.input :description, as: :text, 
+                    input_html: { rows: text_area_rows(@deck.description,70) } %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="form-actions center">
+    <%= f.button :submit,         class: 'btn btn-primary btn-sm'  %> 
+    <%= link_to 'Cancel', :back,  class: 'btn btn-danger btn-sm' %>
+  </div>
+<% end %>
+

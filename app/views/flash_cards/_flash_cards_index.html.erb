@@ -1,0 +1,29 @@
+<div class="section-header">
+  Flash Cards
+  <%= link_to '#', 
+      class: 'btn btn-primary pull-right btn-sm' do %>
+      <i class="glyphicon glyphicon-plus glyphicon-white"></i>
+      Add Flash Card
+  <% end %>
+  <hr/>
+</div>
+
+<%  if @deck.flash_cards.empty? then %>
+  <p>
+    No flash cards have been added yet.
+  </p>
+<% else %>
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+        <td><span class="field-title">Position</span></td>
+        <td><span class="field-title">Front</span></td>
+        <td><span class="field-title">Back</span></td>
+        <td colspan="3"></td>
+      </thead>
+      <tbody>
+       <!-- <%= render @deck.flash_cards %> -->
+      </tbody>
+    </table>
+  </div>
+<% end %>

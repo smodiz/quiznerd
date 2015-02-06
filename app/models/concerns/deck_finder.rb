@@ -3,7 +3,7 @@ module DeckFinder
 
   included do
     include PgSearch
-    pg_search_scope :search, against: [:name, :description],
+    pg_search_scope :search, against: [:name, :description, :status],
       using: { tsearch: { dictionary: "english" } }
 
     scope :published, -> { where(status: "Public") }
@@ -29,6 +29,10 @@ module DeckFinder
 
     def search_owned_by(query,user)
       do_search(query).owned_by(user).ordered
+    end
+
+    def new_for_user(user)
+      user.decks.build
     end
   end
 end

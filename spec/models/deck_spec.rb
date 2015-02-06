@@ -104,4 +104,23 @@ describe Deck do
       end
     end
   end
+
+  describe "new_for_user" do
+    it "returns a new Deck with the correct user set" do
+      user =  FactoryGirl.create(:user)
+      deck = Deck.new_for_user(user)
+      expect(deck.user).to eq user
+    end
+  end
+
+  describe "with_flash_cards" do
+    it "loads the deck and all associated cards" do
+      deck = FactoryGirl.create(:deck)
+      flash_card = FactoryGirl.create(:flash_card, deck_id: deck.id)
+      result = Deck.with_flash_cards(deck.id)
+      expect(result.flash_cards.size).to eq 1
+    end
+  end
+
+
 end
