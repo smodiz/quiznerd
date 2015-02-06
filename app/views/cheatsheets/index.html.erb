@@ -7,14 +7,8 @@
   </div>  
 
   <%= render partial: 'search/shared_search', locals: { path: cheatsheets_path } %>
-  
-  <p>
-     Or filter by Tag:
-      <% @tag_names.sort.each do |name| %>
-        <%= link_to name, cheatsheet_tag_path(name), class: "index-link" %>&nbsp;&nbsp;
-      <% end %>
-  </p>    
-  
+  <%= render partial: 'shared/tag_list', locals: { tag_path: :cheatsheet_tag_path } %>
+ 
   <div class="table-responsive">
     <table class="table table-bordered table-striped index-table">
       <thead>

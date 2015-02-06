@@ -1,0 +1,7 @@
+ <!-- Shared view for things that have tags, e.g. Cheatsheets, Decks -->
+ <p>
+     Or filter by Tag:
+      <% @tag_names.sort.each do |name| %>
+        <%= link_to name, self.send(tag_path,name), class: "index-link" %>&nbsp;&nbsp;
+      <% end %>
+  </p>    
