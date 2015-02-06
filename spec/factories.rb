@@ -69,6 +69,21 @@ FactoryGirl.define do
     association :user, factory: :user
   end
 
+  factory :deck do
+    sequence(:name) { |n| "Flash Deck #{n} - Test" }
+    description "very flashy"
+    status "Private"
+    flash_cards_count 0
+    association :user, factory: :user
+  end
+
+  factory :flash_card do
+    sequence(:front) { |n| "Front of card #{n}" }
+    sequence(:back) { |n| "Front of card #{n}" }
+    sequence(:sequence) { |n| n }
+    difficulty "3"
+    association :deck, factory: :deck
+  end
 end
 
   

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150103231237) do
+ActiveRecord::Schema.define(version: 20150206003426) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,33 @@ ActiveRecord::Schema.define(version: 20150103231237) do
   add_index "cheatsheets", ["title"], name: "index_cheatsheets_on_title", using: :btree
   add_index "cheatsheets", ["user_id"], name: "index_cheatsheets_on_user_id", using: :btree
 
+  create_table "decks", force: true do |t|
+    t.string   "name",              limit: 45
+    t.string   "status"
+    t.text     "description"
+    t.integer  "flash_cards_count",            default: 0
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "decks", ["name"], name: "index_decks_on_name", using: :btree
+  add_index "decks", ["status"], name: "index_decks_on_status", using: :btree
+  add_index "decks", ["user_id"], name: "index_decks_on_user_id", using: :btree
+
+  create_table "flash_cards", force: true do |t|
+    t.text     "front"
+    t.text     "back"
+    t.integer  "sequence"
+    t.string   "difficulty"
+    t.integer  "deck_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "flash_cards", ["deck_id"], name: "index_flash_cards_on_deck_id", using: :btree
+  add_index "flash_cards", ["sequence"], name: "index_flash_cards_on_sequence", using: :btree
+
   create_table "questions", force: true do |t|
     t.string   "question_type"
     t.text     "content"
@@ -70,6 +97,7 @@ ActiveRecord::Schema.define(version: 20150103231237) do
   end
 
   add_index "quiz_events", ["quiz_id"], name: "index_quiz_events_on_quiz_id", using: :btree
+  add_index "quiz_events", ["user_id", "updated_at"], name: "index_quiz_events_on_user_id_and_updated_at", using: :btree
   add_index "quiz_events", ["user_id"], name: "index_quiz_events_on_user_id", using: :btree
 
   create_table "quizzes", force: true do |t|
@@ -84,6 +112,7 @@ ActiveRecord::Schema.define(version: 20150103231237) do
     t.integer  "questions_count", default: 0
   end
 
+  add_index "quizzes", ["author_id", "updated_at"], name: "index_quizzes_on_author_id_and_updated_at", using: :btree
   add_index "quizzes", ["author_id"], name: "index_quizzes_on_author_id", using: :btree
   add_index "quizzes", ["category_id"], name: "index_quizzes_on_category_id", using: :btree
   add_index "quizzes", ["subject_id"], name: "index_quizzes_on_subject_id", using: :btree
