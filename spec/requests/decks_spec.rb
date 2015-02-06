@@ -11,6 +11,22 @@ describe "Flash Deck Pages" do
     valid_sign_in(deck.user)
   end
   
+  describe "the menu" do
+    it "shows the flash deck index link" do
+      visit root_path
+      expect(page).to have_link("My Flash Decks")
+      click_link "My Flash Decks"
+      expect(current_path).to eq(decks_path) 
+    end
+    it "shows a link for creating a new deck" do
+      visit root_path
+      expect(page).to have_link("New Flash Deck")
+      click_link "New Flash Deck"
+      expect(current_path).to eq(new_deck_path) 
+    end
+  end
+
+
   describe "index page" do
     before(:each) do
       @another_deck = FactoryGirl.create(:deck)
@@ -104,7 +120,52 @@ describe "Flash Deck Pages" do
       click_link "Cancel"
       expect(current_path).to eq(decks_path)
     end
+  end
 
+  describe "search for a deck" do
+    before(:each) do
+        @deck_1 = FactoryGirl.create(:deck, user: deck.user, tag_list: "rails, api")
+        @deck_2 = FactoryGirl.create(:deck, user: deck.user, tag_list: "api, arrays") 
+        @deck_3 = FactoryGirl.create(:deck, user: deck.user, tag_list: "rails, arrays") 
+        visit decks_path
+      end
+    context "by search term" do
+      it "returns only the matching records for the user" do
+        fill_in "search", with: @deck_1.name
+        click_button "Search"
+        expect(page).to have_content @deck_1.name
+        expect(page).not_to have_content @deck_2.name
+      end
+    end
+    context "by tag" do
+      it "returns only the matching records" do
+        click_link "rails"
+        expect(page).to have_content @deck_1.name
+        expect(page).to have_content @deck_3.name
+        expect(page).to_not have_content @deck_2.name
+      end
+    end
+  end
+
+  describe "as wrong user" do
+    before(:each) do
+      other_user = FactoryGirl.create(:user)
+      @deck = FactoryGirl.create(:deck, user: other_user)
+      @deck
+    end
+
+    describe "submit a GET request to Cheatsheets#edit action" do
+      before { get edit_cheatsheet_path(@deck) }
+      specify { expect(current_path).to eq root_path }
+    end
+    describe "submit a PATCH request to Cheatsheets#edit action" do
+      before { patch cheatsheet_path(@deck) }
+      specify { expect(current_path).to eq root_path } 
+    end
+    describe "submit a DELETE request to Cheatsheets#edit action" do
+      before { delete cheatsheet_path(@deck) }
+      specify { expect(current_path).to eq root_path }
+    end
   end
 
 end

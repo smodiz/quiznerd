@@ -1,5 +1,6 @@
 class Cheatsheet < ActiveRecord::Base
   include PgSearch
+
   belongs_to :user
   belongs_to :status
   has_many :taggings, as: :taggable, dependent: :destroy

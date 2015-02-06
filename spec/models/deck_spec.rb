@@ -79,26 +79,43 @@ describe Deck do
 
   describe "#seach_owned_by" do
     let(:user)    { FactoryGirl.create(:user) }
-    let(:deck_1)  { FactoryGirl.create(:deck, name: "Rails 4", user: user, status: "Private") }
-    let(:deck_2)  { FactoryGirl.create(:deck, name: "Java 4", user: user, status: "Public") }
-    let(:deck_3)  { FactoryGirl.create(:deck, name: "Rails Syntax", user: user) }
-    let(:deck_4)  { FactoryGirl.create(:deck, name: "Rails Validations") }
+    let(:deck_1)  { FactoryGirl.create(:deck, name:     "Rails 4", 
+                                              user:     user, 
+                                              status:   "Private",
+                                              tag_list: "rails, cool") }
+    let(:deck_2)  { FactoryGirl.create(:deck, name:     "Java 4", 
+                                              user:     user, 
+                                              status:   "Public",
+                                              tag_list: "java, cool") }
+    let(:deck_3)  { FactoryGirl.create(:deck, name:     "Rails Syntax", 
+                                              user:     user,
+                                              tag_list: "rails") }
+    let(:deck_4)  { FactoryGirl.create(:deck, name:     "Rails Validations",
+                                              tag_list:  "rails, cool") }
     
     before(:each) do
+      # touch these to make sure they are created before tests
       user; deck_1; deck_2; deck_3; deck_4
     end
 
     describe "when given a search term" do
       it "returns the matching records for that user" do
-        results = Deck.search_owned_by("Rails", user)
+        results = Deck.search_owned_by(user, "Rails", "")
         expect(results.size).to eq 2
         expect(results).to match_array([deck_1, deck_3])
       end
     end
 
-    describe "when not given a search term" do
+    describe "when given a tag" do
+      it "returns the matching records for that user and tag" do
+        results = Deck.search_owned_by(user, "", "cool")
+        expect(results).to match_array([deck_1, deck_2])
+      end
+    end
+
+    describe "when not given a search term or tag" do
       it "returns all the records for that user" do
-        results = Deck.search_owned_by("", user)
+        results = Deck.search_owned_by(user,"", "")
         expect(results.size).to eq 3
         expect(results).to match_array([deck_1, deck_2, deck_3])
       end

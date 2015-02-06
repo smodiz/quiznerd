@@ -66,6 +66,7 @@ FactoryGirl.define do
     sequence(:title) { |n| "Cheatsheet #{n} - Test" }
     content "sample content"
     status_id 1
+    tag_list ""
     association :user, factory: :user
   end
 
@@ -73,6 +74,7 @@ FactoryGirl.define do
     sequence(:name) { |n| "Flash Deck #{n} - Test" }
     description "very flashy"
     status "Private"
+    tag_list ""
     flash_cards_count 0
     association :user, factory: :user
   end

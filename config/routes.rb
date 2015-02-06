@@ -20,7 +20,8 @@ Rails.application.routes.draw do
   match '/contact', to: 'static_pages#contact', via: 'get'
 
   resources :cheatsheets
-  get 'tags/:tag', to: 'cheatsheets#index', as: :tag
+  get 'cheatsheet_tags/:tag', to: 'cheatsheets#index', as: :cheatsheet_tag
 
   resources :decks
+  get 'deck_tags/:tag', to: 'decks#index', as: :deck_tag
 end

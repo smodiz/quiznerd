@@ -10,7 +10,7 @@
   <p>
      Or filter by Tag:
       <% @tag_names.sort.each do |name| %>
-        <%= link_to name, tag_path(name), class: "index-link" %>&nbsp;&nbsp;
+        <%= link_to name, deck_tag_path(name), class: "index-link" %>&nbsp;&nbsp;
       <% end %>
   </p> 
 
