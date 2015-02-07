@@ -1,0 +1,17 @@
+<div class="section-header">
+  <%= @deck.name %>
+  <div class='visible-xs visible-sm'></div>
+  <%= link_to "Delete", deck_path(@deck), 
+        method: :delete, 
+        data: { confirm: 'Are you sure?' }, 
+        class: "btn btn-sm btn-danger pull-right" 
+  %>
+  <%= link_to("Play Flash Cards", 
+        '#',  
+        class: "btn btn-sm btn-success pull-right") if @deck.flash_cards.present?
+  %>
+  <%= link_to "Edit", 
+        edit_deck_path(@deck), 
+        class: "btn btn-sm btn-primary pull-right" 
+  %>
+</div>

@@ -1,0 +1,11 @@
+<tr class="flash-card">
+  <td><%= flash_card.front %></td>
+  <td><%= flash_card.back %></td>
+  <td class="hidden"><%= flash_card.sequence %></td>
+  <td><%= FlashCard.difficulty_description(flash_card.difficulty) %></td>
+  <td><%= link_to "delete", flash_card,
+      method: :delete, 
+      data: { confirm: "Are you sure?" },
+      class: "index-link" %>
+  </td>
+</tr> 

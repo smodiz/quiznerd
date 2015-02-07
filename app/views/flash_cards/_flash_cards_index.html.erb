@@ -1,47 +1,38 @@
-<div class="section-header">
-  Flash Cards
-  <%= link_to '#', 
-      class: 'btn btn-primary pull-right btn-sm' do %>
-      <i class="glyphicon glyphicon-plus glyphicon-white"></i>
-      Add Flash Card
-  <% end %>
-  <hr/>
-</div>
+<div class="flash-cards-container">
 
-<div>
-<%= render 'flash_cards/form' %>
-</div>
-<br/>
-<br/>
-<br/>
-
-<%  if @deck.flash_cards.empty? then %>
-  <p>
-    No flash cards have been added yet.
-  </p>
-<% else %>
-  <div class="table-responsive">
-    <table class="table table-bordered table-hover">
-      <thead>
-        <td><span class="field-title">Position</span></td>
-        <td><span class="field-title">Front</span></td>
-        <td><span class="field-title">Back</span></td>
-        <td colspan="1"></td>
-      </thead>
-      <tbody>
-       <% @deck.flash_cards.each do |flash_card| %>
-          <tr class="flash-card">
-            <td><%= flash_card.sequence %></td>
-            <td><%= flash_card.front %></td>
-            <td><%= flash_card.back %></td>
-            <td><%= link_to "delete", flash_card,
-                method: :delete, 
-                data: { confirm: "Are you sure?" },
-                class: "index-link" %>
-            </td>
-          </tr> 
-       <% end %>
-      </tbody>
-    </table>
+  <div class="section-header">
+    Flash Cards
+    <hr/>
   </div>
-<% end %>
+
+  <%= link_to new_flash_card_path(:deck_id => @deck.id), 
+        remote: true,
+        id: 'new_link',
+        class: 'btn btn-primary pull-left btn-sm' do %>
+          <i class="glyphicon glyphicon-plus glyphicon-white"></i>
+          Add Flash Card
+  <% end %>
+
+  <%  if @deck.flash_cards.empty? then %>
+    <p>No flash cards have been added yet.</p>
+  <% else %>
+    <div class="table-responsive">
+      <table id="flash-cards" class="table table-bordered table-hover">
+        <thead>
+          <td><span class="field-title">Front</span></td>
+          <td><span class="field-title">Back</span></td>
+          <td><span class="field-title">Difficulty</span></td>
+          <td><span class="hidden">Position</span></td>
+          <td colspan="1"></td>
+        </thead>
+        <tbody id="sortable">
+          <% @deck.flash_cards.each do |flash_card| %>
+            <%= render  partial:'flash_cards/flash_card', 
+                      locals:{flash_card: flash_card} 
+            %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+</div>
