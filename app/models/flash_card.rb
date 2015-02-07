@@ -11,4 +11,6 @@ class FlashCard < ActiveRecord::Base
   validates :deck_id,     presence: true
   validates :difficulty,  inclusion: { in: DIFFICULTIES.keys }
 
+  default_scope ->{ order(sequence: :asc) }
+
 end

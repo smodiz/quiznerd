@@ -1,28 +1,28 @@
-<table class="table table-bordered">
-  <tbody>
-    <tr>
-      <td class="text-right">
-        <span class="field-title text-right">Name: </span>
-      </td> 
-      <td><%= @deck.name  %></td>
-    </tr>  
-    <tr>
-      <td class="text-right">
-        <span class="field-title text-right">Status: </span>
-      </td> 
-      <td><%= @deck.status %></td>
-    </tr>
-    <tr>
-      <td class="text-right">
-        <span class="field-title text-right">Tags: </span>
-      </td>
-      <td><%= @deck.tag_list %></td>
-    </tr>
-    <tr>
-      <td class="text-right">
-        <span class="field-title text-right">Description: </span>
-      </td>
-      <td><%= @deck.description %></td>
-    </tr>
-  </tbody>
-</table>
+  <table class="table table-bordered">
+    <tbody>
+      <tr>
+        <td class="text-right">
+          <span class="field-title">Name: </span>
+        </td> 
+        <td><%= @deck.name  %></td>
+      </tr>  
+      <tr>
+        <td class="text-right">
+          <span class="field-title">Status: </span>
+        </td> 
+        <td><%= @deck.status %></td>
+      </tr>
+      <tr>
+        <td class="text-right field-title">
+          <span class="">Tags: </span>
+        </td>
+        <td><%= @deck.tag_list %></td>
+      </tr>
+      <tr>
+        <td class="text-right">
+          <span class="field-title text-right">Description: </span>
+        </td>
+        <td><%= @deck.description %></td>
+      </tr>
+    </tbody>
+  </table>

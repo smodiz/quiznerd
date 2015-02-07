@@ -1,0 +1,35 @@
+<%= simple_form_for @flash_card = @deck.flash_cards.build, 
+  html: { class: 'form-horizontal' },
+  wrapper: :horizontal_form,
+  wrapper_mappings: {
+    check_boxes: :horizontal_radio_and_checkboxes,
+    radio_buttons: :horizontal_radio_and_checkboxes,
+    file: :horizontal_file_input,
+    boolean: :horizontal_boolean
+  } do |f| %>
+ 
+  <div class="col-sm-12 center">
+      <%= f.input_field :front, as: :text, 
+          placeholder: "front", 
+          label: false,
+          title: "Does this show up?",
+          :class => "flash-card-front" 
+      %>
+      <%= f.input_field :back, as: :text,  
+          placeholder: "back", 
+          label: false,
+          :class => "flash-card-back" 
+      %>
+    <div class="flash-card-control-group">
+      <%= f.input_field :difficulty, label: false, 
+        placeholder: "Level of difficulty", 
+        collection: FlashCard::DIFFICULTIES.map {|k,v| [v,k]}, 
+        include_blank: true,
+        class: 'flash-card-difficulty'  %>
+      <%= f.button :submit, '+', class: 'btn btn-primary btn-sm'  %><br/> 
+    </div>
+  </div>
+
+<% end %>
+
+

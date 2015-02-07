@@ -8,21 +8,39 @@
   <hr/>
 </div>
 
+<div>
+<%= render 'flash_cards/form' %>
+</div>
+<br/>
+<br/>
+<br/>
+
 <%  if @deck.flash_cards.empty? then %>
   <p>
     No flash cards have been added yet.
   </p>
 <% else %>
   <div class="table-responsive">
-    <table class="table table-bordered">
+    <table class="table table-bordered table-hover">
       <thead>
         <td><span class="field-title">Position</span></td>
         <td><span class="field-title">Front</span></td>
         <td><span class="field-title">Back</span></td>
-        <td colspan="3"></td>
+        <td colspan="1"></td>
       </thead>
       <tbody>
-       <!-- <%= render @deck.flash_cards %> -->
+       <% @deck.flash_cards.each do |flash_card| %>
+          <tr class="flash-card">
+            <td><%= flash_card.sequence %></td>
+            <td><%= flash_card.front %></td>
+            <td><%= flash_card.back %></td>
+            <td><%= link_to "delete", flash_card,
+                method: :delete, 
+                data: { confirm: "Are you sure?" },
+                class: "index-link" %>
+            </td>
+          </tr> 
+       <% end %>
       </tbody>
     </table>
   </div>

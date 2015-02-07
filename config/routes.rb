@@ -24,4 +24,6 @@ Rails.application.routes.draw do
 
   resources :decks
   get 'deck_tags/:tag', to: 'decks#index', as: :deck_tag
+
+  resources :flash_cards
 end

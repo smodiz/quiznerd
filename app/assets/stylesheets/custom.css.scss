@@ -152,6 +152,7 @@ ul.li {
 
 .field-title {
   font-weight: bold;
+  width: 20%;
 }
 .pull-right { 
   float: right; 
@@ -270,3 +271,35 @@ footer ul li {
   font-size: 0.8em;
 }
 
+.flash-card-front {
+    display: inline-block;
+    vertical-align: middle;
+    cols: 60;
+    rows: 10;
+    width: 300px;
+    align:right;
+    height: 200px;
+    padding: 0px;
+    margin: 0px 0px 10px 0px;
+}
+.flash-card-back {
+    display: inline-block;
+    vertical-align: middle;
+    cols: 60;
+    rows: 10;
+    width: 300px;
+    align: left;
+    height: 200px;
+    padding: 0px;
+    margin: 0px 0px 10px 0px;
+}
+.flash-card-control-group {
+  display: inline-block;
+}
+.flash-card-difficulty {
+  display: block;
+  margin-bottom: 15px;
+}
+.flash-card-add-button {
+  margin-bottom: 15px;
+}
