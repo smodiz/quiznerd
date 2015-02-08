@@ -16,8 +16,6 @@ class Question < ActiveRecord::Base
             :validate_question_type
   default_scope -> { order('created_at') }
 
-  
-
   def self.new_with_answers(quiz_id)
     question = Question.new(quiz_id: quiz_id)
     4.times { question.answers.build }

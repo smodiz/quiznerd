@@ -3,7 +3,7 @@ class Deck < ActiveRecord::Base
   include Tagged
 
   belongs_to  :user
-  has_many    :flash_cards
+  has_many    :flash_cards, dependent: :destroy
   has_many    :taggings, as: :taggable, dependent: :destroy
   has_many    :tags, through: :taggings
 
@@ -16,6 +16,10 @@ class Deck < ActiveRecord::Base
 
   def self.with_flash_cards(id)
     Deck.includes(:flash_cards).find(id)
+  end
+
+  def next_sequence
+    (flash_cards.map(&:sequence).max || 0) + 1
   end
 
 end

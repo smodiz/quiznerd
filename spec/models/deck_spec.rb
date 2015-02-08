@@ -138,6 +138,5 @@ describe Deck do
       expect(result.flash_cards.size).to eq 1
     end
   end
-
-
+      
 end
