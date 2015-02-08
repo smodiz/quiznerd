@@ -3,11 +3,31 @@ class FlashCardsController < ApplicationController
   def destroy
     load
     @flash_card.destroy
-    redirect_to deck_path(@flash_card.deck), notice: "Flash Card destroyed."
+    respond_to do |format|
+      format.html do
+        redirect_to deck_path(@flash_card.deck), notice: "Flash Card destroyed."
+      end
+      format.js
+    end
   end
 
   def new
     @flash_card = FlashCard.new(deck_id: params[:deck_id])
+
+  end
+
+  def edit
+    load
+  end
+
+  def update
+    load
+    @flash_card.attributes = flash_card_params
+    @flash_card.save
+    respond_to do |format|
+      format.html { redirect_to @flash_card.deck }
+      format.js
+    end
   end
 
   def create
@@ -17,7 +37,6 @@ class FlashCardsController < ApplicationController
       format.js
     end
   end
-
 
   private
 

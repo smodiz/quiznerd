@@ -1,3 +1,5 @@
 
 $('#flash-cards').append('<%= j render(@flash_card) %>');
 $('textarea').val('');
+$('#empty-msg').hide();
+$('textarea').first().focus();

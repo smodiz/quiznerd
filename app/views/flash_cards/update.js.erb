@@ -1,0 +1,4 @@
+$('#<%= @flash_card.id %>').after('<%= j render(@flash_card) %>');
+$('#<%= @flash_card.id %>').remove();
+$('.flash-card-form').remove();
+$('#new_link').show();

@@ -1,5 +1,5 @@
 <%= simple_form_for @flash_card, remote: true,
-  html: { class: 'form-horizontal' },
+  html: { class: 'form-horizontal flash-card-form' },
   wrapper: :horizontal_form,
   wrapper_mappings: {
     check_boxes: :horizontal_radio_and_checkboxes,
@@ -27,8 +27,8 @@
         collection: FlashCard::DIFFICULTIES.map {|k,v| [v,k]}, 
         include_blank: false,
         class: 'flash-card-difficulty'  %>
-      <%= f.button :submit, 'Add ', class: 'btn btn-primary btn-sm'  %>
-      <%= link_to 'Done', '#', id: 'done', class: 'btn btn-danger btn-sm'  %> 
+      <%= f.button :submit, 'Save', class: 'btn btn-primary btn-sm'  %>
+      <%= link_to 'Hide', '#', id: 'done', class: 'btn btn-danger btn-sm'  %> 
     </div>
   </div>
 
