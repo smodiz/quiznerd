@@ -63,7 +63,7 @@ describe "Flash Deck Pages" do
 
   end
 
-  describe "show flash deck"  do #will show cards and create cards, too
+  describe "show flash deck"  do 
     it "shows the deck" do
       visit decks_path
       click_link deck.name
