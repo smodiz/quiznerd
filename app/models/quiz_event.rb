@@ -1,12 +1,10 @@
 class QuizEvent < ActiveRecord::Base
   include QuizEventFinder
 
-  belongs_to :user
-  belongs_to :quiz
   belongs_to    :user
   belongs_to    :quiz
   after_commit  :invalidate_cache
-  after_destroy  :invalidate_cache
+  after_destroy :invalidate_cache
   
   default_scope -> { order('created_at DESC') }
    
