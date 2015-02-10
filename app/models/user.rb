@@ -8,5 +8,5 @@ class User < ActiveRecord::Base
   has_many :quiz_events, dependent: :destroy
   has_many :cheatsheets, dependent: :destroy
   has_many :decks, dependent: :destroy
-
+  has_many :deck_events, dependent: :destroy
 end

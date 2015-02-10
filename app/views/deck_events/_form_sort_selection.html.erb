@@ -1,0 +1,14 @@
+<div id='deck-order-options' class="panel">
+  <div class="panel-heading center">Set the Order</div>
+  <div class="panel-body center">
+    <ul>
+      <li class="option">
+        <%= label_tag "order", "Order".html_safe %>
+        <%= select_tag "order", 
+              options_from_collection_for_select(
+                DeckEvent::SORT_ORDER_OPTIONS, "first", "last", params[:order])
+        %>
+      </li>
+    </ul>
+  </div>
+</div>

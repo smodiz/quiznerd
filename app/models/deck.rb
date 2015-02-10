@@ -6,6 +6,7 @@ class Deck < ActiveRecord::Base
   has_many    :flash_cards, dependent: :destroy
   has_many    :taggings, as: :taggable, dependent: :destroy
   has_many    :tags, through: :taggings
+  has_many    :deck_events, dependent: :destroy
 
   STATUSES =  %w(Private Public)
   validates :name,                presence: true, length: { maximum: 45 }

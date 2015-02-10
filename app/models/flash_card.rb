@@ -3,7 +3,7 @@ class FlashCard < ActiveRecord::Base
 
   DIFFICULTIES =  {   "1" => "Beginner",
                       "2" => "Intermediate",
-                      "3" => "Advanced"  
+                      "3" => "Advanced"
                   }
   validates :sequence,    uniqueness: { scope: :deck_id }, if: :deck_id
   validates :front,       presence: true

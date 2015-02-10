@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150208172209) do
+ActiveRecord::Schema.define(version: 20150209032229) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,19 @@ ActiveRecord::Schema.define(version: 20150208172209) do
   add_index "cheatsheets", ["status_id"], name: "index_cheatsheets_on_status_id", using: :btree
   add_index "cheatsheets", ["title"], name: "index_cheatsheets_on_title", using: :btree
   add_index "cheatsheets", ["user_id"], name: "index_cheatsheets_on_user_id", using: :btree
+
+  create_table "deck_events", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "deck_id"
+    t.integer  "total_cards"
+    t.integer  "total_correct"
+    t.text     "missed_cards_list"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "deck_events", ["deck_id"], name: "index_deck_events_on_deck_id", using: :btree
+  add_index "deck_events", ["user_id"], name: "index_deck_events_on_user_id", using: :btree
 
   create_table "decks", force: true do |t|
     t.string   "name",              limit: 45

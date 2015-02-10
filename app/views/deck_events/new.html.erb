@@ -1,0 +1,18 @@
+
+<div class='deck-event-header center'>
+  Flash Deck <span class="deck-event-title"><%= @deck_event.name %></span>
+</div>
+<hr/>
+<h5 class="center">You can optionally apply filters to customize your view! </h5><br/>
+
+<%= render 'options_form' %>
+
+<table class="deck-event-flash-cards">
+  <% @deck_event.flash_card_set.each do |flash_card|  %>
+  <tr class="flash-card">
+    <td class="sequence"><%= flash_card.sequence %></td>
+    <td class="front"><%= flash_card.front %></td>
+    <td class="back"><%= flash_card.back %></td>
+  </tr>
+  <% end %>
+</table>

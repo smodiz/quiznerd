@@ -20,7 +20,7 @@
     
     <div class="center">
       <%= link_to "Take This Quiz Again", 
-            quiz_events_path + "?quiz_id=#{@quiz_event.quiz_id}",  
+            quiz_events_path(quiz_id: @quiz_event.quiz_id),  
             method: :post, 
             class: "btn btn-primary btn-sm" 
       %>

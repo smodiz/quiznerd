@@ -81,15 +81,33 @@ FactoryGirl.define do
     tag_list ""
     flash_cards_count 0
     association :user, factory: :user
+    factory :deck_with_flash_cards do |dk|
+      dk.flash_cards do |flash_cards| 
+        [ flash_cards.association(:flash_card),
+          flash_cards.association(:flash_card),
+          flash_cards.association(:flash_card),
+          flash_cards.association(:flash_card),
+          flash_cards.association(:flash_card)
+        ] 
+      end
+    end
   end
 
   factory :flash_card do
     sequence(:front) { |n| "Front of card #{n}" }
     sequence(:back) { |n| "Front of card #{n}" }
     sequence(:sequence) { |n| n }
-    difficulty "3"
-    association :deck, factory: :deck
+    difficulty "1"
   end
+
+  factory :deck_event do
+    total_cards 5
+    total_correct 5
+    missed_cards_list ""
+    association :deck, factory: :deck
+    association :user, factory: :user
+  end
+
 end
 
   

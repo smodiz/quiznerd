@@ -256,6 +256,9 @@ footer ul li {
   margin-top: 45px;
   @include box-sizing;
 }
+.debug {
+  margin-top: 450px;
+}
 
 #error_explanation {
   color: #f00;
@@ -271,59 +274,3 @@ footer ul li {
   font-size: 0.8em;
 }
 
-.flash-card-front {
-    display: inline-block;
-    vertical-align: middle;
-    cols: 60;
-    rows: 10;
-    width: 300px;
-    align:right;
-    height: 200px;
-    padding: 0px;
-    margin: 0px 0px 10px 0px;
-}
-.flash-card-back {
-    display: inline-block;
-    vertical-align: middle;
-    cols: 60;
-    rows: 10;
-    width: 300px;
-    align: left;
-    height: 200px;
-    padding: 0px;
-    margin: 0px 0px 10px 0px;
-}
-.flash-card-control-group {
-  display: inline-block;
-}
-.flash-card-difficulty {
-  display: block;
-  margin-bottom: 15px;
-}
-.flash-card-add-button {
-  margin-bottom: 15px;
-}
-#sortable { 
-  list-style-type: none; 
-  margin: 0; 
-  padding: 0; 
-  width: 100%; 
-}
-#sortable li { 
-  margin: 0 3px 3px 3px; 
-  padding: 0.4em; 
-  padding-left: 1.5em; 
-  font-size: 1.4em; 
-  height: 18px; 
-}
-#sortable li span { 
-  position: absolute; 
-  margin-left: -1.3em; 
-}
-.flash-card-container {
-  clear: both;
-  display: inline-block;
-  padding-top: 5px;
-  border: 2px solid gray;
-}
-#draggable {  }

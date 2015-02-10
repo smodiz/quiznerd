@@ -1,0 +1,45 @@
+#deck-filter-options ul, #deck-order-options ul{
+  list-style: none;
+}
+.deck-event-options-row{
+  clear: both;
+  .panel-body {
+    background-color: lighten(Gainsboro, 5%);
+    height: 120px;
+  }
+  .panel-heading {
+    background-color: LightSteelBlue;
+    font-size: 1.3em;
+  }
+  label {
+    font-size: 1em;
+    padding-right: 5px;
+  }
+  select {
+    width: 100px;
+  }
+}
+.deck-event-btn {
+  width: 150px;
+  height: 50px;
+}
+.deck-event-header {
+  padding-top: 10px;
+  font-size: 2em;
+}
+.deck-event-title {
+  color: darken(Purple, 0%);
+  margin-left: 10px;
+}
+.deck-event-flash-cards {
+  display: none;
+}
+#deck-filter-options li{
+  padding-bottom: 5px;
+}
+.option {
+  clear: both;
+  input {
+    text-align: right;
+  }
+}

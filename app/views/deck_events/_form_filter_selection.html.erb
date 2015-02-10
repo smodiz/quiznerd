@@ -1,0 +1,39 @@
+<div id='deck-filter-options' class='panel'>
+  <div class="panel-heading center">Apply Filters</div>
+  <div class="panel-body">
+    <ul>
+      <li class="option">
+        <%= label_tag "num_cards", "Number of Flash Cards to Show"  %>
+        <%= text_field_tag "num_cards", params[:num_cards],
+              options = {
+                placeholder: "Show All " + @deck_event.full_count.to_s,
+                size: 10, 
+                class: "pull-right"
+              }
+        %>
+      </li>
+      <li class="option">
+        <%= label_tag "difficulty", "Filter By Difficulty" %>
+        <%= select_tag "difficulty",
+              options_from_collection_for_select(FlashCard::DIFFICULTIES, "first", "last", params[:difficulty]),
+              options = {
+                prompt: "Show All", 
+                class: "pull-right",
+                width: "150px"  
+              }
+        %>
+      </li> 
+      <li class="option"> 
+        <%= label_tag "missed_filter", "Only Previously Missed"%>
+        <%= select_tag "missed_filter", 
+              options_from_collection_for_select(DeckEvent::MISSED_CARDS_OPTIONS, "first", "last", params[:missed_filter]),
+              options = {
+                prompt: "Not selected",
+                class:  "pull-right",
+                  width: "150px"
+              }
+        %>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -26,4 +26,6 @@ Rails.application.routes.draw do
   get 'deck_tags/:tag', to: 'decks#index', as: :deck_tag
 
   resources :flash_cards
+
+  resources :deck_events, only: [:new, :create, :destroy]
 end
