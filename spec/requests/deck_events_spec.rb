@@ -85,13 +85,13 @@ describe "Flash Deck Event Pages" do
       click_link("advance-#{@first_card.id}")
       click_link("incorrect-answer-#{@first_card.id}")
       click_link("advance-#{@second_card.id}")
-      click_link("correct-answer-#{@second_card.id}")
+      click_link("incorrect-answer-#{@second_card.id}")
       click_button("Save")
       expect(page).to have_content("Your flash card study session was saved!")
       saved_event = DeckEvent.where(deck_id: @deck_id).first
       expect(saved_event.total_cards).to eq 2
-      expect(saved_event.total_correct).to eq 1
-      expect(saved_event.missed_cards_list).to eq @first_card.id.to_s
+      expect(saved_event.total_correct).to eq 0
+      expect(saved_event.missed_cards_list).to eq [@first_card.id,@second_card.id].join(",")
       expect(saved_event.user.id).to eq deck.user.id
     end
     it "does not save the event if the user clicks cancel" do
