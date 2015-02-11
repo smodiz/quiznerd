@@ -13,10 +13,13 @@
     <%= button_tag( type: "submit", 
                     name: "filter", 
                     value: "true",
-                    class: "btn btn-primary new-deck-event-btn") do %>
+                    class: "btn btn-lg btn-primary new-deck-event-btn") do %>
                         Start! <i class="glyphicon glyphicon-play"></i>
     <% end %>
-
+    <%= link_to :back, class: "btn btn-lg btn-danger" do %>
+        Cancel<i class="glyphicon glyphicon-remove"></i>
+    <% end %>
+    
   </div>
 
 <% end %>

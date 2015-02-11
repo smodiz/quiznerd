@@ -99,7 +99,9 @@ describe "Flash Deck Event Pages" do
       click_link("incorrect-answer-#{@first_card.id}")
       click_link("advance-#{@second_card.id}")
       click_link("correct-answer-#{@second_card.id}")
-      click_link("Cancel")
+      within('#new_deck_event') do
+        click_link("Cancel")
+      end
       saved_event = DeckEvent.where(deck_id: @deck_id)
       expect(saved_event).to be_empty
     end
