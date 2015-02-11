@@ -48,19 +48,20 @@ a {
   color: $brand-primary;
   &:hover {
     background-color: transparent;
-    color: $brand-primary;
   }
 }
 
 .index-link {
   color: $brand-primary;
-  &:visited {
-    color: $brand-primary;
-  }
   &:hover {
     background-color: transparent;
-    color: $brand-primary;
   }
+}
+.play-link {
+  color: $brand-success;
+}
+.delete-link {
+  color: $brand-danger;
 }
 .asc { text-decoration: none !important; }
 

@@ -1,8 +1,21 @@
 #deck-filter-options ul, #deck-order-options ul{
   list-style: none;
 }
-.deck-event-options-row{
-  clear: both;
+.de-flash-card-side {
+  .panel-body {
+    background-color: lighten(Gainsboro, 5%);
+    overflow: auto;
+    min-height: 120px;
+    height: 100%;
+    text-align: left;
+    vertical-align: middle;
+  } 
+  .panel-heading {
+    background-color: LightSteelBlue;
+    font-size: 1.3em;
+  }
+}
+.options-section, {
   .panel-body {
     background-color: lighten(Gainsboro, 5%);
     height: 120px;
@@ -19,7 +32,7 @@
     width: 100px;
   }
 }
-.deck-event-btn {
+.new-deck-event-btn {
   width: 150px;
   height: 50px;
 }
@@ -31,7 +44,10 @@
   color: darken(Purple, 0%);
   margin-left: 10px;
 }
-.deck-event-flash-cards {
+.deck-event-flash-cards{
+  display: none;
+}
+#flash-card-set-count {
   display: none;
 }
 #deck-filter-options li{
@@ -42,4 +58,43 @@
   input {
     text-align: right;
   }
+}
+#deck-event-error {
+  margin-top: 20px;
+}
+#flash-card-player {
+  display: inline;
+}
+.options-section h5{
+  text-align: center;
+  display: block;
+  margin-bottom: 20px;
+}
+.de-flash-card-side {
+  display: none;
+}
+.flash_advance {
+  display: block;
+}
+.correct-flash-answer {
+  display: block;
+}
+.incorrect-flash-answer{
+  display: block;
+  background-color: red;
+}
+#de-finished {
+  display: none;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  min-height: 300px;
+}
+#de-score{
+  color: purple;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+.de-form-actions, .de-form-inputs {
+  display: none;
+  margin-top: 20px;
 }

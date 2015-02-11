@@ -8,7 +8,7 @@
               options = {
                 placeholder: "Show All " + @deck_event.full_count.to_s,
                 size: 10, 
-                class: "pull-right"
+                class: "pull-right deck-event-option"
               }
         %>
       </li>
@@ -18,7 +18,7 @@
               options_from_collection_for_select(FlashCard::DIFFICULTIES, "first", "last", params[:difficulty]),
               options = {
                 prompt: "Show All", 
-                class: "pull-right",
+                class: "pull-right deck-event-option",
                 width: "150px"  
               }
         %>
@@ -29,7 +29,7 @@
               options_from_collection_for_select(DeckEvent::MISSED_CARDS_OPTIONS, "first", "last", params[:missed_filter]),
               options = {
                 prompt: "Not selected",
-                class:  "pull-right",
+                class:  "pull-right deck-event-option",
                   width: "150px"
               }
         %>

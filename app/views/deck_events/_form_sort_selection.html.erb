@@ -6,7 +6,11 @@
         <%= label_tag "order", "Order".html_safe %>
         <%= select_tag "order", 
               options_from_collection_for_select(
-                DeckEvent::SORT_ORDER_OPTIONS, "first", "last", params[:order])
+                DeckEvent::SORT_ORDER_OPTIONS, "first", "last", params[:order]
+              ),
+              options = { 
+                class: "deck-event-option"
+              }
         %>
       </li>
     </ul>

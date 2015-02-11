@@ -31,6 +31,8 @@ class DeckEvent < ActiveRecord::Base
       builder = FlashCardSetBuilder.new(deck, options)
       deck_event.flash_card_set = builder.generate_flash_cards
     end
+    deck_event.total_cards = deck_event.count
+    deck_event.total_correct = 0
     deck_event
   end
 
@@ -38,8 +40,16 @@ class DeckEvent < ActiveRecord::Base
     @flash_card_set || self.deck.flash_cards
   end
 
+  def no_cards?
+    flash_card_set.empty?
+  end
+
   def full_count
     self.deck.flash_cards_count
+  end
+
+  def count
+    @count ||= flash_card_set.size
   end
 
 end

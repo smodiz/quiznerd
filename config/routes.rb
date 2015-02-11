@@ -27,5 +27,5 @@ Rails.application.routes.draw do
 
   resources :flash_cards
 
-  resources :deck_events, only: [:new, :create, :destroy]
+  resources :deck_events, only: [:new, :create, :destroy, :index]
 end

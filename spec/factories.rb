@@ -91,6 +91,13 @@ FactoryGirl.define do
         ] 
       end
     end
+    factory :deck_with_two_cards do |dk|
+      dk.flash_cards do |flash_cards| 
+        [ flash_cards.association(:flash_card),
+          flash_cards.association(:flash_card)
+        ] 
+      end
+    end
   end
 
   factory :flash_card do

@@ -2,6 +2,7 @@
 <%= form_tag new_deck_event_path(deck_id: @deck_event.deck_id), method: :get  do %>
 
   <%= hidden_field_tag :deck_id, @deck_event.deck_id %>
+  <%= hidden_field_tag :filtered, params[:filter] %>
 
   <div class="row deck-event-options-row">
     <div class="col-sm-4"><%= render 'form_sort_selection' %></div>
@@ -9,9 +10,13 @@
   </div>
   
   <div class="center">
-    <%= button_tag(type: "submit", name: "submit", class: "btn btn-primary deck-event-btn") do %>
-      Start! <i class="glyphicon glyphicon-play"></i>
+    <%= button_tag( type: "submit", 
+                    name: "filter", 
+                    value: "true",
+                    class: "btn btn-primary new-deck-event-btn") do %>
+                        Start! <i class="glyphicon glyphicon-play"></i>
     <% end %>
+
   </div>
 
 <% end %>

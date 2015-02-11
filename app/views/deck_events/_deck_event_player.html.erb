@@ -1,0 +1,23 @@
+<% @deck_event.flash_card_set.each_with_index do |flash_card, index|  %>
+  <div class="de-flash-card-side front col-sm-8 col-sm-offset-2 center">
+    <div class="panel">
+      <div class="panel-heading">
+        <span class="pull-left"><small><%= "#{index + 1}/#{@deck_event.count}" %></small></span>
+        <span class="center">Question</span>
+      </div>
+      <div class="panel-body center"><%= markdown(flash_card.front) %></div>
+    </div>
+    <%= advance_flash_card_link(flash_card) %> 
+  </div>
+  <div class="de-flash-card-side back col-sm-8 col-sm-offset-2 center">
+    <div class="panel">
+      <div class="panel-heading center">
+        <span class="pull-left"><small><%= "#{index + 1}/#{@deck_event.count}" %></small></span>
+        <span class="center">Answer</span>
+      </div>
+      <div class="panel-body"><%= markdown(flash_card.back) %></div>
+    </div>
+     <%= thumbs_up_link(flash_card) %>
+     <%= thumbs_down_link(flash_card) %>
+  </div>
+<% end %>
