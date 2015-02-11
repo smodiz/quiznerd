@@ -7,6 +7,10 @@ $(document).ready( function(){
   if (isFiltered()  && isValidCount()) {
     playFlashCards();
   }
+  else {
+    $('#new-deck-event-button').select();
+  }
+
 });
 
 // <!-- functions -->
