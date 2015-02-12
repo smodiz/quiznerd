@@ -43,8 +43,6 @@ function changesMadeToFilters() {
   });
   return changes;
 }
-
-
 var process = {
   init: function() {
     $('.new-deck-event-btn').on('click', function(event){
@@ -60,7 +58,6 @@ var process = {
       $(this).closest('.de-flash-card-side').next().show();
       $(this).closest('.de-flash-card-side').hide();
       $(this).closest('.de-flash-card-side').next().find('.correct-flash-answer').focus();
-      
     });
   },
   answer: function() {
@@ -97,10 +94,6 @@ var process = {
         $(this).closest('.de-flash-card-side').next().show();
         $(this).closest('.de-flash-card-side').next().find('.flash-advance').focus();
       }
-        
-
-      
-
     });
   }
 }
