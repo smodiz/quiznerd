@@ -154,16 +154,16 @@ describe "Flash Deck Pages" do
       @deck
     end
 
-    describe "submit a GET request to Cheatsheets#edit action" do
-      before { get edit_cheatsheet_path(@deck) }
+    describe "submit a GET request to Decks#edit action" do
+      before { get edit_deck_path(@deck) }
       specify { expect(current_path).to eq root_path }
     end
-    describe "submit a PATCH request to Cheatsheets#edit action" do
-      before { patch cheatsheet_path(@deck) }
+    describe "submit a PATCH request to Decks#edit action" do
+      before { patch deck_path(@deck) }
       specify { expect(current_path).to eq root_path } 
     end
-    describe "submit a DELETE request to Cheatsheets#edit action" do
-      before { delete cheatsheet_path(@deck) }
+    describe "submit a DELETE request to Decks#edit action" do
+      before { delete deck_path(@deck) }
       specify { expect(current_path).to eq root_path }
     end
   end

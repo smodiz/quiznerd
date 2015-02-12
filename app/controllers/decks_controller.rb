@@ -2,13 +2,13 @@ class DecksController < ApplicationController
   before_action :authenticate_user!
   before_action :authorize_user, only: [:edit, :update, :destroy]
   before_action :build_deck, only: [:new, :create, :update]
-  before_action :load_deck, only: [:show, :destroy]
   
   def index
     load_decks
   end
 
   def show
+    load_deck(eager_load: true)
   end
 
   def new
@@ -26,6 +26,7 @@ class DecksController < ApplicationController
   end
 
   def destroy
+    load_deck
     @deck.destroy
     redirect_to decks_path, notice: 'Deck was successfully destroyed.'
   end

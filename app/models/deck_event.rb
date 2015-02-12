@@ -1,9 +1,10 @@
 =begin
 
 A DeckEvent represents the results of a user playing through the flash cards
-on a Deck. The only things recorded are which deck and user this
+on a Deck. The things persisted are which deck and user this
 event belongs to, the total number of cards (after the user has specified any
-filters to apply) and the user-reported number of correct answers.
+filters to apply), the user-reported number of correct answers, and which
+ones they missed.
 
 =end
 class DeckEvent < ActiveRecord::Base
@@ -16,6 +17,8 @@ class DeckEvent < ActiveRecord::Base
   validates :total_cards, presence: true
   validates :total_correct, presence: true
 
+  default_scope ->{ order(created_at: :desc) }
+
   SORT_ORDER_OPTIONS =  {   in_order: "In order",
                             random:   "Random"
                         }
@@ -23,6 +26,8 @@ class DeckEvent < ActiveRecord::Base
   MISSED_CARDS_OPTIONS = {  last_missed: "Last missed",
                             ever_missed: "Ever missed"
                           }
+
+  self.per_page = 20
 
   def self.new_with_options(deck_id:, user:, options: {})
     deck = Deck.find(deck_id)
@@ -34,6 +39,10 @@ class DeckEvent < ActiveRecord::Base
     deck_event.total_cards = deck_event.count
     deck_event.total_correct = 0
     deck_event
+  end
+
+  def self.for_user(user)
+    DeckEvent.where(user: user).includes(:deck)
   end
 
   def flash_card_set

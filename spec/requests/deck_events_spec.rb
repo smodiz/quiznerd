@@ -109,10 +109,72 @@ describe "Flash Deck Event Pages" do
   end
 
   context "when viewing past flash deck events" do
-    it "shows previous deck events for that user"
-    it "does not show previous events for other users" 
-    it "allows the user to delete their own past events"
-    it "does not allow the user to delete others' events"
+    before(:each) do
+      deck_2 = FactoryGirl.create(:deck_with_flash_cards) #diff user
+      deck_3 = FactoryGirl.create(:deck) #diff user
+      # events 1 and 2 are for deck.user. Note that one of the decks was
+      # not created by deck.user, but a user should be able to play
+      # someone else's deck 
+      @event_1 = FactoryGirl.create(:deck_event, 
+          deck_id: deck.id, 
+          user: deck.user
+      )
+      @event_2 = FactoryGirl.create(:deck_event, 
+          deck_id: deck_2.id, 
+          user: deck.user, 
+          total_correct: 4
+      )
+      # third event is from another user and should not show on our events page
+      @event_3 = FactoryGirl.create(:deck_event, deck_id: deck_3.id, user: deck_3.user)
+    end
+
+    it "shows previous deck events for that user and not others" do
+      visit deck_events_path
+      expect(page).to have_css('.section-header', text: "Flash Card Study History")
+      expect(page).to have_content(@event_1.name)
+      expect(page).to have_content(score_string(@event_1))
+      expect(page).to have_content(@event_2.name)
+      expect(page).to have_content(score_string(@event_2))
+      expect(page).not_to have_content(@event_3.name)
+    end
   end
 
+  it "allows the user to delete their own past events" do
+    event = FactoryGirl.create(:deck_event, user: deck.user)
+    visit deck_events_path
+    expect(page).to have_content(event.name)
+    click_link("delete")
+    expect(page).not_to have_content(event.name)
+    expect(DeckEvent.where(id: event.id)).to be_empty
+  end
+
+
+  describe "as wrong user" do
+    # there's no show, edit, or update action for DeckEvent, so
+    # just need to check that the delete action is only available
+    # for the user that the event belongs to
+    it "does not allow deleting" do
+      different_user = FactoryGirl.create(:user)
+      @event = FactoryGirl.create(:deck_event, user: different_user) 
+      delete deck_event_path(@event)
+      expect(current_path).to eq root_path
+      expect(DeckEvent.where(id: @event.id).size).to eq 1
+    end
+  end
+
+  describe "the menu" do
+    it "shows the flash deck event index link" do
+      visit root_path
+      expect(page).to have_link("Flash Decks Studied")
+      click_link "Flash Decks Studied"
+      expect(current_path).to eq(deck_events_path) 
+    end
+  end
+
+  def score_string(deck_event)
+    correct = deck_event.total_correct
+    total = deck_event.total_cards
+    score = ((correct.to_f/total)*100).to_i
+    "#{score}% (#{correct} out of #{total})"
+  end
 end 

@@ -25,5 +25,14 @@ module DeckEventsHelper
             '#', 
             class: 'btn btn-primary btn-sm flash-advance',
               id: id
-    end
+  end
+
+  def clear_history_link
+   link_to \
+    '<i class="glyphicon glyphicon-plus glyphicon-white"></i> Reset History'.html_safe,
+      clear_deck_events_history_path, 
+      method: :delete, 
+      data: { confirm: "Are you sure? This will delete all of your study history." },
+      class: 'btn btn-danger pull-right btn-sm' 
+  end
 end

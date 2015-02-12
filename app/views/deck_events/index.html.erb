@@ -1,0 +1,52 @@
+<div class="well">
+
+  <div class="section-header">
+    Flash Card Study History
+     <%=  clear_history_link  unless @deck_events.empty? %>
+     <div class='visible-xs clearfix'><br/></div>
+    <hr/>
+  </div>
+  <br/>
+
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped index-table">
+      <thead>
+      <tr>
+        <th>Deck Name</th>
+        <th>Taken</th>
+        <th>Cards in Deck</th>
+        <th>Cards Studied</th>
+        <th>Score</th>
+        <th></th>
+        <th></th>
+      </tr>
+      </thead>
+      <% @deck_events.each do |deck_event| %>
+        <tr>
+          <td><%= deck_event.name %></td>
+          <td><%= time_ago_in_words(deck_event.created_at) %> ago</td>
+          <td><%= deck_event.full_count%></td>
+          <td><%= deck_event.total_cards%></td>
+          <td><%= formatted_score_string(
+                deck_event.total_correct, 
+                deck_event.total_cards) %>
+          </td>
+          <td><%= link_to 'delete', deck_event, method: :delete,
+                    data: { confirm: "Are you sure?"},
+                    class: 'index-link' %>
+          </td>
+          <td><%= link_to 'play again', new_deck_event_path(deck_id: deck_event.deck_id),
+                  class: 'index-link' %>
+          </td>
+        </tr>
+      <% end %>
+      <% if @deck_events.empty?  %>
+        <tr><td colspan="7">There are no records in your flash card study history.</td></tr>  
+      <% end %>
+    </table>
+  </div>
+
+  <div class="center">
+    <%= will_paginate @deck_events, renderer: BootstrapPagination::Rails %>
+  </div>
+</div>

@@ -28,4 +28,5 @@ Rails.application.routes.draw do
   resources :flash_cards
 
   resources :deck_events, only: [:new, :create, :destroy, :index]
+  delete 'clear_deck_events_history', to: 'deck_events#clear'
 end

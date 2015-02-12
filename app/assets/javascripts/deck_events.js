@@ -8,7 +8,7 @@ $(document).ready( function(){
     playFlashCards();
   }
   else {
-    $('#new-deck-event-button').select();
+    $('.new-deck-event-btn').focus();
   }
 
 });
@@ -29,7 +29,7 @@ function rememberOriginalSettings() {
 }
 function playFlashCards() {
   $('.options-section').hide();
-  $('.de-flash-card-side').first().slideDown();
+  $('.de-flash-card-side').first().show();
   $('.de-flash-card-side').first().find('.flash-advance').focus();
 }
 function changesMadeToFilters() {
