@@ -20,7 +20,6 @@
           <th colspan="1"></th>
         </tr>
       </thead>
-      <tbody>
         <% @quiz_events.each do |quiz_event| %>
         <tr>
           <td><%= link_to quiz_event.quiz_name, quiz_event, 
@@ -41,7 +40,6 @@
           </td>
         </tr>
         <% end %>
-      </tbody>
     </table>
   </div>
 
