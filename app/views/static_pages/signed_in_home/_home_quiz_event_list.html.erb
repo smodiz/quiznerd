@@ -1,5 +1,5 @@
 <table class="table table-condensed table-striped">
-<% @quiz_events.each do |event| %>
+<% @dash.quiz_events.each do |event| %>
   <tr>
     <td>
       <%= link_to event.quiz.name, quiz_event_path(event), class: "index-link" %>
@@ -9,11 +9,11 @@
     </td>
   </tr>
 <% end %>  
-<% if @num_remaining_events > 0 %>
+<% if @dash.num_remaining_events > 0 %>
   <tr>
     <td>
       <%= link_to \
-        "... and #{@num_remaining_events} more", 
+        "... and #{@dash.num_remaining_events} more", 
         quiz_events_path, 
         class: "small pull-right" 
       %>
