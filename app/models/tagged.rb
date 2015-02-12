@@ -14,7 +14,7 @@ module Tagged
       end
     end
     def tag_list
-      self.tags.order(name: :asc).map(&:name).join(", ")
+      self.tags.map(&:name).sort.join(",")
     end
   end
 
