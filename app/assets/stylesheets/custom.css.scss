@@ -21,19 +21,60 @@ $table-border-color: darken(Gainsboro, 5%);
   margin-left: 40px;
   margin-right: 70px;
 }
-.home-header {
-  padding-top: 1px;
-  padding-bottom: 2px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  color: #000;
-  background-color: Gainsboro;
+.panel-home {
+  height: 350px;
+  overflow: scroll;
+}
+.panel-default > .panel-orange {
+  color: #fff;
+  background: #ef7e3e;
+}
+.panel-default > .panel-blue {
+  color: #fff;
+  background: #3FB4F1;
+}
+.panel-default > .panel-mint {
+  color: #fff;
+  background: #5ABA66;
+}
+.panel-default > .panel-purple {
+  color: #fff;
+  background: #8956B2;
+}
+.panel-default > .panel-pink {
+  color: #fff;
+  background: #F955B0;
+}
+.panel-default > .panel-green {
+  color: #fff;
+  background: #3C763D;
+}
+.home-panel-header {
+  height: 40px;
+  text-align: center;
+  vertical-align: middle;
+}
+.home-panel-title {
+  text-align: left;
+  vertical-align: middle;
+  font-size: 1.4em;
   a {
     &:hover {
-    background-color: transparent;
-    color: #000;
+      background-color: transparent;
+      text-decoration: none;
     }
   }
+}
+.small-panel-title{
+  font-size: 1.3em;
+}
+.panel-search {
+  margin-top: 20px;
+  height: 100px;
+  width: 300px;
+}
+.time-ago {
+  font-size: .7em;
 }
 .btn {
   margin-left: 2px;

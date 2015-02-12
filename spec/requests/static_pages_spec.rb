@@ -26,7 +26,7 @@ describe "Static Pages" do
         it { should have_content("Quizzes Written") }
         it { should have_content("Quizzes Taken") }
         it { should have_link('New Quiz') }
-        it { should have_link('Search for a Quiz') }
+        it { should have_link('Browse all Quizzes') }
         it { should have_content("You haven't taken any quizzes yet") }
         it { should have_content("You haven't written any quizzes yet") }
       end
@@ -37,7 +37,7 @@ describe "Static Pages" do
       end
 
       describe "when I click the 'Search for a Quiz' link" do
-        before { click_link "Search for a Quiz" }
+        before { click_link "Browse all Quizzes" }
         specify { expect(current_path).to eq(search_path) }
       end     
 
@@ -63,6 +63,24 @@ describe "Static Pages" do
         end
         it "should have link to quiz that was taken" do
           expect(page).to have_link(quiz_taken.name)
+        end
+      end
+
+      describe "searching from the home page" do
+
+        before(:each) do
+          @quiz1 = FactoryGirl.create(:quiz, name: "Looney Tunes")
+          @quiz2 = FactoryGirl.create(:quiz, name: "Looney Tones")
+          within("form") { 
+            fill_in "search", with: "tones"
+            click_button "Search" 
+          } 
+        end
+
+        it "should show search results" do
+          expect(current_path).to eq search_path
+          expect(page).not_to have_content @quiz1.name
+          expect(page).to have_content @quiz2.name
         end
       end
     end

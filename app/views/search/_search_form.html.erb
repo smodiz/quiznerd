@@ -1,0 +1,13 @@
+<%= form_tag search_path, :method => :get do %>
+  <p>
+    <%= text_field_tag :search, 
+          params[:search], 
+          options = { 
+            size: 20, 
+            autofocus: true,
+            placeholder: "search term" 
+          }  
+    %>
+    &nbsp;<%= submit_tag "Search", :name => nil  %>
+  </p>
+<% end %>

@@ -1,6 +1,6 @@
 class StaticPagesController < ApplicationController
   
-  LIMIT = 10
+  LIMIT = 5
 
   def home
     if signed_in?

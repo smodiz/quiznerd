@@ -1,0 +1,26 @@
+
+<div class="row home-page">  
+  <div id="quizzes" class="col-sm-4 col-xs-12">  
+    <%= render 'static_pages/signed_in_home/quizzes' %>
+  </div>  
+
+  <div id="quiz_events" class="col-sm-4 col-xs-12">  
+    <%= render 'static_pages/signed_in_home/events' %>
+  </div>  
+
+  <div class="col-sm-4 col-xs-12"><br/>
+    <div class='hidden-xs'>
+      <%= image_tag "classroom.jpg" %>
+    </div>
+    <div class="panel panel-primary panel-search">
+      <div class="panel-heading">
+        <div class="panel-title small-panel-title">
+          Search for a Quiz to take
+        </div>
+      </div>
+      <div class="panel-body">
+        <%= render 'search/search_form' %>
+      </div>
+    </div>
+  </div>
+</div>

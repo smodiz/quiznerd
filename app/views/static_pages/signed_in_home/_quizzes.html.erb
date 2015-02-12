@@ -1,0 +1,23 @@
+<div class="panel panel-home panel-default">
+  <div class="panel-heading home-panel-header panel-green">
+    <div class="panel-title home-panel-title">
+        <%= link_to "Make Quizzes", quizzes_path %>
+    </div>
+  </div>
+  <div class="panel-body">
+    <% if @dash.quizzes.empty? %>
+      <p>You haven't written any quizzes yet. Be a nerd! Get started today! </p> 
+      <p>Quizzes are a great way to test your mastery of a subject. 
+          Write a quiz for any subject you are learning and test
+          yourself periodically. </p>
+      <p>You'll be amazed at your results! </p>
+      <br/><br/><br/> 
+    <% else %>
+      <p>Here are the quizzes you've written so far:</p>
+      <%= render 'static_pages/signed_in_home/quiz_list' %>  
+    <% end %>
+     <div class="col-md-offset-3"> 
+        <%= link_to "New Quiz", new_quiz_path, class: "btn btn-primary btn-large" %>
+      </div>
+  </div>
+</div>

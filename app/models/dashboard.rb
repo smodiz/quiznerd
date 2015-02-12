@@ -23,7 +23,4 @@ class Dashboard
     @quiz_events = user_events.slice(0, limit)
     @num_remaining_events = user_events.size - quiz_events.size
   end
-
-  
-
 end
