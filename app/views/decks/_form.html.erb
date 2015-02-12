@@ -11,7 +11,7 @@
   <div class="form-inputs">
     <table class="table input-table">
       <tbody>
-        <tr><td><%= f.input :name %></td></tr>
+        <tr><td><%= f.input :name, autofocus: true %></td></tr>
         <tr>
           <td>
             <%= f.input :status, collection: Deck::STATUSES.map { |s| [s, s] }, 
@@ -32,7 +32,7 @@
 
   <div class="form-actions center">
     <%= f.button :submit,         class: 'btn btn-primary btn-sm'  %> 
-    <%= link_to 'Cancel', :back,  class: 'btn btn-danger btn-sm' %>
+    <%= link_to 'Cancel', @deck,  class: 'btn btn-danger btn-sm' %>
   </div>
 <% end %>
 

@@ -4,7 +4,7 @@
     <td>
       <%= link_to event.quiz.name, quiz_event_path(event), class: "index-link" %>
       <span class="pull-right">
-        <%= time_ago_in_words(event.updated_at) %> ago
+        <small><%= time_ago_in_words(event.updated_at) %> ago</small>
       </span>
     </td>
   </tr>

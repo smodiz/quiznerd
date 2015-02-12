@@ -6,6 +6,7 @@
       <%= text_field_tag :search, params[:search], 
         options = { 
           size: 30, 
+          autofocus: true,
           placeholder: "search all text fields shown below" } %>
       <%= submit_tag "Search", name: nil %>
     </p>

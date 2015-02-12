@@ -1,7 +1,7 @@
 <div class="section-header">
   Questions
   <%= link_to new_question_path(quiz_id: @quiz.id), 
-      class: 'btn btn-primary pull-right btn-sm' do %>
+      class: 'btn btn-primary pull-right btn-sm add-question' do %>
       <i class="glyphicon glyphicon-plus glyphicon-white"></i>
       Add Question
   <% end %>
@@ -27,3 +27,4 @@
     </table>
   </div>
 <% end %>
+<%= javascript_tag "$('.add-question').focus()" %>

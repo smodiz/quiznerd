@@ -11,7 +11,7 @@
   <div class="form-inputs">
     <table class="table input-table">
       <tbody>
-        <tr><td><%= f.input :name %></td></tr>
+        <tr><td><%= f.input :name, autofocus: true %></td></tr>
         <tr>
           <td><%= f.input :description, as: :text, 
                     input_html: { rows: text_area_rows(@quiz.description,70) } %>

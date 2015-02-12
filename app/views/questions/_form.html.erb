@@ -17,6 +17,7 @@
         <table class="table input-table">
           <tr>
             <td><%= f.input :question_type, 
+                    autofocus: true,
                     collection: Question::QUESTION_TYPES.map { |k, v| [v, k] }, 
                     include_blank: true  %>
             </td>
