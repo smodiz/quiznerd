@@ -2,7 +2,7 @@
 
   <div class="section-header">
     Flash Card Study History
-     <%=  clear_history_link  unless @deck_events.empty? %>
+     <%=  DeckEventPresenter.clear_history_link(self)  unless @deck_events.empty? %>
      <div class='visible-xs clearfix'><br/></div>
     <hr/>
   </div>

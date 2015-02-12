@@ -1,4 +1,4 @@
-
+<% @deck_event = @presenter.deck_event %>
 <div id="new-deck-event-page">
 
   <div class='deck-event-header center'>
@@ -9,11 +9,11 @@
   <div class='options-section'>
     <h5>You can optionally apply filters to customize your view!</h5>
     <%= render 'options_form' %>
-    <%= render 'empty_set_error' if @deck_event.no_cards? %>
+    <%= render 'empty_set_error' if @presenter.no_cards? %>
   </div>
 
   <div class="hidden-data">
-    <div id="flash-card-set-count"><%= @deck_event.flash_card_set.size %></div>
+    <div id="flash-card-set-count"><%= @presenter.flash_card_set.size %></div>
   </div>
 
   <div class="row">
@@ -28,7 +28,7 @@
       <h4 id="de-score"></h4>
       <h5>To store this in your history, click on the save button.</h5><br/>
     </div>
-    <!-- render the deck_event form here (hidden) -->
+    <!-- render deck_event form here (hidden), except for save button at the end -->
     <div class='form-section'>
       <%= render 'form' %>
     </div>

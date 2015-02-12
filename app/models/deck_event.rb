@@ -11,7 +11,6 @@ class DeckEvent < ActiveRecord::Base
   belongs_to :user 
   belongs_to :deck
 
-  attr_writer :flash_card_set
   delegate :name, to: :deck
   delegate :id, to: :deck, prefix: true
   validates :total_cards, presence: true
@@ -29,14 +28,10 @@ class DeckEvent < ActiveRecord::Base
 
   self.per_page = 20
 
-  def self.new_with_options(deck_id:, user:, options: {})
+  def self.new_for(deck_id:, user:)
     deck = Deck.find(deck_id)
     deck_event = DeckEvent.new(deck: deck, user: user)
-    if options.present?
-      builder = FlashCardSetBuilder.new(deck, options)
-      deck_event.flash_card_set = builder.generate_flash_cards
-    end
-    deck_event.total_cards = deck_event.count
+    deck_event.total_cards = deck.flash_cards_count
     deck_event.total_correct = 0
     deck_event
   end
@@ -45,20 +40,8 @@ class DeckEvent < ActiveRecord::Base
     DeckEvent.where(user: user).includes(:deck)
   end
 
-  def flash_card_set
-    @flash_card_set || self.deck.flash_cards
-  end
-
-  def no_cards?
-    flash_card_set.empty?
-  end
-
   def full_count
     self.deck.flash_cards_count
-  end
-
-  def count
-    @count ||= flash_card_set.size
   end
 
 end

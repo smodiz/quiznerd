@@ -38,13 +38,13 @@ describe "Flash Deck Event Pages" do
   context "while playing" do
     before(:each) do
       play_deck = FactoryGirl.create(:deck_with_two_cards, user: deck.user)
-      deck_event = DeckEvent.new_with_options(
+      deck_event = DeckEvent.new_for(
         deck_id: play_deck.id, 
         user: play_deck.user
       )
       @deck_id = play_deck.id
-      @first_card = deck_event.flash_card_set.first
-      @second_card = deck_event.flash_card_set.last
+      @first_card = deck_event.deck.flash_cards.first
+      @second_card = deck_event.deck.flash_cards.last
       visit deck_path(play_deck)
       click_link "Play Flash Cards"
       fill_in "num_cards", with: 2

@@ -30,17 +30,10 @@ class DeckEventsController < ApplicationController
   private
 
   def build_for_new
-    params[:num_cards] = nil if params[:num_cards].present? && params[:num_cards].to_i <= 0 
-    options = {
-      order: (params[:order].present? ? params[:order].to_sym : nil),
-      num_cards: params[:num_cards],
-      difficulty: params[:difficulty],
-      missed_filter: (params[:missed_filter].present? ? params[:missed_filter].to_sym : nil)
-    }
-    @deck_event = DeckEvent.new_with_options(
-      deck_id: params[:deck_id], 
+    @presenter = DeckEventPresenter.new(
       user: current_user, 
-      options: options
+      params: params, 
+      view_context: self.view_context
     )
   end
 
