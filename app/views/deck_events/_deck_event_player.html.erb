@@ -7,7 +7,9 @@
       </div>
       <div class="panel-body center"><%= markdown(flash_card.front) %></div>
     </div>
+    <%= link_to 'show scratchpad', '#', class: "scratchpad-show pull-left", tabindex: 1 %>
     <%= @presenter.advance_flash_card_link(flash_card) %> 
+    <%= link_to 'hide scratchpad', '#', class: "pull-right scratchpad-hide", tabindex: 4  %>
   </div>
   <div class="de-flash-card-side back col-sm-8 col-sm-offset-2 center">
     <div class="panel">
@@ -17,7 +19,10 @@
       </div>
       <div class="panel-body"><%= markdown(flash_card.back) %></div>
     </div>
+    <%= link_to 'show scratchpad', '#', class: "scratchpad-show pull-left", tabindex: 1  %>
      <%= @presenter.thumbs_up_link(flash_card) %>
      <%= @presenter.thumbs_down_link(flash_card) %>
+     <%= link_to 'hide scratchpad', '#', class: "pull-right scratchpad-hide", tabindex: 4 %>
   </div>
 <% end %>
+  

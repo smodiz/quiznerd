@@ -4,13 +4,20 @@ $(document).ready( function(){
   init();
   showAnswer();
   processAnswer();
-
   if (isFiltered()  && isValidCount()) {
     playFlashCards();
   }
   else {
     $('.new-deck-event-btn').focus();
   }
+  $('.scratchpad-show').on('click', function(){
+    $('.scratchpad').show();
+    $('.scratchpad textarea').focus();
+  });
+  $('.scratchpad-hide').on('click', function(){
+    $('.scratchpad').hide();
+    $('.scratchpad textarea').val("");
+  });
 });
 
 // functions 
@@ -84,10 +91,12 @@ var gradeAnswer = function(elem) {
   }
 }
 var advanceToNext = function(elem) {
+  $('.scratchpad textarea').val("");
   $(elem).closest('.de-flash-card-side').next().show();
   $(elem).closest('.de-flash-card-side').next().find('.flash-advance').focus();
 }
 var showScore = function() {
+  $('.scratchpad').hide();
   $('#de-finished').show();
   $('.de-form-actions').show();
   var correct = parseInt($('#deck_event_total_correct').val());

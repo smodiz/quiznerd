@@ -58,7 +58,8 @@ class DeckEventPresenter < BasePresenter
     h.link_to icon.html_safe, 
             '#', 
             class: 'btn btn-primary btn-sm flash-advance',
-              id: id
+              id: id,
+              tabindex: 3 
   end
 
   def self.clear_history_link(context)
