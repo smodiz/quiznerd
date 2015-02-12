@@ -35,7 +35,7 @@ describe "Flash Deck Pages" do
 
     it { should have_css('div', text: "Flash Decks") }
     it { should have_content(deck.name) }
-    it { should have_link("edit") }
+    it { should have_link("play") }
     it { should have_link("destroy") }
     it { should have_link("New Flash Deck") }
 
@@ -104,7 +104,8 @@ describe "Flash Deck Pages" do
   describe "update flash deck" do
     before(:each) do
       visit decks_path
-      click_link "edit"
+      click_link deck.name
+      click_link "Edit"
     end
 
     it "updates the deck" do
@@ -116,9 +117,9 @@ describe "Flash Deck Pages" do
       expect(page).to have_content("Deck was successfully saved")
       expect(current_path).to eq(deck_path(deck))
     end
-    it "returns to the index page when cancel is clicked" do
+    it "returns to the show page when cancel is clicked" do
       click_link "Cancel"
-      expect(current_path).to eq(decks_path)
+      expect(current_path).to eq(deck_path(deck))
     end
   end
 

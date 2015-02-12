@@ -6,10 +6,6 @@
   <td><%= deck.tag_list %></td>
   <td><%= deck.status %></td>
   <td><%= deck.flash_cards_count %></td>
-  <td><%= link_to 'edit',
-            edit_deck_path(deck),
-            class: "index-link" %>
-  </td>
   <td><%= link_to 'destroy', deck,
             method: :delete,
             data: { confirm: 'Are you sure?' },
