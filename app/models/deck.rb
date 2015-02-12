@@ -13,7 +13,7 @@ class Deck < ActiveRecord::Base
   validates :description,         presence: true
   validates :user_id,             presence: true
   validates :flash_cards_count,   presence: true
-  validates :status,              inclusion: { in: STATUSES }
+  validates :status,              presence: true, inclusion: { in: STATUSES }
 
   def self.with_flash_cards(id)
     Deck.includes(:flash_cards).find(id)
