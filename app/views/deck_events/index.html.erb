@@ -23,7 +23,7 @@
       </thead>
       <% @deck_events.each do |deck_event| %>
         <tr>
-          <td><%= deck_event.name %></td>
+          <td><%= link_to deck_event.name, deck_event.deck %></td>
           <td><%= time_ago_in_words(deck_event.created_at) %> ago</td>
           <td><%= deck_event.full_count%></td>
           <td><%= deck_event.total_cards%></td>
@@ -33,10 +33,10 @@
           </td>
           <td><%= link_to 'delete', deck_event, method: :delete,
                     data: { confirm: "Are you sure?"},
-                    class: 'index-link' %>
+                    class: 'index-link delete-link' %>
           </td>
           <td><%= link_to 'play again', new_deck_event_path(deck_id: deck_event.deck_id),
-                  class: 'index-link' %>
+                  class: 'index-link play-link' %>
           </td>
         </tr>
       <% end %>
