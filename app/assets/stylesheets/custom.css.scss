@@ -68,6 +68,9 @@ $table-border-color: darken(Gainsboro, 5%);
 .small-panel-title{
   font-size: 1.1em;
 }
+.panel-body {
+   position: relative;
+}
 .panel-search {
   margin-top: 20px;
   height: 110px;
@@ -84,15 +87,19 @@ $table-border-color: darken(Gainsboro, 5%);
     color: #fff;
   }
 }
-.btn-default { 
+.btn-std { 
   border-color: darken(Gainsboro,35%); 
   background-color: darken(Gainsboro,35%);
   color: #fff;
+  border-radius: 0;
 }
-.btn-default:hover { 
+.btn-std:hover { 
   border-color: darken(Gainsboro,40%); 
   background-color: darken(Gainsboro,40%); 
   color: #fff;
+}
+.btn.sharp {
+  border-radius: 0;
 }
 a {
   color: $brand-primary;

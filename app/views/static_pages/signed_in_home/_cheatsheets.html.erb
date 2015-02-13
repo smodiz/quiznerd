@@ -15,11 +15,10 @@
       make finding them even easier when you need them.  </p>
       <br/><br/><br/><br/> 
     <% else %>
-      <p>Here are the last few Cheatsheets you wrote:</p>
       <%= render 'static_pages/signed_in_home/cheatsheet_list' %>  
     <% end %>
     <div class="col-md-offset-3"> 
-      <%= link_to new_cheatsheet_path, class: "btn btn-default btn-large" do %>
+      <%= link_to new_cheatsheet_path, class: "btn btn-std btn-large" do %>
         Add Cheatsheet<i class="glyphicon glyphicon-plus glyphicon-white"></i>
       <% end %>
     </div>
