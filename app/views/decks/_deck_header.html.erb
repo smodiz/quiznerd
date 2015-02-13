@@ -6,9 +6,11 @@
         data: { confirm: 'Are you sure?' }, 
         class: "btn btn-sm btn-danger pull-right" 
   %>
-  <%= link_to("Play Flash Cards", 
+  <%= 
+      link_to("Play Flash Cards", 
         new_deck_event_path(deck_id: @deck.id),  
-        class: "btn btn-sm btn-success pull-right") if @deck.flash_cards.present?
+        class: "btn btn-sm btn-success pull-right hide-#{@deck.flash_cards.blank?}",
+          id: "play-flash-cards-link") 
   %>
   <%= link_to "Edit", 
         edit_deck_path(@deck), 
