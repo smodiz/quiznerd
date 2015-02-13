@@ -1,10 +1,11 @@
 <div class="panel panel-home panel-default">
   <div class="panel-heading home-panel-header panel-green">
     <div class="panel-title home-panel-title">
-        <%= link_to "Make Quizzes", quizzes_path %>
-         <span class="badge pull-right">
-            <%= @dash.quizzes_count %>
-         </span>
+      <i class="glyphicon glyphicon-edit glyphicon-white"></i>
+      <%= link_to "Make Quizzes", quizzes_path %>
+      <span class="badge pull-right">
+        <%= @dash.quizzes_count %>
+      </span>
     </div>
   </div>
   <div class="panel-body">
@@ -16,11 +17,13 @@
       <p>You'll be amazed at your results! </p>
       <br/><br/>
     <% else %>
-      <p>Here are the last five quizzes you wrote:</p>
       <%= render 'static_pages/signed_in_home/quiz_list' %>  
     <% end %>
-     <div class="col-md-offset-3"> 
-        <%= link_to "New Quiz", new_quiz_path, class: "btn btn-primary btn-large" %>
-      </div>
+    <br/>
+    <div class="col-md-offset-3"> 
+      <%= link_to new_quiz_path, class: "btn btn-default btn-large" do %>
+        New Quiz<i class="glyphicon glyphicon-plus glyphicon-white"></i>
+      <% end %>
+    </div>
   </div>
 </div>

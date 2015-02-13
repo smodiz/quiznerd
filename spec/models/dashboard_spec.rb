@@ -14,8 +14,8 @@ describe Dashboard do
 
       expect(dashboard.quizzes.map(&:id)).to match_array quizzes.slice(0,limit).map(&:id)
       expect(dashboard.quiz_events).to match_array quiz_events.slice(0,limit)
-      expect(dashboard.num_remaining_quizzes).to eq 1
-      expect(dashboard.num_remaining_events).to eq 1
+      expect(dashboard.remaining_quizzes_count).to eq 1
+      expect(dashboard.remaining_events_count).to eq 1
     end
 
     it "does not load other users' quiz data" do
