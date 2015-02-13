@@ -2,6 +2,9 @@
   <div class="panel-heading home-panel-header panel-green">
     <div class="panel-title home-panel-title">
         <%= link_to "Make Quizzes", quizzes_path %>
+         <span class="badge pull-right">
+            <%= @dash.quizzes_count %>
+         </span>
     </div>
   </div>
   <div class="panel-body">

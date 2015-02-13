@@ -6,11 +6,11 @@
     </td>
   </tr>
 <% end %>  
-<% if @dash.num_remaining_cheatsheets > 0 %>
+<% if @dash.remaining_cheatsheets_count > 0 %>
   <tr>
     <td>
       <%= link_to \
-            "... and #{@dash.num_remaining_cheatsheets} more", 
+            "... and #{@dash.remaining_cheatsheets_count} more", 
             cheatsheets_path, 
             class: "small pull-right" 
       %>

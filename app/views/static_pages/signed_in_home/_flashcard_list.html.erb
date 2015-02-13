@@ -6,11 +6,11 @@
     </td>
   </tr>
 <% end %>  
-<% if @dash.num_remaining_decks > 0 %>
+<% if @dash.remaining_decks_count > 0 %>
   <tr>
     <td>
       <%= link_to \
-            "... and #{@dash.num_remaining_decks} more", 
+            "... and #{@dash.remaining_decks_count} more", 
             decks_path, 
             class: "small pull-right" 
       %>

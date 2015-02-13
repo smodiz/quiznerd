@@ -9,11 +9,11 @@
     </td>
   </tr>
 <% end %>  
-<% if @dash.num_remaining_events > 0 %>
+<% if @dash.remaining_events_count > 0 %>
   <tr>
     <td>
       <%= link_to \
-        "... and #{@dash.num_remaining_events} more", 
+        "... and #{@dash.remaining_events_count} more", 
         quiz_events_path, 
         class: "small pull-right" 
       %>
