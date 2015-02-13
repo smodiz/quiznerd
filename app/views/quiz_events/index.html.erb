@@ -1,6 +1,7 @@
 <div class="well">
   <div class="section-header">
     Quizzes Taken
+    <%=  QuizTakingPresenter.clear_history_link(self)  unless @quiz_events.empty? %>
     <hr/>
   </div>  
 
@@ -17,6 +18,7 @@
           <th>Score</th>
           <th>Status</th>
           <th>Date</th>
+          <th colspan="1"></th>
           <th colspan="1"></th>
         </tr>
       </thead>
@@ -38,6 +40,11 @@
                   method: :delete, data: { confirm: 'Are you sure?' }, 
                   class: "index-link delete-link"  %>
           </td>
+          <td><%= link_to 'take again', 
+                    quiz_events_path(quiz_id: quiz_event.quiz_id),  
+                    method: :post, 
+                    class: "index-link play-link" %>
+          </td> 
         </tr>
         <% end %>
     </table>

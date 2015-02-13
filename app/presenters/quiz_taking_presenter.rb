@@ -7,6 +7,15 @@ class QuizTakingPresenter < BasePresenter
 
   presents :quiz_taking_form
 
+  def self.clear_history_link(context)
+   context.link_to \
+    '<i class="glyphicon glyphicon-plus glyphicon-white"></i> Reset History'.html_safe,
+      context.clear_quiz_events_history_path, 
+      method: :delete, 
+      data: { confirm: "Are you sure? This will delete all of your Quiz Taking history." },
+      class: 'btn btn-danger pull-right btn-sm' 
+  end
+
   def show_graded_question?
     quiz_taking_form.graded_question.present?
   end

@@ -44,6 +44,11 @@ class QuizEventsController < ApplicationController
       notice: "Quiz event was successfully destroyed."
   end
 
+  def clear
+    current_user.quiz_events.delete_all
+    redirect_to quiz_events_path, notice: "History successfully cleared!"
+  end
+
   private
 
     def set_quiz_event

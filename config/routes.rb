@@ -4,14 +4,16 @@ Rails.application.routes.draw do
   root 'static_pages#home'
   
   devise_for :users
- 
+  
+  resources :quizzes do 
+    put 'toggle_publish' => 'quizzes#toggle_publish'
+  end
+
   resources :quiz_events
   resources :questions do
     post 'copy' => 'copy_questions#create'
   end
-  resources :quizzes do 
-    put 'toggle_publish' => 'quizzes#toggle_publish'
-  end
+  delete 'clear_quiz_events_history', to: 'quiz_events#clear'
 
   resource :quiz_merges, only: [:new, :create]
   
