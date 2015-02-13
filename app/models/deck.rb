@@ -8,6 +8,9 @@ class Deck < ActiveRecord::Base
   has_many    :tags, through: :taggings
   has_many    :deck_events, dependent: :destroy
 
+  after_commit      :invalidate_cache
+  after_destroy     :invalidate_cache
+
   STATUSES =  %w(Private Public)
   validates :name,                presence: true, length: { maximum: 45 }
   validates :description,         presence: true
@@ -21,6 +24,12 @@ class Deck < ActiveRecord::Base
 
   def next_sequence
     (flash_cards.map(&:sequence).max || 0) + 1
+  end
+
+  private 
+
+   def invalidate_cache
+    Rails.cache.delete(Quiz.quizzes_cache_key(user))
   end
 
 end

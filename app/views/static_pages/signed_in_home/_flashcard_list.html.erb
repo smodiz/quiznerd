@@ -1,0 +1,20 @@
+<table class="table table-condensed table-striped">
+<% @dash.decks.each do |deck| %>
+  <tr>
+    <td>
+      <%= link_to deck.name, deck_path(deck), class: "index-link" %>
+    </td>
+  </tr>
+<% end %>  
+<% if @dash.num_remaining_decks > 0 %>
+  <tr>
+    <td>
+      <%= link_to \
+            "... and #{@dash.num_remaining_decks} more", 
+            decks_path, 
+            class: "small pull-right" 
+      %>
+    </td>
+  </tr>
+<% end %>
+</table>

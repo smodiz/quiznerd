@@ -32,7 +32,12 @@ describe "Static Pages" do
       end
 
       describe "when I click the New Quiz link" do
-        before { within(".home-page") { click_link "New Quiz" }}
+        before do
+          within(".home-page", :match => :first) do
+            click_link "New Quiz" 
+          end
+        end
+        
         specify { expect(current_path).to eq(new_quiz_path) } 
       end
 

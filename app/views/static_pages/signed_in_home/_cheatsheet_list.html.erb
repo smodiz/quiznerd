@@ -1,0 +1,20 @@
+<table class="table table-condensed table-striped">
+<% @dash.cheatsheets.each do |cheatsheet| %>
+  <tr>
+    <td>
+      <%= link_to cheatsheet.title, cheatsheet_path(cheatsheet), class: "index-link" %>
+    </td>
+  </tr>
+<% end %>  
+<% if @dash.num_remaining_cheatsheets > 0 %>
+  <tr>
+    <td>
+      <%= link_to \
+            "... and #{@dash.num_remaining_cheatsheets} more", 
+            cheatsheets_path, 
+            class: "small pull-right" 
+      %>
+    </td>
+  </tr>
+<% end %>
+</table>

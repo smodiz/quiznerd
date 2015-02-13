@@ -18,4 +18,22 @@ class Cheatsheet < ActiveRecord::Base
   scope :authored_by, -> (user) { where(user: user) }
   default_scope -> { order(created_at: :desc) }
 
+  after_commit      :invalidate_cache
+  after_destroy     :invalidate_cache
+
+  def self.cached_for_user(user)
+    Rails.cache.fetch(cheatsheets_cache_key(user), :expires_in => 15.minutes) do
+      authored_by(user).to_a
+    end
+  end
+
+  private 
+
+  def self.cheatsheets_cache_key(user)
+    ["cheatsheets_for_user", user]
+  end
+
+  def invalidate_cache
+    Rails.cache.delete(Cheatsheet.cheatsheets_cache_key(user))
+  end
 end

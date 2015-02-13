@@ -22,5 +22,16 @@ module DeckFinder
     def new_for_user(user)
       user.decks.build
     end
+
+    def decks_cache_key(user)
+      ["decks_for_user", user]
+    end
+    
+    def cached_for_user(user)
+      Rails.cache.fetch(decks_cache_key(user), :expires_in => 15.minutes) do
+        authored_by(user).to_a
+      end
+    end
+
   end
 end

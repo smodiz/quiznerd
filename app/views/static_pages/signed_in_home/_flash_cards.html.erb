@@ -1,0 +1,31 @@
+<div class="panel panel-home panel-default">
+  <div class="panel-heading home-panel-header panel-purple">
+    <div class="panel-title home-panel-title">
+        Flash Cards
+    </div>
+  </div>
+  <div class="panel-body">
+    <% if @dash.decks.empty? %>
+      <p>Flash cards are another great way to test your mastery of a subject. </p>
+      <p>You can create decks and play them. You can assign difficulty levels 
+          to individual cards and then filter by a particular level when playing 
+          them. 
+      </p>
+      <p> You can even save your history and when you replay the deck, only
+          play ones you missed last time or that you've ever missed in the past. 
+      </p>
+      <p>Awesome! <small>(as the kids say these days)</small> </p>
+      <br/>
+    <% else %>
+      <p>Here are the last few Flash Card Decks you wrote:</p>
+      <%= render 'static_pages/signed_in_home/flashcard_list' %>  
+    <% end %>
+     <div class="col-md-offset-3"> 
+        <%= link_to "Add Flash Card Deck", new_deck_path, 
+            class: "btn btn-primary btn-large" %>
+      </div>
+  </div>
+</div>
+
+
+
