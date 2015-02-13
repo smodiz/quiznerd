@@ -29,7 +29,7 @@ class Deck < ActiveRecord::Base
   private 
 
    def invalidate_cache
-    Rails.cache.delete(Quiz.quizzes_cache_key(user))
+    Rails.cache.delete(Deck.decks_cache_key(user))
   end
 
 end
