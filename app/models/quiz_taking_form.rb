@@ -19,6 +19,7 @@ class QuizTakingForm
                 :graded_question, :graded_answer_ids
   attr_reader   :view_context
   delegate :id, :completed?, to: :quiz_event
+  delegate :grade, to: :quiz_event
 
   def initialize(options={})
     @quiz_event     = options[:quiz_event]

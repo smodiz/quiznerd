@@ -1,13 +1,15 @@
 =begin
 
 A DeckEvent represents the results of a user playing through the flash cards
-on a Deck. The things persisted are which deck and user this
+on a Deck. The things persisted are: which deck and user this
 event belongs to, the total number of cards (after the user has specified any
 filters to apply), the user-reported number of correct answers, and which
 ones they missed.
 
 =end
 class DeckEvent < ActiveRecord::Base
+  include Gradeable
+
   belongs_to :user 
   belongs_to :deck
 
@@ -44,4 +46,7 @@ class DeckEvent < ActiveRecord::Base
     self.deck.flash_cards_count
   end
 
+  def total_answered
+    total_cards
+  end
 end

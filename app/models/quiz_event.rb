@@ -1,5 +1,6 @@
 class QuizEvent < ActiveRecord::Base
   include QuizEventFinder
+  include Gradeable
 
   belongs_to    :user
   belongs_to    :quiz
@@ -38,14 +39,6 @@ class QuizEvent < ActiveRecord::Base
     cached_quiz.number_of_questions
   end
 
-  def current_percent_grade
-    if data_present?
-      (total_correct.to_f / total_answered.to_f) * 100
-    else
-      0
-    end
-  end
-
   def completed?
     self.status == QuizEvent::COMPLETED_STATUS
   end
@@ -54,6 +47,8 @@ class QuizEvent < ActiveRecord::Base
     self[:total_answered] = value
     complete if last_question_answered?
   end
+
+
 
 private
 

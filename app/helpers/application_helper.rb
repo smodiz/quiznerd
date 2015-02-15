@@ -42,19 +42,6 @@ module ApplicationHelper
     rows.max
   end
 
-  def score(total_correct, total_items)
-    if total_items.present? && total_items > 0 && total_correct.present?
-      "%.0f" % ((total_correct.to_f / total_items.to_f) * 100)
-    else
-      0
-    end
-  end
-
-  def formatted_score_string(total_correct, total_items)
-    score = score(total_correct, total_items)
-    "#{score}% (#{total_correct} out of #{total_items})"
-  end
-
   private
 
     def number_of_newlines(text)

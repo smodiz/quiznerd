@@ -30,32 +30,4 @@ describe QuizEvent do
 
   end
 
-  describe "#current_percent_grade" do
-    context "when data present" do 
-      it "returns the correct percentage" do 
-        quiz_event.total_answered = 2
-        quiz_event.total_correct = 1
-        expect(quiz_event.current_percent_grade).to eq (50.0)
-      end
-    end
-
-    context "when data not present" do 
-      it "returns 0 when total_answered is not present" do 
-        quiz_event.total_answered = nil
-        quiz_event.total_correct = 5
-        expect(quiz_event.current_percent_grade).to eq 0
-      end
-      it "returns 0 when total_answered is zero" do 
-        quiz_event.total_answered = 0
-        quiz_event.total_correct = 5
-        expect(quiz_event.current_percent_grade).to eq 0
-      end
-      it "returns 0 when total_correct is not present" do
-        quiz_event.total_answered = 5
-        quiz_event.total_correct = nil
-        expect(quiz_event.current_percent_grade).to eq 0        
-      end
-    end
-  end
-
 end

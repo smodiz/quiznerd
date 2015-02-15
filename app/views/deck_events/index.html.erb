@@ -27,10 +27,7 @@
           <td><%= time_ago_in_words(deck_event.created_at) %> ago</td>
           <td><%= deck_event.full_count%></td>
           <td><%= deck_event.total_cards%></td>
-          <td><%= formatted_score_string(
-                deck_event.total_correct, 
-                deck_event.total_cards) %>
-          </td>
+          <td><%= GradePresenter.long_score(deck_event.grade) %></td>
           <td><%= link_to 'delete', deck_event, method: :delete,
                     data: { confirm: "Are you sure?"},
                     class: 'index-link delete-link' %>

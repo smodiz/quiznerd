@@ -16,6 +16,10 @@ class QuizTakingPresenter < BasePresenter
       class: 'btn btn-danger pull-right btn-sm' 
   end
 
+   def long_score
+    "You scored #{GradePresenter.long_score(quiz_event.grade)}!"
+  end
+
   def show_graded_question?
     quiz_taking_form.graded_question.present?
   end
@@ -45,12 +49,6 @@ class QuizTakingPresenter < BasePresenter
 
   def multi_select?
     question.question_type == "MC-2"
-  end
-
-  def quiz_result
-    "You scored #{h.formatted_quiz_score(quiz_event)} \
-     (#{quiz_event.total_correct}  out of \
-       #{quiz_event.total_answered} )"
   end
 
 end

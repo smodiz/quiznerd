@@ -91,7 +91,7 @@ describe "Quiz Taking Form" do
     end
 
     it "does not impact the grade" do
-      expect(quiz_event.current_percent_grade).to eq 0.0
+      expect(quiz_event.grade.percent).to eq 0.0
     end
   end
 
@@ -112,7 +112,7 @@ describe "Quiz Taking Form" do
     end
 
     it "does not impact the grade" do
-      expect(quiz_event.current_percent_grade).to eq 0.0
+      expect(quiz_event.grade.percent).to eq 0.0
     end
   end
 
