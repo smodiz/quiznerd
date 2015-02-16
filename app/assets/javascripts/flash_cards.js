@@ -5,7 +5,7 @@ $(document).ready(function(){
   
   $('.flash-cards-container').on('click', '#done', function(event) {
     event.preventDefault();
-    $('#new_flash_card').remove();
+    $('form').remove();
     $('#new_link').show();
   });
  
