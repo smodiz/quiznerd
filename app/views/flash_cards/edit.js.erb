@@ -1,3 +1,5 @@
 $('#new_link').hide()
 $('.flash-card-form').remove();
 $('#form-container').append('<%= j render("form") %>');
+$('.flash-cards-container')[0].scrollIntoView();
+$('#flash_card_front').focus();
