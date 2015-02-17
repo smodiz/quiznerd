@@ -1,5 +1,5 @@
 <div id='deck-filter-options' class='panel'>
-  <div class="panel-heading center">Apply Filters</div>
+  <div class="panel-heading center">Select Options</div>
   <div class="panel-body">
     <ul>
       <li class="option">
@@ -34,6 +34,18 @@
               }
         %>
       </li>
+      <li class="option">
+        <%= label_tag "order", "Order".html_safe %>
+        <%= select_tag "order", 
+              options_from_collection_for_select(
+                DeckEvent::SORT_ORDER_OPTIONS, "first", "last", params[:order]
+              ),
+              options = { 
+                class: "pull-right deck-event-option"
+              }
+        %>
+      </li>
     </ul>
+    <br/><br/>
   </div>
 </div>
