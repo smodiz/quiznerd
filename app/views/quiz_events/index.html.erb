@@ -44,6 +44,9 @@
           </td> 
         </tr>
         <% end %>
+        <% if @quiz_events.empty? %>
+          <tr><td colspan="8">There are no quizzes taken in your history.</td></tr>  
+        <% end %>
     </table>
   </div>
 

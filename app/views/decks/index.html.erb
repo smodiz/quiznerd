@@ -20,9 +20,10 @@
           <th></th>
         </tr>
       </thead>
-      <tbody>
         <%= render @decks %>
-      </tbody>
+        <%  if @decks.empty? %>
+          <tr><td colspan="6">There are no flash card decks yet.</td></tr>  
+        <% end %>
     </table>
   </div>
 

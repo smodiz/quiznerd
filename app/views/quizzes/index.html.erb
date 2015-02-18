@@ -22,6 +22,9 @@
       </thead>
       <tbody>
         <%= render @quizzes %>
+        <%  if @quizzes.empty? %>
+          <tr><td colspan="7">There are no quizzes yet.</td></tr>  
+        <% end %>
       </tbody>
     </table>
   </div>

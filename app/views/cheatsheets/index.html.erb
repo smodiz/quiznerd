@@ -22,6 +22,9 @@
       </thead>
       <tbody>
         <%= render @cheatsheets %>
+        <%  if @cheatsheets.empty? %>
+          <tr><td colspan="5">There are no cheatsheets yet.</td></tr>  
+        <% end %>
       </tbody>
     </table>
   </div>
