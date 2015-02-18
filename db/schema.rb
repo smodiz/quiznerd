@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150209032229) do
+ActiveRecord::Schema.define(version: 20150218070900) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,10 +40,8 @@ ActiveRecord::Schema.define(version: 20150209032229) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
-    t.integer  "status_id"
   end
 
-  add_index "cheatsheets", ["status_id"], name: "index_cheatsheets_on_status_id", using: :btree
   add_index "cheatsheets", ["title"], name: "index_cheatsheets_on_title", using: :btree
   add_index "cheatsheets", ["user_id"], name: "index_cheatsheets_on_user_id", using: :btree
 
@@ -129,12 +127,6 @@ ActiveRecord::Schema.define(version: 20150209032229) do
   add_index "quizzes", ["author_id"], name: "index_quizzes_on_author_id", using: :btree
   add_index "quizzes", ["category_id"], name: "index_quizzes_on_category_id", using: :btree
   add_index "quizzes", ["subject_id"], name: "index_quizzes_on_subject_id", using: :btree
-
-  create_table "statuses", force: true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "subjects", force: true do |t|
     t.string   "name"

@@ -86,12 +86,10 @@ describe "Cheatsheets Pages" do
 
   describe "create a new cheatsheet" do
     it "creates a new cheatsheet" do
-      FactoryGirl.create(:status)
       visit new_cheatsheet_path
       expect(page).to have_css ".section-header", text: "New Cheatsheet"
       fill_in "Title", with: "A new cheatsheet"
       fill_in "Content", with: "Something of interest!"
-      select "Private", from: "Status"
       click_button "Create Cheatsheet"
       expect(page).to have_css ".section-header", text: "A new cheatsheet"
       expect(page).to have_content "Something of interest!"

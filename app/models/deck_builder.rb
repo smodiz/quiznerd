@@ -23,16 +23,27 @@ class DeckBuilder
     questions.each_with_index do |question, index|
       flash_cards << FlashCard.new( deck_id: deck_id,
                                     front: self.build_front(question), 
-                                    back: self.build_back(question.answers),
+                                    back: self.build_back(question),
                                     sequence: index + 1,
                                     difficulty: difficulty)
     end
     flash_cards
   end
 
-  def self.build_back(answers)
+  def self.build_back(question)
+    "".tap do |back|
+      back << get_answer(question.answers)
+      back << get_remarks(question) if question.remarks.present?
+    end
+  end
+
+  def self.get_answer(answers)
     answers.each_with_object("") { |a, back| back << "#{a.content}\n" if a.correct? }
   end 
+
+  def self.get_remarks(question)
+    "Remarks: \n\n #{question.remarks}" 
+  end
 
   def self.build_front(question)
     if question.question_type == "T/F"
