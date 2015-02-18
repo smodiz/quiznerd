@@ -1,5 +1,6 @@
 class FlashCardsController < ApplicationController
-
+  before_action :authenticate_user!
+  
   def destroy
     load
     @flash_card.destroy
