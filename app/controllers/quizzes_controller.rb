@@ -50,6 +50,7 @@ class QuizzesController < ApplicationController
   def load_quizzes
     @quizzes = Quiz.search_owned_by(current_user, params[:search]).
         reorder(sort_clause).paginate(page: params[:page]) 
+    @count = Quiz.count
   end
 
   def load_quiz(eager_load:false)

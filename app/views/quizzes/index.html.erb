@@ -1,41 +1,44 @@
-<div class="well">
-  <div class="section-header">
-    Quizzes Written
+<div class="panel panel-default">
+  <div class="panel-heading panel-green">
+    <div class="panel-title index-section-header">
+      Quizzes Written
+      <span class="badge pull-right">
+          <%= @count %>
+       </span>
+    </div>
+  </div>
+  <div class="panel-body">
+    <%= render partial: 'search/shared_search', locals: { path: quizzes_path, new_btn: "new_quiz_button" } %>
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped index-table">
+        <thead>
+          <tr>
+            <th class='quiz_name_cell <%= sortable_css_class("name") %>'><%= sortable_link "name" %></th>
+            <th class='<%= sortable_css_class("description") %>'><%= sortable_link "description" %></th>
+            <th class='<%= sortable_css_class("published") %>'><%= sortable_link "published" %></th>
+            <th>Category</th>
+            <th>Subject</th>
+            <th>Questions</th>
+            <th colspan="1"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render @quizzes %>
+          <%  if @quizzes.empty? %>
+            <tr><td colspan="7">There are no quizzes yet.</td></tr>  
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="page-actions">
       <%= new_quiz_button %>
-    <hr/>
-  </div>  
+    </div>
 
- <%= render partial: 'search/shared_search', locals: { path: quizzes_path, new_btn: "" } %>
+    <div class="center">
+      <%= will_paginate @quizzes, renderer: BootstrapPagination::Rails  %>
+    </div>
 
-  <div class="table-responsive">
-    <table class="table table-bordered table-striped index-table">
-      <thead>
-        <tr>
-          <th class='quiz_name_cell <%= sortable_css_class("name") %>'><%= sortable_link "name" %></th>
-          <th class='<%= sortable_css_class("description") %>'><%= sortable_link "description" %></th>
-          <th class='<%= sortable_css_class("published") %>'><%= sortable_link "published" %></th>
-          <th>Category</th>
-          <th>Subject</th>
-          <th>Questions</th>
-          <th colspan="1"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <%= render @quizzes %>
-        <%  if @quizzes.empty? %>
-          <tr><td colspan="7">There are no quizzes yet.</td></tr>  
-        <% end %>
-      </tbody>
-    </table>
+    <br/><br/>
   </div>
-
-  <div class="page-actions">
-    <%= new_quiz_button %>
-  </div>
-
-  <div class="center">
-    <%= will_paginate @quizzes, renderer: BootstrapPagination::Rails  %>
-  </div>
-
-  <br/><br/>
 </div>
