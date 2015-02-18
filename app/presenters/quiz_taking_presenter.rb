@@ -16,7 +16,11 @@ class QuizTakingPresenter < BasePresenter
       class: 'btn btn-danger pull-right btn-sm' 
   end
 
-   def long_score
+  def self.clear_link_command 
+    "QuizTakingPresenter.clear_history_link(self)  unless @quiz_events.empty?"
+  end
+
+  def long_score
     "You scored #{GradePresenter.long_score(quiz_event.grade)}!"
   end
 

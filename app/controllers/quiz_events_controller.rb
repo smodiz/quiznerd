@@ -6,6 +6,7 @@ class QuizEventsController < ApplicationController
   def index
     @quiz_events = QuizEvent.search_quizzes_taken(
       params[:search], current_user).paginate(page: params[:page])   
+    @count = QuizEvent.count
   end
 
   def show
