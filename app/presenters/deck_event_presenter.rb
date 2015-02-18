@@ -34,6 +34,16 @@ class DeckEventPresenter < BasePresenter
     flash_card_set.present? ? flash_card_set.size : 0
   end
 
+  def show_edit_link
+    deck_event.user == h.current_user
+  end
+
+  def edit_link
+    if show_edit_link
+        h.link_to "edit", h.deck_path(deck_event.deck_id), class: "index-link", target: '_blank'
+    end
+  end
+
   def thumbs_up_link(flash_card)
     id = "correct-answer-#{flash_card.id}"
     icon = '<i class="glyphicon glyphicon-thumbs-up glyphicon-white"></i>'

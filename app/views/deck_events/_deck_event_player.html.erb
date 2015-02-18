@@ -4,6 +4,7 @@
       <div class="panel-heading">
         <span class="pull-left"><small><%= "#{index + 1}/#{@presenter.card_count}" %></small></span>
         <span class="center">Question</span>
+        <span class="pull-right"><small><%= @presenter.edit_link %></small></span>
       </div>
       <div class="panel-body center"><%= markdown(flash_card.front) %></div>
     </div>
@@ -16,6 +17,7 @@
       <div class="panel-heading center">
         <span class="pull-left"><small><%= "#{index + 1}/#{@presenter.card_count}" %></small></span>
         <span class="center">Answer</span>
+        <span class="pull-right"><small><%= @presenter.edit_link %></small></span>
       </div>
       <div class="panel-body"><%= markdown(flash_card.back) %></div>
     </div>

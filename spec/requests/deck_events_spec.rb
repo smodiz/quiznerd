@@ -53,12 +53,13 @@ describe "Flash Deck Event Pages" do
 
     it "shows the first flash card (front) when user selects Start" do
       expect(page).to have_css('.de-flash-card-side', text: @first_card.front)
-      
+      expect(page).to have_link "edit" 
     end
 
     it "shows the back of the card when user clicks show" do
       click_link("advance-#{@first_card.id}")
       expect(page).to have_css('.de-flash-card-side', text: @first_card.back)
+      expect(page).to have_link "edit" 
     end
 
     it "allows user to select 'correct' to advance to next card" do
