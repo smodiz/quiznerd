@@ -34,9 +34,12 @@ class DecksController < ApplicationController
   private
 
   def load_decks
-    @decks = Deck.search_owned_by(current_user,params[:search],params[:tag]).
-      paginate(page: params[:page])
-    @tag_names = Deck.tags_for(current_user)
+    @facade = DecksFacade.new(
+      current_user,
+      params[:search],
+      params[:tag],
+      params[:page]
+    )
   end
 
   def load_deck(eager_load: false)

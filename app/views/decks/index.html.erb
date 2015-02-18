@@ -1,39 +1,42 @@
-<div class="well">
-  <div class="section-header">
-    Flash Decks
-    <%= new_deck_button %>
+<div class="panel panel-default">
+  <div class="panel-heading panel-purple">
+    <div class="panel-title index-section-header">
+      Flash Card Decks
+      <span class="badge pull-right">
+          <%= @facade.count %>
+       </span>
+    </div>
   </div>
-  <hr/>
+  <div class="panel-body">
+    <%= render partial: 'search/shared_search', locals: { path: decks_path, new_btn: "new_deck_button" } %>
+    <%= render partial: 'shared/tag_list', locals: { tag_path: :deck_tag_path, tag_names: @facade.tag_names } %>
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped index-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Tags</th>
+            <th>Status</th>
+            <th>Num Cards</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+          <%= render @facade.decks %>
+          <%  if @facade.decks.empty? %>
+            <tr><td colspan="6">There are no flash card decks yet.</td></tr>  
+          <% end %>
+      </table>
+    </div>
 
-  <%= render partial: 'search/shared_search', locals: { path: decks_path, new_btn: "" } %>
-  <%= render partial: 'shared/tag_list', locals: { tag_path: :deck_tag_path, tag_names: @tag_names} %>
+    <div class="page-actions">
+      <%= new_deck_button %>
+    </div>
 
-  <div class="table-responsive">
-    <table class="table table-bordered table-striped index-table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Tags</th>
-          <th>Status</th>
-          <th>Num Cards</th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
-        <%= render @decks %>
-        <%  if @decks.empty? %>
-          <tr><td colspan="6">There are no flash card decks yet.</td></tr>  
-        <% end %>
-    </table>
+    <div class="center">
+      <%= will_paginate @facade.decks, renderer: BootstrapPagination::Rails %>
+    </div>
+
+    <br/><br/>
   </div>
-
-  <div class="page-actions">
-    <%= new_deck_button %>
-  </div>
-
-  <div class="center">
-    <%= will_paginate @cheatsheets, renderer: BootstrapPagination::Rails %>
-  </div>
-
-  <br/><br/>
 </div>
