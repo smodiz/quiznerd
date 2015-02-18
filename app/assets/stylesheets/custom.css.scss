@@ -76,6 +76,7 @@ $table-border-color: darken(Gainsboro, 5%);
   height: 110px;
   width: 300px;
 }
+
 .time-ago {
   font-size: .7em;
 }
@@ -222,6 +223,14 @@ ul.li {
 }
 .section-header {
    font-size: 1.6em;
+}
+.index-section-header {
+  font-size: 1.8em;
+}
+.tag-well {
+  .well {
+    background: lighten(Gainsboro, 8%);
+  }
 }
 .input-table {
   > thead,

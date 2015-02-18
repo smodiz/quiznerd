@@ -5,8 +5,8 @@
   </div>
   <hr/>
 
-  <%= render partial: 'search/shared_search', locals: { path: decks_path } %>
-  <%= render partial: 'shared/tag_list', locals: { tag_path: :deck_tag_path} %>
+  <%= render partial: 'search/shared_search', locals: { path: decks_path, new_btn: "" } %>
+  <%= render partial: 'shared/tag_list', locals: { tag_path: :deck_tag_path, tag_names: @tag_names} %>
 
   <div class="table-responsive">
     <table class="table table-bordered table-striped index-table">

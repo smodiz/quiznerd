@@ -38,10 +38,12 @@ class CheatsheetsController < ApplicationController
   private
 
   def load_cheatsheets
-    @cheatsheets  ||= 
-      Cheatsheet.search_owned_by(current_user, params[:search], params[:tag]).
-        paginate(page: params[:page]) 
-    @tag_names = Cheatsheet.tags_for(current_user)
+    @facade = CheatsheetsFacade.new(
+      current_user, 
+      params[:search], 
+      params[:tag], 
+      params[:page]
+    )
   end
 
   def load_cheatsheet

@@ -161,12 +161,12 @@ describe "Cheatsheets Pages" do
     end
 
     it "displays the matching cheatsheets" do
-      expect(page).to have_css ".section-header", text: "Cheatsheets"
+      expect(page).to have_css ".index-section-header", text: "Cheatsheets"
       expect(page).to have_content @cs2.title
     end
 
     it "does not display non-matching cheatsheets" do
-      expect(page).to have_css ".section-header", text: "Cheatsheets"
+      expect(page).to have_css ".index-section-header", text: "Cheatsheets"
       expect(page).not_to have_content @cs1.title
     end
   end

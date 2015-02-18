@@ -1,41 +1,46 @@
-<div class="well">
+<div class="panel panel-default">
+  <div class="panel-heading panel-pink">
+    <div class="panel-title index-section-header">
+      Cheatsheets
+      <span class="badge pull-right">
+          <%= @facade.count %>
+       </span>
 
-  <div class="section-header">
-    Cheatsheets
-    <%= new_cheatsheet_button %>
-    <hr/>
-  </div>  
-
-  <%= render partial: 'search/shared_search', locals: { path: cheatsheets_path } %>
-  <%= render partial: 'shared/tag_list', locals: { tag_path: :cheatsheet_tag_path } %>
- 
-  <div class="table-responsive">
-    <table class="table table-bordered table-striped index-table">
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Tags</th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <%= render @cheatsheets %>
-        <%  if @cheatsheets.empty? %>
-          <tr><td colspan="5">There are no cheatsheets yet.</td></tr>  
-        <% end %>
-      </tbody>
-    </table>
+    </div>
   </div>
+  <div class="panel-body">
+    <%= render partial: 'search/shared_search', locals: { path: cheatsheets_path, new_btn: "new_cheatsheet_button" } %>
+    <%= render partial: 'shared/tag_list', locals: { tag_path: :cheatsheet_tag_path, tag_names: @facade.tag_names } %>
+    
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped index-table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Tags</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render @facade.cheatsheets %>
+          <%  if @facade.cheatsheets.empty? %>
+            <tr><td colspan="5">There are no cheatsheets yet.</td></tr>  
+          <% end %>
+        </tbody>
+      </table>
+    </div>
 
-  <div class="page-actions">
-    <%= new_cheatsheet_button %>
+    <div class="page-actions">
+      <%= new_cheatsheet_button %>
+    </div>
+
+    <div class="center">
+      <%= will_paginate @facade.cheatsheets, renderer: BootstrapPagination::Rails  %>
+    </div>
+
+    <br/><br/>
+
   </div>
-
-  <div class="center">
-    <%= will_paginate @cheatsheets, renderer: BootstrapPagination::Rails  %>
-  </div>
-
-  <br/><br/>
-
 </div>
+
