@@ -6,6 +6,8 @@ class QuizEvent < ActiveRecord::Base
   belongs_to    :quiz
   after_commit  :invalidate_cache
   after_destroy :invalidate_cache
+  has_one :subject, through: :quiz 
+  has_one :category, through: :quiz
   
   default_scope -> { order('created_at DESC') }
    
@@ -13,7 +15,6 @@ class QuizEvent < ActiveRecord::Base
   IN_PROGRESS_STATUS  = "In Progress"
   
   def cached_quiz
-    # cached for use by this single quiz event
     quiz = Rails.cache.fetch(["quiz_event/quiz", quiz_id, id]) do
       Quiz.with_questions_and_answers(quiz_id) 
     end 

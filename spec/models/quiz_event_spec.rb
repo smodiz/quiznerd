@@ -30,4 +30,34 @@ describe QuizEvent do
 
   end
 
+  describe "search" do
+    let(:quiz) { FactoryGirl.create(:quiz) }
+    let(:qe_1) { FactoryGirl.create(:quiz_event, quiz: quiz, user: quiz.author) }
+    let(:qe_2) { FactoryGirl.create(:quiz_event, quiz: quiz, user: quiz.author) }
+    let(:qe_3) { FactoryGirl.create(:quiz_event, user: quiz.author) } # some other quiz
+
+    before(:each) do
+      #Touch, otherwise they don't exist yet
+      qe_1; qe_2; qe_3; 
+    end
+
+    context "when given a search key word" do
+      it "should return only the matching records for publishd quizzes" do
+        @quiz_events = QuizEvent.search_quizzes_taken(quiz.name,quiz.author)
+        expect(@quiz_events.size).to eq 2
+        @quiz_events.each do |quiz_event|
+          expect(quiz_event.quiz_name).to eq quiz.name
+          expect(quiz_event.quiz_name).not_to eq qe_3.quiz.name
+        end
+      end
+    end
+
+    context "when no search terms given" do
+      it "should return all records" do
+        @quiz_events = QuizEvent.search_quizzes_taken(nil,quiz.author)
+        expect(@quiz_events.size).to eq 3
+      end
+    end
+  end
+
 end
