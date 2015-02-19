@@ -1,17 +1,20 @@
 require 'spec_helper'
 
-describe DeckBuilder do
+describe FlashCardImporter do
 
-  describe "created from quiz" do
-    it "returns a deck with flash cards" do
+  let(:quiz)    { FactoryGirl.create(:quiz_with_questions) }
+  let(:deck)    { FactoryGirl.create(:deck) }
+  let(:deck_2)  { FactoryGirl.create(:deck_with_two_cards) }
+
+  describe "created from quiz questions" do
+    it "adds flash cards to deck" do
       default_difficulty = "2"
-      quiz = FactoryGirl.create(:quiz_with_questions)
       # factory creates 2 questions, each with 2 answers, 
       # one of which is correct. For a more complete test,
       # make one of the questions have 2 correct answers
       quiz.questions.first.answers[1].correct = true
-      deck = DeckBuilder.from_quiz(quiz, default_difficulty)
-      deck.save!
+      importer = FlashCardImporter.new(deck)
+      importer.import_from_quiz(quiz, default_difficulty)
 
       expect(deck.flash_cards.size).to eq quiz.questions.size
       deck.flash_cards.each_with_index do |flash_card, index|

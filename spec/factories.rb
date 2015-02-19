@@ -75,7 +75,6 @@ FactoryGirl.define do
     description "very flashy"
     status "Private"
     tag_list ""
-    flash_cards_count 0
     association :user, factory: :user
     factory :deck_with_flash_cards do |dk|
       dk.flash_cards do |flash_cards| 
