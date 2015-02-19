@@ -10,17 +10,17 @@
     <table class="table table-bordered table-striped index-table">
       <thead>
         <tr>
-          <th class='quiz_name_cell'>Name</th>
-          <th>Description</th>
-          <th>Category</th>
-          <th>Subject</th>
-          <th>Questions</th>
+          <th class="col-xs-3">Name</th>
+          <th class="col-xs-5">Description</th>
+          <th class="col-xs-1">Category</th>
+          <th class="col-xs-2">Subject</th>
+          <th class="col-xs-1">Questions</th>
         </tr>
       </thead>
       <tbody>
         <% @quizzes.each do |quiz| %>
           <tr>
-            <td class='quiz_name_cell'>
+            <td>
               <%= link_to \
                 quiz.name, 
                 new_quiz_event_path(quiz_id: quiz.id), 

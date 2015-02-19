@@ -14,13 +14,19 @@
       <table class="table table-bordered table-striped index-table">
         <thead>
           <tr>
-            <th class='quiz_name_cell <%= sortable_css_class("name") %>'><%= sortable_link "name" %></th>
-            <th class='<%= sortable_css_class("description") %>'><%= sortable_link "description" %></th>
-            <th class='<%= sortable_css_class("published") %>'><%= sortable_link "published" %></th>
-            <th>Category</th>
-            <th>Subject</th>
-            <th>Questions</th>
-            <th colspan="1"></th>
+            <th class="col-xs-3 <%= sortable_css_class("name") %>">
+              <%= sortable_link "name" %>      
+            </th>
+            <th class="col-xs-4 <%= sortable_css_class("description") %>">
+              <%= sortable_link "description" %>
+            </th>
+            <th class="col-xs-1 <%= sortable_css_class("published") %>">
+              <%= sortable_link "published" %>
+            </th>
+            <th class="col-xs-1">Category</th>
+            <th class="col-xs-1">Subject</th>
+            <th class="col-xs-1"><small>Questions<small></th>
+            <th class="col-xs-1"></th>
           </tr>
         </thead>
         <tbody>
