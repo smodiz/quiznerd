@@ -1,12 +1,11 @@
 Rails.application.routes.draw do
- 
 
   root 'static_pages#home'
   
   devise_for :users
   
   resources :quizzes do 
-    put 'toggle_publish' => 'quizzes#toggle_publish'
+    put 'toggle_publish' => 'publish_quizzes#create'
   end
 
   resources :quiz_events

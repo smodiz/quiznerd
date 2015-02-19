@@ -1,7 +1,6 @@
 class QuizzesController < ApplicationController
   include SortableColumns
 
-
   before_action :authenticate_user!
   before_action :correct_user, only: [:edit, :update, :destroy]
 
@@ -35,14 +34,6 @@ class QuizzesController < ApplicationController
     load_quiz
     @quiz.destroy
     redirect_to quizzes_path, notice: 'Quiz was successfully destroyed.' 
-  end
-
-  def toggle_publish
-    @quiz = Quiz.find(params[:quiz_id])
-    @quiz.toggle_publish
-    @quiz.save
-    action = @quiz.published ? "published" : "unpublished" 
-    redirect_to @quiz, notice: "Quiz was #{action}" 
   end
 
   private
