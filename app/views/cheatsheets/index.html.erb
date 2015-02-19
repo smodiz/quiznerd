@@ -9,8 +9,12 @@
     </div>
   </div>
   <div class="panel-body">
-    <%= render partial: 'search/shared_search', locals: { path: cheatsheets_path, new_btn: "new_cheatsheet_button" } %>
-    <%= render partial: 'shared/tag_list', locals: { tag_path: :cheatsheet_tag_path, tag_names: @facade.tag_names } %>
+    <%= render  partial: 'search/shared_search', 
+                locals: { path: cheatsheets_path, 
+                          btn_cmd: "new_cheatsheet_button" } %>
+    <%= render  partial: 'shared/tag_list', 
+                locals: { tag_path: :cheatsheet_tag_path, 
+                          tag_names: @facade.tag_names } %>
     
     <div class="table-responsive">
       <table class="table table-bordered table-striped index-table">

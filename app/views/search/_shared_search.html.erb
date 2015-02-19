@@ -8,7 +8,7 @@
           autofocus: true,
           placeholder: "search all text fields shown below" } %>
       <%= submit_tag "Search", name: nil %>
-      <%= instance_eval(new_btn) if new_btn %>
+      <%= instance_eval(btn_cmd) if btn_cmd %>
   <% end %>
   <br/>
 </div>
