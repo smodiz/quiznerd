@@ -28,7 +28,7 @@ class QuizTakingForm
     @answer_correct = nil
 
     if starting_quiz?
-      self.question_id = quiz.first_question_id
+      self.question_id = first_question_id
     end
   end
 
@@ -90,7 +90,16 @@ private
   end
 
   def next_question_id 
-    quiz.next_question_id(quiz_event.last_question_id)
+    #quiz.next_question_id(quiz_event.last_question_id)
+    if quiz_event.last_question_id
+      quiz.questions.detect { |q| q.id > quiz_event.last_question_id }.try(:id)
+    else
+      first_question_id
+    end
+  end
+
+  def first_question_id
+    quiz.questions.first.id
   end
 
   def user_cheating?   

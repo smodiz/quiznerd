@@ -14,7 +14,7 @@ describe "Quiz Taking Form" do
 
   context "when starting a quiz" do 
     it "starts with the first question" do
-      first = quiz.first_question_id
+      first = quiz.questions.first.id
       expect(quiz_taking_form.question.id).to eq first
     end
 

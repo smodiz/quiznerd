@@ -37,18 +37,6 @@ class Quiz < ActiveRecord::Base
       self.toggle(:published)
     end
   end
-  
-  def next_question_id(last_question_id)
-    if last_question_id
-      questions.detect { |q| q.id > last_question_id }.try(:id)
-    else
-      first_question_id
-    end
-  end
-
-  def first_question_id
-    questions.first.id 
-  end
 
   protected
   

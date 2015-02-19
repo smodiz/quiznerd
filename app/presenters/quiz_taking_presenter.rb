@@ -7,18 +7,7 @@ class QuizTakingPresenter < BasePresenter
 
   presents :quiz_taking_form
 
-  def self.clear_history_link(context)
-   context.link_to \
-    '<i class="glyphicon glyphicon-plus glyphicon-white"></i> Reset History'.html_safe,
-      context.clear_quiz_events_history_path, 
-      method: :delete, 
-      data: { confirm: "Are you sure? This will delete all of your Quiz Taking history." },
-      class: 'btn btn-danger pull-right btn-sm' 
-  end
-
-  def self.clear_link_command 
-    "QuizTakingPresenter.clear_history_link(self)  unless @quiz_events.empty?"
-  end
+ 
 
   def long_score
     "You scored #{GradePresenter.long_score(quiz_event.grade)}!"
@@ -55,4 +44,16 @@ class QuizTakingPresenter < BasePresenter
     question.question_type == "MC-2"
   end
 
+  def self.clear_history_link(context)
+   context.link_to \
+    '<i class="glyphicon glyphicon-plus glyphicon-white"></i> Reset History'.html_safe,
+      context.clear_quiz_events_history_path, 
+      method: :delete, 
+      data: { confirm: "Are you sure? This will delete all of your Quiz Taking history." },
+      class: 'btn btn-danger pull-right btn-sm' 
+  end
+
+  def self.clear_link_command 
+    "QuizTakingPresenter.clear_history_link(self)  unless @quiz_events.empty?"
+  end
 end
