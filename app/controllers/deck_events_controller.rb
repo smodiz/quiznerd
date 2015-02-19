@@ -8,7 +8,7 @@ class DeckEventsController < ApplicationController
   end
 
   def new
-    build_for_new
+    build_new
   end
 
   def create
@@ -29,7 +29,7 @@ class DeckEventsController < ApplicationController
 
   private
 
-  def build_for_new
+  def build_new
     @presenter = DeckEventPresenter.new(
       user: current_user, 
       params: params, 
