@@ -28,11 +28,11 @@ class QuizTakingPresenter < BasePresenter
 
   def grade_icon_for(answer)
     if answer.correct?
-      h.content_tag(:span, "&#x2713".html_safe, 
-        class: "grade icon correct")
+      h.content_tag(:span,"", 
+        class: "grade icon correct glyphicon glyphicon-ok")
     elsif graded_answer_ids.include?(answer.id)
-      h.content_tag(:span, "&#x2717".html_safe, 
-        class: "grade icon incorrect")
+      h.content_tag(:span, "", 
+        class: "grade icon incorrect glyphicon glyphicon-remove")
     end
   end
 
