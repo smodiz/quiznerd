@@ -35,15 +35,15 @@ function rememberOriginalSettings() {
   });
 }
 function changesMadeToFilters() {
-  changes = false;
+  var changed = false;
   $('.deck-event-option').each(function() {
     var elem = $(this);
     if (elem.data('oldVal') != elem.val()) {
-      changes = true;
-      return false;
+      changed = true;
+      exit;
     }
   });
-  return changes;
+  return changed;
 }
 var init = function() {
   $('.new-deck-event-btn').on('click', function(event){
