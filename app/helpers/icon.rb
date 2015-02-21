@@ -3,7 +3,7 @@ module Icon
   PRE         = "glyphicon glyphicon-"
   WHITE       = " glyphicon-white"
   PLAY        = PRE + "play"
-  QUIZ        = PRE + "edit"    + WHITE
+  QUIZ        = PRE + "list-alt"    + WHITE
   QUIZ_TAKEN  = PRE + "ok "     + WHITE
   CHEATSHEET  = PRE + "pencil"
   FLASH_CARD  = PRE + "flash "  + WHITE
