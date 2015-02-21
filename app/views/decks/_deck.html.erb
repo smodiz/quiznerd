@@ -6,13 +6,15 @@
   <td><%= deck.tag_list %></td>
   <td><%= deck.status %></td>
   <td><%= deck.flash_cards_count %></td>
-  <td><%= link_to 'destroy', deck,
+  <td><%= link_to '', deck,
             method: :delete,
+            id: "delete-link",
             data: { confirm: 'Are you sure?' },
-            class: "index-link delete-link" %>
+            class: "index-link delete-link #{Icon::DELETE}" %>
   </td>
-   <td><%= link_to 'play', 
+   <td><%= link_to '', 
             new_deck_event_path(deck_id: deck.id),
-            class: "index-link play-link" %>
+            id: "play-link",
+            class: "index-link play-link #{Icon::PLAY}" %>
   </td>
 </tr>

@@ -9,10 +9,11 @@
   <td><%= quiz.category_name %></td>
   <td><%= quiz.subject_name %></td>
   <td><%= quiz.number_of_questions %></td>
-  <td><%= link_to 'destroy', 
+  <td><%= link_to '', 
             quiz, 
             method: :delete, 
+            id: "delete-link",
             data: { confirm: 'Are you sure?' }, 
-            class: "index-link delete-link" %>
+            class: "index-link delete-link #{Icon::DELETE}" %>
   </td>
 </tr>

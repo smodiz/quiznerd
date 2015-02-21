@@ -29,12 +29,15 @@
           <td><%= deck_event.full_count%></td>
           <td><%= deck_event.total_cards%></td>
           <td><%= GradePresenter.long_score(deck_event.grade) %></td>
-          <td><%= link_to 'delete', deck_event, method: :delete,
+          <td><%= link_to '', deck_event, method: :delete,
                     data: { confirm: "Are you sure?"},
-                    class: 'index-link delete-link' %>
+                    id: "delete-link",
+                    class: "index-link delete-link #{Icon::DELETE}" %>
           </td>
-          <td><%= link_to 'play again', new_deck_event_path(deck_id: deck_event.deck_id),
-                  class: 'index-link play-link' %>
+          <td><%= link_to '', 
+                  new_deck_event_path(deck_id: deck_event.deck_id),
+                  id: "play-link",
+                  class: "index-link play-link #{Icon::PLAY}" %>
           </td>
         </tr>
       <% end %>

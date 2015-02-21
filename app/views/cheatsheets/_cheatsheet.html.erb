@@ -4,13 +4,15 @@
             class: "index-link" %>
   </td>
   <td><%= cheatsheet.tag_list %></td>
-  <td><%= link_to 'edit', 
-            edit_cheatsheet_path(cheatsheet), 
-            class: "index-link" %>
+  <td><%= link_to '', 
+            edit_cheatsheet_path(cheatsheet),
+            id: "edit-link", 
+            class: "index-link #{Icon::EDIT}"  %>
   </td>
-  <td><%= link_to 'destroy', cheatsheet, 
+  <td><%= link_to '', cheatsheet, 
             method: :delete, 
+            id: "delete-link",
             data: { confirm: 'Are you sure?' }, 
-            class: "index-link delete-link" %>
+            class: "index-link delete-link #{Icon::DELETE}" %>
   </td>
 </tr>

@@ -35,8 +35,8 @@ describe "Flash Deck Pages" do
 
     it { should have_css('div', text: "Flash Decks") }
     it { should have_content(deck.name) }
-    it { should have_link("play") }
-    it { should have_link("destroy") }
+    it { should have_link("play-link") }
+    it { should have_link("delete-link") }
     it { should have_link("New Flash Deck") }
 
     it "does not show other users decks" do
@@ -94,7 +94,7 @@ describe "Flash Deck Pages" do
     end
 
     it "deletes a deck when the link is clicked" do
-      click_link "destroy"
+      click_link "delete-link"
       expect(page).not_to have_content(deck.name)
       expect(Deck.where(id: deck.id)).to be_empty
       expect(current_path).to eq(decks_path)

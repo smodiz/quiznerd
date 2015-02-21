@@ -111,7 +111,7 @@ describe "Cheatsheets Pages" do
 
     it "deletes a cheatsheet" do
       expect(page).to have_content @cs.title
-      click_link "destroy"
+      click_link "delete-link"
       expect(page).to_not have_content @cs.title
       expect(current_path).to eq cheatsheets_path
     end
@@ -124,7 +124,7 @@ describe "Cheatsheets Pages" do
 
     it "modifies a cheatsheet" do
       visit cheatsheets_path
-      click_link "edit"
+      click_link "edit-link"
       expect(page).to have_css ".section-header", text: @cs.title
       fill_in "Content", with: "new content"
       click_button "Update Cheatsheet"
@@ -134,7 +134,7 @@ describe "Cheatsheets Pages" do
 
    it "returns to the index page when canceled" do
       visit cheatsheets_path
-      click_link "edit"
+      click_link "edit-link"
       expect(page).to have_css ".section-header", text: @cs.title
       click_link "Cancel"
       expect(current_path).to eq cheatsheets_path

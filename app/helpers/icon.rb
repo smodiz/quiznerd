@@ -10,7 +10,7 @@ module Icon
   STUDY_AID   = PRE + "book"
   SEARCH      = PRE + "search"
   HOME        = PRE + "home"
-  TRASH       = PRE + "trash"
+  DELETE      = PRE + "trash"
   EDIT        = PRE + "edit"
   NEW         = PRE + "plus "   + WHITE
   INFO        = PRE + "info"
@@ -23,7 +23,7 @@ module Icon
   FLASH_CORRECT       = PRE + "thumbs-up"   + WHITE
   FLASH_INCORRECT     = PRE + "thumbs-down" + WHITE
   FLASH_ADVANCE       = PRE + "arrow-right" + WHITE 
-  CLEAR_HISTORY       = PRE + "plus "       + WHITE
+  CLEAR_HISTORY       = PRE + "minus "       + WHITE
   FLASH_CARD_HISTORY  = PRE + "thumbs-up "  + WHITE
 
 

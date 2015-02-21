@@ -130,7 +130,7 @@ describe "Quiz Pages" do
   describe "delete a quiz" do
     before(:each) do
       visit quizzes_path
-      click_link("destroy")
+      click_link("delete-link")
     end
 
     it { should have_content("Quizzes Written")  }

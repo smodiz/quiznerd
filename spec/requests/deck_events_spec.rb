@@ -144,7 +144,7 @@ describe "Flash Deck Event Pages" do
     event = FactoryGirl.create(:deck_event, user: deck.user)
     visit deck_events_path
     expect(page).to have_content(event.name)
-    click_link("delete")
+    click_link("delete-link")
     expect(page).not_to have_content(event.name)
     expect(DeckEvent.where(id: event.id)).to be_empty
   end

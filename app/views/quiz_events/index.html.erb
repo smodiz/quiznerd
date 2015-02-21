@@ -36,15 +36,18 @@
             <td><%= GradePresenter.long_score(quiz_event.grade) %></td>
             <td><%= quiz_event.status %></td>
             <td><%= time_ago_in_words(quiz_event.updated_at)%> ago</td>
-            <td><%= link_to 'destroy', 
+            <td><%= link_to '', 
                     quiz_event_path(quiz_event,return_to: "index"), 
-                    method: :delete, data: { confirm: 'Are you sure?' }, 
-                    class: "index-link delete-link"  %>
+                    method: :delete, 
+                    data: { confirm: 'Are you sure?' }, 
+                    id: "delete-link",
+                    class: "index-link delete-link #{Icon::DELETE}"  %>
             </td>
-            <td><%= link_to 'take again', 
+            <td><%= link_to '', 
                       quiz_events_path(quiz_id: quiz_event.quiz_id),  
                       method: :post, 
-                      class: "index-link play-link" %>
+                      id: "play-link",
+                      class: "index-link play-link #{Icon::PLAY}" %>
             </td> 
           </tr>
           <% end %>

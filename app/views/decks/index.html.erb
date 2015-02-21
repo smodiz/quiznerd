@@ -9,9 +9,11 @@
     </div>
   </div>
   <div class="panel-body">
-    <%= render partial: 'search/shared_search', 
-               locals: { path: decks_path, btn_cmd: "new_deck_button" } %>
-    <%= render partial: 'shared/tag_list', locals: { tag_path: :deck_tag_path, tag_names: @facade.tag_names } %>
+    <%= render  partial: 'search/shared_search', 
+                locals: { path: decks_path, btn_cmd: "new_deck_button" } %>
+    <%= render  partial: 'shared/tag_list', 
+                locals: { tag_path: :deck_tag_path, 
+                          tag_names: @facade.tag_names } %>
     <div class="table-responsive">
       <table class="table table-bordered table-striped index-table">
         <thead>
