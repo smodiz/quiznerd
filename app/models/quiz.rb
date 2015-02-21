@@ -7,11 +7,10 @@ class Quiz < ActiveRecord::Base
   has_many    :questions, dependent: :destroy
   has_many    :quiz_events, dependent: :destroy
   
-  validates :name, :description, :author, presence: true
-  validates :name, length: { maximum: 45 }
-  validates :description, length: { maximum: 255 }
+  validates :author, :category_id, :subject_id, presence: true
+  validates :name, presence: true, length: { maximum: 45 }
+  validates :description, presence: true, length: { maximum: 255 }
   validates :published, inclusion: { in: [true, false] }
-  validates :category_id, :subject_id, presence: true
 
   delegate :name, :to => :category, :prefix => true, :allow_nil => true
   delegate :name, :to => :subject, :prefix => true, :allow_nil => true
@@ -31,11 +30,7 @@ class Quiz < ActiveRecord::Base
   end
 
   def toggle_publish
-    if published
-      self.toggle(:published)   # can unpublish at will
-    elsif can_publish?  # but publishing requires validation
-      self.toggle(:published)
-    end
+    self.toggle(:published) if published || (!published && can_publish?)
   end
 
   protected
