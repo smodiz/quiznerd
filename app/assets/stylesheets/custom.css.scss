@@ -138,9 +138,10 @@ a {
 }
 .sortable-link {
     text-decoration: underline;
+    color: black;
     &:hover {
       background-color: transparent;
-      color: $brand-primary;
+      color: black;
     }
 }
 
@@ -225,9 +226,9 @@ ul.li {
    font-size: 1.6em;
 }
 .index-section-header {
-  font-size: 1.6em;
-  padding-top: 6px;
-  padding-bottom: 6px;
+  font-size: 1.2em;
+  padding-top: 2px;
+  padding-bottom: 2px;
 }
 .tag-well {
   .well {
