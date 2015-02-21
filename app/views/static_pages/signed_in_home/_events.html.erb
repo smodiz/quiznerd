@@ -1,7 +1,7 @@
 <div class="panel panel-home panel-default">
   <div class="panel-heading home-panel-header panel-orange">
     <div class="panel-title home-panel-title">
-      <i class="glyphicon glyphicon-ok glyphicon-white"></i>
+      <i class="<%= Icon::QUIZ_TAKEN %>"></i>
       <%= link_to "Take Quizzes", quiz_events_path %>
       <span class="badge pull-right">
         <%= @dash.events_count %>
@@ -24,7 +24,7 @@
     <br/>
     <div class="col-md-offset-2">
       <%= link_to search_path, class: "btn btn-std btn-large" do %>
-        Browse all Quizzes<i class="glyphicon glyphicon-search glyphicon-white"></i>
+        Browse all Quizzes<i class="<%= Icon::SEARCH %>"></i>
       <% end %>
     </div>
   </div>

@@ -2,7 +2,7 @@
   Questions
   <%= link_to new_question_path(quiz_id: @quiz.id), 
       class: 'btn btn-primary pull-right btn-sm add-question' do %>
-      <i class="glyphicon glyphicon-plus glyphicon-white"></i>
+      <i class="<%= Icon::NEW %>"></i>
       Add Question
   <% end %>
   <hr/>

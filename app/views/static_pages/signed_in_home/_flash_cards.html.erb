@@ -1,7 +1,7 @@
 <div class="panel panel-home panel-default">
   <div class="panel-heading home-panel-header panel-purple">
     <div class="panel-title home-panel-title">
-      <i class="glyphicon glyphicon-flash glyphicon-white"></i>
+      <i class="<%= Icon::FLASH_CARD %>"></i>
         <%= link_to "Flash Cards", decks_path %>
         <span class="badge pull-right">
             <%= @dash.decks_count %>
@@ -25,7 +25,7 @@
     <% end %>
      <div class="col-md-offset-3"> 
       <%= link_to new_deck_path, class: "btn btn-std btn-large" do %>
-        New Flash Card Deck<i class="glyphicon glyphicon-plus glyphicon-white"></i>
+        New Flash Card Deck<i class="<%= Icon::NEW %>"></i>
       <% end %>
       </div>
   </div>

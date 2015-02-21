@@ -1,6 +1,6 @@
 module QuestionsHelper
 
   def correct_answer_checkmark
-    content_tag(:span,"", class: "grade icon glyphicon glyphicon-ok")
+    content_tag(:span,"", class: "#{Icon::CORRECT}")
   end
 end

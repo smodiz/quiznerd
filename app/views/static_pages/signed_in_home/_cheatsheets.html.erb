@@ -1,7 +1,7 @@
 <div class="panel panel-home panel-default">
   <div class="panel-heading home-panel-header panel-pink">
     <div class="panel-title home-panel-title">
-      <i class="glyphicon glyphicon-pencil glyphicon-white"></i>
+      <i class="<%= Icon::CHEATSHEET %>"></i>
         <%= link_to "Cheatsheets", cheatsheets_path %>
         <span class="badge pull-right">
             <%= @dash.cheatsheets_count %>
@@ -19,7 +19,7 @@
     <% end %>
     <div class="col-md-offset-3"> 
       <%= link_to new_cheatsheet_path, class: "btn btn-std btn-large" do %>
-        Add Cheatsheet<i class="glyphicon glyphicon-plus glyphicon-white"></i>
+        Add Cheatsheet<i class="<%= Icon::NEW %>"></i>
       <% end %>
     </div>
   </div>

@@ -29,4 +29,6 @@ module ApplicationHelper
                                         tables: true)
     markdown.render(text).html_safe
   end
+
+ 
 end

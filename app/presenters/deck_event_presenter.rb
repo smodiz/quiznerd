@@ -40,13 +40,16 @@ class DeckEventPresenter < BasePresenter
 
   def edit_link
     if show_edit_link
-        h.link_to "edit", h.deck_path(deck_event.deck_id), class: "index-link", target: '_blank'
+        h.link_to "edit", 
+          h.deck_path(deck_event.deck_id), 
+          class: "index-link", 
+          target: '_blank'
     end
   end
 
   def thumbs_up_link(flash_card)
     id = "correct-answer-#{flash_card.id}"
-    icon = '<i class="glyphicon glyphicon-thumbs-up glyphicon-white"></i>'
+    icon = "<i class='#{Icon::FLASH_CORRECT}'></i>"
     h.link_to icon.html_safe, 
             '#', 
             class: 'btn btn-success btn-sm correct-flash-answer flash-answer',
@@ -55,7 +58,7 @@ class DeckEventPresenter < BasePresenter
 
   def thumbs_down_link(flash_card)
     id = "incorrect-answer-#{flash_card.id}"
-    icon = '<i class="glyphicon glyphicon-thumbs-down glyphicon-white"></i>'
+    icon = "<i class='#{Icon::FLASH_INCORRECT}'></i>"
       h.link_to icon.html_safe, 
               '#', 
               class: 'btn btn-danger btn-sm incorrect-flash-answer flash-answer',
@@ -64,7 +67,7 @@ class DeckEventPresenter < BasePresenter
 
   def advance_flash_card_link(flash_card)
     id = "advance-#{flash_card.id}"
-    icon = '<i class="glyphicon glyphicon-arrow-right glyphicon-white"></i>'
+    icon = "<i class='#{Icon::FLASH_ADVANCE}'></i>"
     h.link_to icon.html_safe, 
             '#', 
             class: 'btn btn-primary btn-sm flash-advance',
@@ -74,7 +77,7 @@ class DeckEventPresenter < BasePresenter
 
   def self.clear_history_link(context)
    context.link_to \
-    '<i class="glyphicon glyphicon-plus glyphicon-white"></i> Reset History'.html_safe,
+    "<i class='#{Icon::CLEAR_HISTORY}'></i> Reset History".html_safe,
       context.clear_deck_events_history_path, 
       method: :delete, 
       data: { confirm: "Are you sure? This will delete all of your study history." },

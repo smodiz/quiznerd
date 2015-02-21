@@ -2,7 +2,7 @@ module QuizzesHelper
 
   def new_quiz_button(min_quizzes_size: 1)
     if @quizzes.size >= min_quizzes_size
-      link_to '<i class="glyphicon glyphicon-plus glyphicon-white"></i> New Quiz'.html_safe, 
+      link_to "<i class='#{Icon::NEW}'></i> New Quiz".html_safe, 
         new_quiz_path, class: 'btn btn-primary pull-right btn-sm' 
     end
   end

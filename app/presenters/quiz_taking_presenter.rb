@@ -7,8 +7,6 @@ class QuizTakingPresenter < BasePresenter
 
   presents :quiz_taking_form
 
- 
-
   def long_score
     "You scored #{GradePresenter.long_score(quiz_event.grade)}!"
   end
@@ -29,10 +27,10 @@ class QuizTakingPresenter < BasePresenter
   def grade_icon_for(answer)
     if answer.correct?
       h.content_tag(:span,"", 
-        class: "grade icon correct glyphicon glyphicon-ok")
+        class: "grade icon correct #{Icon::CORRECT}")
     elsif graded_answer_ids.include?(answer.id)
       h.content_tag(:span, "", 
-        class: "grade icon incorrect glyphicon glyphicon-remove")
+        class: "grade icon incorrect #{Icon::INCORRECT}")
     end
   end
 
@@ -46,7 +44,7 @@ class QuizTakingPresenter < BasePresenter
 
   def self.clear_history_link(context)
    context.link_to \
-    '<i class="glyphicon glyphicon-plus glyphicon-white"></i> Reset History'.html_safe,
+    "<i class='#{Icon::CLEAR_HISTORY}'></i> Reset History".html_safe,
       context.clear_quiz_events_history_path, 
       method: :delete, 
       data: { confirm: "Are you sure? This will delete all of your Quiz Taking history." },
