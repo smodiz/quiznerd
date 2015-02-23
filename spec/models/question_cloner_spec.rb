@@ -2,8 +2,7 @@ require 'spec_helper'
 
 describe QuestionCloner do 
 
-  let(:quiz)      { FactoryGirl.create(:quiz_with_questions) }
-  let(:question)  { FactoryGirl.create( :question, quiz: quiz) }
+  let(:question)  { FactoryGirl.build(:question) }
  
 
   describe "#clone" do
