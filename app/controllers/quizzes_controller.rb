@@ -2,7 +2,7 @@ class QuizzesController < ApplicationController
   include SortableColumns
 
   before_action :authenticate_user!
-  before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :authorize_user, only: [:edit, :update, :destroy]
 
   def index
     load_quizzes
@@ -48,7 +48,7 @@ class QuizzesController < ApplicationController
     if eager_load
       @quiz = Quiz.with_questions_and_answers(params[:id])
     else
-      @quiz = Quiz.find(params[:id])
+      @quiz ||= Quiz.find(params[:id])
     end
   end
 
@@ -69,7 +69,7 @@ class QuizzesController < ApplicationController
       :category_id, :subject_id, :new_category, :new_subject)
   end
 
-  def correct_user
+  def authorize_user
     @quiz = current_user.quizzes.find_by(id: params[:id])
     redirect_to root_url, notice: 'You cannot modify that quiz.' if @quiz.nil?
   end
