@@ -13,8 +13,7 @@
       <tbody>
         <tr><td><%= f.input :name, autofocus: true %></td></tr>
         <tr>
-          <td><%= f.input :description, as: :text, 
-                    input_html: { rows: text_area_rows(@quiz.description,70) } %>
+          <td><%= f.input :description, as: :text %>
           </td>
         </tr>
         <tr><td><hr/>*</td></tr>
