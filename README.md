@@ -55,13 +55,13 @@ In addition to that, I also introduced a presenter (decorator) to further extrac
 
 #### Refactoring Quiz (Use a Service Object) ####
 
-Quiz stayed reasonably small, but even so, I noticed that it was handling some things that it shouldn't. It was sometimes called upon to create Categories and Subjects, when clearly those things should not be the responsibility of Quiz. The reason for this transgression is that the "Create Quiz" form (and Edit, too) allows you to select a category from a drop down, OR just type a new one into a text area field and it will be created for you and assigned to that Quiz (just a convenience feature for the user).
+Quiz stayed reasonably small, but even so, I noticed that it was handling some things that it shouldn't. The reason for this transgression is that the "Create Quiz" form (and Edit, too) allows you to select a category from a drop down, OR type a new one into a text field and it will be created for you and assigned to that Quiz (just a "convenience" feature for the user). Same thing for Subject. Because of this, Quiz had attributes of new_category and new_subject and was called upon to create Categories and Subjects when those fields were filled in, when clearly those things should not be the responsibility of Quiz. Naughty, yes?
 
-Since creating a Quiz now involved collaboration between multiple models, I introduced a service object to handle creating a Quiz, and creating the Category and Subject, too, as needed. 
+Since creating a Quiz now involved collaboration between multiple models, I introduced a service object to handle the process of creating a Quiz, and creating the Category and Subject, too, as needed. 
 
 #### Tags ####
 
-I originally intended only to tag cheatsheets, but as I started implementing it, I thought it would be more interesting to make it a polymorphic many to many relationship. So cheatsheets are taggable, as are Flash Card Decks, and they can each have multpiple tags.
+I originally intended only to tag cheatsheets, but as I started implementing it, I thought it would be more interesting to make it a polymorphic many to many relationship. So cheatsheets are taggable, and I made Flash Card Decks my secong taggable. They can each have multpiple tags.
 
 #### Facades ####
 
@@ -71,7 +71,7 @@ The Dashboard for the home page is the most obvious case for this, but there are
 
 #### Concers ####
 
-Do you have concerns about concerns? Yeah, me too. But I still moved my Finder functionality for some of the models into a module in the concerns folder. I know, I know, it just moving items out of a junk drawer and into another one. As much as I wanted to make them separate classes, I couldn't easily do it due to the use of Postgres' full text search functionality. 
+Do you have concerns about concerns? Yeah, me too. But I still moved my Finder functionality for some of the models into modules in the concerns folder. I know, I know, it's just moving items out of a junk drawer and into another one. As much as I wanted to make them separate classes, I couldn't easily do it due to the use of Postgres' full text search functionality. 
 
 #### What's Next? ####
 
