@@ -1,11 +1,11 @@
 <ul class="breadcrumb">
   <li><%= link_to "My Flash Decks", decks_path %></li>
-  <li class="actice">Show Flash Deck</li>
+  <li class="active">Show Flash Deck</li>
 </ul>
 
 <div class="well">
   <%= render 'deck_header' %>
-  <%= render partial: 'deck_fields', locals: { quiz: @deck } %> 
+  <%= render partial: 'deck_fields' %> 
 </div>  
 
 

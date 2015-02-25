@@ -13,7 +13,10 @@
       <tbody>
         <tr><td><%= f.input :name, autofocus: true %></td></tr>
         <tr>
-          <td><%= f.input :description, as: :text %>
+          <td>
+            <%= f.input :description, 
+                        as: :text, 
+                        input_html: { class: "autosize" } %>
           </td>
         </tr>
         <tr><td><hr/>*</td></tr>
@@ -28,7 +31,10 @@
         <tr><td><hr/>*</td></tr>
          <tr>
           <td>
-            <%= f.input :subject_id, collection: Category.all.to_a, as: :grouped_select, group_method: :subjects %>
+            <%= f.input :subject_id, 
+                        collection: Category.all.to_a, 
+                        as: :grouped_select, 
+                        group_method: :subjects %>
             <%= f.input :new_subject, label: "or create a new subject:"  do %>
               <%= text_field_tag 'new_subject' %>
             <% end %>

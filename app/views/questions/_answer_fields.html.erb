@@ -1,7 +1,8 @@
 <tr class="answer-row">
   <td>
     <%= f.input :content, 
-        label: 'Answer', as: :text
+        label: 'Answer', as: :text,
+        input_html: { class: "autosize" }
     %>
     <%= f.input :question_id, as: "hidden" %>
   </td>

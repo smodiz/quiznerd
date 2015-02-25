@@ -22,7 +22,7 @@
           <td><%= f.input :tag_list, label: "Tag list (comma sep)" %></td>
         </tr>
         <tr>
-          <td><%= f.input :description, as: :text %></td>
+          <td><%= f.input :description, as: :text, input_html: { class: "autosize" } %></td>
         </tr>
       </tbody>
     </table>
