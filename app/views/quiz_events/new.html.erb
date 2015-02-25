@@ -33,6 +33,7 @@
       <%= link_to "Take This Quiz", 
           quiz_events_path + "?quiz_id=#{@quiz_event.quiz_id}",  
           method: :post, 
+          id: "new_link",
           class: "btn btn-primary btn-sm" 
       %>
       <%= link_to 'Back', :back, 
@@ -42,3 +43,4 @@
     
   </div>
 </div> 
+<%= javascript_tag "$('#new_link').focus()" %>
