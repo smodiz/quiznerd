@@ -23,7 +23,7 @@ $table-border-color: darken(Gainsboro, 5%);
 }
 .panel-home {
   height: 375px;
-  overflow: scroll;
+  overflow: auto;
 }
 .panel-default > .panel-orange {
   color: #fff;
