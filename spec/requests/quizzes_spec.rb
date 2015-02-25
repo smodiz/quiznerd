@@ -6,13 +6,7 @@ describe "Quiz Pages" do
 
   subject { page }
 
-# GENERAL COMMENT: variables declared via let() are not created
-# until accessed the first time. This means that if I visit a page
-# and then check to see that the quiz appears, it won't. Therefore,
-# the before block touches the quiz in the first line.
-
   before(:each) do
-    quiz  
     valid_sign_in(quiz.author) 
   end
 
@@ -27,7 +21,11 @@ describe "Quiz Pages" do
     it { should have_content(quiz.category.name) }
     it { should have_content(quiz.subject.name) }
     it { should have_content(quiz.published ? "Yes" : "No") }
-    it { should have_link("New Quiz") }
+    it "should have a 'New Quiz' link" do
+      within('.panel-body') do
+        expect(page).to have_link('New Quiz')
+      end
+    end
   end
 
   describe "does not show other users quiz" do
