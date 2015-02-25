@@ -1,21 +1,21 @@
 <div class="flash-cards-container">
-
   <div class="section-header">
     Flash Cards
     <hr/>
   </div>
-
-  <%= link_to new_flash_card_path(:deck_id => @deck.id), 
-        remote: true,
-        id: 'new_link',
-        class: 'btn btn-primary pull-left btn-sm' do %>
-          <i class="<%= Icon::NEW %>"></i>
-          Add Flash Card
-  <% end %>
-  <div id='form-container'>
+  <div class="row">
+    <%= link_to new_flash_card_path(:deck_id => @deck.id), 
+          remote: true,
+          id: 'new_link',
+          class: 'btn btn-primary pull-left btn-sm' do %>
+            <i class="<%= Icon::NEW %>"></i>
+            Add Flash Card
+    <% end %>
+  </div>
+  <div id='form-container' class="row">
   </div>
  
-  <div class="table-responsive">
+  <div class="table-responsive row">
     <table id="flash-cards" class="table table-bordered table-hover">
       <thead>
         <td><span class="field-title">Front</span></td>
