@@ -33,7 +33,7 @@ class Quiz < ActiveRecord::Base
     self.toggle(:published) if published || (!published && can_publish?)
   end
 
-  protected
+  private
   
   def unpublish_when_last_question_removed
     if questions.reload.length == 0 && published
