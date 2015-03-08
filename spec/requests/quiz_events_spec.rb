@@ -58,7 +58,7 @@ describe "Quiz Event Pages" do
       end
     end
 
-    describe "when I answer the question" do
+    describe "when I answer the question", js: true do
       let(:question_type) { quiz_event.quiz.questions.first.question_type }
       let(:incorrect_answer_text) { incorrect_answer(quiz_event.quiz.questions.first) }
       let(:correct_answer_text)   { correct_answer(quiz_event.quiz.questions.first) }  
@@ -69,54 +69,44 @@ describe "Quiz Event Pages" do
       end
 
       context "correctly" do
-
         it "should display message for correctly answered question" do
-          if question_type == "MC-2"  #multiple answers, thus checkboxes
-            correct_answer_text.each do |answer_text| 
-              check(answer_text)
-            end
-          else # single answer, thus radio button
-            choose(correct_answer_text.to_s)
-          end
+          answer_correctly
           click_button "Continue"
           expect(page).to have_content "Correct!"
         end
       end
       
       context "incorrectly" do
+        before(:each) do
+          answer_incorrectly
+          click_button "Continue"
+        end
+
         it "should display message for incorrectly answered question" do
-          if question_type == "MC-2"
-            check(incorrect_answer_text)
-          else
-            choose(incorrect_answer_text)
-          end
+          expect(page).to have_content "Incorrect!"
+        end
+
+        it "should not allow user to use back button to re-answer" do
+          expect(page).to have_content "Incorrect!"
+          page.evaluate_script('window.history.back()')
+          answer_correctly
           click_button "Continue"
           expect(page).to have_content "Incorrect!"
         end
       end
-      
-      it "should not allow user to use back button to re-answer" do
-        pending "I don't know how to simulate back button yet"
-        # ('window.history.back()')   # (needs js: true do)
-        # OR? 
-        # visit request.env['HTTP_REFERER']
-        # expect(page).to have_content "Question cannot be answered more than once"
-      end
     end
   end
 
-  
-
-  describe "when I finish the quiz" do
+  describe "when I finish the quiz", js: true do
 
     before do
-        visit new_quiz_url
-        click_link "Take This Quiz"
-        quiz_event.quiz.questions.each do |question|
-          answer_text = question.answers.first.content
-          check(answer_text)
-          click_button "Continue"
-        end
+      visit new_quiz_url
+      click_link "Take This Quiz"
+      quiz_event.quiz.questions.each do |question|
+        answer_text = question.answers.first.content
+        check(answer_text)
+        click_button "Continue"
+      end
     end
 
     it "should display completion message" do
@@ -124,7 +114,8 @@ describe "Quiz Event Pages" do
     end
 
     it "should not allow user to go back once done" do
-      pending "I don't know how to simulate back button yet"
+      page.evaluate_script('window.history.back()')
+      expect(page).to have_content("Can't re-answer questions. Quiz already completed.")
     end
 
   end

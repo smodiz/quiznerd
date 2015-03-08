@@ -29,6 +29,24 @@ def answer_texts(answer_ids)
   answer_texts
 end
 
+def answer_incorrectly
+  if question_type == "MC-2"
+    check(incorrect_answer_text)
+  else
+    choose(incorrect_answer_text)
+  end
+end
+
+def answer_correctly
+  if question_type == "MC-2"  #multiple answers, thus checkboxes
+    correct_answer_text.each do |answer_text| 
+      check(answer_text)
+    end
+  else # single answer, thus radio button
+    choose(correct_answer_text.to_s)
+  end
+end
+
 def new_quiz_url_for(quiz_id)
   "/quiz_events/new?quiz_id=#{quiz_id}"
 end
