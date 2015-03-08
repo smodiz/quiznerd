@@ -12,7 +12,6 @@ class QuizEvent < ActiveRecord::Base
   default_scope -> { order('created_at DESC') }
    
   COMPLETED_STATUS    = "Completed"
-  IN_PROGRESS_STATUS  = "In Progress"
   
   def cached_quiz
     quiz = Rails.cache.fetch(["quiz_event/quiz", quiz_id, id]) do

@@ -10,6 +10,10 @@ class QuizEventsController < ApplicationController
 
   def show
     load_quiz_event
+    unless @quiz_event.completed?
+      flash.now[:notice] = "It appears you did not finish the quiz, but your score \
+          as of the last question you answered was preserved for you." 
+    end
   end
 
   def new
