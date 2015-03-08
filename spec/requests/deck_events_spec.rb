@@ -88,7 +88,7 @@ describe "Flash Deck Event Pages" do
       click_link("advance-#{@second_card.id}")
       click_link("incorrect-answer-#{@second_card.id}")
       click_button("Save")
-      expect(page).to have_content("Your flash card study session was saved!")
+      expect(page).to have_content("Flash card study session was saved!")
       saved_event = DeckEvent.where(deck_id: @deck_id).first
       expect(saved_event.total_cards).to eq 2
       expect(saved_event.total_correct).to eq 0
