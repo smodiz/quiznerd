@@ -147,7 +147,6 @@ ActiveRecord::Schema.define(version: 20150308055934) do
 
   add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
   add_index "taggings", ["taggable_type", "taggable_id"], name: "index_taggings_on_taggable_type_and_taggable_id", using: :btree
-  add_index "taggings", ["taggable_type"], name: "index_taggings_on_taggable_type", using: :btree
 
   create_table "tags", force: true do |t|
     t.string   "name"
