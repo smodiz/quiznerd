@@ -1,6 +1,8 @@
 require 'rubygems'
 require 'spork'
 require 'ruby-debug'
+require 'pry'
+require 'pry-byebug'
 #uncomment the following line to use spork with the debugger
 #require 'spork/ext/ruby-debug'
 
