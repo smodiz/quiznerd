@@ -47,6 +47,15 @@ describe "Quiz Event Pages" do
       it { should have_content("Question 1") }
       it { should have_button("Continue") }
       it { should have_link("Quit") }
+
+      context "author deletes the quiz after I start taking it" do
+        it "redirects me to the home page with a message" do
+          quiz_event.quiz.destroy!
+          click_button "Continue"
+          expect(current_path).to eq(root_path)
+          expect(page).to have_content "author must have deleted that quiz"
+        end
+      end
     end
 
     describe "when I answer the question" do
@@ -96,6 +105,8 @@ describe "Quiz Event Pages" do
     end
   end
 
+  
+
   describe "when I finish the quiz" do
 
     before do
@@ -118,17 +129,46 @@ describe "Quiz Event Pages" do
 
   end
 
-  describe "View completed quiz detail" do
+  describe "Show Quiz Event" do
 
-    before do
-      visit quiz_events_path
-      click_link quiz_event.quiz.name
+    context "when quiz still exists and is public" do 
+      before do
+        visit quiz_events_path
+        click_link quiz_event.quiz.name
+      end
+
+      it { should have_content(quiz_event.quiz.name) }
+      it { should have_content quiz_event.status }
+      it { should have_link "Edit" }
+      it "should have 'take again' link" do
+        expect(page).to have_link "Take This Quiz Again" 
+      end
     end
 
-    it { should have_content(quiz_event.quiz.name) }
-    it { should have_content quiz_event.status }
-    it { should have_link "Edit" }
-    it { should have_link "Take This Quiz Again" }
+    context "after display show page but before clicking 'Take This Quiz' link" do
+    it "routes me to the index page if the author deletes the quiz" do
+      visit new_quiz_event_path(quiz_id: quiz_event.quiz.id)
+      quiz_event.quiz.destroy!
+      click_link "Take This Quiz"
+      expect(current_path).to eq(root_path)
+    end
+    end
+
+    context "when quiz still exists but is not public any more" do 
+      before do
+        quiz_event.quiz.toggle_publish
+        quiz_event.quiz.save!
+        visit quiz_events_path
+        click_link quiz_event.quiz.name
+      end
+
+      it { should have_content(quiz_event.quiz.name) }
+      it { should have_content quiz_event.status }
+      it { should have_link "Edit" }
+      it "should not have 'take again' link" do
+        expect(page).not_to have_link "Take This Quiz Again" 
+      end
+    end
   end
 
   describe "when user quits" do

@@ -22,10 +22,11 @@
     <%= render partial: 'quizzes/quiz_fields', locals: { quiz: @quiz_event.quiz }  %>
     
     <div class="center">
-      <%= link_to "Take This Quiz Again", 
+      <%= link_to_if(quiz_still_public?,
+            "Take This Quiz Again", 
             quiz_events_path(quiz_id: @quiz_event.quiz_id),  
             method: :post, 
-            class: "btn btn-primary btn-sm" 
+            class: "btn btn-primary btn-sm") {}
       %>
       <%= link_to_if(user_owns_quiz?, 
           "Edit Quiz", 
