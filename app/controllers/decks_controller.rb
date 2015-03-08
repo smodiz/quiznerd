@@ -28,7 +28,7 @@ class DecksController < ApplicationController
   def destroy
     load_deck
     @deck.destroy
-    redirect_to decks_path, notice: 'Deck was successfully destroyed.'
+    redirect_to decks_path, success: 'Deck was successfully destroyed.'
   end
 
   private
@@ -57,7 +57,7 @@ class DecksController < ApplicationController
 
   def save_deck
     if @deck.save
-      redirect_to @deck, notice: 'Deck was successfully saved.'
+      redirect_to @deck, success: 'Deck was successfully saved.'
     end
   end
 
@@ -68,7 +68,9 @@ class DecksController < ApplicationController
 
   def authorize_user
     @deck = current_user.decks.find_by(id: params[:id])
-    redirect_to root_url, notice: "You cannot modify that Flash Deck." if @deck.nil?
+    if @deck.nil?
+      redirect_to root_url, error: "You can't modify that Flash Deck." 
+    end
   end
 
 end

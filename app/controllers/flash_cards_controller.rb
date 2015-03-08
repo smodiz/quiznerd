@@ -6,7 +6,7 @@ class FlashCardsController < ApplicationController
     @flash_card.destroy
     respond_to do |format|
       format.html do
-        redirect_to deck_path(@flash_card.deck), notice: "Flash Card destroyed."
+        redirect_to deck_path(@flash_card.deck), success: "Flash Card destroyed."
       end
       format.js
     end
@@ -46,7 +46,8 @@ class FlashCardsController < ApplicationController
   end
 
   def flash_card_params
-    params.require(:flash_card).permit(:sequence, :front, :back, :difficulty, :deck_id)
+    params.require(:flash_card).permit(
+      :sequence, :front, :back, :difficulty, :deck_id)
   end
 
 end

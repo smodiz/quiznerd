@@ -41,12 +41,12 @@ class QuizEventsController < ApplicationController
     load_quiz_event
     @quiz_event.destroy
     redirect_to (return_to_index? ? quiz_events_path : root_path), 
-      notice: "Quiz event was successfully destroyed."
+      success: "Quiz event was successfully destroyed."
   end
 
   def clear
     current_user.quiz_events.delete_all
-    redirect_to quiz_events_path, notice: "History successfully cleared!"
+    redirect_to quiz_events_path, success: "History successfully cleared!"
   end
 
   private
@@ -61,7 +61,7 @@ class QuizEventsController < ApplicationController
     quiz_id = params[:quiz_id] || quiz_event_params[:quiz_id]
     @quiz ||= Quiz.find_by(id: quiz_id)
     unless @quiz
-      redirect_to(root_path, notice: quiz_deleted) and return
+      redirect_to(root_path, error: quiz_deleted) and return
     end
   end
 

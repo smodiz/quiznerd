@@ -6,14 +6,14 @@ class PublishQuizzesController < ApplicationController
     @quiz.toggle_publish
     @quiz.save
     action = @quiz.published ? "published" : "unpublished" 
-    redirect_to @quiz, notice: "Quiz was #{action}" 
+    redirect_to @quiz, success: "Quiz was #{action}" 
   end
 
   private
 
   def authorize_user
     @quiz = current_user.quizzes.find_by(id: params[:quiz_id])
-    redirect_to root_url, notice: "You cannot publish that Quiz." if @quiz.nil?
+    redirect_to root_url, error: "You cannot publish that Quiz." if @quiz.nil?
   end
 
 end

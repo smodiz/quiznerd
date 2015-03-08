@@ -19,12 +19,12 @@ class DeckEventsController < ApplicationController
   def destroy
     load
     @deck_event.destroy
-    redirect_to deck_events_path, notice: "Flash Card Event successfully destroyed!"
+    redirect_to deck_events_path, success: "Flash Card Event destroyed!"
   end
 
   def clear
     current_user.deck_events.delete_all
-    redirect_to deck_events_path, notice: "History successfully cleared!"
+    redirect_to deck_events_path, success: "History successfully cleared!"
   end
 
   private
@@ -48,16 +48,19 @@ class DeckEventsController < ApplicationController
 
   def save
     @deck_event.save
-    redirect_to deck_events_path, notice: "Your flash card study session was saved!"
+    redirect_to deck_events_path, success: "Flash card study session was saved!"
   end
 
   def deck_event_params
-    params.require(:deck_event).permit(:deck_id, :total_cards, :total_correct, :missed_cards_list)
+    params.require(:deck_event).permit(
+      :deck_id, :total_cards, :total_correct, :missed_cards_list)
   end
 
   def authorize_user
     @deck_event = current_user.deck_events.find_by(id: params[:id])
-    redirect_to root_url, notice: 'You cannot modify that deck event.' if @deck_event.nil?
+    if @deck_event.nil?
+      redirect_to root_url, error: "You can't modify that deck event." 
+    end
   end
 
 end

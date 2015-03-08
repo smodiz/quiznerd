@@ -32,7 +32,7 @@ class CheatsheetsController < ApplicationController
   def destroy
     load_cheatsheet
     @cheatsheet.destroy 
-    redirect_to cheatsheets_path
+    redirect_to cheatsheets_path, success: "Cheatsheet was deleted." 
   end
 
   private
@@ -49,8 +49,7 @@ class CheatsheetsController < ApplicationController
   def load_cheatsheet
     @cheatsheet ||= cheatsheets_scope.where(id: params[:id]).first
     if @cheatsheet.nil?
-      flash[:error] = "You cannot modify a cheatsheet you don't own." 
-      redirect_to root_url
+      redirect_to root_url, error: "You can't modify a cheatsheet you don't own."
     end
   end
 
@@ -61,7 +60,7 @@ class CheatsheetsController < ApplicationController
 
   def save_cheatsheet
     if @cheatsheet.save
-      redirect_to @cheatsheet 
+      redirect_to @cheatsheet, success: "Cheatsheet was successfully saved." 
     end
   end
 

@@ -33,7 +33,7 @@ class QuizzesController < ApplicationController
   def destroy
     load_quiz
     @quiz.destroy
-    redirect_to quizzes_path, notice: 'Quiz was successfully destroyed.' 
+    redirect_to quizzes_path, success: 'Quiz was successfully destroyed.' 
   end
 
   private
@@ -59,7 +59,7 @@ class QuizzesController < ApplicationController
 
   def save_quiz
     if QuizSaver.new(@quiz, params[:new_category], params[:new_subject]).save
-      redirect_to @quiz, notice: 'Quiz was successfully saved.' 
+      redirect_to @quiz, success: 'Quiz was successfully saved.' 
     end
   end
 
@@ -71,7 +71,7 @@ class QuizzesController < ApplicationController
 
   def authorize_user
     @quiz = current_user.quizzes.find_by(id: params[:id])
-    redirect_to root_url, notice: 'You cannot modify that quiz.' if @quiz.nil?
+    redirect_to root_url, error: 'You cannot modify that quiz.' if @quiz.nil?
   end
   
 end

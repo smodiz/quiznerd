@@ -17,7 +17,7 @@ class QuestionsController < ApplicationController
     @question = Question.new(question_params)
     if @question.save
        redirect_to quiz_path(@question.quiz_id), 
-          notice: 'Question was successfully created.' 
+          success: 'Question was successfully created.' 
     else
        render :new 
     end
@@ -25,7 +25,7 @@ class QuestionsController < ApplicationController
 
   def update
     if @question.update(question_params)
-      redirect_to  @question.quiz, notice: 'Question was successfully updated.' 
+      redirect_to  @question.quiz, success:'Question was successfully updated.' 
     else
       render :edit 
     end
@@ -34,7 +34,7 @@ class QuestionsController < ApplicationController
   def destroy
     @quiz_id = @question.quiz_id
     @question.destroy
-    redirect_to quiz_path(@quiz_id), notice: 'Question was successfully destroyed.' 
+    redirect_to quiz_path(@quiz_id), success: 'Question was destroyed.' 
   end
 
   private
@@ -49,6 +49,6 @@ class QuestionsController < ApplicationController
     
     def correct_user
       authorized = @question.quiz.author == current_user
-      redirect_to root_url, notice: 'Unauthorized.' unless authorized
+      redirect_to root_url, error: 'Unauthorized.' unless authorized
     end
 end
