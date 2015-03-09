@@ -1,12 +1,54 @@
 <%= provide(:title, 'About') %>
 
-<div class="jumbotron">
+<div class="well">
   <h3>About <span class="app_name">QuizNerd</span></h3>
   <hr/>
-  <br/>
-  <div class="static_text">
-    For infomation on this project, please the README file for this project on
-    <%= link_to "my github", "https://github.com/smodiz/quiznerd" %> account. (Scroll to bottom of linked page). 
+  <div class="about">
+    <h4>
+        What Does It Do?
+    </h4>
+    <ul>
+      <li>
+        Quizzes: you can create quizzes and take quizzes. You can take your 
+        own quizzes or any quiz that has been made public by the author.
+      </li>
+      <li>
+        Flash Cards: you can create flash card decks and "play" the flash 
+        cards. You can self-report on which ones you answered correctly 
+        and which ones you missed, and the application provides you with 
+        the option to use that data to customize your future study sessions 
+        with that deck.
+      </li>
+      <li>
+        Cheatsheets: these are notes, long or short, that you can tag with 
+        keywords to help you find them later on. The search capability 
+        allows you to search via tag name or words in the title or content 
+        of the cheatsheet.
+      </li>
+    </ul>
+    <hr/>
+    <h4>
+      What Does It Use?
+    </h4>
+    <ul>
+      <li>Ruby version: 2.1.1</li>
+      <li>Rails version: 4.1.1</li>
+      <li>Rspec</li>
+      <li>Capybara</li>
+      <li>FactoryGirl</li>
+      <li>Twitter Bootstrap</li>
+      <li>Simple Form</li>
+      <li>Devise</li>
+      <li>jQuery (heavy use of it for playing a flash card deck, light use elsewhere)</li>
+      <li>Ajax (but only for the CRUD operations of flash cards [not the deck, just the cards])</li>
+      <li>Postgres</li>
+      <li>Postgres full text search</li>
+    </ul>  
+    <% if @page && @page.show %>
+      <hr/>
+      <div><%= markdown(@page.content) %></div>
+    <% end %>
   </div>
+
 </div>
 

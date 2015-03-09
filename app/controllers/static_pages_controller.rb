@@ -9,9 +9,11 @@ class StaticPagesController < ApplicationController
   end
 
   def about
+    @page = Page.find_by(name: "about")
   end
 
   def contact
+
   end
 
 end
