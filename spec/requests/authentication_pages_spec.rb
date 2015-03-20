@@ -168,6 +168,8 @@ describe "Authentication Pages" do
       it { should have_link('Back') }
       it { should have_selector('input', user.email) }
       it { should have_link('Cancel my account') }
+      it { should have_link('Get New Token') }
+      it { should have_css('.auth-token', text: user.authentication_token)}
     end
 
     describe "change password" do
@@ -219,6 +221,18 @@ describe "Authentication Pages" do
         end
         it { should have_content('is invalid') }
         it { should have_selector('h3','Edit User') }
+      end
+    end
+
+    describe "reset authentication token", js: true do
+
+      it "displays a new token on the page" do
+        orig_token = user.authentication_token
+        
+        click_link "Get New Token"
+        
+        expect { user.reload.authentication_token }.not_to eq orig_token
+        expect(page).to have_content(user.authentication_token)
       end
     end
   end

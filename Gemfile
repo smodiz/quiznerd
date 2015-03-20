@@ -18,8 +18,10 @@ gem 'will_paginate', github: 'mislav/will_paginate'
 gem 'will_paginate-bootstrap'
 gem 'redcarpet', '3.1.2'
 gem 'devise', '~> 3.4.0' 
+gem 'devise-token_authenticatable', '~> 0.3.0'
 gem 'pg', '0.15.1'
 gem 'pg_search', '0.7.9'
+
 
 # temporarily add to all environments. Later, will remove from production
 gem 'rack-mini-profiler'

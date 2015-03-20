@@ -28,8 +28,20 @@
           <%= f.input :current_password, 
               hint: "we need your current password to confirm your changes", 
               required: true %>
+          <div class="token-container">
+            <span class="auth-token-label col-xs-3">Authentication Token</span>
+            <span class="auth-token col-xs-6"><%= resource.authentication_token %></span>
+            <span class="col-xs-2">
+              <%= link_to "Get New Token", 
+                    api_tokens_path, 
+                    method: :post, 
+                    remote: true,
+                    class: 'btn btn-primary btn-xs' 
+              %>
+            </span>  
+          </div>
         </div>
-
+        <br/>
         <div class="form-actions col-xs-offset-3 col-xs-10">
           <%= f.button :submit, "Update", class: 'btn btn-primary'  %>
           <%= link_to "Back", :back, class: 'btn btn-danger'  %>
