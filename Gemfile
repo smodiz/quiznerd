@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.1.1'
 
-gem 'rails', '4.2.0'
+gem 'rails', '~> 4.2.1' 
 gem 'sass-rails', '~> 4.0.3'
 gem 'bootstrap-sass', '~> 3.1.1.0'
 gem 'uglifier', '>= 1.3.0'
@@ -21,6 +21,7 @@ gem 'devise', '~> 3.4.0'
 gem 'devise-token_authenticatable', '~> 0.3.0'
 gem 'pg', '0.15.1'
 gem 'pg_search', '0.7.9'
+gem 'active_model_serializers'
 
 
 # temporarily add to all environments. Later, will remove from production
