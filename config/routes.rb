@@ -32,4 +32,9 @@ Rails.application.routes.draw do
   delete 'clear_deck_events_history', to: 'deck_events#clear'
 
   resources :api_tokens, only: [:create], :defaults => { :format => 'js' }
+
+  namespace :api do
+    resources :decks, only: :show
+  end
+
 end

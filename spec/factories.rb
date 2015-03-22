@@ -97,7 +97,7 @@ FactoryGirl.define do
 
   factory :flash_card do
     sequence(:front) { |n| "Front of card #{n}" }
-    sequence(:back) { |n| "Front of card #{n}" }
+    sequence(:back) { |n| "Back of card #{n}" }
     sequence(:sequence) { |n| n }
     difficulty "1"
   end
