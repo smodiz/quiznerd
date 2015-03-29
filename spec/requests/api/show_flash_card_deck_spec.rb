@@ -46,9 +46,5 @@ describe "show a flash card deck" do
     expect(json_flash_card[:difficulty]).to eq flash_card.difficulty
   end
 
-  def token_auth_header(token)
-    ActionController::HttpAuthentication::Token.encode_credentials(token)
-  end
-
 end
 
