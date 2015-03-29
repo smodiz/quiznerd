@@ -4,7 +4,10 @@ describe "show a flash card deck" do
 
   before(:each) do
     @deck = FactoryGirl.create(:deck_with_flash_cards)
-    get "/api/decks/#{@deck.id}"
+    puts "User auth_token is #{@deck.user.authentication_token}"
+    get "/api/decks/#{@deck.id}", 
+          { 'auth_token' => @deck.user.authentication_token },  
+          { }
   end
 
   it "returns a good status" do
@@ -17,7 +20,6 @@ describe "show a flash card deck" do
 
   it "returns the flash card deck" do
     json_deck = JSON.parse(response.body, symbolize_names: true)[:deck]
-    puts json_deck
     expect(json_deck[:id]).to eq @deck.id
     expect(json_deck[:name]).to eq @deck.name
     expect(json_deck[:description]).to eq @deck.description
