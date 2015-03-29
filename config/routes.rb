@@ -33,8 +33,8 @@ Rails.application.routes.draw do
 
   resources :api_tokens, only: [:create], :defaults => { :format => 'js' }
 
-  namespace :api do
-    resources :decks, only: :show
+  namespace :api, :defaults => { :format => 'json' } do
+    resources :decks, only: [:show, :create]  
   end
 
 end
