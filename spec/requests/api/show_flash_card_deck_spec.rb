@@ -2,12 +2,12 @@ require 'spec_helper'
 
 describe "show a flash card deck" do  
 
-  before(:each) do
+  before(:all) do
     @deck = FactoryGirl.create(:deck_with_flash_cards)
-    puts "User auth_token is #{@deck.user.authentication_token}"
     get "/api/decks/#{@deck.id}", 
-          { 'auth_token' => @deck.user.authentication_token },  
-          { }
+          { },
+          { 'Accept' => 'application/json', 
+            "Authorization" => token_auth_header(@deck.user.authentication_token) } 
   end
 
   it "returns a good status" do
@@ -45,7 +45,10 @@ describe "show a flash card deck" do
     expect(json_flash_card[:sequence]).to eq flash_card.sequence
     expect(json_flash_card[:difficulty]).to eq flash_card.difficulty
   end
+
+  def token_auth_header(token)
+    ActionController::HttpAuthentication::Token.encode_credentials(token)
+  end
+
 end
-
-
 
