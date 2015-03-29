@@ -3,8 +3,7 @@ module Api
     before_action :authenticate_user!
 
     def show
-
-      deck = Deck.find(params[:id])
+      deck = current_user.decks.find(params[:id])
       render json: deck, status: 200
     end
 
