@@ -7,7 +7,7 @@ describe "create flash card deck" do
       before(:all) do
         user = FactoryGirl.create(:user)
         @deck = FactoryGirl.build(:deck, user: user)
-        post '/api/decks', @deck.to_json, {
+        post '/api/v1/decks', @deck.to_json, {
           'Accept' => 'application/json',
           'Content-Type' => 'application/json',
           'Authorization' => token_auth_header(user.authentication_token) 
@@ -24,7 +24,7 @@ describe "create flash card deck" do
       end
 
       it "has the correct location" do
-        expected_loc = api_deck_url(@response_deck[:id])
+        expected_loc = api_v1_deck_url(@response_deck[:id])
         expect(response.location).to eq expected_loc
       end
 
@@ -43,7 +43,7 @@ describe "create flash card deck" do
       before(:all) do
         user = FactoryGirl.create(:user)
         @deck = Deck.new
-        post '/api/decks', @deck.to_json, {
+        post '/api/v1/decks', @deck.to_json, {
           'Accept' => 'application/json',
           'Content-Type' => 'application/json',
           'Authorization' => token_auth_header(user.authentication_token) 

@@ -5,7 +5,7 @@ describe "show a flash card deck" do
   context "with valid credentials" do
     before(:all) do
       @deck = FactoryGirl.create(:deck_with_flash_cards)
-      get "/api/decks/#{@deck.id}", 
+      get "/api/v1/decks/#{@deck.id}", 
             { },
             { 'Accept' => 'application/json', 
               "Authorization" => token_auth_header(@deck.user.authentication_token) } 
@@ -42,12 +42,27 @@ describe "show a flash card deck" do
   context "With invalid credentials" do
     it "returns a status 401 unauthorized" do
       @deck = FactoryGirl.create(:deck_with_flash_cards)
-      get "/api/decks/#{@deck.id}", 
+      get "/api/v1/decks/#{@deck.id}", 
             { },
             { 'Accept' => 'application/json' } 
       expect(response.status).to eq 401       
     end
   end
+
+  context "with invalid id" do
+    before(:each) do
+      user = FactoryGirl.create(:user)
+      get "/api/v1/decks/99999", 
+            { },
+            { 'Accept' => 'application/json', 
+              "Authorization" => token_auth_header(user.authentication_token) } 
+    end
+
+    it "returns status 404 Not Found" do
+      expect(response.status).to eq 404
+    end
+  end
+
 
   def validate_flash_card(flash_card, json_flash_card)
     expect(json_flash_card[:id]).to eq flash_card.id
