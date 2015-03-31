@@ -48,7 +48,7 @@ describe "create flash card deck" do
           'Content-Type' => 'application/json',
           'Authorization' => token_auth_header(user.authentication_token) 
         }
-        @response = JSON.parse(response.body, symbolize_names: true)
+        @response_deck = JSON.parse(response.body, symbolize_names: true)
       end
       it "returns a 422 status" do
         expect(response.status).to eq 422
@@ -56,10 +56,9 @@ describe "create flash card deck" do
       it "returns an error message" do
         expected_errors = [ "Name can't be blank", 
                             "Description can't be blank", 
-                            "User can't be blank", 
                             "Status can't be blank", 
                             "Status is not included in the list"]
-        expect(@response[:decks]).to match_array expected_errors
+        expect(@response_deck[:decks]).to match_array expected_errors
       end
     end
   end
