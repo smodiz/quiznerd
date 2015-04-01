@@ -1,4 +1,5 @@
-
+//dynamically add and remove answers, plus if the question type
+//is true/false, default the possible answers to true and false
 $(document).ready(function() {
   $('#question_question_type').on('click', setTrueFalseDefaults);
 
