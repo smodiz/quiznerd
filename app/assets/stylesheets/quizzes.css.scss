@@ -5,3 +5,11 @@
   display: block;
   white-space:nowrap;
 }
+.question_answers_correct, .question_answers__destroy  {
+  display: inline-block;
+  margin: 5px;
+  padding-right: 5px;
+  input { display: inline; }
+  .checkbox { display: inline; }
+ }
+

@@ -1,14 +1,13 @@
 <tr class="answer-row">
-  <td>
+  <td class="col-sm-6">
     <%= f.input :content, 
         label: 'Answer', as: :text,
         input_html: { class: "autosize" }
     %>
     <%= f.input :question_id, as: "hidden" %>
   </td>
-  <td>&nbsp;</td>
-  <td>
-    <%= f.input :correct, as: :boolean, label: false, inline_label: 'Correct?' %>
-    <%= f.input :_destroy, as: :boolean, label: false, inline_label: 'Delete?', input_html: { class: "destroy" } %>
+  <td class="col-sm-3">
+    <%= f.input :correct, as: :boolean, label: false, inline_label: 'Correct' %>
+    <%= f.input :_destroy, as: :boolean, label: false, inline_label: 'Delete', input_html: { class: "destroy" } %>
   </td>
 </tr>
