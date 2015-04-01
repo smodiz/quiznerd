@@ -1,16 +1,50 @@
-
+//when the page loads, all the flash cards are pre-loaded (hidden). 
+//If user doesn't decide to filter and just clicks start, 
+//we're good to go and we start playing. If they apply filters,
+//we reload the page with just the matching flash cards and 
+//immediately start playing
 $(document).ready( function(){
-  
   init();
-  showAnswer();
-  processAnswer();
   if (isFiltered()  && isValidCount()) {
     playFlashCards();
   }
   else {
     $('.new-deck-event-btn').focus();
   }
-  $('.scratchpad-show').on('click', function(){
+});
+
+function init() {
+  initShowAnswer();
+  initProcessAnswer();
+  initScratchPad();
+  initStart();
+}
+
+function initShowAnswer() {
+  $('.flash-advance').on('click', function(event){
+    $(this).closest('.de-flash-card-side').next().show();
+    $(this).closest('.de-flash-card-side').hide();
+    $(this).closest('.de-flash-card-side').next().find('.correct-flash-answer').focus();
+  });
+}
+
+function initProcessAnswer() {
+  $('.flash-answer').on('click', function(event){
+    //first, deal with grading
+    gradeAnswer(this);
+    //then, display the next one or the finished message  
+    $(this).closest('.de-flash-card-side').hide();
+    if($(this).closest('.de-flash-card-side').next()[0] == null) {
+      showScore();
+    }
+    else {
+      advanceToNext(this);
+    }
+  });
+}
+
+function initScratchPad() {
+    $('.scratchpad-show').on('click', function(){
     $('.scratchpad').show();
     $('.scratchpad textarea').focus();
   });
@@ -18,22 +52,18 @@ $(document).ready( function(){
     $('.scratchpad').hide();
     $('.scratchpad textarea').val("");
   });
-});
-
-// functions 
-
-function isValidCount() {
-  return ($('#flash-card-set-count').text() > 0);
 }
-function isFiltered() {
-  return $('#filtered').val();
-}
-function rememberOriginalSettings() {
-  $('.deck-event-option').each(function() {
-   var elem = $(this);
-   elem.data('oldVal', elem.val());
+
+function initStart() {
+  $('.new-deck-event-btn').on('click', function(event){
+    if (!changesMadeToFilters() && isValidCount()) {
+      event.preventDefault();
+      rememberOriginalSettings();
+      playFlashCards();
+    }
   });
 }
+
 function changesMadeToFilters() {
   var changed = false;
   $('.deck-event-option').each(function() {
@@ -45,37 +75,29 @@ function changesMadeToFilters() {
   });
   return changed;
 }
-var init = function() {
-  $('.new-deck-event-btn').on('click', function(event){
-    if (!changesMadeToFilters() && isValidCount()) {
-      event.preventDefault();
-      rememberOriginalSettings();
-      playFlashCards();
-    }
+
+function isValidCount() {
+  return ($('#flash-card-set-count').text() > 0);
+}
+
+function rememberOriginalSettings() {
+  $('.deck-event-option').each(function() {
+   var elem = $(this);
+   elem.data('oldVal', elem.val());
   });
 }
+
 function playFlashCards() {
   $('.options-section').hide();
   $('.de-flash-card-side').first().show();
   $('.de-flash-card-side').first().find('.flash-advance').focus();
 }
-var processAnswer = function() {
-  $('.flash-answer').on('click', function(event){
 
-    //first, deal with grading
-    gradeAnswer(this);
-
-    //then, display the next one or the finished message  
-    $(this).closest('.de-flash-card-side').hide();
-    if($(this).closest('.de-flash-card-side').next()[0] == null) {
-      showScore();
-    }
-    else {
-      advanceToNext(this);
-    }
-  });
+function isFiltered() {
+  return $('#filtered').val();
 }
-var gradeAnswer = function(elem) {
+
+function gradeAnswer(elem) {
   if ($(elem).attr("class").match(/incorrect/)) {
     var id = $(elem).attr("id").split("-")[2];
     var missed_cards_list = $('#deck_event_missed_cards_list').val();
@@ -90,12 +112,14 @@ var gradeAnswer = function(elem) {
     $('#deck_event_total_correct').val(currentCount + 1);
   }
 }
-var advanceToNext = function(elem) {
+
+function advanceToNext(elem) {
   $('.scratchpad textarea').val("");
   $(elem).closest('.de-flash-card-side').next().show();
   $(elem).closest('.de-flash-card-side').next().find('.flash-advance').focus();
 }
-var showScore = function() {
+
+function showScore() {
   $('.scratchpad').hide();
   $('#de-finished').show();
   $('.de-form-actions').show();
@@ -106,10 +130,4 @@ var showScore = function() {
   $(this).off('click'); 
   $('#new_deck_event').find('.btn-primary').focus();
 }
-var showAnswer = function() {
-  $('.flash-advance').on('click', function(event){
-    $(this).closest('.de-flash-card-side').next().show();
-    $(this).closest('.de-flash-card-side').hide();
-    $(this).closest('.de-flash-card-side').next().find('.correct-flash-answer').focus();
-  });
-}
+
