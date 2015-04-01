@@ -19,7 +19,7 @@ class Deck < ActiveRecord::Base
   validates :status,              presence: true, inclusion: { in: STATUSES }
 
   def self.with_flash_cards(id)
-    Deck.includes(:flash_cards).find(id)
+    Deck.includes(:flash_cards).find_by(id: id)
   end
 
   def next_sequence
