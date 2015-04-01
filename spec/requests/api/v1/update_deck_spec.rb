@@ -13,12 +13,8 @@ describe "update flash card deck" do
                 { deck: {name: "New name", status: "Public", description: "New description" }},
                 { 'Authorization' => token_auth_header(@deck.user.authentication_token) }
       end
-      it "returns json content" do
-        expect(response.content_type).to eq Mime::JSON
-      end
-      it "has a response status of 200" do
-        expect(response.status).to eq 200
-      end
+      it_has_json_response
+      it_has_status(200)
       it "updates the deck" do
         @deck.reload
         expect(@deck.name).to eq "New name"
@@ -34,12 +30,8 @@ describe "update flash card deck" do
                 { 'Authorization' => token_auth_header(@deck.user.authentication_token) }
         @json_deck = JSON.parse(response.body, symbolize_names: true)[:decks]
       end
-      it "returns json content" do
-        expect(response.content_type).to eq Mime::JSON
-      end
-      it "returns a status of 422" do
-        expect(response.status).to eq 422
-      end
+      it_has_json_response
+      it_has_status(422)
       it "returns error messages" do
         expected_errors = [ "Name can't be blank", 
                             "Description can't be blank", 
@@ -57,7 +49,7 @@ describe "update flash card deck" do
               { deck: {name: "", status: "", description: "" }},
               { 'Authorization' => SecureRandom.hex(10) }
 
-      expect(response.status).to eq 401
+      expect_status(401)
     end
   end
 

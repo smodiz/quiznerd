@@ -7,21 +7,19 @@ describe "create flash card deck" do
       before(:all) do
         user = FactoryGirl.create(:user)
         @deck = FactoryGirl.build(:deck, user: user)
+
         post '/api/v1/decks', @deck.to_json, {
           'Accept' => 'application/json',
           'Content-Type' => 'application/json',
           'Authorization' => token_auth_header(user.authentication_token) 
         }
+
         @response_deck = JSON.parse(response.body, symbolize_names: true)[:deck]
       end
 
-      it "has json content" do
-        expect(response.content_type).to eq Mime::JSON
-      end
-
-      it "returns the correct status" do
-        expect(response.status).to eq 201
-      end
+      it_has_json_response
+      
+      it_has_status(201)
 
       it "has the correct location" do
         expected_loc = api_v1_deck_url(@response_deck[:id])
@@ -43,16 +41,18 @@ describe "create flash card deck" do
       before(:all) do
         user = FactoryGirl.create(:user)
         @deck = Deck.new
+
         post '/api/v1/decks', @deck.to_json, {
           'Accept' => 'application/json',
           'Content-Type' => 'application/json',
           'Authorization' => token_auth_header(user.authentication_token) 
         }
+        
         @response_deck = JSON.parse(response.body, symbolize_names: true)
       end
-      it "returns a 422 status" do
-        expect(response.status).to eq 422
-      end
+      
+      it_has_status(422)
+      
       it "returns an error message" do
         expected_errors = [ "Name can't be blank", 
                             "Description can't be blank", 
