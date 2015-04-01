@@ -1,7 +1,8 @@
 class DecksController < ApplicationController
+  include DecksCommon
+
   before_action :authenticate_user!
   before_action :authorize_user, only: [:edit, :update, :destroy]
-  before_action :build_deck, only: [:new, :create, :update]
   
   def index
     load_decks
@@ -12,16 +13,19 @@ class DecksController < ApplicationController
   end
 
   def new
+    build_deck
   end
 
   def edit
   end
 
   def create
+    build_deck
     save_deck or render :new
   end
 
   def update 
+    build_deck
     save_deck or render :new
   end
 
@@ -42,28 +46,10 @@ class DecksController < ApplicationController
     )
   end
 
-  def load_deck(eager_load: false)
-    if eager_load
-      @deck ||= Deck.with_flash_cards(params[:id])
-    else
-      @deck ||= Deck.find(params[:id])
-    end
-  end
-
-  def build_deck
-    @deck ||= Deck.new_for_user(current_user)
-    @deck.attributes = deck_params unless deck_params.blank?
-  end
-
   def save_deck
     if @deck.save
       redirect_to @deck, success: 'Deck was successfully saved.'
     end
-  end
-
-  def deck_params
-    return {} unless params[:deck]
-    params.require(:deck).permit(:name, :description, :status, :tag_list, :page)
   end
 
   def authorize_user

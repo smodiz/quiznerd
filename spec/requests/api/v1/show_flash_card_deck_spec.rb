@@ -63,7 +63,6 @@ describe "show a flash card deck" do
     end
   end
 
-
   def validate_flash_card(flash_card, json_flash_card)
     expect(json_flash_card[:id]).to eq flash_card.id
     expect(json_flash_card[:front]).to eq flash_card.front

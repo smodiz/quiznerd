@@ -52,7 +52,8 @@ describe "update flash card deck" do
 
   context "with invalid credentials" do
     it "returns an unauthorized 401 status code" do
-      patch   "/api/v1/decks/999999",
+      @deck = FactoryGirl.create(:deck)
+      patch   "/api/v1/decks/@deck.id",
               { deck: {name: "", status: "", description: "" }},
               { 'Authorization' => SecureRandom.hex(10) }
 

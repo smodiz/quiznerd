@@ -1,62 +1,58 @@
-module Api
-  module V1
-    class DecksController < ApplicationController
-      
-      before_action :authenticate_user!
+module Api::V1
+  class DecksController < ApplicationController
+    include DecksCommon
+    
+    before_action :authenticate_user!
+    before_action :authorize_user, only: [:destroy, :update]
 
-      def index
-        decks = current_user.decks
-        render json: decks, status: 200
-      end
+    def index
+      decks = current_user.decks
+      render json: decks, status: 200
+    end
 
-      def show
-        deck = current_user.decks.find_by(id: params[:id])
-        if deck
-          render json: deck, status: 200
-        else
-          render nothing: true, status: 404
-        end
-      end
-
-      def create
-        deck = Deck.new_for_user(current_user)
-        deck.attributes = deck_params
-        if deck.save
-          render json: deck, status: 201, location: [:api, :v1, deck]
-        else
-          render json: deck.errors.full_messages, status: 422
-        end
-      end
-
-      def update
-        deck = current_user.decks.find_by(id: params[:id])
-        if deck.nil?
-          render nothing: true, status: 404
-          return
-        end
-        deck.attributes = deck_params unless deck_params.blank?
-        if deck.save
-          render json: deck, status: 200
-        else
-          render json: deck.errors.full_messages, status: 422
-        end
-      end
-
-      def destroy
-        deck = current_user.decks.find_by(id: params[:id])
-        if deck 
-          deck.destroy!
-          render nothing: true, status: 204
-        else
-          render nothing: true, status: 404
-        end
-      end
-
-      private 
-
-      def deck_params
-        params.require(:deck).permit(:name, :description, :status, :tag_list, :page)
+    def show
+      load_deck
+      if @deck
+        render json: @deck, status: 200
+      else
+        render nothing: true, status: 404
       end
     end
+
+    def create
+      build_deck
+      if @deck.save
+        render json: @deck, status: 201, location: [:api, :v1, @deck]
+      else
+        render json: @deck.errors.full_messages, status: 422
+      end
+    end
+
+    def update
+      build_deck
+      if @deck.save
+        render json: @deck, status: 200
+      else
+        render json: @deck.errors.full_messages, status: 422
+      end
+    end
+
+    def destroy
+      load_deck
+      if @deck 
+        @deck.destroy!
+        render nothing: true, status: 204
+      else
+        render nothing: true, status: 404
+      end
+    end
+
+    def authorize_user
+      @deck = deck_for(user: current_user, id: params[:id])
+      if @deck.nil?
+        render nothing: true, status: 404 and return false
+      end
+    end
+
   end
 end
