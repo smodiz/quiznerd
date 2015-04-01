@@ -53,7 +53,7 @@ class DecksController < ApplicationController
   end
 
   def authorize_user
-    @deck = current_user.decks.find_by(id: params[:id])
+    @deck = deck_for(user: current_user, id: params[:id])
     if @deck.nil?
       redirect_to root_url, error: "You can't modify that Flash Deck." 
     end
