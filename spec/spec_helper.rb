@@ -1,3 +1,6 @@
+require 'simplecov'
+SimpleCov.start 'rails'
+
 require 'rubygems'
 require 'spork'
 require 'ruby-debug'
@@ -72,7 +75,8 @@ Spork.prefork do
     config.after(:each) do
       DatabaseCleaner.clean
     end
-
+config.before(:each) { GC.disable }
+config.after(:each) { GC.enable }
   end
   Capybara.javascript_driver = :webkit
 end

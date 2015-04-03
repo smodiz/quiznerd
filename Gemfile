@@ -41,6 +41,9 @@ group :development, :test do
   gem 'pry'
   gem 'pry-byebug'
   gem 'orderly'
+  gem 'puma'
+  gem 'rubocop', '~> 0.29.1'
+
 
   # In Rails 4.1, we have secrets.yml which kind of does the same thing as 
   # figaro, except figaro helps automatically set up the variables in your 
@@ -50,6 +53,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'simplecov', :require => false
   gem 'selenium-webdriver', '2.35.1'
   gem 'capybara', '2.1.0'
   gem "capybara-webkit"

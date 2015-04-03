@@ -26,3 +26,6 @@
 *~
 .DS_Store
 
+# ignore test coverage metrics folder
+/coverage/*
+
