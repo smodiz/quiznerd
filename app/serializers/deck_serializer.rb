@@ -1,10 +1,10 @@
 class DeckSerializer < ActiveModel::Serializer
-  attributes  :id, 
+  attributes  :id,
               :user_id,
-              :name, 
-              :description, 
-              :status, 
+              :name,
+              :description,
+              :status,
               :flash_cards_count
-    
+
   has_many :flash_cards
 end

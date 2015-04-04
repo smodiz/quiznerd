@@ -1,15 +1,15 @@
 class CheatsheetsController < ApplicationController
   before_action :authenticate_user!
 
-  def index 
+  def index
     load_cheatsheets
   end
 
-  def show 
+  def show
     load_cheatsheet
   end
 
-  def new 
+  def new
     build_cheatsheet
   end
 
@@ -18,7 +18,7 @@ class CheatsheetsController < ApplicationController
     save_cheatsheet or render 'new'
   end
 
-  def edit 
+  def edit
     load_cheatsheet
     build_cheatsheet
   end
@@ -31,17 +31,17 @@ class CheatsheetsController < ApplicationController
 
   def destroy
     load_cheatsheet
-    @cheatsheet.destroy 
-    redirect_to cheatsheets_path, success: "Cheatsheet was deleted." 
+    @cheatsheet.destroy
+    redirect_to cheatsheets_path, success: "Cheatsheet was deleted."
   end
 
   private
 
   def load_cheatsheets
     @facade = CheatsheetsFacade.new(
-      current_user, 
-      params[:search], 
-      params[:tag], 
+      current_user,
+      params[:search],
+      params[:tag],
       params[:page]
     )
   end
@@ -54,13 +54,13 @@ class CheatsheetsController < ApplicationController
   end
 
   def build_cheatsheet
-    @cheatsheet ||= cheatsheets_scope.build 
+    @cheatsheet ||= cheatsheets_scope.build
     @cheatsheet.attributes = cheatsheet_params
   end
 
   def save_cheatsheet
     if @cheatsheet.save
-      redirect_to @cheatsheet, success: "Cheatsheet was successfully saved." 
+      redirect_to @cheatsheet, success: "Cheatsheet was successfully saved."
     end
   end
 
@@ -73,8 +73,7 @@ class CheatsheetsController < ApplicationController
     end
   end
 
-  def cheatsheets_scope 
+  def cheatsheets_scope
     current_user.cheatsheets
-  end 
-
+  end
 end

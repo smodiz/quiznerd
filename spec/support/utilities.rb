@@ -1,13 +1,13 @@
 include ApplicationHelper
 
 def valid_sign_in(user)
-	visit new_user_session_path
-	fill_in "Email", with: user.email
-	fill_in "Password", with: user.password
-	click_button 'Sign in'
+  visit new_user_session_path
+  fill_in 'Email', with: user.email
+  fill_in 'Password', with: user.password
+  click_button 'Sign in'
 end
 
-# Note: These methds cannot be named the same as the variable specified in the 
+# Note: These methds cannot be named the same as the variable specified in the
 # let methods that use them. See quiz_events_spec.rb
 
 def correct_answer(question)
@@ -16,9 +16,9 @@ def correct_answer(question)
 end
 
 def incorrect_answer(question)
-   # just need one incorrect answer
-   incorrect_id = question.incorrect_answer_ids[0]
-   Answer.find(incorrect_id).content
+  # just need one incorrect answer
+  incorrect_id = question.incorrect_answer_ids[0]
+  Answer.find(incorrect_id).content
 end
 
 def answer_texts(answer_ids)
@@ -30,7 +30,7 @@ def answer_texts(answer_ids)
 end
 
 def answer_incorrectly
-  if question_type == "MC-2"
+  if question_type == 'MC-2'
     check(incorrect_answer_text)
   else
     choose(incorrect_answer_text)
@@ -38,8 +38,8 @@ def answer_incorrectly
 end
 
 def answer_correctly
-  if question_type == "MC-2"  #multiple answers, thus checkboxes
-    correct_answer_text.each do |answer_text| 
+  if question_type == 'MC-2'  # multiple answers, thus checkboxes
+    correct_answer_text.each do |answer_text|
       check(answer_text)
     end
   else # single answer, thus radio button

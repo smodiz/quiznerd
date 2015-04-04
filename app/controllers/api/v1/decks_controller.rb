@@ -1,7 +1,7 @@
 module Api::V1
   class DecksController < ApplicationController
     include DecksCommon
-    
+
     before_action :authenticate_user!
     before_action :authorize_user, only: [:destroy, :update]
 
@@ -39,7 +39,7 @@ module Api::V1
 
     def destroy
       load_deck
-      if @deck 
+      if @deck
         @deck.destroy!
         render nothing: true, status: 204
       else

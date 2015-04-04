@@ -22,7 +22,7 @@ def expect_status(status)
 end
 
 def it_has_json_response
-  it "returns json content" do
+  it 'returns json content' do
     expect(response.content_type).to eq Mime::JSON
   end
 end

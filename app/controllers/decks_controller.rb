@@ -3,7 +3,7 @@ class DecksController < ApplicationController
 
   before_action :authenticate_user!
   before_action :authorize_user, only: [:edit, :update, :destroy]
-  
+
   def index
     load_decks
   end
@@ -24,7 +24,7 @@ class DecksController < ApplicationController
     save_deck or render :new
   end
 
-  def update 
+  def update
     build_deck
     save_deck or render :new
   end
@@ -55,8 +55,7 @@ class DecksController < ApplicationController
   def authorize_user
     @deck = deck_for(user: current_user, id: params[:id])
     if @deck.nil?
-      redirect_to root_url, error: "You can't modify that Flash Deck." 
+      redirect_to root_url, error: "You can't modify that Flash Deck."
     end
   end
-
 end

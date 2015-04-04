@@ -1,5 +1,4 @@
 class CheatsheetsFacade
-
   attr_reader :cheatsheets, :tag_names, :count
 
   def initialize(user, search, tag, page)
@@ -10,14 +9,13 @@ class CheatsheetsFacade
     load
   end
 
-  private 
+  private
 
   def load
-    @cheatsheets = 
+    @cheatsheets =
       Cheatsheet.search_owned_by(@user, @search, @tag).
-        paginate(page: @page) 
+        paginate(page: @page)
     @tag_names = Cheatsheet.tags_for(@user)
     @count = Cheatsheet.count
   end
-
 end

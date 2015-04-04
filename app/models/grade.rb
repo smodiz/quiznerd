@@ -1,5 +1,4 @@
 class Grade
-
   def initialize(total_correct, total_answered)
     @total_correct = total_correct
     @total_answered = total_answered
@@ -21,6 +20,4 @@ class Grade
   def correct
     @total_correct || 0
   end
-
-
 end

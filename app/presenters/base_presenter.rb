@@ -1,5 +1,4 @@
-class BasePresenter 
-
+class BasePresenter
   def initialize(object, template)
     @object = object
     @template = template
@@ -18,5 +17,4 @@ class BasePresenter
   def method_missing(*args, &block)
     @object.send(*args, &block)
   end
-
 end

@@ -1,6 +1,6 @@
 class FlashCardsController < ApplicationController
   before_action :authenticate_user!
-  
+
   def destroy
     load
     @flash_card.destroy
@@ -14,7 +14,6 @@ class FlashCardsController < ApplicationController
 
   def new
     @flash_card = FlashCard.new(deck_id: params[:deck_id])
-
   end
 
   def edit
@@ -49,5 +48,4 @@ class FlashCardsController < ApplicationController
     params.require(:flash_card).permit(
       :sequence, :front, :back, :difficulty, :deck_id)
   end
-
 end

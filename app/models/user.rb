@@ -6,8 +6,8 @@ class User < ActiveRecord::Base
          :token_authenticatable
 
   before_save :ensure_authentication_token
-  
-  has_many :quizzes, :foreign_key =>"author_id", dependent: :nullify
+
+  has_many :quizzes, foreign_key: 'author_id', dependent: :nullify
   has_many :quiz_events, dependent: :destroy
   has_many :cheatsheets, dependent: :destroy
   has_many :decks, dependent: :destroy

@@ -1,5 +1,4 @@
 class DeckEventsController < ApplicationController
-
   before_action :authenticate_user!
   before_action :authorize_user, only: :destroy
 
@@ -31,8 +30,8 @@ class DeckEventsController < ApplicationController
 
   def build_new
     @presenter = DeckEventPresenter.new(
-      user: current_user, 
-      params: params, 
+      user: current_user,
+      params: params,
       view_context: self.view_context
     )
   end
@@ -59,8 +58,7 @@ class DeckEventsController < ApplicationController
   def authorize_user
     @deck_event = current_user.deck_events.find_by(id: params[:id])
     if @deck_event.nil?
-      redirect_to root_url, error: "You can't modify that deck event." 
+      redirect_to root_url, error: "You can't modify that deck event."
     end
   end
-
 end

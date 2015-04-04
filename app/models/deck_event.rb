@@ -1,16 +1,12 @@
-=begin
-
-A DeckEvent represents the results of a user playing through the flash cards
-on a Deck. The things persisted are: which deck and user this
-event belongs to, the total number of cards (after the user has specified any
-filters to apply), the user-reported number of correct answers, and which
-ones they missed.
-
-=end
+# A DeckEvent represents the results of a user playing through the flash cards
+# on a Deck. The things persisted are: which deck and user this
+# event belongs to, the total number of cards (after the user has specified any
+# filters to apply), the user-reported number of correct answers, and which
+# ones they missed.
 class DeckEvent < ActiveRecord::Base
   include Gradeable
 
-  belongs_to :user 
+  belongs_to :user
   belongs_to :deck
 
   delegate :name, to: :deck
@@ -18,14 +14,14 @@ class DeckEvent < ActiveRecord::Base
   validates :total_cards, presence: true
   validates :total_correct, presence: true
 
-  default_scope ->{ order(created_at: :desc) }
+  default_scope -> { order(created_at: :desc) }
 
-  SORT_ORDER_OPTIONS =  {   in_order: "In order",
-                            random:   "Random"
+  SORT_ORDER_OPTIONS =  {   in_order: 'In order',
+                            random:   'Random'
                         }
 
-  MISSED_CARDS_OPTIONS = {  last_missed: "Last missed",
-                            ever_missed: "Ever missed"
+  MISSED_CARDS_OPTIONS = {  last_missed: 'Last missed',
+                            ever_missed: 'Ever missed'
                           }
 
   self.per_page = 20
@@ -43,7 +39,7 @@ class DeckEvent < ActiveRecord::Base
   end
 
   def full_count
-    self.deck.flash_cards_count
+    deck.flash_cards_count
   end
 
   def total_answered

@@ -1,5 +1,4 @@
 class Dashboard
-
   attr_reader :user, :quizzes, :quiz_events, :limit
   attr_reader :quizzes_count, :events_count
   attr_reader :cheatsheets, :decks
@@ -15,19 +14,19 @@ class Dashboard
   def remaining_quizzes_count
     quizzes_count - quizzes.size
   end
-  
+
   def remaining_events_count
     events_count - quiz_events.size
   end
-  
+
   def remaining_cheatsheets_count
     cheatsheets_count - cheatsheets.size
   end
-  
+
   def remaining_decks_count
     decks_count - decks.size
   end
-  
+
   private
 
   def load
@@ -62,9 +61,9 @@ class Dashboard
   end
 
   def set_counts
-    @quizzes_count = 0 
+    @quizzes_count = 0
     @events_count = 0
-    @cheatsheets_count = 0 
+    @cheatsheets_count = 0
     @decks_count = 0
   end
 end

@@ -1,7 +1,6 @@
 class QuizEventsController < ApplicationController
-
   before_action :authenticate_user!
-  before_action :load_quiz, only: [:new, :create, :delete, :update]  
+  before_action :load_quiz, only: [:new, :create, :delete, :update]
 
   def index
     @quiz_events = load_quiz_events
@@ -10,10 +9,9 @@ class QuizEventsController < ApplicationController
 
   def show
     load_quiz_event
-    unless @quiz_event.completed?
-      flash.now[:notice] = "It appears you did not finish the quiz, but your score \
-          as of the last question you answered was preserved for you." 
-    end
+    flash.now[:notice] =
+      'It appears you did not finish the quiz, but your score as of the ' \
+      'last question you answered was preserved for you.' unless completed?
   end
 
   def new
@@ -44,21 +42,28 @@ class QuizEventsController < ApplicationController
   def destroy
     load_quiz_event
     @quiz_event.destroy
-    redirect_to (return_to_index? ? quiz_events_path : root_path), 
-      success: "Quiz event was successfully destroyed."
+    redirect_to redirect_path, success: 'Quiz event successfully destroyed.'
   end
 
   def clear
     current_user.quiz_events.delete_all
-    redirect_to quiz_events_path, success: "History successfully cleared!"
+    redirect_to quiz_events_path, success: 'History successfully cleared!'
   end
 
   private
 
+  def completed?
+    @quiz_event.completed?
+  end
+
+  def redirect_path
+    return_to_index? ? quiz_events_path : root_path
+  end
+
   def load_quiz_events
     QuizEvent.search_quizzes_taken(
-      params[:search], current_user).
-      paginate(page: params[:page])  
+      params[:search], current_user)
+      .paginate(page: params[:page])
   end
 
   def load_quiz
@@ -78,35 +83,32 @@ class QuizEventsController < ApplicationController
   end
 
   def quiz_deleted
-    "The author must have deleted that quiz just now. Sorry!"
+    'The author must have deleted that quiz just now. Sorry!'
   end
 
   def load_quiz_event
     @quiz_event ||= current_user.quiz_events.find_by(id: params[:id])
   end
- 
+
   def return_to_index?
-    params[:return_to].present? && params[:return_to] == "index"
+    params[:return_to].present? && params[:return_to] == 'index'
   end
 
-  # If radio button is the selector, we get a single string, if 
-  # check boxes are the selectors, we get an array of strings. 
+  # If radio button is the selector, we get a single string, if
+  # check boxes are the selectors, we get an array of strings.
   # We want an array of integers all the time.
   def convert_answer_ids
     ids = params[:quiz_event][:answer_ids] if params[:quiz_event]
-    if ids 
-      params[:quiz_event][:answer_ids] = 
-        ids.split.flatten.reject(&:blank?).map(&:to_i)
-    end
+    params[:quiz_event][:answer_ids] =
+      ids.split.flatten.reject(&:blank?).map(&:to_i) if ids
   end
 
-  # Note that answer_ids can be a single value (radio button) or multiple 
+  # Note that answer_ids can be a single value (radio button) or multiple
   # values (check boxes), thus it appears in this list both ways and we have
-  # to convert it. 
+  # to convert it.
   def quiz_event_params
     convert_answer_ids
-    params.require(:quiz_event).permit(:id, :quiz_id, :question_id, 
-      { :answer_ids => [] }, :answer_ids)
+    params.require(:quiz_event).permit(
+      :id, :quiz_id, :question_id, { answer_ids: [] }, :answer_ids)
   end
-
 end

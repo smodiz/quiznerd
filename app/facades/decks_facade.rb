@@ -1,5 +1,4 @@
 class DecksFacade
-
   attr_reader :decks, :tag_names, :count
 
   def initialize(user, search, tag, page)
@@ -10,14 +9,12 @@ class DecksFacade
     load
   end
 
-  private 
+  private
 
   def load
-    @decks = 
-      Deck.search_owned_by(@user, @search, @tag).
-        paginate(page: @page) 
+    @decks =
+      Deck.search_owned_by(@user, @search, @tag).paginate(page: @page)
     @tag_names = Deck.tags_for(@user)
     @count = Deck.count
   end
-
 end

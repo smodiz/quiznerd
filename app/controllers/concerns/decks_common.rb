@@ -1,5 +1,4 @@
 module DecksCommon
-  
   def deck_params
     return {} unless params[:deck]
     params.require(:deck).permit(:name, :description, :status, :tag_list, :page)
@@ -21,5 +20,4 @@ module DecksCommon
   def deck_for(user:, id:)
     user.decks.find_by(id: id)
   end
-
 end

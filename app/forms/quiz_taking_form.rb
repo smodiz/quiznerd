@@ -1,36 +1,34 @@
-=begin 
-
-QuizTakingForm is a form model to handle interactions with the user
-during a quiz, i.e. serving up each question, in turn, and showing 
-the user their graded answer. Much of this interaction is NOT persisted
-so this logic was extracted from the QuizEvent model, which is now left
-with only the high level data that IS persisted, such as which quiz a user 
-took, and their overall score.
-
-=end
-
+# QuizTakingForm is a form model to handle interactions with the user
+# during a quiz, i.e. serving up each question, in turn, and showing
+# the user their graded answer. Much of this interaction is NOT persisted
+# so this logic was extracted from the QuizEvent model, which is now left
+# with only the high level data that IS persisted, such as which quiz a user
+# took, and their overall score.
 class QuizTakingForm
-  include ActiveModel::Model 
+  include ActiveModel::Model
 
   validates :answer_ids, presence: true
 
-  attr_accessor :quiz_event, :quiz, 
-                :question_id, :question, :answer_ids,
-                :graded_question, :graded_answer_ids
-  attr_reader   :view_context
+  attr_accessor :quiz_event,
+                :quiz,
+                :question_id,
+                :question,
+                :answer_ids,
+                :graded_question,
+                :graded_answer_ids
+  attr_reader :view_context
+
   delegate :id, :completed?, to: :quiz_event
   delegate :grade, to: :quiz_event
   delegate :id, to: :quiz, prefix: true
 
-  def initialize(options={})
+  def initialize(options = {})
     @quiz_event     = options[:quiz_event]
     @quiz           = @quiz_event.cached_quiz
-    @view_context   = options[:view_context] 
+    @view_context   = options[:view_context]
     @answer_correct = nil
 
-    if starting_quiz?
-      self.question_id = first_question_id
-    end
+    self.question_id = first_question_id if starting_quiz?
   end
 
   def persisted?
@@ -38,7 +36,7 @@ class QuizTakingForm
   end
 
   def self.model_name
-    ActiveModel::Name.new(self, nil, "QuizEvent")
+    ActiveModel::Name.new(self, nil, 'QuizEvent')
   end
 
   def submit(params)
@@ -46,7 +44,7 @@ class QuizTakingForm
     self.question_id = params[:question_id]
 
     if user_cheating? || !valid?
-      false      
+      false
     else
       grade_question
       advance_to_next
@@ -55,7 +53,7 @@ class QuizTakingForm
   end
 
   def question
-    @question ||= 
+    @question ||=
       if question_id.blank?
         nil
       else
@@ -66,11 +64,11 @@ class QuizTakingForm
   def answer_correct?
     if @answer_correct.nil?
       @answer_correct = question.correct_answer?(answer_ids)
-    end  
-    @answer_correct 
+    end
+    @answer_correct
   end
 
-private
+  private
 
   def starting_quiz?
     quiz_event.total_answered == 0 && question_id.blank?
@@ -90,8 +88,7 @@ private
     self.question = nil
   end
 
-  def next_question_id 
-    #quiz.next_question_id(quiz_event.last_question_id)
+  def next_question_id
     if quiz_event.last_question_id
       quiz.questions.detect { |q| q.id > quiz_event.last_question_id }.try(:id)
     else
@@ -103,14 +100,15 @@ private
     quiz.questions.first.id
   end
 
-  def user_cheating?   
+  def user_cheating?
     user_modifying_completed_test? || user_re_answering_question?
   end
 
   def user_modifying_completed_test?
     if quiz_event.completed?
-      self.errors.add(:base, 
-        "Can't re-answer questions. Quiz already completed.")
+      errors.add(
+        :base,
+        'Cannot re-answer questions. Quiz already completed.')
       true
     else
       false
@@ -119,8 +117,9 @@ private
 
   def user_re_answering_question?
     if question_out_of_order?
-      self.errors.add(:question_id, 
-        "cannot be answered more than once. Please answer the next question:")
+      errors.add(
+        :question_id,
+        'cannot be answered more than once. Please answer the next question:')
       self.question_id = next_question_id
       true
     else
@@ -135,5 +134,4 @@ private
       false
     end
   end
-
 end

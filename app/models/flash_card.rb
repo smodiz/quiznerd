@@ -1,16 +1,16 @@
 class FlashCard < ActiveRecord::Base
   belongs_to :deck, counter_cache: true
 
-  DIFFICULTIES =  {   "1" => "Beginner",
-                      "2" => "Intermediate",
-                      "3" => "Advanced"
+  DIFFICULTIES =  {   '1' => 'Beginner',
+                      '2' => 'Intermediate',
+                      '3' => 'Advanced'
                   }
   validates :sequence,    uniqueness: { scope: :deck_id }, if: :deck_id
   validates :front,       presence: true
   validates :back,        presence: true
   validates :difficulty,  inclusion: { in: DIFFICULTIES.keys }
 
-  default_scope ->{ order(sequence: :asc) }
+  default_scope -> { order(sequence: :asc) }
 
   before_validation :set_sequence
 
@@ -19,7 +19,6 @@ class FlashCard < ActiveRecord::Base
   end
 
   def set_sequence
-    self.sequence = deck.next_sequence if self.sequence.blank?
+    self.sequence = deck.next_sequence if sequence.blank?
   end
-
 end

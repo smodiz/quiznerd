@@ -1,5 +1,4 @@
 class QuestionCloner
-
   def self.clone(question)
     question.dup.tap do |new_question|
       question.answers.each do |answer|
@@ -7,5 +6,4 @@ class QuestionCloner
       end
     end
   end
-
 end

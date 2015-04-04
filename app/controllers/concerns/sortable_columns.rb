@@ -1,6 +1,6 @@
 module SortableColumns
   extend ActiveSupport::Concern
-  
+
   included do
     helper_method :sort_column, :sort_direction
   end
@@ -35,6 +35,4 @@ module SortableColumns
   def valid_sort_column?(allowed=[])
     allowed.include?(params[:sort])
   end
-
-
 end

@@ -8,10 +8,10 @@ class QuizMergesController < ApplicationController
   def create
     @quiz_merge = QuizMerge.new(merges_params.merge({ user: current_user }))
     if @quiz_merge.save
-      redirect_to quiz_path(@quiz_merge.target_quiz), 
+      redirect_to quiz_path(@quiz_merge.target_quiz),
         success: "Merge completed successfully"
     else
-      render :new 
+      render :new
     end
   end
 

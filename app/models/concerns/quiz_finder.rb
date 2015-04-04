@@ -1,32 +1,33 @@
 module QuizFinder
   extend ActiveSupport::Concern
 
-  included do 
+  included do
     include PgSearch
-    pg_search_scope :search, against: [:name, :description],
-      using: {tsearch: {dictionary: "english" }},
-      associated_against: {category: :name, subject: :name }
+    pg_search_scope(
+      :search,
+      against: [:name, :description],
+      using: { tsearch: { dictionary: 'english' } },
+      associated_against: { category: :name, subject: :name })
 
     scope :published,   -> { where(published: true) }
     scope :authored_by, -> (user) { where(author: user) }
-    scope :ordered,     -> { order('updated_at DESC') } 
+    scope :ordered,     -> { order('updated_at DESC') }
 
     self.per_page = 10
   end
 
-  module ClassMethods 
-
+  module ClassMethods
     def search_quiz_to_take(query)
       do_search(query).published
     end
 
-    def search_owned_by(user,query)
+    def search_owned_by(user, query)
       do_search(query).authored_by(user).includes(:category, :subject, :author)
     end
 
     def do_search(query)
       if query.present?
-        search(query) 
+        search(query)
       else
         all
       end
@@ -41,15 +42,13 @@ module QuizFinder
     end
 
     def quizzes_cache_key(user)
-      ["quizzes_for_user", user]
+      ['quizzes_for_user', user]
     end
-    
+
     def cached_for_user(user)
-      Rails.cache.fetch(quizzes_cache_key(user), :expires_in => 15.minutes) do
+      Rails.cache.fetch(quizzes_cache_key(user), expires_in: 15.minutes) do
         authored_by(user).ordered.to_a
       end
     end
-
- 
   end
 end

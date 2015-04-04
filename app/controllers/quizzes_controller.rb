@@ -22,7 +22,7 @@ class QuizzesController < ApplicationController
 
   def create
     build_quiz
-    save_quiz or render :new 
+    save_quiz or render :new
   end
 
   def update
@@ -33,14 +33,15 @@ class QuizzesController < ApplicationController
   def destroy
     load_quiz
     @quiz.destroy
-    redirect_to quizzes_path, success: 'Quiz was successfully destroyed.' 
+    redirect_to quizzes_path, success: 'Quiz was successfully destroyed.'
   end
 
   private
 
   def load_quizzes
-    @quizzes = Quiz.search_owned_by(current_user, params[:search]).
-        reorder(sort_clause).paginate(page: params[:page]) 
+    @quizzes = Quiz.search_owned_by(
+      current_user,
+      params[:search]).reorder(sort_clause).paginate(page: params[:page])
     @count = Quiz.count
   end
 
@@ -59,13 +60,13 @@ class QuizzesController < ApplicationController
 
   def save_quiz
     if QuizSaver.new(@quiz, params[:new_category], params[:new_subject]).save
-      redirect_to @quiz, success: 'Quiz was successfully saved.' 
+      redirect_to @quiz, success: 'Quiz was successfully saved.'
     end
   end
 
   def quiz_params
     return {} unless params[:quiz]
-    params.require(:quiz).permit(:name, :description, :published, 
+    params.require(:quiz).permit(:name, :description, :published,
       :category_id, :subject_id, :new_category, :new_subject)
   end
 
@@ -73,5 +74,4 @@ class QuizzesController < ApplicationController
     @quiz = current_user.quizzes.find_by(id: params[:id])
     redirect_to root_url, error: 'You cannot modify that quiz.' if @quiz.nil?
   end
-  
 end
