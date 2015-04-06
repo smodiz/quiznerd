@@ -1,3 +1,4 @@
+#:nodoc:
 class FlashCard < ActiveRecord::Base
   belongs_to :deck, counter_cache: true
 

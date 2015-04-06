@@ -1,3 +1,4 @@
+#:nodoc:
 class GradePresenter
   def self.short_score(grade)
     "#{grade.percent}%"

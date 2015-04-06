@@ -1,3 +1,4 @@
+#:nodoc:
 class ApiTokensController < ApplicationController
   before_action :authenticate_user!
 

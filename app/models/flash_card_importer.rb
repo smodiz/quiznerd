@@ -1,3 +1,9 @@
+# This class is for creating a flash
+# card deck from a quiz. The questions
+# on the quiz become flash cards on the
+# deck. This is only currently used from
+# the console and not from the web interface
+# of the application.
 class FlashCardImporter
   attr_reader :deck
 

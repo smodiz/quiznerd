@@ -1,7 +1,14 @@
+# These are methods that are mixed in with both the
+# DecksController and the api version of the decks
+# controller.
 module DecksCommon
   def deck_params
     return {} unless params[:deck]
-    params.require(:deck).permit(:name, :description, :status, :tag_list, :page)
+    params.require(:deck).permit(:name,
+                                 :description,
+                                 :status,
+                                 :tag_list,
+                                 :page)
   end
 
   def load_deck(eager_load: false)

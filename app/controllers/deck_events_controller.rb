@@ -1,9 +1,11 @@
+#:nodoc:
 class DeckEventsController < ApplicationController
   before_action :authenticate_user!
   before_action :authorize_user, only: :destroy
 
   def index
-    @deck_events = DeckEvent.for_user(current_user).paginate(page: params[:page])
+    @deck_events = DeckEvent.for_user(current_user)
+                   .paginate(page: params[:page])
   end
 
   def new
@@ -18,12 +20,12 @@ class DeckEventsController < ApplicationController
   def destroy
     load
     @deck_event.destroy
-    redirect_to deck_events_path, success: "Flash Card Event destroyed!"
+    redirect_to deck_events_path, success: 'Flash Card Event destroyed!'
   end
 
   def clear
     current_user.deck_events.delete_all
-    redirect_to deck_events_path, success: "History successfully cleared!"
+    redirect_to deck_events_path, success: 'History successfully cleared!'
   end
 
   private
@@ -32,7 +34,7 @@ class DeckEventsController < ApplicationController
     @presenter = DeckEventPresenter.new(
       user: current_user,
       params: params,
-      view_context: self.view_context
+      view_context: view_context
     )
   end
 
@@ -47,7 +49,7 @@ class DeckEventsController < ApplicationController
 
   def save
     @deck_event.save
-    redirect_to deck_events_path, success: "Flash card study session was saved!"
+    redirect_to deck_events_path, success: 'Flash card study session was saved!'
   end
 
   def deck_event_params
@@ -58,7 +60,7 @@ class DeckEventsController < ApplicationController
   def authorize_user
     @deck_event = current_user.deck_events.find_by(id: params[:id])
     if @deck_event.nil?
-      redirect_to root_url, error: "You can't modify that deck event."
+      redirect_to root_url, error: 'You can\'t modify that deck event.'
     end
   end
 end

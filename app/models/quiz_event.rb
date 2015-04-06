@@ -1,3 +1,8 @@
+# A quiz event is the name for a quiz that has
+# been taken by a user. Only the end result
+# is recorded (i.e. the user who took the quiz,
+# which quiz they took, how many questions did
+# they get right, etc)
 class QuizEvent < ActiveRecord::Base
   include QuizEventFinder
   include Gradeable

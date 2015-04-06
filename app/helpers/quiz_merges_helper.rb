@@ -1,3 +1,4 @@
+#:nodoc:
 module QuizMergesHelper
   def mergable_quizzes_select
     @quizzes ||=

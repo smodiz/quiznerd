@@ -1,3 +1,4 @@
+#:nodoc:
 class QuizMergesController < ApplicationController
   before_action :authenticate_user!
 
@@ -6,10 +7,10 @@ class QuizMergesController < ApplicationController
   end
 
   def create
-    @quiz_merge = QuizMerge.new(merges_params.merge({ user: current_user }))
+    @quiz_merge = QuizMerge.new(merges_params.merge(user: current_user))
     if @quiz_merge.save
       redirect_to quiz_path(@quiz_merge.target_quiz),
-        success: "Merge completed successfully"
+                  success: 'Merge completed successfully'
     else
       render :new
     end

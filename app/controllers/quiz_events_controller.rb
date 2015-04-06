@@ -1,3 +1,4 @@
+#:nodoc:
 class QuizEventsController < ApplicationController
   before_action :authenticate_user!
   before_action :load_quiz, only: [:new, :create, :delete, :update]
@@ -69,9 +70,7 @@ class QuizEventsController < ApplicationController
   def load_quiz
     quiz_id = params[:quiz_id] || quiz_event_params[:quiz_id]
     @quiz ||= Quiz.find_by(id: quiz_id)
-    unless @quiz
-      redirect_to(root_path, error: quiz_deleted) and return
-    end
+    redirect_to(root_path, error: quiz_deleted) and return unless @quiz
   end
 
   def build_quiz_event

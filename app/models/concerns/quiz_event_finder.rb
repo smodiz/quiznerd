@@ -1,3 +1,4 @@
+#:nodoc:
 module QuizEventFinder
   extend ActiveSupport::Concern
 
@@ -14,6 +15,7 @@ module QuizEventFinder
     scope :ordered,     -> { order('updated_at DESC') }
   end
 
+  #:nodoc:
   module ClassMethods
     def search_quizzes_taken(query, user)
       do_search(query).taken_by(user).includes(:quiz)

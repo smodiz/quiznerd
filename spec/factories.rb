@@ -23,10 +23,14 @@ FactoryGirl.define do
     association :category, factory: :category
     association :subject, factory: :subject
     factory :quiz_with_questions do |qz|
-      qz.questions { |questions| [questions.association(:question), questions.association(:question)] }
+      qz.questions do |questions|
+        [questions.association(:question), questions.association(:question)]
+      end
     end
     factory :small_quiz do |qz|
-      qz.questions { |questions| [questions.association(:question), questions.association(:question)] }
+      qz.questions do |questions|
+        [questions.association(:question), questions.association(:question)]
+      end
     end
   end
 
@@ -34,7 +38,10 @@ FactoryGirl.define do
     sequence(:content) { |n| "WhyWhyWhy! #{n}" }
     question_type 'MC-2'
     remarks 'remarks for question'
-    answers { |answers| [answers.association(:answer_correct), answers.association(:answer_incorrect)] }
+    answers do |answers|
+      [answers.association(:answer_correct),
+       answers.association(:answer_incorrect)]
+    end
   end
 
   factory :answer do

@@ -1,3 +1,4 @@
+#:nodoc:
 class CheatsheetsFacade
   attr_reader :cheatsheets, :tag_names, :count
 
@@ -13,8 +14,7 @@ class CheatsheetsFacade
 
   def load
     @cheatsheets =
-      Cheatsheet.search_owned_by(@user, @search, @tag).
-        paginate(page: @page)
+      Cheatsheet.search_owned_by(@user, @search, @tag).paginate(page: @page)
     @tag_names = Cheatsheet.tags_for(@user)
     @count = Cheatsheet.count
   end

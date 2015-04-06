@@ -1,3 +1,4 @@
+#:nodoc:
 class ApplicationController < ActionController::Base
   add_flash_types :error, :success, :info
   # Prevent CSRF attacks by raising an exception.

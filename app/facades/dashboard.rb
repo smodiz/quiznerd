@@ -1,3 +1,4 @@
+#:nodoc:
 class Dashboard
   attr_reader :user, :quizzes, :quiz_events, :limit
   attr_reader :quizzes_count, :events_count

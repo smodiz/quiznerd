@@ -1,3 +1,4 @@
+#:nodoc:
 class DecksFacade
   attr_reader :decks, :tag_names, :count
 

@@ -1,3 +1,4 @@
+#:nodoc:
 module QuizFinder
   extend ActiveSupport::Concern
 
@@ -16,6 +17,7 @@ module QuizFinder
     self.per_page = 10
   end
 
+  #:nodoc:
   module ClassMethods
     def search_quiz_to_take(query)
       do_search(query).published

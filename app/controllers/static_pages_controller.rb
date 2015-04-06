@@ -1,3 +1,4 @@
+#:nodoc:
 class StaticPagesController < ApplicationController
   LIMIT = 5
 

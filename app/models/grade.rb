@@ -1,3 +1,4 @@
+#:nodoc:
 class Grade
   def initialize(total_correct, total_answered)
     @total_correct = total_correct

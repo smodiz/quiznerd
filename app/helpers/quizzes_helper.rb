@@ -1,3 +1,4 @@
+#:nodoc:
 module QuizzesHelper
   def new_quiz_button
     link_to(

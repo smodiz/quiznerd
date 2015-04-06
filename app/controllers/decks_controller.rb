@@ -1,3 +1,4 @@
+#:nodoc:
 class DecksController < ApplicationController
   include DecksCommon
 

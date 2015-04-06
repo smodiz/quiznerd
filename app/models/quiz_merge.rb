@@ -1,3 +1,6 @@
+# This class handles the merging of two quizzes
+# into one. Both must be owned by the user
+# attempting the merge.
 class QuizMerge
   include ActiveModel::Model
 

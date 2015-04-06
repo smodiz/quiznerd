@@ -1,3 +1,4 @@
+#:nodoc:
 class BasePresenter
   def initialize(object, template)
     @object = object

@@ -1,4 +1,6 @@
+#:nodoc:
 module Api::V1
+  #:nodoc:
   class DecksController < ApplicationController
     include DecksCommon
 
@@ -53,6 +55,5 @@ module Api::V1
         render nothing: true, status: 404 and return false
       end
     end
-
   end
 end

@@ -1,3 +1,6 @@
+# These are constants for the icons used by
+# the application. This will be moved to css
+# when time allows.
 module Icon
   PRE         = 'glyphicon glyphicon-'
   WHITE       = ' glyphicon-white'

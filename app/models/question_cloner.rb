@@ -1,3 +1,4 @@
+#:nodoc:
 class QuestionCloner
   def self.clone(question)
     question.dup.tap do |new_question|

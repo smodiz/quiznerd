@@ -1,3 +1,4 @@
+#:nodoc:
 class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
@@ -16,16 +17,16 @@ class QuestionsController < ApplicationController
   def create
     @question = Question.new(question_params)
     if @question.save
-       redirect_to quiz_path(@question.quiz_id),
-          success: 'Question was successfully created.'
+      redirect_to quiz_path(@question.quiz_id),
+                  success: 'Question was successfully created.'
     else
-       render :new
+      render :new
     end
   end
 
   def update
     if @question.update(question_params)
-      redirect_to  @question.quiz, success:'Question was successfully updated.'
+      redirect_to @question.quiz, success: 'Question was successfully updated.'
     else
       render :edit
     end
@@ -38,17 +39,22 @@ class QuestionsController < ApplicationController
   end
 
   private
-    def set_question
-      @question = Question.find(params[:id])
-    end
 
-    def question_params
-      params.require(:question).permit(:question_type, :content, :remarks,
-        :quiz_id, answers_attributes: [:id, :content, :correct, :_destroy])
-    end
+  def set_question
+    @question = Question.find(params[:id])
+  end
 
-    def correct_user
-      authorized = @question.quiz.author == current_user
-      redirect_to root_url, error: 'Unauthorized.' unless authorized
-    end
+  def question_params
+    params.require(:question).permit(
+      :question_type,
+      :content,
+      :remarks,
+      :quiz_id,
+      answers_attributes: [:id, :content, :correct, :_destroy])
+  end
+
+  def correct_user
+    authorized = @question.quiz.author == current_user
+    redirect_to root_url, error: 'Unauthorized.' unless authorized
+  end
 end

@@ -1,3 +1,4 @@
+# This is a flash card deck
 class Deck < ActiveRecord::Base
   include DeckFinder
   include Tagged

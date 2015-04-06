@@ -1,3 +1,4 @@
+#:nodoc:
 module DeckFinder
   extend ActiveSupport::Concern
 
@@ -14,6 +15,7 @@ module DeckFinder
     self.per_page = 20
   end
 
+  #:nodoc:
   module ClassMethods
     def search_by(query)
       do_search(query, '').published

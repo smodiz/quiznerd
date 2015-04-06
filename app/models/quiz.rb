@@ -1,3 +1,4 @@
+#:nodoc:
 class Quiz < ActiveRecord::Base
   include QuizFinder
 

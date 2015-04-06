@@ -1,3 +1,4 @@
+#:nodoc:
 class FlashCardsController < ApplicationController
   before_action :authenticate_user!
 
@@ -6,7 +7,8 @@ class FlashCardsController < ApplicationController
     @flash_card.destroy
     respond_to do |format|
       format.html do
-        redirect_to deck_path(@flash_card.deck), success: "Flash Card destroyed."
+        redirect_to deck_path(@flash_card.deck),
+                    success: 'Flash Card destroyed.'
       end
       format.js
     end

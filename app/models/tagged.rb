@@ -15,6 +15,7 @@ module Tagged
     end
   end
 
+  #:nodoc:
   module ClassMethods
     def search_owned_by(user, query, tag)
       do_search(query, tag).authored_by(user).includes(:tags)

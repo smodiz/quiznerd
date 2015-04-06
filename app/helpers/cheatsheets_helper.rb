@@ -1,3 +1,4 @@
+#:nodoc:
 module CheatsheetsHelper
   def new_cheatsheet_button
     link_to(

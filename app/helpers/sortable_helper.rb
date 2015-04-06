@@ -1,3 +1,4 @@
+#:nodoc:
 module SortableHelper
   def sortable_link(column, title = nil)
     title ||= column.titleize
@@ -9,6 +10,10 @@ module SortableHelper
   end
 
   def sortable_css_class(column)
-    column == sort_column ? "sortable-header current #{sort_direction}" : 'sortable-header'
+    column == sort_column ?  current_header : 'sortable-header'
+  end
+
+  def current_header
+    "sortable-header current #{sort_direction}"
   end
 end

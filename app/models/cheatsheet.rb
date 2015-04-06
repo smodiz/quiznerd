@@ -1,3 +1,4 @@
+#:nodoc:
 class Cheatsheet < ActiveRecord::Base
   include PgSearch
   include Tagged

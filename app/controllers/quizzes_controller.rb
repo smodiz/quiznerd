@@ -1,3 +1,4 @@
+#:nodoc:
 class QuizzesController < ApplicationController
   include SortableColumns
 
@@ -66,8 +67,14 @@ class QuizzesController < ApplicationController
 
   def quiz_params
     return {} unless params[:quiz]
-    params.require(:quiz).permit(:name, :description, :published,
-      :category_id, :subject_id, :new_category, :new_subject)
+    params.require(:quiz).permit(
+      :name,
+      :description,
+      :published,
+      :category_id,
+      :subject_id,
+      :new_category,
+      :new_subject)
   end
 
   def authorize_user

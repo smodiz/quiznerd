@@ -1,3 +1,4 @@
+#:nodoc:
 module DecksHelper
   def new_deck_button
     link_to \
