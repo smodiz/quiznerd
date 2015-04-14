@@ -2,12 +2,12 @@ require 'spec_helper'
 
 describe 'update flash card deck' do
   context 'with valid credentials' do
-    before(:each) do
+    before(:all) do
       @deck = FactoryGirl.create(:deck)
     end
 
     context 'and valid data' do
-      before(:each) do
+      before(:all) do
         post_data = {
           deck: {
             name: 'New name', status: 'Public', description: 'New description'
