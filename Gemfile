@@ -22,7 +22,7 @@ gem 'devise-token_authenticatable', '~> 0.3.0'
 gem 'pg', '0.15.1'
 gem 'pg_search', '0.7.9'
 gem 'active_model_serializers'
-
+gem 'redis-rails'
 
 # temporarily add to all environments. Later, will remove from production
 gem 'rack-mini-profiler'
