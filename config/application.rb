@@ -29,5 +29,6 @@ module Quiznerd
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
 
     config.active_record.raise_in_transactional_callbacks = true
+    config.middleware.insert_before 0, "SearchSuggestions"
   end
 end
