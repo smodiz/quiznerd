@@ -43,6 +43,7 @@ group :development, :test do
   gem 'orderly'
   gem 'puma'
   gem 'rubocop', '~> 0.29.1'
+  gem 'mock_redis'
 
 
   # In Rails 4.1, we have secrets.yml which kind of does the same thing as 

@@ -6,6 +6,9 @@ require 'spork'
 require 'ruby-debug'
 require 'pry'
 require 'pry-byebug'
+require 'redis-rails'
+require 'mock_redis'
+
 # uncomment the following line to use spork with the debugger
 # require 'spork/ext/ruby-debug'
 
@@ -78,8 +81,10 @@ Spork.prefork do
     end
     config.before(:each) { GC.disable }
     config.after(:each) { GC.enable }
+    config.before(:each) { $redis = MockRedis.new }
   end
   Capybara.javascript_driver = :webkit
+
 end
 
 Spork.each_run do
