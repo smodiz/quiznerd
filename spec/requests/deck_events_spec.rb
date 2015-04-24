@@ -1,4 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
+
+
 
 describe 'Flash Deck Event Pages' do
   let(:deck) { FactoryGirl.create(:deck_with_flash_cards) }

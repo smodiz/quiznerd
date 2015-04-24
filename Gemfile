@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.1.1'
+ruby '2.2.1'
 
 gem 'rails', '~> 4.2.1' 
 gem 'sass-rails', '~> 4.0.3'
@@ -29,22 +29,21 @@ gem 'rack-mini-profiler'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
 group :development, :test do
+  gem 'test-unit',  :require => true
   gem 'spring'
-  gem 'rspec-rails', '2.13.1'
-  gem 'guard-rspec', '2.5.0'
-  gem 'spork-rails', '4.0.0'
-  gem 'guard-spork', '1.5.0'
+  gem 'guard-rspec'
+  gem 'spork-rails'
+  gem 'guard-spork'
+  gem 'rspec-rails'
   gem 'childprocess', '0.3.6'
   gem 'hirb'
   gem 'awesome_print'
-  gem 'debugger'
   gem 'pry'
   gem 'pry-byebug'
   gem 'orderly'
   gem 'puma'
   gem 'rubocop', '~> 0.29.1'
   gem 'mock_redis'
-
 
   # In Rails 4.1, we have secrets.yml which kind of does the same thing as 
   # figaro, except figaro helps automatically set up the variables in your 
@@ -55,11 +54,11 @@ end
 
 group :test do
   gem 'simplecov', :require => false
-  gem 'selenium-webdriver', '2.35.1'
-  gem 'capybara', '2.1.0'
+  gem 'selenium-webdriver'
+  gem 'capybara'
   gem "capybara-webkit"
   gem "launchy"
-  gem 'factory_girl_rails', '4.2.0'
+  gem 'factory_girl_rails'
   gem 'cucumber-rails', '1.4.0', :require => false
   gem 'database_cleaner', github: 'bmabey/database_cleaner'
   # Uncomment this line on OS X.
