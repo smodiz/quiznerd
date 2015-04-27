@@ -24,7 +24,6 @@ Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
 
-
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end
@@ -71,7 +70,6 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
 
   config.include Capybara::DSL
-  
 
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)
@@ -98,8 +96,7 @@ RSpec.configure do |config|
 
   config.before :each, js: true do
     page.driver.block_url(
-      "http://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"
+      'http://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js'
     )
   end
 end
-
