@@ -21,8 +21,6 @@ describe QuizEvent do
     end
 
     it 'does not update status unless all the questions have been answered' do
-      quiz_event.should_receive(:number_of_questions)
-        .and_return(number_of_questions)
       quiz_event.total_answered = (number_of_questions.to_i - 1)
       expect(quiz_event).not_to be_completed
     end

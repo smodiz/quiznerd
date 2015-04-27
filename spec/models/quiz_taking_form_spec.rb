@@ -8,7 +8,7 @@ describe 'Quiz Taking Form' do
   subject { quiz_taking_form }
 
   it 'requires an answer when submitting' do
-    expect(submit_form_for(:no_answer)).to be_false
+    expect(submit_form_for(:no_answer)).to eq false
   end
 
   context 'when starting a quiz' do
@@ -18,7 +18,7 @@ describe 'Quiz Taking Form' do
     end
 
     it 'has no graded question yet' do
-      expect(quiz_taking_form.graded_question).to be_nil
+      expect(quiz_taking_form.graded_question).to eq nil
     end
   end
 
@@ -29,7 +29,7 @@ describe 'Quiz Taking Form' do
 
     it 'has a graded answer which shows it as incorrect' do
       expect(quiz_taking_form.graded_question.id).to eq @question.id
-      expect(quiz_taking_form.answer_correct?).to be_false
+      expect(quiz_taking_form.answer_correct?).to eq false
     end
 
     it 'serves the next question up' do
@@ -44,7 +44,7 @@ describe 'Quiz Taking Form' do
 
     it 'has a graded answer which shows it as correct' do
       expect(quiz_taking_form.graded_question.id).to eq @question.id
-      expect(quiz_taking_form.answer_correct?).to be_true
+      expect(quiz_taking_form.answer_correct?).to eq true
     end
 
     it 'serves the next question up' do
@@ -63,11 +63,11 @@ describe 'Quiz Taking Form' do
 
     it 'has a graded question' do
       expect(quiz_taking_form.graded_question.id).to eq @question.id
-      expect(quiz_taking_form.answer_correct?).to be_true
+      expect(quiz_taking_form.answer_correct?).to eq true
     end
 
     it 'does not have a next question' do
-      expect(quiz_taking_form.question).to be_nil
+      expect(quiz_taking_form.question).to eq nil
     end
 
     it 'has a status of completed' do
@@ -108,7 +108,7 @@ describe 'Quiz Taking Form' do
     end
 
     it 'is still completed' do
-      expect(quiz_taking_form.completed?).to be_true
+      expect(quiz_taking_form.completed?).to eq true
     end
 
     it 'does not impact the grade' do

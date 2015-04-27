@@ -93,11 +93,11 @@ describe User do
     end
 
     it 'will validate a correct password' do
-      user.valid_password?('foobarbaz').should be_true
+      expect(user.valid_password?('foobarbaz')).to eq true
     end
 
     it 'will not validate an incorrect password' do
-      user.valid_password?('invalid_foo').should be_false
+      expect(user.valid_password?('invalid_foo')).to eq false
     end
   end
 end

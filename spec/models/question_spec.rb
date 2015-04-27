@@ -83,10 +83,10 @@ describe Question do
   describe '#correct_answer?' do
     it 'should return true when correct answer is provided' do
       expect(question.correct_answer?(
-               question.correct_answer_ids)).to be_true
+               question.correct_answer_ids)).to eq true
     end
     it 'should return false when incorrect answer is provided' do
-      expect(question.correct_answer?([9_999_999])).to be_false
+      expect(question.correct_answer?([9_999_999])).to eq false
     end
   end
 

@@ -1,3 +1,4 @@
+require 'rails_helper'
 
 describe 'Cheatsheets Pages' do
   let(:user) { FactoryGirl.create(:user) }

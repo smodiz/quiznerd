@@ -9,6 +9,8 @@ require File.expand_path('../../config/environment', __FILE__)
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'rspec/rails'
 require 'capybara'
+require 'capybara/dsl'
+require 'capybara/webkit'
 require 'pry'
 require 'pry-byebug'
 require 'redis-rails'
@@ -94,14 +96,10 @@ RSpec.configure do |config|
   config.after(:each) { GC.enable }
   config.before(:each) { $redis = MockRedis.new }
 
-  # config.before(:each) do
-  #   if Capybara.javascript_driver == :webkit
-  #     # Allow loading of all external URLs
-  #     page.driver.allow_url("*")
-  #     # Ignore SSL errors
-  #     page.driver.browser.ignore_ssl_errors
-  #   end
-  # end
-
+  config.before :each, js: true do
+    page.driver.block_url(
+      "http://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"
+    )
+  end
 end
 

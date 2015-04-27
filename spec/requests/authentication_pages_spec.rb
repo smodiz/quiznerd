@@ -226,8 +226,10 @@ describe 'Authentication Pages' do
 
         click_link 'Get New Token'
 
-        expect { user.reload.authentication_token }.not_to eq orig_token
-        expect(page).to have_content(user.authentication_token)
+        wait_until { user.reload.authentication_token != orig_token }
+        new_token = user.reload.authentication_token
+        expect(new_token).not_to eq orig_token
+        expect(page).to have_content(new_token)
       end
     end
   end
