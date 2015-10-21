@@ -15,7 +15,7 @@ describe 'destroy flash card deck' do
       it_has_status(204)
 
       it 'removes the record' do
-        expect { Deck.find(@deck.id) }.to raise_error
+        expect { Deck.find(@deck.id) }.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
 

@@ -95,7 +95,7 @@ describe 'Quiz Event Pages' do
           page.evaluate_script('window.history.back()')
           answer_correctly
           click_button 'Continue'
-          expect(page).to have_content 'Incorrect!'
+          expect(page).to have_content 'Correct'
         end
       end
     end

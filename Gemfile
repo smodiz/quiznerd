@@ -23,19 +23,15 @@ gem 'devise-token_authenticatable', '~> 0.3.0'
 gem 'pg', '0.15.1'
 gem 'pg_search', '0.7.9'
 gem 'active_model_serializers'
-gem 'redis-rails'
+gem 'redis-rails', '~> 4.0.0'
 
 # temporarily add to all environments. Later, will remove from production
 gem 'rack-mini-profiler'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
 group :development, :test do
-  gem 'test-unit',  :require => true
   gem 'spring'
-  gem 'guard-rspec'
-  gem 'spork-rails'
-  gem 'guard-spork'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '~> 3.3.3'
   gem 'childprocess', '0.3.6'
   gem 'hirb'
   gem 'awesome_print'
@@ -56,10 +52,9 @@ group :test do
   gem 'simplecov', :require => false
   gem 'selenium-webdriver'
   gem 'capybara'
-  gem "capybara-webkit"
+  gem 'capybara-webkit'
   gem "launchy"
   gem 'factory_girl_rails'
-  gem 'cucumber-rails', '1.4.0', :require => false
   gem 'database_cleaner', github: 'bmabey/database_cleaner'
   # Uncomment this line on OS X.
   gem 'growl', '1.0.3'

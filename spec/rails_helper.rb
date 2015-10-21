@@ -10,7 +10,7 @@ require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
 require 'capybara'
 require 'capybara/dsl'
-require 'capybara/webkit'
+require 'capybara-webkit'
 require 'pry'
 require 'pry-byebug'
 require 'redis-rails'
@@ -93,10 +93,8 @@ RSpec.configure do |config|
   config.before(:each) { GC.disable }
   config.after(:each) { GC.enable }
   config.before(:each) { $redis = MockRedis.new }
+end
 
-  config.before :each, js: true do
-    page.driver.block_url(
-      'http://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js'
-    )
-  end
+Capybara::Webkit.configure do |config|
+  config.block_url("http://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js")
 end
