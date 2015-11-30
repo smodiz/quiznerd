@@ -1,0 +1,10 @@
+AllCops:
+  RunRailsCops: true
+  Include:
+    - '**/Rakefile'
+  Exclude:
+    - 'bin/**/*'
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'script/**/*'
+    - !ruby/regexp /old_and_unused\.rb$/
