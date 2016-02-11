@@ -4,3 +4,8 @@ rvm:
 
 before_script:
   - psql -c "CREATE USER qnerd_user WITH PASSWORD 'seekrit';" -U postgres
+
+script:
+  - export RAILS_ENV=test
+  - bundle exec rake db:create db:migrate
+  - bundle exec rake db:test:prepare
