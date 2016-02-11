@@ -17,7 +17,3 @@ prog_id = Category.find_by(name: "Programming").id
  'Data Structures and Algorithms'].each do |subj|
    Subject.find_or_create_by(name: subj, category_id: prog_id)
 end
-
-['Private','Public','Archived'].each do |status|
-  Status.find_or_create_by(name: status)
-end
