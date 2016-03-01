@@ -1,5 +1,7 @@
 #:nodoc:
 class FlashCardsController < ApplicationController
+  include FlashCardsCommon
+
   before_action :authenticate_user!
 
   def destroy
@@ -38,16 +40,5 @@ class FlashCardsController < ApplicationController
       format.html { redirect_to @flash_card.deck }
       format.js
     end
-  end
-
-  private
-
-  def load
-    @flash_card ||= FlashCard.find(params[:id])
-  end
-
-  def flash_card_params
-    params.require(:flash_card).permit(
-      :sequence, :front, :back, :difficulty, :deck_id)
   end
 end

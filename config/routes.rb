@@ -36,7 +36,7 @@ Rails.application.routes.draw do
   namespace :api, :defaults => { :format => 'json' } do
     namespace :v1 do
       resources :decks, only: [:show, :create, :index, :destroy, :update]  
-      resources :flash_cards, only: [:show]
+      resources :flash_cards, only: [:show, :create]
     end
   end
 
