@@ -8,4 +8,5 @@ class DeckSerializer < ActiveModel::Serializer
              :flash_cards_count
 
   has_many :flash_cards
+  has_many :tags
 end
