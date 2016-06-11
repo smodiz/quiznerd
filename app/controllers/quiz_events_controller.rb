@@ -47,7 +47,7 @@ class QuizEventsController < ApplicationController
   end
 
   def clear
-    current_user.quiz_events.delete_all
+    current_user.quiz_events.destroy_all
     redirect_to quiz_events_path, success: 'History successfully cleared!'
   end
 

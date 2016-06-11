@@ -190,6 +190,29 @@ describe 'Quiz Event Pages' do
       end
     end
   end
+
+  describe 'user resets quiz events history' do
+    it 'should delete quiz events and display index page w/o any quiz events' do
+      quiz_event = FactoryGirl.create(:quiz_event, user: user)
+
+      visit quiz_events_path
+      click_link('Reset History')
+
+      expect(page).to have_content('History successfully cleared!')
+      expect(page).not_to have_content(quiz_event.quiz.name)
+      expect(QuizEvent.all.count).to eq 0
+    end
+
+    it 'should not show quiz events on the dashboard page' do
+      quiz_event = FactoryGirl.create(:quiz_event, user: user)
+
+      visit quiz_events_path
+      click_link('Reset History')
+      visit root_path
+
+      expect(page).not_to have_content(quiz_event.quiz.name)
+    end
+  end
 end
 
 # ---------------  helper methods --------------
