@@ -1,5 +1,4 @@
 # Quiz Nerd #
 
-### About the Application ####
+This was a "just for fun" project, to learn Ruby on Rails.
 
-For notes on this code, please see the About page of the application at http://quiznerd.herokuapp.com/about 
